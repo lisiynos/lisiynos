@@ -1,0 +1,1800 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Метод Монте-Карло</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body>
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.
+ca
+b#version=6,0,0,0"
+                width="100" height="50">
+            <param name="movie"
+                   value="../audio/a_smsqulh3n.swf">
+            <param
+                    name="bgcolor" value="fff">
+            <param name="FlashVars"
+                   value="src=../audio/8016574696f623430301------------ffffff">
+            <param
+                    name="autoplay"
+                    value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70"
+                   type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=../audio/8016574696f623430301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+
+<div id="content" style="width:80%;">
+
+<h1>2.4 Статистическое моделирование (или метод Монте-Карло)</h1>
+
+<h2>Введение</h2>
+
+<p style='text-indent:20pt;'>Предложена
+    методическая разработка темы с целью продемонстрировать насколько
+    описываемый
+    метод является мощным и универсальным инструментом для решения
+    различных
+    задач
+    во многих областях знаний. Тема моделирования обычно изучается в школе
+    на
+    примере адекватного представления процессов (например, движения) по
+    выбранным
+    приближенным уравнениям. Статистическое моделирование, наоборот, не
+    предполагает изначально знание математических связей и позволяет получить
+    их на
+    основе многократного наблюдения (компьютерной генерации) возможных
+    событий в
+    представленной модели. </p>
+
+<p style='text-indent:20pt;'>Изучение
+    данного материала возможно, например, на занятиях по подготовке к
+    олимпиадам по
+    программированию /1/. С этой целью выбрано часть задач, предложенных на
+    олимпиадах по Ленинградской области. </p>
+
+<p style='text-indent:20pt;'>Подборка
+    задач позволяет совместное изучение темы школьниками различных классов,
+    имеет
+    игровой и занимательный характер, рассматривает применение и
+    характеристики
+    метода с различных сторон. В ходе разбора задач указаны некоторые
+    приемы 
+    программирования, проводится начальное знакомство с важными понятиями
+    теории
+    вероятности, неразрывно связанной с данным методом. Для освоения темы
+    приводятся задачи для самостоятельного решения с указаниями к получению
+    правильных  ответов.</p>
+
+<h2>Общая схема метода</h2>
+
+<p style='text-indent:20pt;'>Метод
+    статистического моделирования или метод Монте-Карло назван так в честь
+    столицы
+    княжества Монако, известной своими многочисленными казино, в которых
+    публика
+    растрачивает или увеличивает свои доходы согласно законам распределения
+    случайных величин. </p>
+
+<p style='text-indent:20pt;'>Этот метод позволяет решать задачи, в условиях
+    которых присутствует
+    элемент неопределенности (например, при подбрасывании монеты может
+    выпасть
+    “орел” или “решка”). Пусть требуется найти некоторую величину (например,
+    долю
+    выпадения “орлов”). На ЭВМ с помощью генератора (датчика) случайных
+    чисел
+    (ДСЧ)
+    имитируются ситуации или процессы, возможные по условию задачи, и
+    которые
+    приводят к тем или иным исходам, при этом искомая величина принимает
+    некоторое
+    значение (в нашем примере это 0 – если выпал “орел” и 1 – в противном
+    случае).
+    Все или почти все различные исходы (с учетом, когда монета может упасть на
+    ребро) проявятся, если многократно рассмотреть случайное развитие одного и
+    того
+    же начального состояния (смоделировать некоторое количество историй —
+    N).</p>
+
+<p style='text-indent:20pt;'>Закон больших чисел «разыгрываемых» историй
+    утверждает, что
+    среднее арифметическое  полученных в каждом розыгрыше значений
+    исследуемой
+    величины  имеет предельное искомое значение (в нашей задаче оно равно
+    1/2).</p>
+
+<p style='text-indent:20pt;'>Это вероятностная сходимость, т.е. чем больше
+    историй, тем
+    достоверней можно утверждать, что наш результат близок к истинному. Для
+    задач с
+    элементами неопределенности - а в реальном мире все задачи такие - это
+    даже
+    естественно. Погрешность определения предельного значения
+    пропорциональна
+    1/&#8730;<em>N</em>. Таким образом, для увеличения
+    точности результата на один порядок, требуется разыграть в 100 раз больше
+    историй. «Разумно» число историй первоначально задавать порядка
+    10000.</p>
+
+<p style='text-indent:20pt;'>Следовательно, требуется получать
+    много случайных чисел так, чтобы переход от одного числа к другому
+    определялся
+    простыми правилами, но чтобы сами числа “производили впечатление
+    случайности”
+    (их называют поэтому псевдослучайными числами). Например, для выбора
+    последовательности
+    случайных цифр можно взять дробную часть числа пи
+    (&#960;&nbsp;=&nbsp;3.14159265358979323846264338327950288
+    4197169399375105820974944592307816406286208998628034825342117…
+    Представляет интерес обратное утверждение: возможно ли, что для любой
+    конечной,
+    наперед заданной последовательности цифр есть ее вложение в бесконечном
+    представлении числа<span class="210" style="text-indent:20pt">
+&#960;</span>). Данный способ,
+    однако, мало приемлем для программирования. Как правило, при решении
+    задач
+    методом Монте-Карло используются процедуры, которые с помощью
+    рекуррентных
+    формул генерируют случайные числа, равномерно распределенные на
+    промежутке [0,
+    1]. В Pascal для этого используется стандартная функция RANDOM. Для
+    отладки
+    программы бывает важно уметь воспроизвести псевдослучайные числа, а для
+    генерации другой последовательности случайных чисел используется
+    процедура
+    <span>RANDOMIZE</span>. </p>
+
+<p style='text-indent:20pt;'>Очень
+    полезным для понимания данного метода является моделирование игровых
+    вероятностных ситуаций (бросание монеты или кубика, блуждания). Именно
+    «игровая» или связанная с чем-то знакомым (известным, «бытовым»)
+    формулировка
+    задачи помогает лучше усвоить метод, осмыслить понятие вероятности. </p>
+
+<p style='text-indent:20pt;'>&nbsp;</p>
+
+<p style='text-indent:20pt;'><strong>Пример 1</strong>.
+    (Районная олимпиада 1994).</p>
+
+<p style='text-indent:20pt;'>Три игрока (с
+    номерами 1, 2 и 3), имеющие изначально <i><span>X</span>, Y</i> и
+    <i>Z</i>
+    жетонов соответственно,  играют в следующую игру. В каждом раунде каждый
+    игрок
+    ставит на кон один жетон. Затем бросают кубик, на котором цифры 4, 5, 6
+    заменены на 1, 2 и 3. При выпадении числа i игрок с номером i забирает с
+    кона
+    все три жетона. Игра заканчивается, когда кто-нибудь из игроков проигрывает
+    все
+    жетоны. Введем функцию f(<i>X, Y, Z</i>), как среднюю длительность игры
+    (среднее количество раундов) при заданных начальных капиталах <i>X, Y,
+        Z</i>.
+    Например, f(2, 2, 2) = 2. Ваша задача состоит в том, чтобы определить эту
+    функцию. Для этого необходимо смоделировать игру на компьютере, накопить
+    экспериментальные результаты, проанализировать их, а затем выдвигать
+    гипотезы о
+    виде функции f, проверять их для разных входных значений,  и,  отбросив
+    неподходящие, найти решение. </p>
+
+<p style='text-indent:20pt;'>Моделирование
+    игры не вызывает трудности (программа приведена ниже). Также очевидно,
+    что
+    вид
+    функции симметричен относительно порядка задания входных параметров
+    <span>f</span>(<i><span>X</span></i><i>,
+    </i><i><span>Y</span></i><i>,
+    </i><i><span>Z</span></i>) =
+    <span>f</span>(<i><span>Y</span></i><i>,
+    </i><i><span>X</span></i><i>, </i><i><span>Z</span></i>) и т.д.
+    Сложность задачи заключается в нахождении вида функции <br>
+    <span>f</span>(<i><span>X</span></i><i>,
+    </i><i><span>Y</span></i><i>,
+    </i><i><span>Z</span></i>) = <i><span>X</span></i> &#183; <i>Y</i>
+    &#183; <i>Z</i> /
+    (<i>X</i><i> </i>+ <i><span>Y</span></i><i> +
+    </i><i><span>Z</span></i><i> - </i>2), так как результаты моделирования
+    определяются не точно.</p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>&nbsp;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>var</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>  i, n, Rounds:
+LongInt;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>  x, y, z, j:
+Integer;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>  a: array[0..2]
+of Integer;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>&nbsp;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>begin</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>  Write('x, y, z
+</span><span style='font-size:12.0pt;font-family:"Times New 
+Roman","serif"'>натуральные</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"","serif"'>: ');
+ReadLn(x, y, z);</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>  </span><span
+        style='font-size:12.0pt;font-family:"","serif"'>Write('Число
+историй (игр): '); ReadLn(n);</span></p>
+
+<p style='text-indent:1.0cm'><span style='font-size:12.0pt;font-family:
+"","serif"'>  Rounds:=0;                 {число раундов в одной
+игре}</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'> 
+Randomize;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>  for i:=1 to n
+do              {разыгрываем n историй развития начальной 
+ситуации}</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>  </span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>begin</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>    a[0]:=x;
+a[1]:=y; a[2]:=z;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>    </span><span
+        style='font-size:12.0pt;font-family:"","serif"'>while
+a[0]*a[1]*a[2]&lt;&gt;0 do  {моделируем игру, пока у всех игроков есть 
+жетоны}</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>    </span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>begin</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>     
+Inc(Rounds);</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>     
+</span><span
+        style='font-size:12.0pt;font-family:"","serif"'>for j:=0 to 2 do
+Dec(a[j]);  {все игроки ставят по одному жетону}</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>     
+Inc(a[Random(3)],
+3);        {а победитель берет все три жетона}</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>   
+end;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'> 
+end;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>  WriteLn('f(x,y,z)
+= ', Rounds/n:0:3);  {среднее количество раундов}</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>end.</span></p>
+
+<p style='text-indent:20pt;'>&nbsp;</p>
+
+<p>Данная задача достаточно хорошо характеризует метод Монте-Карло, а
+    именно:</p>
+
+<p style='margin-left:37.85pt;text-indent:
+-18.0pt'><span style='font-family:Symbol'>·<span style='font:7.0pt "Times New 
+Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><strong>Идею метода</strong></p>
+
+<p style='margin-left:53.4pt;text-indent:-18.0pt'>-<span
+        style='font:7.0pt "Times New
+Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>ожидаемый результат игры может быть оценен усреднением
+    результатов
+    большого числа игр (это число так и называется  – математическим ожиданием
+    или
+    средним значением).</p>
+
+<p style='margin-left:53.4pt'><span style='position:relative;top:-17.0pt'>То есть 
+результат
+приближенно равен числу </span> <img src="monte_carlo/1.png" width="108"
+                                     height="61"><span
+        style='position:relative;top:-17.0pt'>,</span></p>
+
+<p style='margin-left:53.4pt'> где
+    <i><span>x<sub>i</sub></span></i><sub><span>
+</span></sub>– результат игры <i><span>i</span></i>,
+    а <span>N</span>- число всех проведенных игр (испытаний) </p>
+
+<p style='margin-left:37.85pt;text-indent:
+-18.0pt'><span style='font-family:Symbol'>·<span style='font:7.0pt "Times New 
+Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><strong>Достоинство метода</strong></p>
+
+<p style='margin-left:53.4pt;text-indent:-18.0pt'>-<span
+        style='font:7.0pt "Times New
+Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>незнание <i>a priori</i> (до опыта) функциональных зависимостей
+    исследуемой задачи в целом, выявление этих зависимостей <i>a
+        posteriori</i>
+    (после опыта).</p>
+
+<p style='margin-left:37.85pt;text-indent:
+-18.0pt'><span style='font-family:Symbol'>·<span style='font:7.0pt "Times New 
+Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><strong>Недостатки метода</strong></p>
+
+<p style='margin-left:53.3pt;text-indent:
+-17.85pt'>-<span style='font:7.0pt "Times New 
+Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>неопределенное время расчета (варианты примера 1 при больших
+    числах
+    <i><span>X</span>, </i><i><span>Y</span>,
+    </i><i><span>Z</span></i>);</p>
+
+<p style='margin-left:53.3pt;text-indent:
+-17.85pt'>-<span style='font:7.0pt "Times New 
+Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>приближенное вычисление результата.</p>
+
+<p style='margin-left:35.45pt;text-align:justify'>&nbsp;</p>
+
+<p>Последний недостаток компенсируется тем, что с использованием
+    данного метода вместе со значением <img src="monte_carlo/2.png" width="11"
+                                            height="11"> может
+    одновременно определяться и его
+    погрешность <span style='position:relative;top:5.0pt'><img src="monte_carlo/3.png"
+                                                               width="17"
+                                                               height="17"></span> по
+    формулам:</p>
+
+<p><img src="monte_carlo/4.png" width="243" height="80"></p>
+
+<p class=31 style='text-indent:0cm'>При больших <span>N</span>
+    формулу можно упростить: <img src="monte_carlo/5.png" width="104" height="21">,
+    где
+<span
+        style='position:relative;top:10.0pt'><img src="monte_carlo/6.png" width="112"
+                                                  height="44"></span></p>
+
+<p>&nbsp;</p>
+
+<p>В пределах [<img src="monte_carlo/2.png" width="11" height="11"> - <span
+        style='position:relative;top:5.0pt'><img src="monte_carlo/3.png" width="17"
+                                                 height="17"></span>, <img
+        src="monte_carlo/2.png" width="11" height="11"> + <span
+        style='position:relative;top:5.0pt'><img
+        src="monte_carlo/3.png" width="17" height="17"></span>] с достоверностью 68.27%
+    находится
+    искомая величина, а в пределах <sub><img src="monte_carlo/2.png" width="11"
+                                             height="11"></sub><span
+            style='font-family:Symbol'> ±</span><span>&nbsp;</span>2<span
+            style='position:relative;top:5.0pt'><img src="monte_carlo/3.png" width="17"
+                                                     height="17"></span> или <img
+            src="monte_carlo/2.png" width="11" height="11"><span style='font-family:Symbol'>
+±</span><span>&nbsp;</span>3<span style='position:relative;top:5.0pt'><img
+            src="monte_carlo/3.png"
+            width="17" height="17"></span></sub> достоверность уже 95.45% и 99.73%
+    соответственно. Поэтому метод по праву называют порой прецизионным или
+    точным в
+    смысле, что известна точность рассчитываемых величин, и это может служить
+    точкой отсчета для проверки программ, использующих другие приближенные
+    методы. </p>
+
+<p style='text-indent:20pt;'>Иногда, чтобы избежать потери значащих цифр
+    при
+    суммировании,
+    среднее значение определяется в программе после каждого испытания по
+    формуле:</p>
+
+<p><img src="monte_carlo/7.png" width="143" height="37"></p>
+
+<p style='text-indent:20pt;'>Так как программа с использованием метода
+    Монте-
+    Карло порой
+    требует значительных временных затрат, целесообразно выводить на экран
+    некоторую
+    информацию о ходе ее решения во избежание мнимого эффекта «зависания»,
+    за
+    исключением тех случаев, когда вывод на экран запрещен по условию
+    задачи.
+    Предпочтительно для описания целочисленных переменных, осуществляющих
+    подсчет
+    историй, использовать тип «длинное целое».</p>
+
+<p style='text-indent:20pt;'>Метод
+    Монте-Карло применяется <i>для выбора наилучших стратегий </i>в задачах,
+    где
+    присутствуют много случайных факторов.</p>
+
+<p>&nbsp;</p>
+
+<p style='text-indent:20pt;'><strong>Задача 1.</strong>
+    «<strong>Лучшее пари для простаков». </strong>(Районная олимпиада 1997).</p>
+
+<p style='text-indent:20pt;'>Игрок A
+    выбирает комбинацию из цифр 0 и 1 длиной 3 знака (например, 001). Игрок B
+    выбирает свою комбинацию (отличную от игрока A). Подбрасывается монета и
+    записываются результаты бросания (например, 101101..., где 0 обозначает
+    «орел»,
+    а 1 — «решка»). Игра прекращается в тот момент, когда в последовательности
+    цифр
+    на конце возникает комбинация, выбранная <span>A</span> или B
+    (побеждает A или B соответственно). Игра повторяется.</p>
+
+<p style='text-indent:20pt;'>а) Оценить
+    шансы на выигрыш каждого из игроков R(A,B) (т.е. отношение числа
+    выигрышей
+    игрока B к числу выигрышей игрока A). </p>
+
+<p style='text-indent:20pt;'>б) Для
+    выбранной игроком A комбинации определить такую комбинацию для игрока
+    B,
+    которая ему дает больше шансов на выигрыш. </p>
+
+<p style='text-indent:20pt;'>Ниже
+    представлена таблица значений <span>R</span>(A,B) для всевозможных
+    выбранных игроками A и B исходных комбинаций при «неограниченном
+    продолжении»
+    игры (выделены наиболее выигрышные ситуации для игрока
+    <span>B</span>).</p>
+
+<p style='text-indent:20pt;'>Пари является
+    беспроигрышным (!) для игрока <span>B</span>. Парадокс заключается в
+    том, что какую бы комбинацию цифр не выбрал игрок <span>A</span>,
+    его соперник <span>B</span> может выбрать другую комбинацию, которая
+    ему дает больше шансов на выигрыш.</p>
+
+<p class="title">Таблица R(A,B)</p>
+
+
+<p class="image"><img src="monte_carlo/8.png" width="392" height="190"></p>
+
+<p style='text-indent:20pt;'><u>Указание</u>.
+    При решении задачи полученные результаты по пункту <span>a</span>)
+    не будут совпадать с данными из таблицы, так как число опытов ограничено,
+    тем
+    не менее, позволяют дать качественный ответ по пункту б)</p>
+
+<p style='text-indent:20pt;'>Метод
+    Монте-Карло используется <i>для определения вероятности наступления
+        какого-либо
+        события</i>.</p>
+
+<p style='text-indent:20pt;'>&nbsp;</p>
+
+<p style='text-indent:20pt;'><strong>Задача 2.</strong></p>
+
+<p style='text-indent:20pt;'>Пусть дана
+    ось с отмеченными на ней целочисленными точками. Предположим, что
+    Чиполлино
+    спрятался в точке 0, в точке <span>N</span> находится пропасть, и
+    сыщик Моркоу находится в точке <span>k</span> (0 &lt; <span>k</span>
+    &lt;
+    <span>N</span>).
+    Сыщик ищет Чиполлино
+    случайным образом, блуждая по соседним целочисленным точкам. Если он
+    попадет в
+    точку 0, то найдет Чиполлино, а если попадет в точку <span>N</span>,
+    то свалится в пропасть. С какой вероятностью сыщик найдет Чиполлино?</p>
+
+<p style='text-indent:20pt;'>Под
+    вероятностью какого-либо события (<span>P</span>) мы будем понимать
+    предельное значение частоты события, а именно, отношения числа успешных
+    (приведших к появлению данного события) испытаний
+    (<span>N</span><sub>у</sub>)
+    к общему числу проведенных испытаний (<span>N</span>), то есть
+    <span>P</span><span>
+</span><span style='font-family:Symbol'>»</span>
+    <span>N</span><sub>у</sub> / <span>N</span>. Чем больше
+    мы проведем испытаний, тем точнее (в идеале) мы определяем численное
+    значение
+    вероятности. Очевидно, что вероятность <span>P</span> удовлетворяет
+    условию: 0 <span style='font-family:Symbol'>&pound;</span>
+    <span>P</span><span>
+</span><span style='font-family:Symbol'>&pound;</span> 1.</p>
+
+<p style='text-indent:20pt;'><u>Указание</u>.
+    Смоделируйте многократный поиск сыщика из точки k, доля удачных попыток
+    от
+    общего их числа дает приближенную оценку искомой вероятности. На
+    основании
+    этой
+    оценки сформулируйте простую формулу для нахождения вероятности
+    события
+    (обозначим ее P<sub>0</sub>(k)), указанного в задаче.</p>
+
+<p>Данную задачу можно решить точно, используя рекуррентную формулу:
+    <br>
+    P<sub>0</sub>(k) = P<sub>0</sub>(k-1)/2 + P<sub>0</sub>(k+1)/2 при
+    очевидных
+    условиях, что P<sub>0</sub>(0) = 1 и P<sub>0</sub>(N)=0, однако
+    использовать
+    рекурсию в такой форме неприемлемо, так как глубина рекурсии
+    неограниченна, что
+    ведет к переполнению стека и краху программы. <i><u><span
+            style='text-decoration:none'>&nbsp;</span></u></i></p>
+
+<p style='text-indent:20pt;'><i><u>Упражнение
+    1.</u></i></p>
+
+<p style='text-indent:20pt;'>Выведите
+    рекуррентную зависимость
+    <span>P</span><sub>0</sub>(<span>k</span>+1)
+    от
+    <span>P</span><sub>0</sub>(<span>k</span>), начиная с
+    <span>k</span>
+    = 0 и, используя
+    известное значение <span>P</span><sub>0</sub>(<span>N</span>),
+    обратным ходом получите общее выражение для
+    <span>P</span><sub>0</sub>(<span>k</span>).</p>
+
+<p style='text-indent:20pt;'>&nbsp;</p>
+
+<p style='text-indent:20pt;'><strong>Задача 3.</strong></p>
+
+<p style='text-indent:20pt;'>Пусть имеется
+    “однорукий бандит” – игровой автомат с ручкой, которой его запускают для
+    игры.
+    Считаем (для упрощения), что игра будет типа “в орлянку”, и игрок имеет
+    начальный капитал в одну монету. Игра ведется до тех пор, пока игрок не
+    обанкротится или выиграет <span>N</span> монет. Промоделировать игру
+    для <span>N</span>=10, определить вероятность (шансы) игрока
+    “сорвать указанный куш” и объяснить, почему автомат назвали
+    “бандитом”.</p>
+
+<p style='text-indent:20pt;'>Задача о
+    разорении игрока аналогична задачи блуждания по отрезку [0,
+    <span>N</span>]
+    с той лишь разницей, что требуется определить вероятность
+    <span>P<sub>N</sub></span>(<span>k</span>) достичь точки
+    <span>N</span>, находясь в
+    точке <span>k</span>=1. Образно говоря, эти модели “связаны одной
+    цепью”.
+    Последовательность
+    испытаний, в которой каждое следующее испытание зависит только от исхода
+    предыдущего, называется цепью Маркова. Многие реальные явления
+    (например,
+    броуновское движение частиц, обслуживание телефонных линий)
+    описываются
+    данными
+    вероятностными моделями /2/. </p>
+
+<p style='text-indent:20pt;'>Метод Монте-Карло <i>универсален и
+    применим</i>
+    как для задач, в
+    условиях которых присутствует элемент неопределенности, так <i>и</i>
+    <i>для
+        полностью детерминированных задач</i>.</p>
+
+<p style='text-indent:20pt;'>Иногда трудно
+    найти алгоритм или функциональные зависимости для решения сложных
+    задач,
+    однако
+    возможно переформулировать условие задачи таким образом, чтобы
+    использовать для
+    нахождения решения метод Монте-Карло. При этом задача упрощается, но за
+    это
+    приходится “расплачиваться” временем решения и точностью
+    результата.<strong>&nbsp;</strong></p>
+
+<p style='text-indent:20pt;'>&nbsp;</p>
+
+<p style='text-indent:20pt;'><strong>Пример 2</strong>.
+    (Областная олимпиада 2001).</p>
+
+<p style='text-indent:20pt;'>Найти площадь
+    пересечения трех окружностей с заданными радиусами и координатами
+    центров
+    окружностей. </p>
+
+<p style='text-indent:20pt;'>Аналитические
+    выкладки для определения площади пересечения достаточно сложны. Метод
+    Монте-Карло позволяет приближенно вычислить площадь (объем) области,
+    даже
+    в том
+    случае, когда имеется лишь возможностью определить, принадлежит ли точка
+    данной
+    области.</p>
+
+<p style='text-indent:20pt;'>Переформулируем
+    условие задачи. Опишем квадрат около одной из окружностей (например,
+    меньшего
+    радиуса). Будем случайным образом кидать точки в этот квадрат. При
+    достаточно
+    большом их количестве (<i><span>n</span></i>) они равномерно
+    распределятся по площади квадрата. Часть из них (<i><span>m</span></i>)
+    попадет в область пересечения трех окружностей. Можно ожидать, что
+    отношение
+    <i><span>m</span>/</i><i><span>n</span></i> имеет конечный предел,
+    равный отношению искомой площади к площади описанного квадрата (см.
+    Упражнение
+    2).</p>
+
+<p style='text-indent:20pt;'><u>Указание</u>.
+    Наилучший путь - это «использовать геометрию» для анализа частных случаев
+    (когда нет пересечения, одна окружность внутри другой), а метод Монте-
+    Карло -
+    для общего случая.</p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>&nbsp;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>label</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'> 
+NotInCircle;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>&nbsp;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>var</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>  i, n, m:
+LongInt;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>  j:
+Integer;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>  x, y, r, rr:
+array[1..3] of Real;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>  xp, yp, xmin,
+ymin, d: Real;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>&nbsp;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>begin</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>  for j:=1 to 3
+do      {вводим координаты центра и радиус трех окружностей}</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'> 
+begin</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>    Write(j, '-я
+окружность (x y r): ');</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>    </span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>ReadLn(x[j],
+y[j], r[j]);</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>    </span><span
+        style='font-size:12.0pt;font-family:"","serif"'>rr[j]:=Sqr(r[j]);  
+{вычислим квадраты радиусов - они будут часто использоваться}</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'> 
+end;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'> 
+Write('Количество
+историй: '); ReadLn(n);</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>&nbsp;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>  xmin:=x[1]-
+r[1];     
+{опишем квадрат около первой окружности}</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>  </span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>ymin:=y[1]-
+r[1];</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'> 
+d:=r[1]*2;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>&nbsp;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'> 
+m:=0;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'> 
+Randomize;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>  for i:=1 to n
+do      {</span><span style='font-size:12.0pt;font-family:"Times New 
+Roman","serif"'>в</span><span
+        style='font-size:12.0pt;font-family:"","serif"'> </span><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>цикле</span><span
+        style='font-size:12.0pt;font-family:"","serif"'> </span><span
+        style='font-size:12.0pt;font-family:"","serif"'>по</span><span
+        style='font-size:12.0pt;font-family:"","serif"'> </span><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>числу</span><span
+        style='font-size:12.0pt;font-family:"","serif"'> </span><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>историй</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>}</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>  </span><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>begin</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>   
+xp:=Random*d+xmin; 
+{бросаем случайным образом}</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>   
+yp:=Random*d+ymin; 
+{точки в выбранный квадрат}</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>    for j:=1 to
+3 do    {проверяем, попадает ли точка в каждый круг}</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>     
+</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"","serif"'>if
+Sqr(xp-x[j])+Sqr(yp-y[j]) &gt; rr[j] then goto NotInCircle;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>    </span><span
+        style='font-size:12.0pt;font-family:"","serif"'>Inc(m);            
+{считаем количество точек, попавших сразу во все три круга}</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>   
+NotInCircle:</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'> 
+end;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>  WriteLn('S =
+', Sqr(d)*m/n:0:3);  {результат, тем точнее, чем больше историй}</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>end.</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>&nbsp;</span></p>
+
+<p style='text-indent:20pt;'><strong>Задача 4</strong>.
+    Два цилиндра одинакового радиуса <span>R</span>=1 пересекаются под
+    прямым углом. Найти объем <span>V</span> их общей части.<u><span
+            style='text-decoration:none'>&nbsp;</span></u></p>
+
+<p style='text-indent:20pt;'><u>Указание.</u>
+    В журнале “Квант” (№2, 1988 г.) приводится геометрический формализм
+    решения
+    задачи: <span>V</span> = 16<span>R</span><sup>3</sup>/3.</p>
+
+<p style='text-indent:20pt;'>&nbsp;</p>
+
+<p style='text-indent:20pt;'><strong>Задача 5</strong>.
+    Оценить чего больше: несократимых или сократимых дробей.</p>
+
+<p style='text-indent:20pt;'>Фривольное
+    условие задачи предполагает строгую формулировку: какова вероятность
+    того,
+    что
+    наудачу взятая дробь несократима?</p>
+
+<p style='text-indent:20pt;'>Ответ
+    достаточно сложен и равен 6/&#960;<sup>2</sup>
+    = 0.6079...</p>
+
+<p style='text-indent:20pt;'>(Н.Я.
+    Виленкин. В таинственном мире бесконечных рядов. Квант №10, 1989)</p>
+
+<p style='text-indent:20pt;'>Сформулируем
+    условие иначе. Рассмотрим несократимые дроби вида
+    <i><span>a</span>/</i><i><span>b</span></i>, где 1<span style='font-
+family:Symbol'>&pound;</span> <i><span>a</span>,
+    </i><i><span>b</span></i><span>
+</span><span
+            style='font-family:Symbol'>&pound;</span>.<span>N</span>. Количество
+    их <span>f</span>(<span>N</span>). Нужно найти предел
+    <span>f</span>(<span>N</span>)<span>&nbsp;</span>/&nbsp;<span>N</sp
+        an
+><sup>2</sup> 
+для больших чисел <span>N</span>.
+Выберем случайные натуральные числа (не превосходящие фиксированного 
+достаточно
+большого числа <span>N</span>) для числителя и знаменателя дроби.
+Повторяем «эксперимент» <i><span>n</span></i> раз, подсчитывая
+количество (<i><span>m</span></i>) несократимых дробей, используя
+алгоритм Эвклида для нахождения наибольшего общего делителя числителя и
+знаменателя. Отношение <i><span>m</span>/</i><i><span>n</span></i>
+дает оценку доли несократимых дробей.</p>
+
+<p style='text-indent:20pt;'>Строго
+    говоря, мы должны доказать, что характер соотношения не изменится при
+    увеличении числа <span>N</span>. Мы же будем это предполагать во
+    всех задачах, так как математические критерии, гарантирующие сходимость
+    решения, известны в редких случаях. Сходимость можно проверять для
+    различного
+    числа испытаний (например, увеличивая в 10 раз). Важно, чтобы число
+    историй
+    по
+    закону было “большим”. </p>
+
+<p style='text-indent:20pt;'>&nbsp;</p>
+
+<p style='text-indent:20pt;'><strong>Упражнение 2</strong></p>
+
+<p style='text-indent:20pt;'>Свойство
+    равномерного распределения случайных чисел на отрезке [0,1] означает, что
+    вероятность попасть очередному числу, сгенерированному ДСЧ, в любой 
+    выбранный
+    отрезок из [0,1] равна длине этого отрезка (проверьте моделированием). </p>
+
+<p style='text-indent:20pt;'>Поэтому
+    смоделировать событие (обозначим его <span>C</span>), реализующееся
+    с вероятностью <span>P</span> можно так: на единичном отрезке
+    выбирается отрезок длины <span>P</span>, и если случайная точка
+    попала в заданный отрезок, то считаем, что событие <span>C</span>
+    произошло. Если есть несколько независимых событий, то им следует
+    сопоставить
+    непересекающиеся отрезки с длинами, соответствующими вероятностям
+    событий.</p>
+
+<p style='text-indent:20pt;'>Равномерность
+    распределения точек по отрезку справедлива для большого числа
+    сгенерированных
+    случайных точек. Так, если мы разобьем единичный отрезок на
+    <span>k</span>
+    равных частей, то необходимо сгенерировать более 10<span style='font-
+size:8.0pt;
+font-family:Symbol'>·</span><span>k</span> случайных чисел, чтобы
+    они распределились в каждой части примерно одинаково. Для
+    <span>k</span>
+    случайных точек получим совершенно иную картину
+    распределения.<strong>&nbsp;</strong></p>
+
+<p style='text-indent:20pt;'>&nbsp;</p>
+
+<p style='text-indent:20pt;'><strong>Пример 3. </strong></p>
+
+<p style='text-indent:20pt;'>На шахматную
+    доску случайным образом бросают 64 зерна. Определить, как зерна по
+    количеству
+    распределятся  в клетках.<u><span
+            style='text-decoration:none'>&nbsp;</span></u></p>
+
+<p style='text-indent:20pt;'><u>Указание.</u>
+    Пронумеруем клетки шахматной доски от 0 до 63. Случайное попадание зерна
+    на
+    какую-либо клетку моделируем случайным выбором клетки с помощью
+    датчика
+    случайных чисел <span>RANDOM</span>(64).</p>
+
+<p style='text-indent:20pt;'>&nbsp;</p>
+
+<p style='text-indent:20pt;'><span>const</span></p>
+
+<p style='text-indent:20pt;'><span>  Iterations = 10000;</span></p>
+
+<p style='text-indent:20pt;'><span>var</span></p>
+
+<p style='text-indent:20pt;'><span>  Board: array[0..63] of 
+LongInt;</span></p>
+
+<p style='text-indent:20pt;'><span>  Count: array[0..63] of 
+LongInt;</span></p>
+
+<p style='text-indent:20pt;'><span>  i, j: LongInt;</span></p>
+
+<p style='text-indent:20pt;'><span>&nbsp;</span></p>
+
+<p style='text-indent:20pt;'><span>begin</span></p>
+
+<p style='text-indent:20pt;'><span>  Randomize;</span></p>
+
+<p style='text-indent:20pt;'><span>  FillChar(Count, SizeOf(Count), 
+0);</span></p>
+
+<p style='text-indent:20pt;'><span>&nbsp;</span></p>
+
+<p style='text-indent:20pt;'><span>  for i:=1 to Iterations do</span></p>
+
+<p style='text-indent:20pt;'><span>  begin</span></p>
+
+<p style='text-indent:20pt;'><span>    FillChar(Board, SizeOf(Board), 
+0);</span></p>
+
+<p style='text-indent:20pt;'><span>    for j:=0 to 63 do 
+Inc(Board[Random(64)]);</span></p>
+
+<p style='text-indent:20pt;'><span>    for j:=0 to 63 do 
+Inc(Count[Board[j]]);</span></p>
+
+<p style='text-indent:20pt;'><span>  end;</span></p>
+
+<p style='text-indent:20pt;'><span>&nbsp;</span></p>
+
+<p style='text-indent:20pt;'><span>  for j:=0 to 10 do</span></p>
+
+<p style='text-indent:20pt;'><span>    WriteLn(j:2, ' ', 
+Count[j]/Iterations:8:5);</span></p>
+
+<p style='text-indent:20pt;'><span> end</span>.</p>
+
+<p style='text-indent:20pt;'>В результате
+    моделирования оказывается, что вероятнее всего: 23 клетки останутся
+    пустыми,
+    на
+    24 клетках будет по одному зерну, на 12 клетках – по два, на 4 клетках – по
+    три, на одной клетке – четыре. </p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>Генератор
+случайных чисел можно использовать для построения различных 
+геометрических
+объектов.</span><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>&nbsp;</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>Приведем
+алгоритм построения простейшего лабиринта. Лабиринты служат основой
+многочисленных игровых программ и олимпиадных задач.</span></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>На плоскости
+чертится прямоугольник, задающий границы лабиринта. Внутри 
+прямоугольника
+выбирается точка (координаты которой задаются случайным образом), не 
+лежащая на
+ранее построенных границах. От точки в случайном направлении (вправо, 
+влево,
+вверх, вниз) рисуется линия границы до пересечения с какой-либо другой 
+линией.
+Чтобы проходы в лабиринте были одинаковой ширины, координаты точки 
+задаются с
+заранее выбранным шагом (например, на целочисленной сетке). Построение
+лабиринта прекращается по нажатию клавиши &lt;ESC&gt; или когда выбраны 
+все
+допустимые точки. Такой алгоритм построения не дает циклических путей в
+лабиринте и, следовательно, в нем всегда можно найти выход. На рис. 1 
+приведен
+вариант сгенерированного лабиринта.</span><strong><u><span
+        style='font-size:12.0pt;font-family:"","serif"'><span
+        style='text-decoration:none'>&nbsp;</span></span></u></strong></p>
+
+<p style='text-indent:20pt;'>&nbsp;</p>
+
+<p style='text-indent:20pt;'><strong><span
+        style='font-size:12.0pt;font-family:"","serif"'>Пример
+4.</span></strong></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>Построим
+лабиринт, используя приведенный выше алгоритм.</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>&nbsp;</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>uses</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>  Graph, Crt;</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>&nbsp;</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+
+font-family:"","serif"'>const</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>  </span><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>Step</span><span
+        style='font-size:12.0pt;font-family:"","serif"'> = 20;    {шаг -
+размер клетки в пикселах}</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>  </span><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>Width</span><span
+        style='font-size:12.0pt;font-family:"","serif"'> = 30;   {ширина
+лабиринта в клетках}</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>  </span><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>Height</span><span
+        style='font-size:12.0pt;font-family:"","serif"'> = 20;  {высота
+лабиринта в клетках}</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>  </span><span
+        style='font-size:12.0pt;font-family:"","serif"'>dx</span><span
+        style='font-size:12.0pt;font-family:"","serif"'>: </span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>array</span><span
+        style='font-size:12.0pt;font-family:"","serif"'>[0..3]
+</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>of</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"","serif"'>
+</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>Integer</span><span
+        style='font-size:12.0pt;font-family:"","serif"'> = (1,  0, -1,
+0);  {смещения по горизонтали}</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>  </span><span
+        style='font-size:12.0pt;font-family:"","serif"'>dy</span><span
+        style='font-size:12.0pt;font-family:"","serif"'>: </span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>array</span><span
+        style='font-size:12.0pt;font-family:"","serif"'>[0..3]
+</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>of</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"","serif"'>
+</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>Integer</span><span
+        style='font-size:12.0pt;font-family:"","serif"'> = (0, -1,  0,
+1);  {и вертикали для четырех направлений}</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>&nbsp;</span></p>
+
+<div style="float:right;margin-right:40px;"><img src="monte_carlo/img2.png">
+
+    <p class="title">Рис. 1</p>
+</div>
+
+<p style='text-indent:20pt'><span
+        style='font-size:12.0pt;font-family:"","serif"'>var</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>  Driver, Mode: Integer;</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>  x, y, n: Integer;</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>  Wall: Boolean;</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>&nbsp;</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>begin</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>  Driver:=Vga;
+Mode:=VgaHi;</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>  InitGraph(Driver, Mode,
+'');</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'> </span><span style='font-size:12.0pt;
+font-family:"","serif"'>{очертим границы
+лабиринта}</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'> </span><span
+        style='font-size:12.0pt;font-family:"","serif"'>Rectangle(0, 0,
+Width*Step, Height*Step);  </span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>  </span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>  Randomize;</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>  repeat</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>    x:=Random(Width)*Step;                 
+{</span><span style='font-size:12.0pt;font-family:"Times New 
+Roman","serif"'>выбираем</span><span
+        style='font-size:12.0pt;font-family:"","serif"'> </span><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>случайную</span><span
+        style='font-size:12.0pt;font-family:"","serif"'> </span><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>точку</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>}</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>   
+y:=Random(Height)*Step;</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>    if</span><span
+        style='font-size:12.0pt;font-family:"","serif"'> </span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>GetPixel</span><span
+        style='font-size:12.0pt;font-family:"","serif"'>(</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>x</span><span
+        style='font-size:12.0pt;font-family:"","serif"'>, </span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>y</span><span
+        style='font-size:12.0pt;font-family:"","serif"'>)&lt;&gt;0
+</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>then</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"","serif"'>
+</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>Continue</span><span
+        style='font-size:12.0pt;font-family:"","serif"'>;  {если она
+лежит на стене, пробуем заново}</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>    </span><span
+        style='font-size:12.0pt;font-family:"","serif"'>MoveTo(x,
+y);</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>    n</span><span style='font-
+size:12.0pt;
+font-family:"","serif"'>:=</span><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>Random</span><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>(4);                                 
+{выбираем случайное направление}</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>    </span><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>repeat</span><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>                                                
+{рисуется линия от текущей точки}</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>      </span><span
+        style='font-size:12.0pt;font-family:"","serif"'>Inc</span><span
+        style='font-size:12.0pt;font-family:"","serif"'>(</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>x</span><span
+        style='font-size:12.0pt;font-family:"","serif"'>, </span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>dx</span><span
+        style='font-size:12.0pt;font-family:"","serif"'>[</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>n</span><span
+        style='font-size:12.0pt;font-family:"","serif"'>]*</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>Step</span><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>);                         
+{с заданным шагом и направлением}</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>      </span><span
+        style='font-size:12.0pt;font-family:"","serif"'>Inc(y,
+dy[n]*Step);</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>      Wall</span><span style='font-size:
+12.0pt;font-family:"","serif"'>:=(</span><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>GetPixel</span><span
+        style='font-size:12.0pt;font-family:"","serif"'>(</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>x</span><span
+        style='font-size:12.0pt;font-family:"","serif"'>, </span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>y</span><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>)&lt;&gt;0);            
+{до ближайшей стенки}</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>      </span><span
+        style='font-size:12.0pt;font-family:"","serif"'>LineTo(x,
+y);</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>    until Wall;             </span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>  until KeyPressed;</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>  ReadKey;</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+
+font-family:"","serif"'>  CloseGraph;</span></p>
+
+<p style='text-indent:20pt'><span style='font-size:12.0pt;
+font-family:"","serif"'>end.</span></p>
+
+<p style='margin-left:1.0cm;text-indent:1.0cm'><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>&nbsp;</span></p>
+
+<p style='text-indent:20pt'><i><u><span style='font-size:12.0pt;
+font-family:"","serif"'>Упражнение 3</span></u></i></p>
+
+<p style='text-indent:20pt;'><span
+        style='font-size:12.0pt;font-family:"","serif"'>Преобразуйте
+алгоритм для построения лабиринта на квадратной сетке, где квадрат – есть 
+часть
+стены (1) или коридора (0). Выведите матрицу лабиринта в файл, который 
+можно
+использовать далее в задачах отыскания пути в лабиринте (например, на 
+рисунке 1
+из левого верхнего поля – в правое нижнее) или для создания игр-
+стратегий.</span><span
+        style='font-size:12.0pt;font-family:"Times New
+Roman","serif"'>&nbsp;</span></p>
+
+<p style='text-indent:20pt;'>&nbsp;</p>
+
+<p style='text-indent:20pt;'><strong>Задача 6</strong>.
+</p>
+
+<p style='text-indent:20pt;'>На окружности
+    задана точка, две другие точки выбираются на окружности произвольно.
+    Какова
+    вероятность, что треугольник с вершинами в этих точках – остроугольный?
+    Смоделируйте задачу с помощью метода Монте-Карло.</p>
+
+<p style='text-indent:20pt;'><u>Указание</u>.
+    Положение случайной точки на окружности можно задавать дугой в радианах
+    от
+    заданной фиксированной точки (например, против часовой стрелки). Тогда
+    угол
+    измеряется половиной  дуги между его сторонами. <strong>&nbsp;</strong></p>
+
+<p style='text-indent:20pt;'>Используя
+    геометрическую интерпретацию вероятности, можно наоборот свести задачу со
+    случайными параметрами к простому соотношению некоторых величин /2/.
+    Пусть
+    &#945; - дуга (в
+    радианах) до вершины <i><span>B</span></i> треугольника от вершины
+    <i><span>A</span></i>
+    (рисунок 2), &#946; - дуга до вершины <i>С</i> 
+    от  точки <i><span>A</span></i> (0 &lt; &#945;, &#946; &lt; 2&#960;).
+    Треугольник будет
+    остроугольным, если:</p>
+
+<p style='margin-left:37.85pt;text-indent:
+-18.0pt'>1)<span style='font:7.0pt "Times New 
+Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span>при &#946; &gt; &#945; выполняется: &#945;
+    &lt; &#960;, &#946; &gt; &#960;, &#946; - &#945; &lt; &#960;</p>
+
+<p style='margin-left:37.85pt;text-indent:
+-18.0pt'>2)<span style='font:7.0pt "Times New 
+Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span>при &#946; &lt; &#945; выполняется: &#945;
+    &gt; &#960;, &#946; &lt; &#960;, &#945; - &#946; &lt; &#960;</p>
+
+<p class=21 style='text-indent:20pt'>Эти условия определяют заштрихованную
+    область на рисунке 3. Следовательно, искомая вероятность равна отношению
+    площади этой области к площади квадрата разброса точек, то есть 1/4.</p>
+
+<p><img src="monte_carlo/9.png" width="307" height="150"></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Рис. 2
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
+    p;
+    &nbsp;&nbsp;&nbsp
+    ;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
+    p;
+    &nbsp;&nbsp;Рис.
+    3</p>
+
+<p style='text-indent:20pt;'>Необходимо обратить внимание на <i>выбор
+    подходящей
+    вероятностной
+    модели</i> для адекватного представления поставленной задачи.
+    Рассмотрим:<strong>&nbsp;</strong></p>
+
+<p>&nbsp;</p>
+
+<p style='text-indent:20pt;'><strong>Пример 5.</strong></p>
+
+<p style='text-indent:20pt;'>В круге
+    радиуса 1 берется наудачу хорда. Требуется определить вероятность того, что
+    ее
+    длина больше &#8730;<em></em>3.</p>
+
+<p style='text-indent:20pt;'>&nbsp;</p>
+
+<p style='text-indent:20pt;'>Построим три
+    вероятностные модели:</p>
+
+<p style='margin-left:48.2pt;text-indent:
+-1.0cm; text-align:left;'>М1. &nbsp;Положение хорды в круге однозначно
+    задается ее серединой  –
+    моделируем случайный выбор
+    середины хорды;</p>
+
+<p style='margin-left:48.2pt;text-indent:
+-1.0cm'>М2. &nbsp;Случайным
+    образом выбираются две точки на окружности, задающие хорду;</p>
+
+<p style='margin-left:48.2pt;text-indent:-1.0cm;text-align:left;'>М3.&nbsp; Из
+    соображения симметрии фиксируем направление хорды, моделируем
+    положение
+    точки
+    пересечения хорды с диаметром, перпендикулярным этому направлению</p>
+
+<p style='text-indent:20pt;'>&nbsp;</p>
+
+<p style='text-indent:20pt;'>Разные модели
+    дают разные ответы на поставленную задачу (парадокс Бертрана): 1/2, 1/3,
+    1/4
+    соответственно для М1, М2, М3 вследствие того, что случайный выбор хорды
+    четко
+    не определен в задаче.</p>
+
+<p style='text-indent:20pt;'><i><u>Упражнение
+    4</u></i></p>
+
+<p style='text-indent:20pt;'>Опишите
+    геометрический способ решения задачи для перечисленных моделей.</p>
+
+<p style='text-indent:20pt;'>&nbsp;</p>
+
+<p style='text-indent:20pt;'><strong>Задача 7</strong>.
+    <strong>«Салфетка Серпинского».</strong></p>
+
+<p style='text-indent:20pt;'>Возьмем
+    произвольный треугольник и выберем любую точку внутри него. Следующей
+    точкой
+    выберем середину отрезка от заданной точки до произвольно выбранной
+    вершины
+    треугольника. Принимая полученную точку за исходную, продолжим процесс.
+    Изобразите процесс графически.</p>
+
+<p style='text-indent:20pt;'>Салфетку Серпинского можно нарисовать с
+    помощью
+    рекурсивного
+    рисования средних линий треугольника. Оказывается, казалось бы
+    «случайный»
+    разброс точек также создает закономерное кружево как на рисунке 4.</p>
+
+<p style='text-indent:20pt;'><u>Указание</u>:
+    Предусмотреть окончание задачи, например, по нажатию любой клавиши или
+    генерации большого, но конечного числа точек.</p>
+
+<p style='text-indent:20pt;'>Небольшое
+    отступление от темы посвятим свойствам полученного объекта. </p>
+
+<p style='text-indent:20pt;'>Если
+    определить геометрическую размерность как размерность самоподобия по
+    формуле
+    <span>ln</span>(<span>N</span>)/<span>ln</span>(<span>n</span>), где
+    <span>N</span>  -
+    число одинаковых частей,
+    на которые разбивается данный объект, имеющий в <span>n</span> раз
+    меньший пространственный размер, то для треугольной кривой Серпинского
+    (как
+    это
+    видно из рисунка 4) имеем размерность
+    <span>ln</span>(3)/<span>ln</span>(2) = 1.5849. Для
+    объектов дробной размерности Мандельбротом
+    введено понятие “фрактал” /3/. </p>
+
+<p style='text-indent:20pt;'>Красота и
+    простота фракталов завораживает исследователей и даже побуждает
+    использовать
+    самоподобие в музыке и поэзии -
+    http://sites.netscape.net/rlbtftn/index.html.</p>
+
+<p>С салфеткой Серпинского связана работа клеточного автомата,
+    определяемая в следующей задаче. <u><span
+            style='text-decoration:none'>&nbsp;</span></u></p>
+
+<p>&nbsp;</p>
+
+<p class=MsoBodyText style='margin-right:0cm;text-indent:20pt'><strong>Задача
+    8.</strong>
+    Рассмотрим события, разворачивающиеся во времени в одномерном
+    клеточном
+    пространстве по следующим правилам. Определяется сумма значений пяти
+    клеток
+    (самой клетки и двух ближайших к ней слева и справа). На следующем шаге
+    по
+    времени в зависимости от суммы, которая может равняться 0, 1, 2, 3, 4, 5,
+    клеткам присваивается значение 0, 1, 1, 1, 0, 0). Постройте на дисплее
+    клеточный автомат, в котором каждая строка соответствует одному моменту
+    времени.</p>
+
+<div style="float:left;margin-right:10px;"><img src="monte_carlo/10.png">
+
+    <p class="title">Рис. 4</p>
+</div>
+
+
+<p class=MsoBodyText style='margin-right:0cm;text-indent:20pt'>Эволюция
+    клеточного автомата воспроизводит рисунок 4, подобный салфетке
+    Серпинского.
+</p>
+
+<p class=MsoBodyText style='margin-right:0cm;text-indent:20pt'>Одномерные и
+    многомерные
+    клеточные автоматы явились
+    прообразом параллельных вычислений в компьютере, они имитируют сложную
+    структуру связей, которая наблюдается у нервных клеток мозга – нейронов, и
+    породили новую технологию обработки информации – нейрокомпьютинг
+    (Открытые
+    системы, № 4(24), 1997г.). <span>&nbsp;</span></p>
+
+<p class=MsoBodyText style='margin-right:0cm;text-indent:20pt'>Исследуем
+    работу автомата для других правил. Пусть значение в клетке (модель
+    нейрона)
+    определяется по сумме только соседних клеток. Если сумма четна, то считаем
+    воздействия скомпенсированными – значение равно 0 (покой), в противном
+    случае –
+    1 (возбуждение). </p>
+
+<div style="float:right;margin-top:10px;"><img src="monte_carlo/11.png">
+
+    <p class="title">Рис. 5</p>
+</div>
+<p><i><u>Упражнение 5</u></i></p>
+
+<p>Проверьте, что распространение возбуждения от одиночной клетки дает
+    картину расположения нечетных биномиальных коэффициентов в
+    треугольнике
+    Паскаля. </p>
+
+<p><i><u>Указание.</u></i> Треугольником Паскаля называется числовой
+    треугольник, в котором по краям стоят единицы, а каждое число внутри равно
+    сумме двух ближайших стоящих над ним чисел в строке сверху (рис.5). </p>
+
+<p>Треугольник Паскаля связан с одним из фундаментальных законов
+    распределения случайных чисел. Для начала, решим следующую задачу:</p>
+
+<p style='text-indent:20pt;'><strong>&nbsp;</strong></p>
+
+<p style='text-indent:20pt;'><strong>Задача 9.</strong></p>
+
+<div style="float:right;margin:10px 0 0 10px;"><img src="monte_carlo/12.png">
+
+    <p class="title">Рис. 6</p>
+</div>
+<p style='text-indent:20pt;'>Промоделируйте
+    работу прибора, указанного на рисунке 6. Дробинки, проходя через верхний
+    канал
+    и встречая препятствие, случайным образом продолжают свой путь вправо или
+    влево. Определите среднее число дробинок, попавших в каждую ячейку,
+    расположенную на выходе <span>m</span>-уровня препятствий
+    (<span>m</span>=9), если  в
+    каждой серии используется 2<sup><span>m</span></sup> штук
+    дробинок.</p>
+
+<p style='text-indent:20pt;'>На рисунке 6
+    показано распределение дробинок по ячейкам (сравните с числами Паскаля!)
+    в
+    виде
+    гистограммы, которая намечает вид кривой – кривой Гаусса, которая
+    соответствует
+    данной модели при бесконечно большом числе бесконечно малых препятствий
+    и
+    имеет
+    функциональную зависимость типа exp(-x<sup>2</sup>). </p>
+
+<p style='text-indent:20pt;'>В природе
+    кривая Гаусса характеризует естественный закон распределения
+    (“нормальное”
+    распределение) случайных ошибок в серии измерений какой-либо величины.
+    Проверим, насколько хорош наш датчик случайных чисел. Разобьем 
+    единичный
+    отрезок на <span>m</span> (=10000) равных отрезков. Сгенерируем
+    <span>N</span>
+    (=1000000) случайных чисел. Подсчитаем, сколько точек (в
+    среднем) попадет в каждый отрезок (<span>k</span><sub>1</sub>,
+    <span>k</span><sub>2</sub>, ..., <span>k<sub>m</sub></span>) и
+    насколько отличаются эти числа от идеального равномерного распределения,
+    когда
+    в каждый отрезок попадает в среднем <span>N</span>/<span>m</span>
+    (=100) точек. Так называемая центральная предельная теорема в теории
+    вероятности утверждает, что ошибки средних
+    (d<span>k<sub>i</sub></span>)
+    распределяются по нормальному закону. Промоделируем равномерное
+    распределение
+    точек на отрезке [0,1]</p>
+
+<p style='text-indent:20pt;'>&nbsp;</p>
+
+<p style='text-indent:20pt;'><strong>Пример</strong><strong><span> 6</span></strong></p>
+
+<p style='text-indent:20pt;'><span>const</span></p>
+
+<p style='text-indent:20pt;'><span>  N = 1000000;</span></p>
+
+<p style='text-indent:20pt;'><span>  M = 10000;</span></p>
+
+<p style='text-indent:20pt;'><span>  K = 100; {=N/M}</span></p>
+
+<p style='text-indent:20pt;'><span>var</span></p>
+
+<p style='text-indent:20pt;'><span>  Segment: array[0..M-1] of 
+LongInt;</span></p>
+
+<p style='text-indent:20pt;'><span>  i: LongInt;</span></p>
+
+<p style='text-indent:20pt;'><span>&nbsp;</span></p>
+
+<p style='text-indent:20pt;'><span>begin</span></p>
+
+<p style='text-indent:20pt;'><span>  Randomize;</span></p>
+
+<p style='text-indent:20pt;'><span>  Assign(Output, 'out.txt');</span></p>
+
+<p style='text-indent:20pt;'><span>  Rewrite(Output);</span></p>
+
+<p style='text-indent:20pt;'><span>&nbsp;</span></p>
+
+<p style='text-indent:20pt;'><span>  for i:=1 to N do</span></p>
+
+<p style='text-indent:20pt;'><span>   Inc(Segment[Random(M)]);</span></p>
+
+<p style='text-indent:20pt;'><span>&nbsp;</span></p>
+
+<p style='text-indent:20pt;'><span>  for i:=0 to M-1 do</span></p>
+
+<p style='text-indent:20pt;'><span>    WriteLn(i,' ', Segment[i]-K);</span></p>
+
+<p style='text-indent:20pt;'><span>end</span>.</p>
+
+<p style='text-indent:20pt;'>В этой
+    программе, как и в примере 3, использовался прием подмены моделируемых
+    величин,
+    применяемый для уменьшения трудоемкости программы: вместо
+    генерирования
+    случайной точки и поиска отрезка, куда она попала, выбирается случайным
+    образом
+    сам отрезок и считается, что точка попала куда-то в него.</p>
+
+<p style='text-indent:20pt;'>В файл “<span>output</span>.<span>txt</span>”
+    выводится номер
+    отрезка и
+    отличия d<span>k<sub>i</sub></span> (со знаком) от общего среднего.
+    На рисунке 7 представлена диаграмма сводной таблицы, построенной с
+    помощью
+    <span>Excel</span>, где по горизонтальной оси  отложены значения
+    d<span>k<sub>i</sub></span>, сгруппированные с шагом 4, а по
+    вертикальной
+    оси – количество отрезков, у которых различие от среднего попадает в
+    заданный
+    интервал.</p>
+
+<p class="image"><img src="monte_carlo/14.png" width="623" height="299"></p>
+
+<p class="title">Рис. 7</p>
+
+<p style='text-indent:20pt;'>Обычно
+    приводят нормированные значения (делят на общее число точек
+    <span>N</span>).
+    В таком случае, говорят о кривой плотности распределения (на рисунке 8
+    приближенно представлен график кривой Гаусса).</p>
+
+<p class="image"><img src="monte_carlo/13.png" width="593" height="325"></p>
+
+<p class="title">Рис. 8</p>
+
+<p style='text-indent:20pt;'>Из рисунка 8
+    видно, что данные, подчиняющиеся нормальному закону распределения,
+    “кучкуются”
+    около некоторого среднего значения. Чем больше расхождение, тем меньшая
+    доля
+    данных, имеющих такое расхождение. По такому закону, например,
+    распределяется
+    количество школьников (одинакового возраста) по росту. Относительно
+    группы,
+    имеющих средний рост, очень мало слишком высоких или низких.</p>
+
+<p>В некоторых задачах (например, моделировании траектории ядерной
+    частицы при исследовании процессов в ядерном реакторе или в задаче поиска
+    внеземных цивилизаций) требуется выбрать случайное пространственное
+    направление
+    от заданной точки (или, что равносильно, задать случайную точку на
+    единичной
+    сфере с центром в исходной точке).</p>
+
+<div style="float:left;margin:10px 10px 10px 0;"><img src="monte_carlo/15.png">
+
+    <p class="title">Рис. 9</p>
+</div>
+
+<p style='text-indent:20pt;'>Приведем
+    один из способов получения равномерного распределения точек на сфере.
+    Так
+    как
+    три координаты связаны уравнением сферы, то в качестве независимых
+    величин
+    выберем координату <span>Z</span> и угол <span style='font-family:
+Symbol'>j</span>, который определяет положение точки на круге,
+    параллельном X-Y
+    плоскости (на высоте <span>Z</span>) от оси <span>X</span>.</p>
+
+<p style='text-indent:20pt'>Алгоритм по шагам:</p>
+
+<p style='margin-left:45pt;text-indent:-10.0pt'>1.<span
+        style='font:7.0pt ""'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Выбираем 
+    точку z, равномерно распределенную на [-1,1].</p>
+
+<p style='margin-left:45pt;text-indent:-10.0pt'>2.<span
+        style='font:7.0pt ""'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Выбираем
+    угол &#966;, равномерно распределенный на
+    [0, 2&#183;&#960;).</p>
+
+<p style='margin-left:45pt;text-indent:-10pt'>3.<span
+        style='font:7.0pt "Times New
+Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Полагаем <img
+        src="monte_carlo/16.png" width="76" height="20">.</p>
+
+<p style='margin-left:45pt;text-indent:-10pt'>4.<span
+        style='font:7.0pt ""'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Полагаем
+    x = r &#183; cos(&#966;).</p>
+
+<p style='margin-left:45pt;text-indent:-10pt'>5.<span
+        style='font:7.0pt ""'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Полагаем
+    y = r &#183; sin (&#966;).</p>
+
+<p style='text-indent:20pt;'>&nbsp;</p>
+
+<p style='text-indent:20pt;'>Используя
+    вышеизложенный алгоритм, на рисунке 9 графически изображены
+    сгенерированные
+    случайные точки на сфере, где темные точки расположены на “видимой”
+    поверхности
+    сферы (<span>z</span> <span
+            style='font-family:Symbol'>&sup3;</span> 0), а серые точки – на “невидимой”
+    (<span>z</span>
+    &lt; 0). <strong>&nbsp;</strong></p>
+
+
+<p style='text-indent:20pt;'>Актуальная
+    задача определения температуры во внутренней точке
+    <span>P</span><sub>0</sub>
+    однородного тела с известной температурой на границе может быть решена
+    методом
+    “блуждания по сферам” (подобно блужданиям по сетке в задаче 2). От
+    заданной
+    точки  <span>P</span><sub>0</sub> последующая точка
+    <span>P</span><sub>1
+    </sub>выбирается случайным образом на максимальной
+    (внутри исходного тела) сфере с центром в <span>P</span><sub>0</sub>
+    и т.д. Процесс обрывается, если очередная точка попадает на границу (или ее
+    малую окрестность). Граничное значение температуры добавляется в
+    определение
+    среднего результата для точки <span>P</span><sub>0</sub> и
+    повторяется очередное моделирование пути. <strong>&nbsp;</strong></p>
+
+<p style='text-indent:20pt;'>&nbsp;</p>
+
+<p style='text-indent:20pt;'><strong>Задача 10.</strong></p>
+
+<p style='text-indent:20pt;'>Температура
+    <i><span>t</span></i><sup><span>o</span></sup> в
+    любой точке (<i><span>x</span>, </i><i><span>y</span>,
+    </i><i><span>z</span></i>)
+    на поверхности однородного единичного шара постоянна и равна <img
+            src="monte_carlo/17.png"
+            width="292" height="40"></p>
+
+<p>Определить температуру в центре шара.</p>
+
+<p style='text-indent:20pt;'>Как видно из приведенных задач, метод Монте-
+    Карло имеет широкое и
+    эффективное применение, и не случайно он выбран многими авторами
+    школьного
+    курса информатики при изучении темы «Моделирование». Не менее важно
+    также
+    включать метод статистического моделирования в курс по подготовке
+    школьников к
+    олимпиадам по программированию.</p>
+
+<h3>Список литературы</h3>
+
+<p class=31 style='margin-left:37.85pt;text-indent:-18.0pt'>1.<span
+        style='font:7.0pt ""'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Есипов
+    А.С., Паньгина Н.Н., Громада М.И. Информатика (задачник). </p>
+
+<p class=31 style='margin-left:19.85pt;text-indent:15.55pt'>Санкт-Петербург,
+    “Наука и Техника”, 2001</p>
+
+<p class=31 style='margin-left:37.85pt;text-indent:-18.0pt'>2.<span
+        style='font:7.0pt ""'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Севастьянов
+    Б.А. Вероятностные модели. М., “Наука”, 1992</p>
+
+<p class=31 style='margin-left:37.85pt;text-indent:-18.0pt'>3.<span
+        style='font:7.0pt ""'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Пайтген
+    Х.-О., Рихтер П.Х. Красота фракталов. М., “Мир”, 1993 </p>
+
+</div>
+</center>
+
+</body>
+
+</html>

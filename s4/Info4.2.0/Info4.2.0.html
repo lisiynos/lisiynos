@@ -1,0 +1,335 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Отношения между геометрическими объектами</title>
+    <link rel="stylesheet" type="text/css" href="../../style/style.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body>
+<div id="content">
+<h1>4.2. Отношения между геометрическими объектами</h1>
+
+<h3>4.2.1. Расстояние и площадь</h3>
+
+<p style='margin-top:6.0pt;margin-right:0cm;margin-bottom:0cm;
+margin-left:0cm;margin-bottom:.0001pt;text-indent:17.0pt'>a)<span
+        style='font:7.0pt ""'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Расстояние между двумя точками с координатами
+    $(x_1,y_1)$ и $(x_2,y_2)$
+    вычисляется по формуле
+    $d = \sqrt{(x_1-x_2)^2+(y_1-y_2)^2}$</p>
+
+<div style="float:left;margin:20px 10px 0 0;"><img src="img/11.png">
+
+    <p class="title">Рис. 5</p>
+</div>
+<p style='margin-top:6.0pt;margin-right:0cm;margin-bottom:0cm;
+margin-left:0cm;margin-bottom:.0001pt;text-indent:17.0pt'>b)<span
+        style='font:7.0pt ""'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Расстояние $d$ от точки $P_1(X_1,Y_1)$ до прямой $Ax + By + C = 0$ вычисляется следующим
+    образом.</p>
+
+<p style='margin-top:6.0pt;'>Предположим, что
+    выбрана точка $P_0(x_0,y_0)$,
+    лежащая на прямой (рисунок 5),
+    тогда $d$ есть проекция отрезка ${P_1}{P_0}$ на вектор $n(A,B)$.
+    Используя формулы скалярного произведения и свойство
+    $A{x_0}+B{y_0}+C=0$, получим:
+  
+  
+  <span style='position:relative;
+top:13.0pt;vertical-align:baseline !msorm'><sub><img src="img/12.png"
+          ></sub></span>, или окончательно <span
+            style='position:relative;top:15.5pt;
+vertical-align:baseline !msorm'><sub><img src="img/13.png"
+            ></sub></span>,
+</p>
+
+<p style='margin-top:6.0pt;'>&nbsp;</p>
+
+<p style='margin-top:6.0pt;'>причем, если убрать знак
+    модуля из числителя, то получится ориентированное расстояние,
+    указывающее на
+    расположение точки относительно прямой.</p>
+
+<p style='margin-top:6.0pt;margin-right:0cm;margin-bottom:0cm;
+margin-left:0cm;margin-bottom:.0001pt;text-indent:17.0pt'>c)<span
+        style='font:7.0pt ""'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Вычисление
+    расстояния $d$ от точки
+    <i>(</i><i>X</i><sub>1</sub><i>, </i><i>Y</i><sub>1</sub><i>)
+    </i>до луча или отрезка отличается от вышеописанного, так как основание
+    перпендикуляра, опущенного из точки на продолженную прямую, может не
+    лежать на
+    луче/отрезке. В этом случае кратчайшим расстоянием будет дистанция от
+    точки до
+    начальной точки луча или одной из начальных точек отрезка.</p>
+
+<p style='margin-top:6.0pt;margin-right:0cm;margin-bottom:0cm;
+margin-left:0cm;margin-bottom:.0001pt;text-indent:17.0pt'>d)<span
+        style='font:7.0pt ""'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span> Площадь
+    треугольника со сторонами $a, b, c$ по формуле
+    Герона $S=\sqrt{p(p-a)(p-b)(p-c)}$,
+    где $p$ – <strong>полупериметр</strong> треугольника $p = \frac{a + b + c}2$.</p>
+
+<p style='margin-top:6.0pt;margin-right:0cm;margin-bottom:0cm;
+margin-left:0cm;margin-bottom:.0001pt;text-indent:17.0pt'>e)<span
+        style='font:7.0pt ""'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Площадь
+    треугольника со сторонами <i>a, </i><i>b</i> и углом между ними
+    <i>&#966;</i> вычисляется как половина площади
+    параллелограмма, построенного на этих сторонах, с использованием
+    формулы
+    векторного произведения.</p>
+
+<p style='margin-top:6.0pt;'><i>S</i><i><sub><span style='font-
+family:Symbol'>D</span></sub></i><i> = </i><span>|[<strong><i>a
+</i></strong></span>&#215;<i><span>
+<strong>b</strong></span></i>]| / 2 =<strong><i>
+</i>|</strong>(<i>x</i><sub>1</sub><i>&#183;
+</i><i>Y</i><sub>2 </sub><i><span>-
+x</span></i><sub>2</sub><i>&#183;</i><i>Y</i><sub><span lang=EN-
+                                                        US>1</span></sub><span>)|
+/ 2</span>.</p>
+
+<p style='margin-top:6.0pt;margin-right:0cm;margin-bottom:0cm;
+margin-left:0cm;margin-bottom:.0001pt;text-indent:17.0pt'>f)<span
+        style='font:7.0pt "Times New
+Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Площадь
+    произвольного многоугольника вычисляется как сумма ориентированных
+    площадей
+    треугольников, у которых одна вершина – начало координат, а две другие
+    – пары
+    вершин многоугольника (последовательные концы сторон).</p>
+
+<p style='margin-top:6.0pt;text-indent:17.0pt'>$S=\displaystyle\sum\limits_{i=1}^N{S_i}$<i>,
+</i>где $S_i$ – площадь $i$-го треугольника, $N$ – количество вершин многоугольника. </p>
+
+<p style='margin-top:6.0pt;text-indent:17.0pt'>Площади треугольников вычисляются по следующим формулам:</p>
+
+<p style='margin-top:6.0pt;text-indent:17.0pt'>$S_i=({x_i}{y_{i+1}}-x_{i+1}y_i)/2$, $i=1,2,...,{N-1}$,</p>
+
+<p style='margin-top:6.0pt;text-indent:17.0pt'>$S_N=({x_N}{y_1}-{x_1}{y_N})/2$,</p>
+
+<p style='margin-top:6.0pt;text-indent:17.0pt'>Если вершины нумеровать с 0 и индекс вершины брать по модулю $N$, то эти
+    две формулы объединяются в одну.</p>
+
+<h3>4.2.2. Параллельность и
+    перпендикулярность</h3>
+
+<p style='text-indent:17.0pt'>Для того чтобы
+    определить, принадлежит ли точка прямой, необходимо подставить
+    координаты точки
+    в уравнение прямой. При определении принадлежности точки отрезку
+    добавляется
+    проверка на то, лежат ли координаты точки между координатами начала и
+    конца
+    отрезка.</p>
+
+<p style='text-indent:17.0pt'>Определение
+    того, пересекаются ли две прямые, заданные уравнениями <br>
+    <i>A</i><sub>1</sub><i>x + B</i><sub>1</sub><i>y + C<sub>1</sub>
+        = 0 </i>и <i>A</i><sub>2</sub><i>x
+        + B</i><sub>2</sub><i>y + C<sub>2</sub> = 0, </i>сводится к
+    следующему:</p>
+
+<ul>
+    <li>вычисляется определитель второго порядка &#916; =
+        <i>A</i><sub>1</sub><i> B</i><sub>2 </sub><i>–
+            A</i><sub>2</sub><i>
+            B</i><sub>1</sub>;
+    </li>
+
+    <li>проверяется, равен ли он нулю;</li>
+
+    <li>если равен, то делается вывод о <strong><i>параллельности
+        прямых</i></strong>;
+    </li>
+
+    <li>если не равен, то <strong><i>прямые пересекаются</i></strong>;</li>
+
+    <li>координаты точки пересечения прямых находятся по следующим
+        <strong><i>формулам
+            Крамера:</i></strong> <br>
+        <i>x = -</i>&#916;<sub>x</sub>/&#916; и<i> у = -
+        </i>&#916;<sub>у</sub>/&#916;, где &#916;<sub>x </sub>=
+        <i>c</i><sub>1</sub><i>
+            B</i><sub>2 </sub><i>– C</i><sub>2</sub><i>
+            B</i><sub>1</sub>, &#916;<sub>у </sub>= <i>A</i><sub>1</sub><i>
+            C</i><sub>2<i>
+        </i></sub><i>– A</i><sub>2</sub> <i>c</i><sub>1</sub>;
+    </li>
+
+    <li>если <i>A</i><sub>2</sub> = <i>B</i><sub>1</sub> и
+        <i>B</i><sub>2</sub>
+        = -<i> A</i><sub>1</sub>, то <strong><i>прямые
+            перпендикулярны</i></strong>.
+    </li>
+</ul>
+
+<div style="float:left;margin:20px 10px 0 0;"><img src="img/16.png">
+
+    <p class="title">Рис. 6</p>
+</div>
+
+<p style='text-indent:17.0pt'>Взаимное
+    расположение двух отрезков можно проверить с помощью четырех
+    векторных
+    произведений (рис. 6).</p>
+
+<p style='text-indent:17.0pt'><i>V<sub>1</sub> = (x<sub>3 </sub>-
+    <sub> </sub>x<sub>1</sub>)(y<sub>4</sub>
+    – y<sub>1</sub>) – (x<sub>4</sub> – x<sub>1</sub>)(y<sub>3</sub> –
+    y<sub>1</sub>)</i></p>
+
+<p style='text-indent:17.0pt'><i>V<sub>2</sub> = (x<sub>3 </sub>-
+    <sub> </sub>x<sub>2</sub>)(y<sub>4</sub>
+    – y<sub>2</sub>) – (x<sub>4</sub> – x<sub>2</sub>)(y<sub>3</sub> –
+    y<sub>2</sub>)</i></p>
+
+<p style='text-indent:17.0pt'><i>V<sub>3</sub> = (x<sub>1 </sub>-
+    <sub> </sub>x<sub>3</sub>)(y<sub>2</sub>
+    – y<sub>3</sub>) – (x<sub>2</sub> – x<sub>3</sub>)(y<sub>1</sub> –
+    y<sub>3</sub>)</i></p>
+
+<p style='text-indent:17.0pt'><i>V<sub>4</sub> = (x<sub>1 </sub>-
+    <sub> </sub>x<sub>4</sub>)(y<sub>2</sub>
+    – y<sub>4</sub>) – (x<sub>2</sub> – x<sub>4</sub>)(y<sub>1</sub> –
+    y<sub>4</sub>)</i></p>
+
+<p style='text-indent:17.0pt'>Отрезки
+    пересекаются, если одновременно выполняются два условия: <i>V<sub>1</sub></i><i>V<sub>2</sub>&lt;0</i> (векторные
+    произведения
+    <i>V</i><sub>1</sub></i><sub> </sub>и <i>V<sub>2</sub></i><sub>
+    </sub>разных знаков)<i>, </i><i><span lang=EN-
+                                          US>V</span><sub>3</sub></i><i>V</span><sub>4</sub>&lt;0 </i>(векторные
+    произведения
+    <i>V</i><sub>3</sub></i> и <i>V<sub>4</sub></i><sub>
+    </sub>разных знаков)<i>. </i>Если <i><span lang=EN-
+                                               US>V</span><sub>1</sub></i><i>V</span><sub>2</sub>&gt;0 </i>или <i><span
+            lang=EN-
+            US>V</span><sub>3</sub></i><i>V</span><sub>4</sub>&gt;0</i>, то отрезки не
+    пересекаются. </p>
+
+<p style='text-indent:17.0pt'>Дополнительные
+    проверки используются, если точка пересечения лежит на одном из
+    отрезков.</p>
+
+<h3>4.2.3. Внутри и снаружи</h3>
+
+<p style='text-indent:17.0pt'>Чтобы
+    определить, находится ли точка внутри или снаружи многоугольника,
+    необходимо
+    знать, является ли многоугольник выпуклым или нет. </p>
+
+<p style='text-indent:17.0pt'><strong>Для
+    выпуклого</strong> N-угольника существует несколько способов определения
+    принадлежности точки многоугольнику:</p>
+
+<p style='margin-top:0cm;margin-right:-.25pt;margin-bottom:
+0cm;margin-left:36.0pt;margin-bottom:.0001pt;text-indent:
+-18.0pt'>1)<span style='font:7.0pt "Times New 
+Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Вычислить сумму площадей треугольников, образованных
+    смежными сторонами
+    многоугольника и заданной точкой, используя формулу Герона. Сравнить с
+    площадью
+    многоугольника, вычисленной по векторному произведению как в пункте
+    4.2.1. Если
+    площади равны (или отличаются не более чем на заданную малую
+    величину), то
+    точка внутри многоугольника.</p>
+
+<p class=MsoBodyText style='margin-left:36.0pt;text-indent:
+-18.0pt'>2)<span style='font:7.0pt "Times New 
+Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Проверить, если вершины и данная точка лежат в одной
+    полуплоскости от
+    каждой стороны N-угольника, то точка внутренняя. В уравнение прямой
+    через
+    каждые две соседние вершины <i><span lang=EN-
+                                         US>x<sub>i</sub></span>,</i><i>y</span><sub>i</sub> </i>и<i>
+    </i><i>X<sub>i+1</sub>,</i><i>y</span><sub>i+1</sub></i>, подставляем координаты
+    данной точки <i>X,</i><i>Y</i><sub><span>
+</span></sub>и
+    по очереди координаты всех остальных вершин. Другими словами,
+    необходимо, чтобы
+    полученные значения функции <span>F</span>(<i>x<sub>i</sub></span>,</i><i><span
+            lang=EN-
+            US>y</span><sub>i</sub>,</i><i>X<sub>i+1</sub>,</i><i>y</span>
+        <sub>i+1</sub>,</i><i>X,</i><i>y</span></i>)<span>&nbsp;</span>=&nbsp;</span>
+    (<i>X<sub>i+1</sub>-
+    </i><i>X<sub>i</sub></i>)(<i>y</span>-</i><i>Y<sub>i</sub></i>)-(<i>X-
+    </i><i>X<sub>i</sub></i>)(<i>y</span><sub>i+1</sub>-</i><i>Y<sub>i</sub></i>)
+    при разных <i><span lang=EN-
+                        US>x<sub>i</sub></span>,&nbsp;</i><i><span
+            lang=EN-
+            US>y</span><sub>i</sub>,&nbsp;</i><i>X<sub>i+1</sub>,&nbsp;</i><i
+            >y</span><sub>i+1</sub></i><sub> </sub>(<i>i&nbsp;</span>=</i><i>&nbsp;</span>1,</i><i><span lang=EN-
+                                                                                                         US>&nbsp;</span>…,</i><i>
+        &nbsp;N</span>-1</i>) были одного знака, тогда точка
+    внутри
+    многоугольника.</p>
+
+<p style='margin-top:0cm;margin-right:-.25pt;margin-bottom:
+0cm;margin-left:36.0pt;margin-bottom:.0001pt;text-indent:
+-18.0pt'>3)<span style='font:7.0pt "Times New 
+Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Составить N векторных произведений (один вектор — сторона
+    многоугольника, а второй вектор — из точки до одной из вершин на
+    стороне) и
+    проверить, все ли они одного знака (если одного, то точка внутри).</p>
+
+<p style='text-indent:17.0pt'><strong>Для
+    произвольного</strong> N-угольника все эти способы работают не всегда.
+    Необходимо
+    использовать следующие способы: </p>
+
+<p style='margin-top:0cm;margin-right:-.25pt;margin-bottom:
+0cm;margin-left:36.0pt;margin-bottom:.0001pt;text-indent:
+-18.0pt'>4)<span style='font:7.0pt "Times New 
+Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Проверить, чему равна сумма углов вокруг исследуемой точки, то
+    есть
+    сумма углов, под которыми видна каждая сторона многоугольника из
+    искомой точки.
+    Причем углы следует брать со знаком, соответствующим
+    последовательному обходу
+    сторон многоугольника. Знак угла определяется векторным произведением
+    радиус-векторов от заданной точки до вершин многоугольника,
+    определяющих
+    сторону. Величина угла определяется по формуле арккосинуса для
+    найденного из
+    скалярного произведения косинуса угла. Если точка внутренняя, то сумма
+    углов по
+    модулю — 2<span style='font-family:Symbol'>p</span>, если наружная, то
+    ноль. В
+    программе достаточно произвести сравнение абсолютной величины
+    суммарного угла с
+    <span style='font-family:Symbol'>p</span> (больше либо меньше
+    &#960;).</p>
+
+<p style='margin-top:0cm; margin-right:-.25pt; margin-bottom:
+0cm; margin-left:36.0pt; text-indent:
+-18.0pt'>5)<span style='font:7.0pt "Times New 
+Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Провести через точку произвольную прямую. Если она не
+    пересекает ни одну
+    из сторон многоугольника, то точка лежит снаружи. Если пересечения есть,
+    то
+    определить количество пересечений луча, выходящего из данной точки в
+    любую
+    сторону, со сторонами многоугольника. Точка внутри, если количество
+    пересечений
+    нечетно. </p>
+</div>
+
+</body>
+
+</html>

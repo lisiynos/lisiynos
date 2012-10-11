@@ -1,0 +1,333 @@
+@charset
+"utf-8"
+;
+
+body {
+    font-family: Verdana, sans-serif;
+    font-size: 12pt;
+    color: #333;
+    padding: 0px;
+    margin: 0px;
+}
+
+/* Страница: цвет фона и высота строки */
+p {
+    margin-top: 0.5em;
+    margin-bottom: 20pt;
+}
+
+/* Абзацы: выравнивание по ширине и отступы */
+a {
+    color: #003333;
+}
+
+/* Ссылки: цвет */
+a:hover {
+    color: #000;
+}
+
+#content {
+    width: 1000px;
+    margin-top: 0px;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+}
+
+#nav {
+    width: 100%;
+    background-color: #333;
+    color: #FFF;
+    padding: 5px;
+}
+
+#nav > a:link, a:visited {
+    padding: 5px;
+    color: #90C;
+}
+
+#nav > a:hover, a:active {
+    color: #006;
+    background-color: #9CF;
+    text-decoration: none;
+}
+
+/* Ссылки при наведении: цвет */
+h1, h2, h3, h4, h5 {
+    color: #202d14;
+    text-align: left; /* Заголовки: цвет, центрирование, отступ сверху */
+    font-family: Cambria, Georgia, serif;
+    font-weight: normal;
+}
+
+h2 {
+    font-size: 18pt;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+h1 {
+    color: #202d14;
+    text-align: left;
+    padding-top: 20px;
+}
+
+/* Главный заголовок: цвет, центрирование, отступ сверху */
+.image {
+    text-align: center;
+    margin: 8px;
+}
+
+/* Изображения: выравнивание по центру и отступы */
+.title {
+    text-align: center;
+}
+
+/* Названия таблиц, графиков: центрирование */
+ul, ol {
+    text-align: left;
+}
+
+/* Стиль списков: выравнивание текста по левому краю */
+table {
+    margin: 15px;
+}
+
+/* Таблицы: отступ */
+td {
+    padding: 0 5px 0 5px;
+}
+
+/* Таблицы: отступ в ячейках */
+.tabletitle {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* Заголовок таблицы: размер шрифта, вес */
+.colontitul {
+}
+
+/* Колонтитулы */
+.snoski {
+}
+
+/* Сноски */
+.ol, .ul {
+    text-align: left;
+}
+
+#main table p {
+    text-indent: 0.0pt;
+}
+
+.h {
+    text-decoration: underline;
+}
+
+.sh_basic, .sh_pascal, .sh_java, .sh_python, .sh_alg, .sh_cpp, .console, .algo {
+    text-align: left;
+    border: 1px solid #ccc;
+    margin-left: 10px;
+    padding: 10px;
+}
+
+/* Отступ внутри алгоритмов должен быть маленьким */
+.algo p {
+    margin: 3px;
+}
+
+/* Блок внутри алгоритма */
+.alg {
+    padding-left: 2px;
+    margin-left: 25px;
+    border-left-style: dashed;
+    border-left-color: #000;
+    border-left-width: thin;
+}
+
+.console {
+    background-color: #000;
+    color: #FFF;
+    font-weight: 500;
+    font-family: "Courier New", Courier, monospace;
+}
+
+.cmd {
+    color: #0F0;
+}
+
+.sub_link {
+}
+
+#plan {
+    width: 600pt;
+    border-collapse: collapse;
+    border: solid windowtext 1.0pt;
+}
+
+#plan tr .number {
+    width: 71pt;
+    border-top: solid windowtext 1.0pt;
+    border-left: solid windowtext 1.0pt;
+    border-bottom: solid windowtext 1.0pt;
+    border-right: solid windowtext 1.0pt;
+    padding-top: 0cm;
+    padding-right: 5.4pt;
+    padding-bottom: 0cm;
+    padding-left: 5.4pt;
+}
+
+#plan tr td {
+    width: 79.35pt;
+    border-top: solid windowtext 1.0pt;
+    border-left: solid windowtext 1.0pt;
+    border-bottom: solid windowtext 1.0pt;
+    border-right: solid windowtext 1.0pt;
+    padding: 0cm 5.4pt 0cm 5.4pt;
+    margin-top: 6.1pt;
+    margin-right: 5.65pt;
+    margin-bottom: 0cm;
+    margin-left: 0cm;
+    text-align: center;
+}
+
+#plan .number {
+    margin-top: 6.1pt;
+    margin-right: 5.65pt;
+    margin-bottom: 0cm;
+    margin-left: 0cm;
+    margin-bottom: .0001pt;
+}
+
+#plan .hours {
+    margin: 6.1pt 5.65pt 0cm 0cm;
+    text-align: center;
+    font-size: 12.0pt;
+    width: 85pt;
+}
+
+#plan .theme {
+    width: 400pt;
+    text-align: left;
+}
+
+#content #plan tr td p {
+    margin-top: 6.1pt;
+    margin-right: 5.65pt;
+    margin-bottom: 0cm;
+    margin-left: 0cm;
+    text-align: center;
+}
+
+#content #plan tr td {
+    width: 53.95pt;
+    border-top: none;
+    border-left: none;
+    border-bottom: solid windowtext 1.0pt;
+    border-right: solid windowtext 1.0pt;
+    padding: 0cm 5.4pt 0cm 5.4pt;
+}
+
+#85 {
+    width: 63.8pt;
+    border: solid windowtext 1.0pt;
+    border-left: none;
+    padding: 0cm 5.4pt 0cm 5.4pt;
+}
+
+.x_table_head {
+    width: 53.6pt;
+    border: solid windowtext 1.0pt;
+    padding: 0 5.4pt 0 5.4pt;
+    font-size: 12pt;
+    font-style: italic;
+    text-align: center;
+}
+
+td.number {
+    width: 53.6pt;
+    border: solid windowtext 1.0pt;
+    border-top: none;
+    padding: 0cm 5.4pt 0cm 5.4pt;
+}
+
+.number {
+    margin: 6.1pt 5.65pt 0cm 36pt;
+    text-align: center;
+    text-indent: 0pt;
+    punctuation-wrap: hanging;
+}
+
+#content #plan tr .number p {
+    margin-top: 6.1pt;
+    margin-right: 5.65pt;
+    margin-bottom: 0cm;
+    margin-left: 36.0pt;
+    text-align: center;
+    text-indent: -18.0pt;
+    punctuation-wrap: hanging;
+}
+
+#content #plan tr td {
+    width: 63.8pt;
+    border-top: none;
+    border-left: none;
+    border-bottom: solid windowtext 1.0pt;
+    border-right: solid windowtext 1.0pt;
+    padding: 0cm 5.4pt 0cm 5.4pt;
+}
+
+#plan .chapter {
+    font-weight: bold;
+}
+
+.examples tr td {
+    font-family: 'Courier New', Courier, monospace;
+    border: 1px solid #000;
+    width: 170px;
+}
+
+.examples, .examples th {
+    border: 1px solid #000;
+}
+
+/* Таблица с центрированным контентом */
+.table_center {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.algo {
+    border-left-width: 1px;
+    border-left-style: dotted;
+    border-left-color: #003;
+    padding-left: 5px;
+    margin-left: 20px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+}
+
+.algo p {
+    margin: 2px;
+    padding: 3px;
+}
+
+.lesson {
+    /* Номер занятия (урока) */
+    float: right;
+    vertical-align: top;
+    border: thick;
+    border-color: #030;
+    border-style: dashed;
+    border-width: 1px;
+    background-color: #6F8;
+    font-weight: 600;
+    padding-left: 5px;
+    padding-right: 5px;
+}

@@ -1,0 +1,198 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Системы счисления (сс)</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_java.js"></script>
+    <script type="text/javascript" src="../syntax/sh_python.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_basic.js"></script>
+    <script type="text/javascript" src="../syntax/sh_alg.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version
+=6,0,0,0" width="100" height="50">
+            <param name="movie"
+                   value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param
+                    name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param
+                    name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70" type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+</div>
+
+<div id="content" style="width:80%;">
+
+    <h1>Системы счисления (сс)</h1>
+
+    <p>Системы счисления делятся на:</p>
+    <ul>
+        <li><strong>позиционные</strong> - одна и та же цифра имеет разное значение в зависимости от позиции $143=1
+            \cdot
+            10^2 + 4 \cdot 10 + 3$.
+        </li>
+        <li><strong>непозиционные</strong> - число задаётся несколькими знаками с различным значением.</li>
+        <li> смешанные - например, римская система счисления $IX = 9$ - значение зависит от позиции цифр, но есть
+            ограничения.
+        </li>
+    </ul>
+    <h2>Двоичная система счисления (запись чисел)</h2>
+
+    <p><strong>Позиционная</strong> система счисления с основанием 2, Числа записываются с помощью двух символов: 0 и 1.
+    </p>
+
+    <p>Например: число $3 = 11_2$.</p>
+
+    <p>$\ x_{2,2} = a_{n-1} a_{n-2}\dots a_{1} a_{0\ 2,2} = \sum_{k=0}^{n-1} a_k b^k = \sum_{k=0}^{n-1} a_k 2^k,$<br>
+        где:<br>
+        * $\ x_{2,2}$ — представляемое число, первый индекс - [[Двоичный код|основание системы кодирования]]
+        (размерность
+        множества цифр '''a={0,1}'''), второй индекс - основание весовой [[показательная функция|показательной функции]]
+        '''b''' (в [[двоично-десятичное кодирование|двоично-десятичном кодировании]] '''b=10'''), <br>
+        * $\ a_{n-1}a_{n-2}...a_1a_0$ — запись числа, строка цифровых знаков,<br>
+        * $\ .\ .\ .\ _{2,2}$ — обозначение основания системы кодирования и основания системы счисления,<br>
+        * $\ n$ — количество [[цифры|цифр]] (знаков) в числе '''x&lt;sub&gt;2,2&lt;/sub&gt;''',<br>
+        * $\ k$ — порядковый номер цифры,<br>
+        * $\ a_k$ — цифры числа '''x&lt;sub&gt;2,2&lt;/sub&gt;''' из множества '''a={0,1}''', в двоичной системе
+        счисления
+        основание системы кодирования равно 2, <br>
+        * $\ b=2$ — основание показательной весовой функции, основание системы счисления,<br>
+        * $\ b^k=2^k$ — весовая [[показательная функция]], создающая весовые коэффициенты. <br>
+    </p>
+
+    <h2>Восьмеричная, шестнадцатеричная</h2>
+
+    <p>Позиционная целочисленная система счисления с основанием 8 (используются цифры от 0 до 7).</p>
+
+    <p>Таблица перевода восьмеричных чисел в двоичные:</p>
+
+    0<sub>8</sub> = 000<sub>2</sub><br>
+    1<sub>8</sub> = 001<sub>2</sub><br>
+    2<sub>8</sub> = 010<sub>2</sub><br>
+    3<sub>8</sub> = 011<sub>2</sub><br>
+    4<sub>8</sub> = 100<sub>2</sub><br>
+    5<sub>8</sub> = 101<sub>2</sub><br>
+    6<sub>8</sub> = 110<sub>2</sub><br>
+    7<sub>8</sub> = 111<sub>2</sub><br>
+
+    Для перевода восьмеричного числа в двоичное необходимо заменить каждую цифру восьмеричного числа на триплет двоичных
+    цифр. Например:
+    2541<sub>8</sub> = [ 2<sub>8</sub> | 5<sub>8</sub> | 4<sub>8</sub> | 1<sub>8</sub> ] = [ 010<sub>2</sub> |
+    101<sub>2</sub> | 100<sub>2</sub> | 001<sub>2</sub> ] = 010101100001<sub>2</sub>
+
+    <h2>Перевод целых чисел из 10 системы счисления в любую</h2>
+
+    <p>Для перевода надо делить "в столбик" число на основание системы счисления. Каждый очередной остаток будет цифрой
+        числа</p>
+
+    <p>Вывод числа в произвольной системе счисления:</p>
+
+<pre class="sh_pascal">
+{$APPTYPE CONSOLE}
+
+uses SysUtils;
+
+var 
+  x, b : longint;
+  s : string; { Результат преобразования }
+begin
+  Write('Введите число: '); Readln(x);
+  Write('Введите основание системы счисления: '); Readln(b);  
+  s := '';
+  while x > 0 do begin
+    s := IntToStr(x mod b) + s; { Остаток - это очередная цифра. Приписываем её спереди к числу }
+    x := x div b; { Делим на основание системы счисления }
+  end;
+  if s = '' then s := '0';
+  writeln('Результат: ',s);
+end.
+</pre>
+
+
+    <h2>Перевод целых чисел из 2-й, 8-й, 16-й в 10 сс</h2>
+
+    <p>Для перевода умножаем каждую последующую цифру на соответствующую степень 2-ки, 8-рки, 16-ти</p>
+
+    Для двоичного числа: $x = a_n{\cdot}2^n + ... + a_1{\cdot}2^1 + a_0{\cdot}2^0$
+
+    <h2>Перевод дробных чисел из 2-й в 10 сс и обратно</h2>
+
+    <h2>&nbsp;</h2>
+
+    <p>&nbsp;</p>
+
+    <p>&nbsp;</p>
+
+    <h2>Римская система счисления</h2>
+
+    <table>
+        <tr>
+            <td>1</td>
+            <td>I</td>
+            <td>лат. unus</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>V</td>
+            <td>лат. quinque</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>X</td>
+            <td>лат. decem</td>
+        </tr>
+        <tr>
+            <td>50</td>
+            <td>L</td>
+            <td>лат. quinquaginta</td>
+        </tr>
+        <tr>
+            <td>100</td>
+            <td>C</td>
+            <td>лат. centum</td>
+        </tr>
+        <tr>
+            <td>500</td>
+            <td>D</td>
+            <td>лат. quingenti</td>
+        </tr>
+        <tr>
+            <td>1000</td>
+            <td>M</td>
+            <td>лат. mille</td>
+        </tr>
+    </table>
+
+
+    <p>&nbsp;</p>
+
+    <p>&nbsp;</p>
+
+    <p style='margin-bottom:6.0pt;text-align:justify;text-indent:20pt'>&nbsp;  </p>
+</div>
+<script type="text/javascript">
+    swfobject.registerObject("FlashID2");
+</script>
+</body>
+
+</html>

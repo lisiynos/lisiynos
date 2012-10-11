@@ -1,0 +1,127 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Работа с тестирующей системой</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_java.js"></script>
+    <script type="text/javascript" src="../syntax/sh_python.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_basic.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version
+=6,0,0,0" width="100" height="50">
+            <param name="movie"
+                   value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param
+                    name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param
+                    name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70" type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+</div>
+
+<div id="content" style="width:80%;">
+
+    <h1>Работа с тестирующей системой </h1>
+
+    <p>Тестирующая система <strong>TestSys</strong> расположена по адресу: <a
+            href="http://ts.lokos.net">ts.lokos.net</a>.
+    </p>
+
+    <p>Для входа в систему следует использовать логин (обычно - 2 цифры) и пароль выданные преподавателем.</p>
+
+    <h2>Задача "A+B" на разных языках программирования</h2>
+
+    <p>Нужно ввести из входного файла два целых числа и вывести их сумму в выходной файл.</p>
+
+    <h3>Pascal</h3>
+
+<pre class="sh_pascal">
+const FN = 'aplusb'; { Название входного и выходного файла }
+var a,b : longint; { Входные данные }
+begin
+  assign(Input,FN+'.in'); reset(input);
+  assign(Output,FN+'.out'); rewrite(output);
+  read(a,b); { Читаем исходные данные из входного файла }
+  writeln(a+b); { Записываем результат в выходной файл }
+end.
+</pre>
+
+    <h3>Delphi</h3>
+
+<pre class="sh_pascal">
+{$APPTYPE CONSOLE}
+const FN = 'aplusb'; { Название входного и выходного файла }
+var a,b : Int64; { Входные данные }
+begin
+  reset(Input,FN+'.in');
+  rewrite(Output,FN+'.out');
+  read(a,b); { Читаем исходные данные из входного файла }
+  writeln(a+b); { Записываем результат в выходной файл }
+end.
+</pre>
+
+    <h3>C/C++</h3>
+
+<pre class="sh_cpp">
+#include &lt;stdio.h&gt;
+#define s "aplusb"
+
+int main() {
+  freopen(s".in","r",stdin); // Стандартный поток ввода из входного файла
+  freopen(s".out","w",stdout); // Стандартный поток вывода в выходной файл
+  long long a,b;
+  scanf("%lld%lld",&a,&b);
+  printf("%lld",a+b);
+  return 0;
+}
+</pre>
+
+    <h2>Сообщения тестирующей системы</h2>
+
+    <ul>
+        <li><strong>Accepted</strong><strong> - </strong> Все в порядке! Ваша программа принята! Она откомпилировалась без ошибок и прошла все тесты.</li>
+        <li><strong>Presentation</strong><strong> Error (PE)</strong> - неправильный формат вывода, проверяющая
+            программа не
+            смогла прочитать ваш выходной файл или ваша программа вообще не создала выходной файл.
+        </li>
+        <li><strong>Wrong</strong><strong> Answer (WA)</strong>- неправильный ответ на тест. </li>
+        <li><strong>Compile Error (CE)</strong> - ошибки компиляции программы. Посмотрите что вы отправляете (нажмите view в отправках).</li>
+        <li><strong>Runtime Error (RE)</strong> - ошибка времени выполнения (выход за границы массива, переполнение
+            переменной, деление на ноль, корень из отрицательного числа, ошибка в имени входного файла).
+        </li>
+        <li><strong>Time Limit (TL)</strong> - ваша программа выполнялась на каком-то тесте больше времени по условию
+            задачи.
+        </li>
+        <li><strong>Memory Limit (ML)</strong> - ваша программа использовала больше памяти, чем разрешено по условию
+            задачи.
+        </li>
+    </ul>
+
+    <p>&nbsp;</p>
+
+    <p>&nbsp;</p>
+
+    <p>&nbsp;</p>
+
+    <p>&nbsp;</p>
+
+    <p style='margin-bottom:6.0pt;text-align:justify;text-indent:
+20pt'>&nbsp;  </p>
+</div>
+</body>
+
+</html>

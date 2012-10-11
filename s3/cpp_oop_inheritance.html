@@ -1,0 +1,99 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>ООП на C/C++ наследование</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <script type="text/javascript" src="../syntax/load.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version
+=6,0,0,0" width="100" height="50">
+            <param name="movie"
+                   value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param
+                    name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param
+                    name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70" type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+<div id="content">
+
+    <h1>ООП на С/C++</h1>
+
+    <h2>Оператор *this</h2>
+
+    <p>this является указателем внутри объекта на сам объект.</p>
+
+    <p>Он нужен, чтобы, например, зарегистировать один обьект у другого объекта.</p>
+
+    <p>Вспомогательная цель: различать поля и локальные переменные.</p>
+
+    <h2>Наследование</h2>
+
+    <p><strong>public наследование - </strong>в классе-наследнике доступны все свойства класса-предка кроме private, и
+        они также доступны извне.</p>
+
+    <p><strong>private</strong> - класс-наследник наследует свойства и методы &quot;только для себя&quot;. Т.е.</p>
+
+    <p><strong>protected </strong>- класс-наследник наследует свойства и передают их своим наследникам.</p>
+
+    <h2>Полиморфизм</h2>
+
+    <p>Создадим три класса: A, B и C - которые будут выводит экземпляр какого класса вызван.</p>
+
+<pre class="sh_cpp">
+#include &lt;iostream&gt;
+
+use namespace std;
+
+class A {
+  // virtual
+  void nv(){
+    cout << "nv A" << endl;
+  };
+};
+
+class B : public A {
+  void show(){
+    cout << "show B" << endl;
+  };
+};
+
+class C : public B {
+  void show(){
+    cout << "show C" << endl;
+  };
+};
+
+void main(){
+  A* a[3];
+  // Заводим всех типов
+  a[0] = new A();
+  a[1] = new B();
+  a[2] = new C();
+  for(int i=0; i&lt;3; i++)
+    a[i]->show();
+  // Отчистка памяти  
+    
+}
+</pre>
+
+    <h2>Битовые поля</h2>
+
+</div>
+</body>
+
+</html>

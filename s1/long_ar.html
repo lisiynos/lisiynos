@@ -1,0 +1,481 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Длинная арифметика</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_basic.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100"
+                height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param name="FlashVars" value="src=../audio/6016574696f60301------------ffffff">
+            <param name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff" width="100" height="70"
+                   type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=../audio/6016574696f60301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+<div id="content">
+<h1>Длинная арифметика</h1>
+
+<p>Числа, для представления которых в стандартных типах данных не хватает количества разрядов,
+    называются <strong>длинными</strong>.
+    Реализация арифметических операций над такими «длинными» числами называется <strong>длинной арифметикой</strong>.
+    Задачи на «длинную» арифметику возникают, когда разрядности стандартных типов данных (целые, длинные целые,
+    вещественные числа) не хватает чтобы хранить результат (настолько он велик). </p>
+
+<p>Например, вычислить 30! (30 факториал) = 265252859812191058636308480000000, это число больше чем, например,
+    максимальное для типа int64. В этом случае используется прием хранения длинных чисел в виде строки или массива цифр,
+    а
+    чтобы выполнять арифметические действия с такими числами, необходимо написать специальные процедуры сложения,
+    умножения и деления длинных чисел, которые основаны на правилах вычисления &quot;в столбик&quot;.</p>
+
+<p>Итак<strong> Длинная арифметика</strong> — набор структур данных и алгоритмов,
+    которые позволяют работать с числами гораздо большими, чем это позволяют стандартные типы данных.
+</p>
+
+<p>
+    <strong>Длинная арифметика используется:</strong>
+</p>
+<ul>
+    <li>При решении олимпиадных задач.</li>
+    <li>В компьютерах низкой разрядности, микроконтроллерах (например, процессор умеет работать только с числами длиной
+        8
+        бит, 8 двоичных разрядов, в 8 битах можно представить только числа от 0 до $2^8-1=255$, а требуется обрабатывать
+        большие числа).
+    </li>
+    <li>Криптография.</li>
+    <li>Математическое и финансовое ПО, требующее, чтобы результат вычисления на компьютере совпал до последнего
+        разряда с результатом вычисления на бумаге. В частности, калькулятор Windows (начиная с 95)
+    </li>
+    <li>«Спортивные» вычисления знаменитых <a
+            title="Трансцендентное - вещественное или комплексное число, не являющееся алгебраическим, иными словами, число, не являющееся корнем многочлена с рациональными коэффициентами">трансцендентных</a>
+        чисел ("число Пи", "число e" и т. д.) с высокой точностью.
+        <strong>Вещественное число</strong> - число, которое может возникать как результат измерения (Например: 4,31;
+        5,23432; корень из 2-х).
+        Множество вещественных чисел больше чем множество рациональных дробей (чисел представляющихся в виде дроби), но
+        меньше
+        чем множество комплексных чисел.
+        <strong>Комплексное число</strong> - расширение множества вещественных чисел за счёт добавления мнимой
+        компоненты
+        числа.
+        Комплексное число представляется в виде: <em>x+iy</em>, где x и y - вещественные числа, а i-мнимая единица.
+    </li>
+    <li> Высококачественные изображения фракталов.
+    </li>
+</ul>
+
+<p><strong>Представление в компьютере длинных чисел</strong></p>
+
+<p>Реализация операций с длинными числами во многом определяется тем, как представить их в памяти компьютера.
+    "Длинное" число можно записать, например, с помощью
+    <a title="Массив - упорядоченный набор данных одного типа, идентифицируемых с помощью одного или нескольких индексов"><strong>массива</strong></a>
+    десятичных цифр,
+    количество элементов в таком массиве равно количеству значащих цифр в "длинном" числе.
+    При этом размер массива должен быть достаточным, чтобы разместить в нем и результат, например, умножения.</p>
+
+<p><strong>Классификация реализации длинной арифметики (преимущества и недостатки различных способов)</strong>
+    Количество знаков может быть фиксированным (знаки хранятся в массиве с индексом от 0 до количества знаков минус 1)
+    и с переменной длиной (отдельно ещё хравнится длина числа).
+</p>
+
+<table border="1">
+    <thead>
+    <th>Количество цифр</th>
+    <th>Только целые числа</th>
+    <th>Действительные числа</th>
+    </thead>
+    <tr>
+        <td>Фиксированное</td>
+        <td>"+" Простота реализации</td>
+    </tr>
+    <tr>
+        <td>Переменное</td>
+        <td>&quot;+&quot; Экономия памяти</td>
+    </tr>
+</table>
+
+<p>Разряды в позиционной системе счисления.</p>
+
+<p><strong>Рассмотрим реализацию операций в простейшем случае - с целыми положительными числами</strong>
+
+<p>Существуют и другие представления "длинных" чисел. Рассмотрим одно из них. Представим наше число<br>
+    30! = 265252859812191058636308480000000 в виде:
+    30! = 2 * (10<sup>4</sup>)<sup>8</sup> +
+    6525 * (10<sup>4</sup>)<sup>7</sup> +
+    2859 * (10<sup>4</sup>)<sup>6</sup> +
+    8121 * (10<sup>4</sup>)<sup>5</sup> +
+    9105 * (10<sup>4</sup>)<sup>4</sup> +
+    8636 * (10<sup>4</sup>)<sup>3</sup> +
+    3084 * (10<sup>4</sup>)<sup>2</sup> +
+    8000 * (10<sup>4</sup>)<sup>1</sup> +
+    0000 * (10<sup>4</sup>)<sup>0</sup>.
+
+<p> Для вычислений его удобно хранить в виде массива:
+</p>
+
+<table border="1">
+    <thead>
+    <th>Номер элемента в массиве А</th>
+    <th>0</th>
+    <th>1</th>
+    <th>2</th>
+    <th>3</th>
+    <th>4</th>
+    <th>5</th>
+    <th>6</th>
+    <th>7</th>
+    <th>8</th>
+    <th>9</th>
+    </thead>
+    <tr>
+        <td>Значение</td>
+        <td>9</td>
+        <td>0000</td>
+        <td>8000</td>
+        <td>3084</td>
+        <td>8636</td>
+        <td>9105</td>
+        <td>8121</td>
+        <td>2859</td>
+        <td>6525</td>
+        <td>2</td>
+    </tr>
+</table>
+
+<p>Наше "длинное" число представлено в 10000-10 системе счисления (десятитысячно-десятичная система счисления,
+    приведите аналогию с восьмерично-десятичной системой счисления), а "цифрами" числа являются четырехзначные числа.
+    9 в А [0] - длина числа. Число хранится "задом наперед", начиная с младшего разряда.
+</p>
+
+<p><strong>Алгоритмы чтения и записи длинных чисел</strong>
+</p>
+
+<p><strong>Ввод длинного числа из файла.</strong> Решение задачи начнем с описания данных.
+</p>
+
+ <pre class="sh_pascal" style="text-align:left;">
+Const MaxDig = 1000; { Максимальное количество цифр — четырехзначных! }
+      Osn = 10000; { Основание нашей системы счисления, в элементах массива храним четырехзначные числа }
+Type TLong = Array [0..MaxDig] Of Integer;  { Десятичных цифр в нашем числе }
+  { В А[0] храним количество задействованных (ненулевых) элементов массива А. }</pre>
+
+<p>При обработке каждой очередной цифры входного числа старшая цифра элемента массива с номером i становится младшей
+    цифрой числа в элементе i + 1, а вводимая цифра будет младшей цифрой числа из А[1]. В результате работы нашего
+    алгоритма мы получили число, записанное "задом наперед".</p>
+<pre class="sh_pascal" style="text-align:left;">
+procedure ReadLong(Var A : TLong);
+Var ch : char; i : Integer;
+begin
+  FillChar(A, SizeOf(A), 0); { Заполнение нулями массива }
+  Read(ch);
+  While Not(ch In ['0'..'9']) Do Read(ch); {пропуск не цифр во входном файле}
+  While ch In ['0'..'9'] do begin
+    For i := A[0] DownTo 1 do begin
+      {"протаскивание" старшей цифры в числе из A[i] в младшую цифру числа из A[i+l]}
+      A[i+l] := A[i+l] + (LongInt(A[i]) * 10) Div Osn;
+      A[i] := (LongInt(A[i]) * 10) Mod Osn
+    end;
+    A[1] := A[l] + Ord(ch) - Ord('0');
+    {добавляем младшую цифру к числу из А[1]}
+    If A[A[0]+1] > 0 Then Inc(A[0]);
+    {изменяем длину, число задействованных элементов массива А}
+    Read(ch)
+  end
+end;</pre>
+
+<p><strong>Задачи на длинную арифметику</strong></p>
+
+<p><strong>Задача 1. </strong>(Районная олимпиада 1997).<br>
+    Числа Фибоначчи выписываются подряд, начиная с Ф(1). Какая цифра будет на N-ом месте (N &lt; 5000)? </p>
+
+<p><u> Указание:</u> Ф(n+1) = Ф(n) + Ф(n-1); Ф(1) = Ф(2) = 1 </p>
+
+<p> Необходимо написать процедуру сложения «длинных» чисел (представленных в виде массивов отдельных разрядов A и B). В
+    первой ячейке массива будем хранить «длину» числа (количество разрядов). Массив B содержит предыдущее вычисленное
+    число Фибоначчи, а массив A – текущее число. Для удобства сложения полагаем Ф(0) = 0.</p>
+
+<p><u>Программа на Basic для сложения 2 &quot;длинных чисел&quot;</u>:</p>
+<pre class="sh_basic">
+DECLARE SUB LongAdd ()
+DEFLNG A-Z
+DIM SHARED A(10000), B(10000) 
+'Длинные числа. A(0)-длина числа A, A(i)-i-ый разряд, 
+A(0) = 1: A(1) = 1 'A=Ф(1)=1
+B(0) = 1: B(1) = 0 'B=Ф(0)=0
+L = 1 'L - общая длина строки, состоящей из чисел Фибоначчи
+
+INPUT "N=", N
+WHILE N > L 'Пока N-номер искомой цифры больше длины строки...
+LongAdd 'найти очередное число Фибоначчи
+L = L + A(0) 'и прибавить его длину к общей длине строки
+WEND
+PRINT A(L - N + 1) 'Как только N-ая цифра получена в явном виде, печатаем ее
+
+'Процедура сложения двух "длинных" чисел A и B "в столбик"
+'Результат сложения помещается в A, прежнее значение А переносится в B
+SUB LongAdd
+r = 0
+FOR i = 1 TO A(0)
+k = A(i) 'Запоминается i-ая цифра числа A
+r = A(i) + B(i) + r 'Сумма i-ых разрядов чисел A и B с учетом переноса
+A(i) = r MOD 10
+r = r \ 10 'r - перенос в следующий разряд
+B(i) = k 'Переносим запомненную i-ую цифру числа A в число B
+NEXT
+IF r <> 0 THEN 'Если в результате сложения старших разрядов оказался
+A(0) = A(0) + 1 'ненулевой перенос, то "удлиняем" результат на 1 цифру
+A(A(0)) = r
+END IF
+END SUB
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>Реализация знаковой длинной целой арифметики для Delphi</strong>: <strong>cложение, вычитание, умножение и
+    деление</strong>.</p>
+<pre class="sh_pascal">
+{ Самая простая знаковая длинная целая арифметика }
+{ Реализация вычислений &quot;в столбик&quot;: сложения, вычитания, умножения, деления, остатка от деления }
+Const MaxLen = 3000; { Максимальная длина длинного числа }
+var Base : Integer = 10; { Основание системы счисления (можно установить в начале программы) }
+
+Type Long = array [-1..MaxLen] of Integer;
+  { В -1-ой позиции находится знак,  -1 - отрицательное число, +1 - положительное, 0 - ноль }
+
+{ Получить цифру в виде символа по её значению }
+{ 0 -&gt; '0', 1 -&gt; '1', 2 -&gt; '2', ... 9 -&gt; '9', 'A' -&gt; 10, ... 'F' -&gt; 15 }
+function Digit( Dig:Integer ):Char;
+begin
+  case Dig of
+    0..9: Result := Chr(Ord('0')+Dig);
+    10..35: Result := Chr(Ord('A')+Dig-10);
+  else
+    raise EOverflow.Create('Слишком большая цифра. Невозможно вывести!');
+  end;
+end;
+
+{ Получаем из "короткого" числа int64 длинное (используется для инициализации длинных чисел) }
+function ToLong( N:Int64 ):Long;
+var i : integer;
+begin
+  fillChar(Result,sizeOf(Result),0);
+  { Знак }
+  if N=0 then Result[-1]:=0  { Число равно 0 }
+  else if N>0 then Result[-1]:=1 { Число положительное }
+  else begin Result[-1] := -1; N := -N ; end; { Число отрицательное, дальше будем }
+  i := 0;
+  while N > 0 do begin
+    Result[i] := N mod Base;
+    N := N div Base;
+    inc(i);
+  end;
+end;
+
+{ Получаем из "длинного" короткое если это возможно }
+function ToInt( L:Long ):Int64;
+var
+  i : Integer;
+  X : Int64;
+begin
+  X := 1; { Base в нужной степени }
+  Result := 0;
+  for i:=0 to MaxLen do begin
+    assert( L[i] >= 0 );
+    Inc( Result, X*L[i] );
+    X := X * Base; { Получаем Base в следующей степени }
+  end;
+  Result := Result * L[-1]; { Умножаем на знак }
+end;
+
+{ Перевод &quot;длинного числа&quot; в строку (для вывода) }
+function ToString( Var L:Long ):String;
+var i : Integer;
+begin
+  { Сначала учитываем знак }
+  Case L[-1] of
+    -1: Result := '-';
+    0,1: Result := '';
+  end;
+  { Выводим число по цифрам }
+  for i:=Len(L) downto 0 do
+    Result := Result + Digit(L[i]);
+end;
+
+{ Приведение нуля в нормальный вид }
+procedure FixZero( Var L:Long );
+var
+  i : Integer;
+begin
+  for i:=0 to MaxLen do
+    if L[i]<>0 then 
+      exit;
+  L[-1]:=0;
+end;
+
+{ Учёт переноса в старшие разряды }
+procedure FixUp( Var L:Long );
+var i : Integer;
+begin
+  for i:=0 to MaxLen-1 do begin
+    inc( L[i+1], L[i] div Base );
+    L[i] := L[i] mod Base;
+  end;
+  FixZero(L);
+end;
+
+{ Учёт заёма из старших разрядов }
+procedure FixDown( Var L:Long );
+var i : Integer;
+begin
+  for i:=0 to MaxLen-1 do
+    while L[i] < 0 do begin
+      inc( L[i], Base );
+      dec( L[i+1], 1 );
+    end;
+  FixZero(L);
+end;
+
+{ Больше или равно по абсолютному значению с учётом сдвига B на Sdvig_B цифр влево }
+function isGreatEq_Abs( A,B:Long; Sdvig_B:Integer=0 ):boolean;
+var i : Integer;
+begin
+  for i:=MaxLen-Sdvig_B downto 0 do begin
+    if A[i+Sdvig_B]>B[i] then begin Result := true; exit; end;
+    if A[i+Sdvig_B]< B[i] then begin Result := false; exit; end;
+  end;
+  Result := true; { A и B равны }
+end;
+
+{ Больше или равно с учётом знака }
+function isGreatEq( A,B:Long ):boolean; { Больше ли A B }
+begin
+  case A[-1] of
+    -1: case B[-1] of
+       -1: Result := isGreatEq_Abs(B,A); { A отрицательно B отрицательно }
+        0: Result := false; { A отрицательно B ноль }
+       +1: Result := false; { A отрицательно B положительно }
+       end;
+     0: case B[-1] of
+       -1: Result := true; { A ноль B отрицательно }
+        0: Result := true; { A ноль B ноль }
+       +1: Result := isGreatEq_Abs(A,B); { A ноль B положительно }
+       end;
+    +1: case B[-1] of
+       -1: Result := true; { A положительно B отрицательно }
+        0: Result := true; { A положительно B ноль }
+       +1: Result := isGreatEq_Abs(A,B); { A положительно B положительно }
+       end;
+  end;
+end;
+
+{ Сложение по абсолютному значению }
+function Add_Abs( A,B:Long ):Long;
+var i : Integer;
+begin
+  for i:=0 to MaxLen do Result[i] := A[i] + B[i];
+  FixUp(Result);
+end;
+
+{ Вычитание по абсолютному значению с возможным сдвигом (сдвиг нужен при делении) }
+function Sub_Abs( A,B:Long; Sdvig_B:Integer=0 ):Long;
+var i : Integer;
+begin
+  assert( isGreatEq_Abs(A,B) );
+  for i:=0 to Sdvig_B-1 do Result[i] := A[i];
+  for i:=Sdvig_B to MaxLen do Result[i] := A[i] - B[i-Sdvig_B];
+  FixDown(Result);
+end;
+
+{ Сложение "длинных" с учётом знака }
+function Add( A,B:Long ):Long;
+begin
+  { Рассмотрим 2 случая: }
+  if A[-1] = B[-1] then begin { A и B одного знака }
+    Result := Add_Abs(A,B);
+    Result[-1] := A[-1]; { Тогда знак их суммы такой же как у A и B }
+  end else begin { A и B с разными знаками }
+    { Тогда знак суммы равен знаку наибольшего из них по абсолютному значению,
+      а значение - разности абсолютных значений }
+    if isGreatEq_Abs(A,B) then begin
+      REsult := Sub_Abs(A,B); { Если A больше по абсолютному значению - вычитаем из A B }
+      Result[-1] := A[-1];
+    end else begin { иначе из B A }
+      Result := Sub_Abs(B,A);
+      Result[-1] := B[-1];
+    end;
+  end;
+end;
+
+{ Вычитание "длинных" с учётом знака }
+function Sub( A,B:Long ):Long;
+begin
+  B[-1] := -B[-1]; { Изменяем знак и складываем }
+  Result := Add(A,B);
+end;
+
+{ Перемножение длинных }
+function Mul( A,B:Long ):Long;
+var i,j : Integer;
+begin
+  fillChar(Result,sizeOf(Result),0);
+  for i:=0 to MaxLen do
+    for j:=0 to MaxLen-i do
+      Inc( Result[i+j], A[i]*B[j] );
+  Result[-1] := A[-1] * B[-1]; { Знаки перемножаются }
+  FixUp(Result);
+end;
+
+{ Возведение в квадрат }
+function Sqr( A:Long ):Long;
+begin
+  Result := Mul(A,A);
+end;
+
+{ Длинное деление }
+function LDiv( A,B:Long ):Long;
+var Sdvig_B : Integer;
+begin
+  fillChar(Result,sizeOf(Result),0);
+  Result[-1] := A[-1] * B[-1]; { Знаки перемножаются }
+  for Sdvig_B:=Len(A)-Len(B) downto 0 do
+    while isGreatEq_Abs(A,B,Sdvig_B) do begin
+      A := Sub_Abs(A,B,Sdvig_B);
+      Inc( Result[Sdvig_B] );
+    end;
+  FixUp(Result);
+end;
+
+{ Остаток при целочисленном делении }
+function LMod( A,B:Long ):Long;
+var Sdvig_B : Integer;
+begin
+  for Sdvig_B:=Len(A)-Len(B) downto 0 do
+    while isGreatEq_Abs(A,B,Sdvig_B) do
+      A := Sub_Abs(A,B,Sdvig_B);
+  Result := A;
+  Result[-1] := 1;
+end;</pre>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,726 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- This file is part of Flash Pascal project. See 'http://flashpascal.sf.net' for more. (c) 2011 by Péter Gábor (ptrg) -->
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <meta name="description" content="Flash Pascal is a Pascal like language compiler that build Flash (SWF) files. This manual contains informations about the special abilities and adventages of the Flash Pascal compiler.">
+    <title>Flash Pascal Manual (v0.8)
+    </title>
+    <style type="text/css">A { color:#800000; text-decoration: none;}
+            </style>
+  </head>
+  <body style="font: 12px Arial; color: rgb(0, 0, 0); padding: 20px;  background-color:#d0d0d0;" alink="#ee0000" link="#0000ee" vlink="#551a8b">
+    <div style="border: solid 1px gray;  background-color: #ffffff;  padding: 10px;">
+      <table width="100%"><tr><td>
+      <img style="border: 0px; float:left; margin: 0px 10px 0px 0px;" src="FlashPascal.png" alt="Flash Pascal" title="Flash Pascal">
+      <span style="font: bold 24px Arial;">Flash Pascal Manual
+      </span>
+      <br>
+      <br>Flash Pascal is a Pascal like language compiler that build Flash (SWF) files.
+      <br>
+      <br>
+      <br>Pascal for Flash compiler (c)2008 by Paul TOTH
+      <br>Pascal for Flash compiler portions (c) 2011 by Péter Gábor
+     </td></tr></table>
+      <br>
+      <span style="font: bold 16px Arial;">Contents of the manual
+      </span>
+      <br>
+      <span style="font-style: italic;">Released for Flash Pascal version 0.8
+      </span>
+      <br>
+      <br>
+      <span style="font-style: italic; color: rgb(160,0,0); background-color: #FFFFA0;">This manual is a draft only, so anything or everything may be wrong and can change anytime.
+      </span>
+      <br>
+      <br>This minor manual contains informations mostly about the special abilities and adventages of the Flash Pascal compiler and nothing about the pascal programing language itself, we assume that you know it.
+      <br>
+      <br>
+      <span style="font: bold 16px Arial;">Some words about Flash Pascal
+      </span>
+      <br>
+      <br>Flash Pascal is released under the terms of GNU GENERAL PUBLIC LICENSE Version 2. See
+      <a href="COPYING.TXT">copying.txt</a> or
+      <a href="http://www.gnu.org/licenses/gpl-2.0.html">gnu.org</a> for details.
+      <br>The history of developement can be found in the
+      <a href="history.txt">history.txt</a>.
+      <br>The project is hosted at
+      <a href="http://flashpascal.sourceforge.net">SourceForge.net</a>.
+      <br>
+      <ul>
+        <li>Flash Pascal is a Pascal like language compiler that build Flash (SWF) files.
+        </li>
+        <li>The main difference from standard pascal is that Flash Pascal must be case sensitive where external identifiers are declared (because Flash is case sensitive).
+        </li>
+        <li>The compiler is a command line tool, so it can be started via shell execute command from source code editors.
+        </li>
+        <li>The compiler can generate simple HTML file for testing the compiled Flash (SWF) file in a browser.
+        </li>
+        <li>Importing of Flash classes can be done with the
+        <span style="font-family: monospace;">EXTERNAL
+        </span> keyword.
+        </li>
+        <li>Aliases for methods of top level Flash classes can be declared with the
+        <span style="font-family: monospace;">EXTERNAL
+        </span> keyword.
+        </li>
+        <li>In external class references any internal Flash Pascal symbols, reserved words or user defined identifiers are accepted (type, class, variable, constant, procedure, function, method names).
+        </li>
+        <li>Aliases for methods and properties in declarations of external classes are supported by using the
+        <span style="font-family: monospace;">AS
+        </span> keyword.
+        </li>
+        <li>Bit shifting operators
+        <span style="font-family: monospace;">&lt;&lt;
+        </span> (shift left),
+        <span style="font-family: monospace;">&gt;&gt;
+        </span> (signed shift right),
+        <span style="font-family: monospace;">&gt;&gt;&gt;
+        </span> (unsigned shift right) are supported with the same meaning as the Flash ones.
+        </li>
+        <li>etc.
+        </li>
+      </ul>
+      <span style="font-weight: bold;">The command line:
+      </span>
+      <br>
+      <br>
+      <span style="font-family: monospace;">FlashPascal.exe [-?|h] [-c] [-[e][n][p][s][t][u][v][w][x]] filename</span>
+      <br>
+      <table border="0" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="font-family: monospace;">-?&nbsp;&nbsp;</td><td>display usage help message (-h)</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">-c&nbsp;&nbsp;</td><td>display copyright informations</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">-e&nbsp;&nbsp;</td><td>display error messages on programming errors</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">-h&nbsp;&nbsp;</td><td>display usage help message (-?)</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">-n&nbsp;&nbsp;</td><td>display notes stored in the source</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">-p&nbsp;&nbsp;</td><td>pause after execution (hit &lt;ENTER&gt; to exit)</td>
+          </tr>
+          <!--tr>
+            <td style="font-family: monospace;">-r&nbsp;&nbsp;</td><td>use registers for variables where it is possible</td>
+          </tr-->
+          <tr>
+            <td style="font-family: monospace;">-s&nbsp;&nbsp;</td><td>display buggy line of source code on error (with -e only)</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">-t&nbsp;&nbsp;</td><td>generate html file for (web) testing</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">-u&nbsp;&nbsp;</td><td>do not compress the swf file (for special needs if any)</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">-v&nbsp;&nbsp;</td><td>verbose mode, same as -ensw</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">-w&nbsp;&nbsp;</td><td>display warning messages on possible mistakes</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">-x&nbsp;&nbsp;</td><td>syntax checking only, no files written</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">filename&nbsp;&nbsp;</td><td>the file to be compiled, multiple source files are not supported</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>The compiler can return different exit codes (errorlevel) after execution:
+      <table border="0" cellpadding="2" cellspacing="0">
+        <tbody>
+      <tr>
+            <td style="font-family: monospace;">0&nbsp;&nbsp;</td><td>successful execution (also if warnings were generated or no compilation started)</td>
+          </tr>
+      <tr>
+            <td style="font-family: monospace;">1&nbsp;&nbsp;</td><td>programming error</td>
+          </tr>
+      <tr>
+            <td style="font-family: monospace;">255&nbsp;&nbsp;</td><td>fatal error (eg. file i/o)</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <span style="font: bold 16px Arial;">Flash Pascal internals
+      </span>
+      <br>
+      <br>
+      <span style="font-weight: bold;">The _root object:
+      </span>
+      <br>
+      <br>
+      <table border="0" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="font-family: monospace;">_root&nbsp;&nbsp;</td><td>the root object of every flash application is
+              <span style="font-family: monospace;">MovieClip
+              </span></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <span style="font-weight: bold;">Base types:
+      </span>
+      <br>
+      <br>
+      <table border="0" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="font-family: monospace;">CHAR&nbsp;&nbsp;</td><td>one character</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">STRING&nbsp;&nbsp;</td><td>character string</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">INTEGER&nbsp;&nbsp;</td><td>integer number</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">DOUBLE&nbsp;&nbsp;</td><td>double precision number</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">BOOLEAN&nbsp;&nbsp;</td><td>boolean</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">TOBJECT&nbsp;&nbsp;</td><td>undefined: any object, any type</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <span style="font-weight: bold;">Keywords:
+      </span>
+      <br>
+      <br>
+      <table border="0" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="font-family: monospace;">PROGRAM&nbsp;&nbsp;</td><td>program file</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">UNIT&nbsp;&nbsp;</td><td>unit file</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">INTERFACE&nbsp;&nbsp;</td><td>interface section</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">IMPLEMENTATION&nbsp;&nbsp;</td><td>implementation section</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">USES&nbsp;&nbsp;</td><td>list of required units</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">USES ... IN ...&nbsp;&nbsp;</td><td>use specified file as source of the unit</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">TYPE&nbsp;&nbsp;</td><td>type definition block</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">CONST&nbsp;&nbsp;</td><td>constant declaration block</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">VAR&nbsp;&nbsp;</td><td>varible declaration block</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">NIL&nbsp;&nbsp;</td><td>nil (undefined object), can be compared (= or <>) with all kind of variables to test that it is defined or not</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">TRUE&nbsp;&nbsp;</td><td>boolean true</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">FALSE&nbsp;&nbsp;</td><td>boolean false</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">RESULT&nbsp;&nbsp;</td><td>inside a
+              <span style="font-family: monospace;">FUNCTION
+              </span> this holds the return value, in other places it's free to use</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">SELF&nbsp;&nbsp;</td><td>reference to the class in its methods</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">ARRAY ... OF ...&nbsp;&nbsp;</td><td>array definition</td>
+          </tr>
+          <!--tr> <td style="font-family: monospace;">OBJECT&nbsp;&nbsp;</td><td>symbolic reference to any object type: <span style="font-family: monospace;">CLASS</span> or <span style="font-family: monospace;">TOBJECT</span></td></tr-->
+          <tr>
+            <td style="font-family: monospace;">CLASS&nbsp;&nbsp;</td><td>class declaration</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">CLASS ... EXTERNAL ...&nbsp;&nbsp;</td><td>import external Flash class:
+              <span style="font-family: monospace;">MovieClip=external class
+              </span> or
+              <span style="font-family: monospace;">TMath=external class(Math)
+              </span></td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">CONSTRUCTOR&nbsp;&nbsp;</td><td>constuctor of a class</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">CONSTRUCTOR ... AS ...&nbsp;&nbsp;</td><td>pseudo constructor of a class:
+              <span style="font-family: monospace;">constructor Create(Parent:TObject) as Parent.Create;
+              </span></td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">INHERITED&nbsp;&nbsp;</td><td>class method is inherited</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">PROPERTY&nbsp;&nbsp;</td><td>class property declaration</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">PROPERTY ... AS ...&nbsp;&nbsp;</td><td>class property alias to override reserved words
+              <span style="font-family: monospace;">property type_:string as type;
+              </span></td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">PROCEDURE ... AS ...&nbsp;&nbsp;</td><td>procedure method alias for external Flash class method:
+              <span style="font-family: monospace;">procedure sort_(A:array of TObject;FieldName:string) as sort;
+              </span></td></td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">FUNCTION ... AS ...&nbsp;&nbsp;</td><td>function method alias for external Flash class method:
+              <span style="font-family: monospace;">function Copy_:TContextMenu as copy;
+              </span></td></td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">PROCEDURE ... OF OBJECT&nbsp;&nbsp;</td><td>procedure method prototype definition</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">FUNCTION ... OF OBJECT&nbsp;&nbsp;</td><td>function method prototype definition</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">PROCEDURE ... EXTERNAL ...&nbsp;&nbsp;</td><td>procedure alias for external Flash class method:
+              <span style="font-family: monospace;">procedure showSettings(tabID:Number) extenal System.showSettings;
+              </span></td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">FUNCTION ... EXTERNAL ...&nbsp;&nbsp;</td><td>function alias for external Flash class method:
+              <span style="font-family: monospace;">function random:double external Math.random;
+              </span></td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">PROCEDURE ...&nbsp;&nbsp;</td><td>procedure header</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">FUNCTION ...&nbsp;&nbsp;</td><td>function header</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">BEGIN ... END&nbsp;&nbsp;</td><td>code block</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">IF ... THEN ... ELSE ...&nbsp;&nbsp;</td><td>conditional execution</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">FOR ... TO ... DO ...&nbsp;&nbsp;</td><td>for block counting up</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">FOR ... DOWNTO ... DO ...&nbsp;&nbsp;</td><td>for block counting down</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">CASE ... OF ... ELSE ... END&nbsp;&nbsp;</td><td>case statements accept any kind of expression</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">REPEAT ... UNTIL ...&nbsp;&nbsp;</td><td>repeat block</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">WHILE ... DO ...&nbsp;&nbsp;</td><td>while block</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">EXIT&nbsp;&nbsp;</td><td>return from functions and procedures or stop swf's execution</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <span style="font-weight: bold;">Operators:
+      </span>
+      <br>
+      <br>
+      <table border="0" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="font-family: monospace;">OR&nbsp;&nbsp;</td><td>bitwise and Boolean OR operation</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">AND&nbsp;&nbsp;</td><td>bitwise and Boolean AND operation</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">XOR&nbsp;&nbsp;</td><td>bitwise and Boolean XOR operation</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">NOT&nbsp;&nbsp;</td><td>bitwise and Boolean NOT operation</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">=&nbsp;&nbsp;</td><td>equal</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">&gt;=&nbsp;&nbsp;</td><td>greater or equal</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">&gt;&nbsp;&nbsp;</td><td>greater</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">&lt;=&nbsp;&nbsp;</td><td>lesser or equal</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">&lt;&nbsp;&nbsp;</td><td>lesser</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">SHRI&nbsp;&nbsp;&gt;&gt;&nbsp;&nbsp;</td><td>bitwise signed shift right operation - the sign bit remains untouched, so negative value remains negative</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">SHR&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;&nbsp;</td><td>bitwise unsigned shift right operation</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">SHL&nbsp;&nbsp;&lt;&lt;&nbsp;&nbsp;</td><td>bitwise shift left operation</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">+&nbsp;&nbsp;</td><td>add</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">-&nbsp;&nbsp;</td><td>subtract</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">*&nbsp;&nbsp;</td><td>multiply</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">:=&nbsp;&nbsp;</td><td>assignment</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">DIV&nbsp;&nbsp;</td><td>divide</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">/&nbsp;&nbsp;</td><td>divide double precision numbers</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">MOD&nbsp;&nbsp;</td><td>modulus (reminder of divide)</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <span style="font-weight: bold;">Symbols:
+      </span>
+      <br>
+      <br>
+      <table border="0" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="font-family: monospace;">..&nbsp;&nbsp;</td><td>range definition in
+              <span style="font-family: monospace;">CASE
+              </span> labels and
+              <span style="font-family: monospace;">ARRAY
+              </span> declaration</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">.&nbsp;&nbsp;</td><td>decimal point, structure member separator, program end.</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">,&nbsp;&nbsp;</td><td>parameter and
+              <span style="font-family: monospace;">ARRAY
+              </span> element separator</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">:&nbsp;&nbsp;</td><td>data
+              <span style="font-family: monospace;">TYPE
+              </span> assignment in
+              <span style="font-family: monospace;">VAR
+              </span> and
+              <span style="font-family: monospace;">FUNCTION
+              </span> result declarations,
+              <span style="font-family: monospace;">CASE
+              </span> label definition</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">;&nbsp;&nbsp;</td><td>statement separator</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">(&nbsp;)&nbsp;&nbsp;</td><td>parenthesis</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">[&nbsp;]&nbsp;&nbsp;</td><td>range definition in
+              <span style="font-family: monospace;">ARRAY
+              </span> declaration</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">{$&nbsp;}&nbsp;&nbsp;</td><td>compiler switch delimiters</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">(*&nbsp;*)&nbsp;&nbsp;</td><td>comment delimiters</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">{&nbsp;}&nbsp;&nbsp;</td><td>comment delimiters</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">//&nbsp;&nbsp;</td><td>comment to the end of line</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">$&nbsp;&nbsp;</td><td>hexadecimal number</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">#&nbsp;&nbsp;</td><td>character code</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">'&nbsp;'&nbsp;&nbsp;</td><td>string constant delimiters</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <span style="font-weight: bold;">Built-in functions:
+      </span>
+      <br>
+      <br>
+      <table border="0" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="font-family: monospace;">COPY(S:string;Start,Length:Integer):string;&nbsp;&nbsp;</td><td>get a part of a string</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">LENGTH(S:string):Integer;&nbsp;&nbsp;</td><td>get length of a string</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">ORD(C:Char):Integer;&nbsp;&nbsp;</td><td>get ascii value (code) of a character</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">CHR(I:Integer):Char;&nbsp;&nbsp;</td><td>get character referenced by ascii value (code)</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">INC(N:numeric_type):numeric_type;&nbsp;&nbsp;</td><td>incremet a number (+1)</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">INC(N:numeric_type,N2:numeric_expression):numeric_type;&nbsp;&nbsp;</td><td>incremet a number by a specified value</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">DEC(N:numeric_type):numeric_type;&nbsp;&nbsp;</td><td>decrement a number (-1)</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">DEC(N:numeric_type,N2:numeric_expression):numeric_type;&nbsp;&nbsp;</td><td>decrement a number by a specified value</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">TRUNC(F:Double):Integer;&nbsp;&nbsp;</td><td>get integer part of a real number</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">INTTOSTR(I:Integer):string;&nbsp;&nbsp;</td><td>convert integer to string</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">FLOATTOSTR(F:Double):string;&nbsp;&nbsp;</td><td>convert double to string</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">BOOLTOSTR(B:Boolean):string;&nbsp;&nbsp;</td><td>convert boolean to string</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">SORT(A:array of base_type);&nbsp;&nbsp;</td><td>sort elements in an array</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">SORT(A:array of TObject;FieldName:string);&nbsp;&nbsp;</td><td>sort the elements in an array according to the given field</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">LOW(A:array of any_type):Integer;&nbsp;&nbsp;</td><td>lowest index in an array (0 for open arrays)</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">HIGH(A:array of any_type):Integer;&nbsp;&nbsp;</td><td>highest index in an array (including undefined items to the highest defined for open arrays)</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">TRACE(S:string);&nbsp;&nbsp;</td><td>write a string to the debug output (not tested)</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <span style="font-weight: bold;">Compiler switches:
+      </span>
+      <br>
+      <br>
+      <table border="0" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="font-family: monospace;">FRAME_WIDTH pixel_count&nbsp;&nbsp;</td><td>set the width of the SWF frame</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">FRAME_HEIGHT pixel_count&nbsp;&nbsp;</td><td>set the height of the SWF frame</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">FRAME_RATE frames_per_second&nbsp;&nbsp;</td><td>set the frame rate per seconds</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">BACKGROUND color&nbsp;&nbsp;</td><td>set the background color of the SWF frame</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">VERSION flash_version&nbsp;&nbsp;</td><td>minimal version of flash required to play the compiled SWF file</td>
+          </tr>
+          <tr>
+            <td style="font-family: monospace;">NOTE any_text&nbsp;&nbsp;</td><td>important notices that can be displayed at compile time</td>
+          </tr>
+          <!--tr>
+            <td style="font-family: monospace;">BITMAP bitmap_file_name&nbsp;&nbsp;</td><td>bitmap resource (*.BMP file)</td>
+          </tr-->
+        </tbody>
+      </table>
+      <br>
+      <span style="font: bold 16px Arial;">Acknowledgment
+      </span>
+      <br>
+      <br>The SWF code part is based on
+      <a href="http://sphing.sourceforge.net/">Sphing</a> (Swf with PHp without mING): Copyright 2002 Igor Clukas
+      <br>Deflate is based on
+      <a href="http://www.nomssi.de/paszlib/paszlib.html">paszlib</a>: Copyright (C) 1998 by Jacques Nomssi Nzali
+      <br>The original
+      <a href="http://zlib.net/">ZLib</a>: Copyright (C) 1995-1998 Jean-loup Gailly and Mark Adler
+      <br>The
+      <a href="http://www.m2osw.com/fr/swf_alexref.html">SWF File Format Reference</a> was originally written by Alexis Wilke.
+      <br>Interface units based on
+      <a href="http://www.mtasc.org">MTASC</a> headers: (c)2004-2008 Motion-Twin
+      <br>
+      <br>
+      <hr>
+      <br>
+      <a href="http://sourceforge.net/projects/flashpascal">
+        <img src="http://sflogo.sourceforge.net/sflogo.php?group_id=236643&type=12" border="0" title="Get FlashPascal at SourceForge.net. Fast, secure and Free Open Source software downloads" alt="Get FlashPascal at SourceForge.net. Fast, secure and Free Open Source software downloads"/></a>
+      <a href="http://sourceforge.net/donate/index.php?group_id=236643">
+        <img src="http://images.sourceforge.net/images/project-support.jpg" width="80" height="30" border="0" alt="Support This Project"/></a>
+      <br>
+      <br>Regards, Paul TOTH & Péter Gábor
+    </div>
+<!-- CimkeFelhő eleje -->
+      <span hidden="true" name="flashpascal_tags" style="font: italic 0px Arial;">Tags:
+1.0
+2.0
+3.0
+4.0
+5.0
+6.0
+7.0
+8.0
+9.0
+10.0
+11.0
+action
+anim
+animation
+animations
+array
+as
+as2
+as3
+audio
+bit
+bitwise
+block
+boolean
+bsd
+byte
+bytecode
+class
+code
+compile
+compiler
+constructor
+createemptymovieclip
+debian
+declaration
+define
+definition
+delphi
+documentation
+double
+download
+downloads
+embed
+example
+external
+file
+fix
+flash
+flashpascal
+flv
+fpc
+frame
+france
+francia
+franciaország
+free
+freepascal
+function
+gábor
+game
+gif
+hat
+help
+hungary
+hungarian
+informations
+integer
+inherited
+java
+javascript
+keywords
+knowlege
+kylix
+language
+lazarus
+linux
+lite
+magyar
+magyarország
+manual
+minesweeper
+movieclip
+mp3
+name
+new
+number
+object
+operation
+parent
+pascal
+paul
+péter
+php
+play
+png
+procedure
+project
+promote
+prototype
+read
+red
+regards
+reklám
+result
+sample
+screen
+script
+secure
+seven
+shift
+slax
+slackware
+software
+solution
+source
+sourceforge
+string
+support
+swf
+target
+test
+tobject
+top
+toth
+triangle
+type
+uhu
+units
+video
+vista
+wav
+web
+website
+window
+windows
+xp
+      </span>
+<!-- CimkeFelhő vége -->
+  </body>
+</html>

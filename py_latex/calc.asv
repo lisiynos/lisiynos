@@ -1,0 +1,14 @@
+p=sym('p'); R=sym('R'); L=sym('L'); C=sym('C'); % Вводим символические переменные
+A=[ -R/L -1/L; 
+     1/C  0 ];
+disp('Матрица A = '); disp(A);
+I = eye(2); % Единичная матрица 2x2
+M = p*I-A;
+disp('p*I-A = '); disp(M);
+disp('det(p*I-A) = '); disp(det(M));
+X = 
+disp('Матрица, обратная к p*I-A = '); disp();
+B = [1/L; 0]; disp('B = '); disp(B);
+C = [0 1]; disp('C = '); disp(C);
+W = C*X*B;
+disp(W);

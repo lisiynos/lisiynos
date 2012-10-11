@@ -1,0 +1,436 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>ООП на C/C++</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <script type="text/javascript" src="../syntax/load.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version
+=6,0,0,0" width="100" height="50">
+            <param name="movie"
+                   value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param
+                    name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param
+                    name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70" type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+<div id="content">
+
+<h1>ООП и перегрузка операторов в С/C++</h1>
+
+<h2> Ссылки для скачивания:</h2>
+<ul>
+    <li>Borland C++ для DOS - <a href="http://alexeypetrov.narod.ru/Distrib/distrib.html">http://alexeypetrov.narod.ru/Distrib/distrib.html</a>
+    </li>
+    <li>MinGW - <a href="http://www.mingw.org/">http://www.mingw.org</a></li>
+    <li>Dev-Cpp - <a href="http://www.bloodshed.net/dev/devcpp.html">http://www.bloodshed.net/dev/devcpp.html</a> (можно
+        скачать только его и пользоваться его редактором и отладчиком)
+    </li>
+    <li>Code::Blocks - <a href="http://www.codeblocks.org/">http://www.codeblocks.org</a>  - другая бесплатная IDE
+        (можно
+        скачать с интегрированным MinGW и использовать вместо Dev-Cpp)
+    </li>
+    <li>JDK - <a href="http://java.sun.com/javase/downloads/?intcmp=1281">http://java.sun.com/javase/downloads/?intcmp=1281</a>
+        - нужен для запуска Eclipse
+    </li>
+    <li>Eclipse - <a href="http://www.eclipse.org/cdt/downloads.php">http://www.eclipse.org/cdt/downloads.php</a> -
+        удобная кроссплатформенная Open Source IDE 
+    </li>
+    <li><a href="http://lib.ru/CPPHB/cpptut.txt">http://lib.ru/CPPHB/cpptut.txt</a>  - Книга - Бьерн Страуструп "Язык
+        программирования С++".
+    </li>
+    <li><a href="http://oop2005.narod.ru/">http://oop2005.narod.ru</a> - сайт с подборкой ссылок по теме и другой
+        полезной
+        информацией
+    </li>
+</ul>
+Отчёты по лабораторным должны содержать:<br>
+<ul>
+    <li>Задание (техническое задание)</li>
+    <li>Объектно-ориентированное проектирование - схема модулей, классов, методов, связей между ними</li>
+    <li>Текст программы с демонстрационным примером, тестирующим все функции программы</li>
+</ul>
+<br>
+Для реализации программы можете использовать любой компилятор / IDE C/C++  на ваш выбор (я рекомендую MinGW +
+Eclipse).<br>
+
+<h2>1. Классы. Протоколы классов</h2>
+
+<p>1) Определить класс дробей – рациональных чисел, являющихся отношением двух целых чисел. Специфицировать интерфейс
+    класса и реализовать методы сложения, вычитания, умножения и деления дробей. После выполнения метода дробь должна
+    приводиться к несократимому виду.</p>
+
+<p>2) В разработанном классе рациональных дробей заменить методы операций над заданными объектами перегруженными
+    стандартными операторами. Определить операции сравнения «==», «&gt;», «&lt;», «&gt;=», «&lt;=» и «!=».</p>
+
+<pre class="sh_cpp">
+// Пример простейшей реализации 
+#include &lt;iostream&gt;
+
+#define show(x) #x &lt;&lt; " = " &lt;&lt; x &lt;&lt; "  "
+#define test(x) if(x) cout &lt;&lt; #x &lt;&lt; endl
+
+// Вычисление НОД = Наибольший общий делитель<br>// GCD = Greatest Common Divider (по-английски)<br>long GCD( long a, long b ){ return b==0 ? a : GCD(b,a%b); }<br> <br>// Класс &quot;Рациональная дробь&quot;<br>class Rat {<br>  void init( long n, long d ){ 
+    long gcd = GCD(n,d); // вычисляем наибольший общий делитель числителя и знаменателя
+    // Сокращаем дробь 
+    this-&gt;n = n/gcd; 
+    this-&gt;d = d/gcd; 
+    curObj++; 
+    constCalls++; 
+  };<br>public:   
+  static int curObj /* текущее кол-во объектов */, constCalls /* кол-во вызовов конструкторов */; 
+  long n,d; // Числитель и знаменатель nominator/denominator 
+  Rat(long n, long d) { init(n,d); } // &quot;Основной&quot; конструктор
+  Rat(const Rat&amp; x) { init(x.n,x.d); }; // Конструктор копирования
+  Rat() { init(0,1); } // Конструктор &quot;по-умолчанию&quot;, дробь равная 0 - 0/1
+  ~Rat() { curObj--; } // Деструктор (уменьшает количество объектов)
+  // Арифметические операции
+  Rat operator+(const Rat&amp; x) const { return Rat( n*x.d+d*x.n, d*x.d ); }
+  Rat operator-(const Rat&amp; x) const { return Rat( n*x.d-d*x.n, d*x.d ); }
+  Rat operator*(const Rat&amp; x) const { return Rat( x.n*n, x.d*d ); }
+  Rat operator/(const Rat&amp; x) const { return Rat( n*x.d, d*x.n ); }
+  // Операции сравнения
+  bool operator==(const Rat&amp; x) const { return n*x.d == d*x.n; }
+  bool operator!=(const Rat&amp; x) const { return n*x.d != d*x.n; }
+  bool operator&gt;(const Rat&amp; x) const { return n*x.d &gt; d*x.n; }
+  bool operator&lt;(const Rat&amp; x) const { return n*x.d &lt; d*x.n; }
+  bool operator&gt;=(const Rat&amp; x) const { return n*x.d &gt;= d*x.n; }
+  bool operator&lt;=(const Rat&amp; x) const { return n*x.d &lt;= d*x.n; }
+};
+
+// Инициализируем статические переменные
+int Rat::curObj = 0, Rat::constCalls = 0;
+ <br>using namespace std;
+ <br>// Перегрузка операции вывода в поток для класса &quot;Рациональная дробь&quot;<br>ostream&amp; operator &lt;&lt; ( ostream&amp; os, const Rat&amp; x ){ return os &lt;&lt; x.n &lt;&lt; &quot;/&quot; &lt;&lt; x.d; };
+ <br>// Основная программа - демонстрация возможностей класса &quot;Рациональная дробь&quot;
+void demoRat(){
+  const Rat a(3,9),b(1,6),c = a*b+b/a;<br>  cout &lt;&lt; show(a) &lt;&lt; show(b) &lt;&lt; endl;<br>  cout &lt;&lt; show(a+b) &lt;&lt; show(a-b) &lt;&lt; show(a*b) &lt;&lt; show(a/b) &lt;&lt; endl;<br>  test(a==b); test(a!=b); test(a&gt;b); test(a&lt;b); test(a&gt;=b); test(a&lt;=b); test( a*b == b*a );<br>}<br> <br>int main() {<br>  demoRat();<br>  cout &lt;&lt; &quot;Объектов в памяти = &quot; &lt;&lt; Rat::curObj &lt;&lt; &quot;   Вызовов конструкторов = &quot; &lt;&lt; Rat::constCalls &lt;&lt; endl;    <br>  return 0;<br>};</pre>
+
+<h2>2. Перегрузка операторов</h2>
+
+<p>Разработать и реализовать класс «Строка» произвольной длины. Протокол класса должен включать конструктор копирования,
+    метод вывода на экран, перегруженные операторы присваивания («=»), сложения («+» и «+=») и удаления подстроки («-» и
+    «-=»), а также оператор преобразования строки в char*.</p>
+
+<pre class="sh_cpp">
+// Пример простейшей реализации
+#include &lt;assert.h&gt;
+#include &lt;iostream&gt;
+
+using namespace std;
+
+// Класс "Строка"
+class String {
+  char *p; // строка = указатель на массив символов
+  int len; // длина строки
+  void init(char *s, int _len){ 
+    len = _len; 
+    p = new char[len+1]; 
+    strcpy(p,s); 
+  }
+public:
+  String(char *s){ init(s,strlen(s)); };
+  String(const String &x){ init(x.p,x.len); } // Конструктор копирования
+  ~String(){ delete []p; }
+  operator char*(){ return p; }; // оператор преобразования строки в char*
+  String& operator=(String &x){ 
+    delete []p; // Очищаем старую строку
+    init(x.p,x.len); 
+    return *this; 
+  }
+  // Конкатенация
+  String& operator+=(String &x){ 
+    char *old=p; 
+    init(old,len+x.len); 
+    strcat(p,x.p); 
+    delete []old; 
+    return *this; 
+  };
+  String& operator-=(String &x){ // удаление подстроки
+    char* substr = strstr(p, x.p); // поиск подстроки
+    if (substr != NULL) { // если подстрока найдена
+      len -= x.len; char* pn = new char[len+1]; // создаём новую строку, которая короче на длину подстроки
+      strncpy(pn, p, substr - p); strcpy(pn + (substr - p), substr + x.len); // копируем начало строки (до подстроки) и конец (после подстроки)
+      delete []p; p = pn; // заменяем строку на новую
+    }
+    return *this; // возвращаем "указатель на себя"
+  }
+  String& operator+(String &x){ return *(new String(p))+=x; }
+  String& operator-(String &x){ return *(new String(p))-=x; }
+  // Перегрузка операции "&lt;&lt;" вывода в поток
+  ostream& operator &lt;&lt; (ostream& os){ return os &lt;&lt; p; }
+};
+ 
+// Основная программа - демонстрация возможностей класса "Строка"
+int main() {
+  // Проверяем работу конкатенации
+  String a("prog"), b("systema"), c = a + b; 
+  assert(!strcmp(c,"progsystema"));
+  // Проверяем работу второго варианта конкатенации
+  a += b;   
+  assert(!strcmp(a,"progsystema"));
+  String d = a - *(new String("sys")); 
+  assert(!strcmp(d,"progtema"));
+  cout &lt;&lt; d &lt;&lt; endl;
+  return 0;
+}
+</pre>
+
+<h2>4. Преобразования типов. Дружественные методы и классы</h2>
+
+<p dir="ltr">Разработать класс «Матрица целых чисел» произвольной размерности, использующий в качестве свойства двойной
+    указатель int**. Протокол класса должен содержать необходимые конструкторы, деструктор и операции «=», «+», «-»
+    (унарный и бинарный), «*» и «~» (транспонирование). Определить операцию индексирования [] как выделения матрицы
+    строки
+    (или столбца). </p>
+
+<p dir="ltr">Определить в классе операции ввода «&gt;&gt;» и вывода «&lt;&lt;» через объекты классов istream и
+    ostream.</p>
+
+<pre class="sh_cpp">
+#include &lt;iostream&gt;
+
+using namespace std;
+ 
+// Матрица целых чисел
+class matrix {
+  int rows,cols; // rows - количество строк, cols - количество столбцов
+  int **data; // Данные матрицы
+  // Инициализация матрицы 
+  //   rows - количество строк
+  //   cols - количество столбцов
+  //   fillZero - надо ли заполнять нулями
+  void init(int rows, int cols, bool fillZero){
+    // Запоминаем количество строк и столбцов
+    this-&gt;rows = rows;
+    this-&gt;cols = cols;
+    // Создаём массив указателей на int
+    data = new int*[rows];
+    // Создаём массивы int'ов и запоминаем указатели
+    for(int i=0;i&lt;rows;i++){
+      data[i] = new int[cols];
+      if(fillZero) // заполняем нулями если надо
+        for(int j=0;j&lt;cols;j++)
+          data[i][j] = 0;
+    }   
+  }
+public:
+  matrix(){ init(0,0,true); }  // Конструктор без параметров
+  matrix( int rows, int cols ){ init(rows,cols,true); }  // Основной конструктор
+  // Конструктор копирования
+  matrix(const matrix& m) { 
+    init(m.rows,m.cols,false);
+    for(int i=0;i&lt;rows;i++)
+      for(int j=0;j&lt;cols;j++)
+        data[i][j] = m.data[i][j];
+  }
+  // Деструктор
+  ~matrix(){
+    // Удаляем каждую строку
+    for(int i=0;i&lt;rows;i++)
+      delete data[i];
+    // Удаляем массив указателей на double
+    delete data;
+  }
+  int Rows() const { return rows; }  // Количество строк
+  int Cols() const { return cols; }  // Количество столбцов
+  // Операция выделения строки матрицы
+  int* operator[] (int index) const { return data[index]; }
+  // Сложение
+  matrix& operator +=(const matrix& m) {
+    // Для сложения матрицы должны быть одинакового размера
+    assert( rows == m.rows && cols == m.cols );
+    // Сладываем матрицы поэлементно
+    for(int i=0; i&lt;rows; i++)
+      for(int j=0; j&lt;cols; j++)
+        data[i][j] += m.data[i][j];
+    return *this;   
+  }
+  // Дружественная функция сложения 
+  friend matrix operator +(const matrix& a,const matrix& b) { 
+    matrix temp = a; 
+    return temp += b; 
+  }
+  // Вычитание
+  matrix& operator -=(const matrix& m) {
+    assert( rows == m.rows && cols == m.cols );
+    for(int i=0;i&lt;rows;i++)
+      for(int j=0;j&lt;cols;j++)
+        data[i][j] -= m.data[i][j];
+    return *this;       
+  }
+  // Дружественная функция вычитания 
+  friend matrix operator -(const matrix& a,const matrix& b) { 
+    matrix temp = a; 
+    return temp -= b; 
+  }
+  // Умножение - легче сделать бинарный оператор
+  matrix& operator *=(const matrix& m) {
+    assert( rows == m.cols && cols == m.rows );
+    matrix temp(rows,m.cols);
+    for(int i=0;i&lt;rows;i++)
+      for(int j=0;j&lt;cols;j++){
+        temp.data[i][j] = 0;       
+        for(int k=0;k&lt;m.cols;k++)
+          temp.data[i][j] += data[i][k] * m.data[k][j];
+      }
+    *this = temp;
+    return *this;       
+  }
+  friend matrix operator *(const matrix& a,const matrix& b) {
+    matrix temp = a;
+    return temp *= b;
+  }
+  // Транспонирование
+  matrix& operator ~() {
+    matrix temp(cols,rows);
+    for(int i=0;i&lt;rows;i++)
+      for(int j=0;j&lt;cols;j++)
+        temp.data[j][i] = data[i][j];       
+    *this = temp;
+    return *this;       
+  }
+  // Вывод в поток
+  ostream& print(ostream &os){
+    os &lt;&lt; "(" &lt;&lt; rows &lt;&lt; "," &lt;&lt; cols &lt;&lt; ")" &lt;&lt; endl;
+    for(int i=0;i&lt;rows;i++){
+      for(int j=0;j&lt;cols;j++)
+        os &lt;&lt; data[i][j] &lt;&lt; " ";
+      os &lt;&lt; endl;
+    }
+    return os;
+  }
+  // Ввод из потока (в частности - с клавиатуры)
+  istream& scan(istream &is){
+    if(is == cin) cout &lt;&lt; "Введите количество строк и столбцов: ";
+    is &gt;&gt; rows &gt;&gt; cols;
+    for(int i=0;i&lt;rows;i++)
+      for(int j=0;j&lt;cols;j++){
+        if(is == cin) cout &lt;&lt; "[" &lt;&lt; i &lt;&lt; "][" &lt;&lt; j &lt;&lt; "] = ";
+        is &gt;&gt; data[i][j];
+      }
+    return is;
+  }
+};
+ 
+// Оператор вывода в поток 
+template &lt;class T&gt; ostream& operator &lt;&lt; (ostream& os, T& t){
+  return t.print(os);
+}
+ 
+// Оператор ввода из потока
+template &lt;class T&gt; istream& operator &gt;&gt; (istream& is, T& t){
+  return t.scan(is);
+}
+ 
+// Тестирование класса Матрица
+int main(){
+  const matrix m(2,1);
+  assert( m.Rows() == 2 && m.Cols() == 1 );
+  m[0][0] = 1; assert( m[0][0] == 1 );
+  m[1][0] = 2; assert( m[1][0] == 2 );
+  // Создаём 2 матрицы
+  const matrix a(2,2);
+  a[0][0] = 3; a[0][1] = 5;
+  a[1][0] = 4; a[1][1] = 2;
+  matrix b(2,2);
+  b[0][0] = 2; b[0][1] = 1;
+  b[1][0] = 1; b[1][1] = 3;
+  // Используем конструктор копирования
+  matrix c = b, c1 = b, c2 = b;
+  assert( c[0][0] == 2 ); assert( c[0][1] = 1 );
+  assert( c[1][0] == 1 ); assert( c[1][1] = 3 );
+  // Сложение
+  b+=a;
+  assert( b[0][0] == 3+2 ); assert( b[0][1] == 5+1 );
+  assert( b[1][0] == 4+1 ); assert( b[1][1] == 2+3 );
+  matrix d = a+c;
+  assert( d[0][0] == 3+2 ); assert( d[0][1] == 5+1 );
+  assert( d[1][0] == 4+1 ); assert( d[1][1] == 2+3 );
+  // Вычитание
+  c-=a;
+  cout &lt;&lt; c &lt;&lt; endl;
+  assert( c[0][0] == 2-3 ); assert( c[0][1] == 1-5 );
+  assert( c[1][0] == 1-4 ); assert( c[1][1] == 3-2 );
+  matrix e = c1-a;
+  assert( e[0][0] == 2-3 ); assert( e[0][1] == 1-5 );
+  assert( e[1][0] == 1-4 ); assert( e[1][1] == 3-2 );
+  // Умножение
+  c2 *= a;
+  // Надо протестировать умножение
+  //  ...
+  // Ввод матрицы с клавиатуры
+  matrix f;
+  cin &gt;&gt; f;
+  // Вывод её же на экран
+  cout &lt;&lt; f &lt;&lt; endl;
+  return 0;
+}</pre>
+
+<h2>5. Одиночное наследование. Иерархия классов</h2>
+
+<p>Разработать иерархию классов «Линия», «Луч», «Отрезок». Реализовать методы нарисовать, сдвинуть, повернуть
+    (использовать графический режим).</p>
+
+<h2>6. Одиночное наследование. Виртуальные функции</h2>
+
+<p dir="ltr">Разработать иерархию классов «Квадрат», «Круг», «Прямоугольник», «Фигура», «Эллипс». В класс «Экран» должен
+    включать любую композицию из объектов указанных классов и уметь рисовать себя (использовать абстрактные классы).</p>
+
+<h2>7. Множественное наследование</h2>
+
+<p>Разработать иерархию и протоколы классов «квадрат», «ромб», «прямоугольник» и «параллелограмм». Определить методы для
+    изменения размеров, расчета периметра и площади фигур.</p>
+
+<h2>8. Шаблоны классов</h2>
+
+<p>Создать шаблоны классов с необходимым для работы с объектами протоколом:</p>
+
+         А) одномерный массив произвольной длины,<br>
+         Б) список,<br>
+         В) стек,<br>
+         Д) кольцевой буфер произвольной длины.<br>
+
+<h2>Темы курсовых работ по курсу: «Объектно-ориентированное программирование»</h2>
+
+<p dir="ltr">Лучше всего, если задание выберет себе сам студент исходя из своих интересов. Тем, кто не может выбрать
+    самостоятельно, можно рекомендовать темы:</p>
+<ol>
+    <li> Текстовый редактор (загрузка текста из файла, запись текста в файл, окно редактирования).</li>
+    <li> Графический редактор.</li>
+    <li> Калькулятор (N – разрядные целые числа, использование "длинной арифметики").</li>
+    <li> Осциллограф.</li>
+    <li> Игра в шахматы (два игрока - люди).</li>
+    <li> Игра в шашки (два игрока - люди).</li>
+    <li> Игра в карты «дурак» (переводной - 2 игрока).</li>
+    <li> Электрическая схема постоянного тока (элементы: батарейка, провод, выключатель, лампочка) - моделирование.</li>
+    <li> Электрическая схема переменного тока (элементы: источник напряжения, резистор, конденсатор, катушка
+        индуктивности).
+    </li>
+    <li>Лифт - наглядное моделирование.</li>
+    <li> Офисная АТС - наглядное моделирование.</li>
+    <li> Канал передачи данных (несколько источников/получателей, один канал).</li>
+    <li>Управление светофорами на перекрестке (режимы – с пульта и автоматический).</li>
+    <li> Датчик случайных чисел (распределения – равномерное, нормальное, экспоненциальное, Бернулли) c методами
+        определения математического ожидания, дисперсии и среднеквадратичного отклонения.
+    </li>
+</ol>
+</div>
+</body>
+
+</html>

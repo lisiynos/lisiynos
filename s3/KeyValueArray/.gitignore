@@ -1,0 +1,14 @@
+<<<<<<< HEAD
+_ReSharper.cpp
+Debug
+ipch
+*.sdf
+*.suo
+*.user
+*.filters
+=======
+Debug
+ipch
+*.suo
+*.sdf
+>>>>>>> 53fdeb2efbc58c2d155d2403ac1f305307a301b2

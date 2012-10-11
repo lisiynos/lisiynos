@@ -1,0 +1,166 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Двоичный (бинарный) поиск</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_python.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100"
+                height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70" type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+<div id="content" style="width:80%;">
+    <div class="lesson">Сессия 1</div>
+    <h1>Двоичный (бинарный) поиск, BinSearch, БинПоиск</h1>
+
+    <p>Поиск в упорядоченном массиве за $O(\log{n})$. Так же его называют - метод деления пополам и дихотомия (деление
+        пополам по-гречески).</p>
+
+    <p> Перед применением двоичного поиска нужно отсортировать массив одним из <a href="sort.html"
+                                                                                  title="Алгоритмы сортировки">алгоритмов
+        сортировки</a>.</p>
+
+    <h3>Цель</h3>
+
+    <p>Найти элемент со значением $x$ в отсортированном массиве $A$ из $N$ элементов или установить, что элемента $x$ в
+        массиве $A$ нет.</p>
+
+    <h3>Идея</h3>
+
+    <p>Разделить отсортированный массив на две половины, сравнить средний элемент с $x$, понять в какой половине массива
+        может находиться значение $x$ и перейти к поиску в этой половине.. И так далее, пока размер массива не
+        уменьшиться
+        до 1 элемента, тогда либо этот элемент равен $x$ и мы нашли $x$, либо не равен $x$, и тогда элемента $x$ нет в
+        массиве $A$.</p>
+
+    <p><strong>Скорость работы</strong></p>
+
+    <p>Линейный поиск (последовательный просмотр всех элементов массива) выполняется за $O(N)$ операций, двоичный поиск
+        -
+        за $O(\log{N})$.</p>
+
+    <p><strong>Пример реализации на C++</strong></p>
+
+    <p> Шаблонная функция и пример её использования:<br>
+        template &lt;typename  T&gt; int binary_serch (const T *a,int n ,const  T &amp;elem);<br>
+        Пусть $а$ - отсортированный массив, тогда функция за логарифмическое время возвращает $i$-ый индекс элемента
+        массива
+        elem=a[i] и -1, если элемент не найден.</p>
+<pre class="sh_cpp">
+#include &lt;iostream&gt; // Отсюда будем использовать вывод на экран при потоков (cout)
+#include &lt;algorithm&gt; // Алгоритм сортировки (функция sort) из STL
+#include &lt;stdlib.h&gt; // Функция rand() - случайные числа
+#include &lt;ctime&gt; // Функция time() - время
+#include &lt;conio.h&gt; // Функция getch() - ожидание нажатия клавиши в конце программы
+
+// Шаблонная функция
+template &lt;typename T&gt; int binary_search(const T *a, int n, const T &elem){
+  int L = 0, R = n-1; // Левая и правая границы поиска
+  while (L &lt; R){ // Пока в рассматриваемом куске массива больше одного элемента
+    int m = (L+R)/2; // Вычисляем индекс среднего элемента
+    if (elem &lt;= a[m]) // Если искомый элемент меньше центрального
+      R = m; // Сдвигаем правую границу влево
+    else // , а иначе
+      L = m+1; // Левую границу вправо
+  }
+  // Остался один элемент с индеком L = R, 
+  // и это либо искомый элемент elem, либо elem в массиве вообще нет!
+  return (a[R] == elem) ? R : -1; // возвращаем индекс или -1 если элемент не найден 
+}
+
+using namespace std; // Чтобы не писать перед каждым cout "std::"
+
+// Основная программа c примером использования
+int main() {
+  // Создаём случайный массив из N элементов
+  const int N = 20;
+  int a[N];
+  // Заполняем массив a случайными целыми числами 
+  srand(time(0)); // Инициализация генератора случайных чисел
+  for(int i=0;i&lt;N;i++)
+    a[i] = rand() % 200; // случайные числа в диапазоне 0..199
+  int el1 = a[rand() % N]; // Запоминаем случайный элемент массива
+    // он точно будет в отсортированном массиве :)
+  // Сортируем массив a при помощи функции sort из STL
+  sort(a, a+N); // Да-да.. вот так просто, одной строкой, можно отсортировать массив ;)
+  // Выводим массив на экран 
+  for(int i=0;i&lt;N;i++)
+    cout &lt;&lt; "a[" &lt;&lt; i &lt;&lt; "] = " &lt;&lt; a[i] &lt;&lt; endl;
+  // Поиск элементов массива при помощи функции binary_search
+  // Ищем элемент массива, который там заведомо есть 
+  cout &lt;&lt; "search " &lt;&lt; el1 &lt;&lt; " " &lt;&lt; binary_search(a,N,el1) &lt;&lt; endl;
+  // Поиск элемента, которого в массиве a заведомо нет, т.к. он больше 199
+  cout &lt;&lt; "search " &lt;&lt; 1000 &lt;&lt; " " &lt;&lt; binary_search(a,N,1000) &lt;&lt; endl;
+
+  cout &lt;&lt; "Press any key..."; getch(); // Ожидаем нажатия клавиши :)
+  return 0;
+}</pre>
+
+    <p> Стандартная STL функция binary_search возвращает лишь найден элемент или нет.</p>
+
+<pre class="sh_cpp">
+#include &lt;iostream&gt; // Вывод на экран
+#include &lt;algorithm&gt; // Алгоритм сортировки из STL
+#include &lt;stdlib.h&gt; // Функция rand() - случайные числа
+#include &lt;ctime&gt; // Функция time() - время
+
+// Основная программа для демонстрации функции 
+using namespace std; // Чтобы не писать везде "std::"
+
+int main() {
+  // Создаём случайный массив из N элементов
+  const int N = 20;
+  int a[N];
+  // Заполняем случайными числами 
+  srand(time(0)); // Инициализация генератора случаных чисел
+  for(int i=0;i&lt;N;i++)
+    a[i] = rand() % 200;
+  int el1 = a[rand() % N]; // Запоминаем элемент массива
+  // Сортируем массив a 
+  sort(a, a+N);
+  // Выводим массив на экран 
+  for(int i=0;i&lt;N;i++)
+    cout &lt;&lt; "a[" &lt;&lt; i &lt;&lt; "] = " &lt;&lt; a[i] &lt;&lt; endl;
+  // Поиск элементов массива
+  // Ищем элемент массива, который там заведомо есть 
+  cout &lt;&lt; "search " &lt;&lt; el1 &lt;&lt; " " &lt;&lt; binary_search(a,a+N,el1) &lt;&lt; endl;
+  cout &lt;&lt; "search " &lt;&lt; 1000 &lt;&lt; " " &lt;&lt; binary_search(a,a+N,1000) &lt;&lt; endl;
+  return 0;
+}
+</pre>
+
+    <p><strong>TODO:</strong></p>
+
+    <p>Добавить картинки </p>
+
+    <p>Добавить реализацию на Delphi</p>
+</div>
+
+</body>
+
+</html>

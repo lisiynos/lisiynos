@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- This file is part of Flash Pascal project. See 'http://flashpascal.sf.net' for more. (c) 2011 by Péter Gábor (ptrg) -->
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <meta name="description" content="Flash Pascal is a Pascal like language compiler that build Flash (SWF) files. This manual contains informations about the special abilities and adventages of the Flash Pascal compiler.">
+    <title>Flash Pascal - ZoneFlash.pas
+    </title>
+    <meta name="generator" content="SynEdit HTML exporter" />
+    <style type="text/css">
+      <!--
+                        body { color: #000000; background-color: #FFFFFF; }
+                        .pas1-assembler { color: #008000; font-weight: bold; }
+                        .pas1-character { color: #000000; }
+                        .pas1-comment { color: #0000FF; font-weight: bold; }
+                        .pas1-datatype { }
+                        .pas1-float { color: #000080; }
+                        .pas1-hexadecimal { color: #000080; }
+                        .pas1-identifier { color: #000000; }
+                        .pas1-number { color: #000080; }
+                        .pas1-preprocessor { color: #FF0000; font-weight: bold; }
+                        .pas1-reservedword { color: #000000; font-weight: bold; }
+                        .pas1-space { color: #000000; }
+                        .pas1-string { color: #800080; }
+                        .pas1-symbol { color: #FF0000; }
+                        -->
+      A { color:#800000; text-decoration: none;}
+    </style>
+  </head>
+  <body style="font: 12px Arial; color: rgb(0, 0, 0); padding: 20px;  background-color:#d0d0d0;" alink="#ee0000" link="#0000ee" vlink="#551a8b">
+    <div style="border: solid 1px gray;  background-color: #ffffff;  padding: 10px;">
+      <table width="100%"><tr><td>
+      <img style="border: 0px; float:left; margin: 0px 10px 0px 0px;" src="FlashPascal.png" alt="Flash Pascal" title="Flash Pascal">
+      <span style="font: bold 24px Arial;">Flash Pascal - ZoneFlash.pas
+      </span>
+      <br>
+      <br>Flash Pascal is a Pascal like language compiler that build Flash (SWF) files.
+      <br>
+      <br>
+      <br>Pascal for Flash compiler (c)2008 by Paul TOTH
+      <br>Pascal for Flash compiler portions (c) 2011 by Péter Gábor
+     </td></tr></table>
+      <br>You can build such 3D animation with just some Pascal knowlege!
+      <br>
+      <br>
+      <object height="250" width="250">
+        <param name="movie" value="ZoneFlash.swf">
+        <embed tplayername="SWF" splayername="SWF" id="Player1219614649844" type="application/x-shockwave-flash" src="ZoneFlash.swf" mediawrapchecked="true" pluginspage="http://www.macromedia.com/go/getflashplayer" height="250" width="250">
+      </object>
+      <br>
+      <hr>
+<pre>
+<code><span style="font: 8pt Courier New;"><span class="pas1-reservedword">program</span><span class="pas1-space"> ZoneFlash</span><span class="pas1-symbol">;</span><span class="pas1-space"> </span><span class="pas1-comment">
+{
+ Flash Pascal sample
+ inspired by http://www.zoneflash.net
+(http://www.zoneflash.net/fichiers/zoneflash.swf)
+}
+</span><span class="pas1-preprocessor">{$FRAME_WIDTH  250}
+{$FRAME_HEIGHT 250}
+{$FRAME_RATE    25}
+{$VERSION        9}
+</span><span class="pas1-reservedword">uses
+</span><span class="pas1-space"> Flash8Ext</span><span class="pas1-symbol">,</span><span class="pas1-identifier">Math</span><span class="pas1-symbol">;
+</span><span class="pas1-reservedword">type
+</span><span class="pas1-space"> TCercle</span><span class="pas1-symbol">=</span><span class="pas1-reservedword">class</span><span class="pas1-symbol">(</span><span class="pas1-identifier">MovieClip</span><span class="pas1-symbol">)
+</span><span class="pas1-space">  x</span><span class="pas1-symbol">,</span><span class="pas1-identifier">y</span><span class="pas1-symbol">,</span><span class="pas1-identifier">z</span><span class="pas1-symbol">,</span><span class="pas1-identifier">zz</span><span class="pas1-symbol">:</span><span class="pas1-datatype">double</span><span class="pas1-symbol">;
+</span><span class="pas1-space">  index</span><span class="pas1-symbol">:</span><span class="pas1-datatype">integer</span><span class="pas1-symbol">;
+</span><span class="pas1-space">  </span><span class="pas1-reservedword">constructor</span><span class="pas1-space"> Create</span><span class="pas1-symbol">(</span><span class="pas1-identifier">Name</span><span class="pas1-symbol">:</span><span class="pas1-reservedword">string</span><span class="pas1-symbol">;</span><span class="pas1-space"> Depth</span><span class="pas1-symbol">:</span><span class="pas1-datatype">integer</span><span class="pas1-symbol">);
+</span><span class="pas1-space">  </span><span class="pas1-reservedword">procedure</span><span class="pas1-space"> tourner</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> </span><span class="pas1-reservedword">end</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> TCadre</span><span class="pas1-symbol">=</span><span class="pas1-reservedword">class</span><span class="pas1-symbol">(</span><span class="pas1-identifier">MovieClip</span><span class="pas1-symbol">)
+</span><span class="pas1-space">  </span><span class="pas1-reservedword">constructor</span><span class="pas1-space"> Create</span><span class="pas1-symbol">(</span><span class="pas1-identifier">Depth</span><span class="pas1-symbol">:</span><span class="pas1-datatype">integer</span><span class="pas1-symbol">);
+</span><span class="pas1-space">  </span><span class="pas1-reservedword">procedure</span><span class="pas1-space"> doEnterFrame</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> </span><span class="pas1-reservedword">end</span><span class="pas1-symbol">;
+</span><span class="pas1-reservedword">const
+</span><span class="pas1-space"> x0</span><span class="pas1-symbol">=</span><span class="pas1-number">125</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> y0</span><span class="pas1-symbol">=</span><span class="pas1-number">125</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> df</span><span class="pas1-symbol">=</span><span class="pas1-number">130</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> n</span><span class="pas1-symbol">=</span><span class="pas1-number">3</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> largeur</span><span class="pas1-symbol">=</span><span class="pas1-number">80</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> dl</span><span class="pas1-symbol">=</span><span class="pas1-identifier">largeur</span><span class="pas1-symbol">/(</span><span class="pas1-identifier">n</span><span class="pas1-symbol">-</span><span class="pas1-number">1</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> vitesse </span><span class="pas1-symbol">=</span><span class="pas1-space"> </span><span class="pas1-float">0.01</span><span class="pas1-symbol">;
+</span><span class="pas1-reservedword">var
+</span><span class="pas1-space"> Cadre</span><span class="pas1-symbol">:</span><span class="pas1-identifier">TCadre</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> Cercles</span><span class="pas1-symbol">:</span><span class="pas1-reservedword">array</span><span class="pas1-symbol">[</span><span class="pas1-number">0</span><span class="pas1-symbol">..</span><span class="pas1-number">26</span><span class="pas1-symbol">]</span><span class="pas1-space"> </span><span class="pas1-reservedword">of</span><span class="pas1-space"> TCercle</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> i</span><span class="pas1-symbol">,</span><span class="pas1-identifier">j</span><span class="pas1-symbol">,</span><span class="pas1-identifier">k</span><span class="pas1-symbol">:</span><span class="pas1-datatype">integer</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> depth</span><span class="pas1-symbol">:</span><span class="pas1-datatype">integer</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> mc</span><span class="pas1-symbol">:</span><span class="pas1-identifier">TCercle</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> anglex</span><span class="pas1-symbol">,</span><span class="pas1-identifier">angley</span><span class="pas1-symbol">:</span><span class="pas1-datatype">double</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> danglex</span><span class="pas1-symbol">,</span><span class="pas1-identifier">dangley</span><span class="pas1-symbol">:</span><span class="pas1-datatype">double</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> cosx</span><span class="pas1-symbol">,</span><span class="pas1-identifier">sinx</span><span class="pas1-symbol">,</span><span class="pas1-identifier">cosy</span><span class="pas1-symbol">,</span><span class="pas1-identifier">siny</span><span class="pas1-symbol">:</span><span class="pas1-datatype">double</span><span class="pas1-symbol">;
+</span><span class="pas1-reservedword">function</span><span class="pas1-space"> aleatoire</span><span class="pas1-symbol">(</span><span class="pas1-identifier">vmin</span><span class="pas1-symbol">,</span><span class="pas1-space"> vmax</span><span class="pas1-symbol">:</span><span class="pas1-datatype">double</span><span class="pas1-symbol">):</span><span class="pas1-datatype">double</span><span class="pas1-symbol">;
+</span><span class="pas1-reservedword">begin
+</span><span class="pas1-space"> Result</span><span class="pas1-symbol">:=(</span><span class="pas1-identifier">vmin </span><span class="pas1-symbol">+</span><span class="pas1-space"> </span><span class="pas1-symbol">(</span><span class="pas1-identifier">vmax </span><span class="pas1-symbol">-</span><span class="pas1-space"> vmin</span><span class="pas1-symbol">)</span><span class="pas1-space"> </span><span class="pas1-symbol">*</span><span class="pas1-space"> random</span><span class="pas1-symbol">());
+</span><span class="pas1-reservedword">end</span><span class="pas1-symbol">;
+</span><span class="pas1-reservedword">constructor</span><span class="pas1-space"> TCadre</span><span class="pas1-symbol">.</span><span class="pas1-identifier">Create</span><span class="pas1-symbol">(</span><span class="pas1-identifier">Depth</span><span class="pas1-symbol">:</span><span class="pas1-datatype">integer</span><span class="pas1-symbol">);
+</span><span class="pas1-reservedword">begin
+</span><span class="pas1-space"> </span><span class="pas1-reservedword">inherited</span><span class="pas1-space"> Create</span><span class="pas1-symbol">(</span><span class="pas1-reservedword">nil</span><span class="pas1-symbol">,</span><span class="pas1-string">'Cadre'</span><span class="pas1-symbol">,</span><span class="pas1-identifier">Depth</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> onEnterFrame</span><span class="pas1-symbol">:=</span><span class="pas1-identifier">doEnterFrame</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> lineStyle</span><span class="pas1-symbol">(</span><span class="pas1-number">0</span><span class="pas1-symbol">,</span><span class="pas1-hexadecimal">$808080</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> beginFill</span><span class="pas1-symbol">(</span><span class="pas1-hexadecimal">$e0e0e0</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> moveTo</span><span class="pas1-symbol">(</span><span class="pas1-number">5</span><span class="pas1-symbol">,</span><span class="pas1-number">5</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> lineTo</span><span class="pas1-symbol">(</span><span class="pas1-number">240</span><span class="pas1-symbol">,</span><span class="pas1-number">5</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> lineTo</span><span class="pas1-symbol">(</span><span class="pas1-number">240</span><span class="pas1-symbol">,</span><span class="pas1-number">240</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> lineTo</span><span class="pas1-symbol">(</span><span class="pas1-number">5</span><span class="pas1-symbol">,</span><span class="pas1-number">240</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> endFill</span><span class="pas1-symbol">();
+</span><span class="pas1-space"> anglex </span><span class="pas1-symbol">:=</span><span class="pas1-space"> </span><span class="pas1-number">0</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> angley </span><span class="pas1-symbol">:=</span><span class="pas1-space"> </span><span class="pas1-float">1.5</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> danglex</span><span class="pas1-symbol">:=</span><span class="pas1-number">4</span><span class="pas1-symbol">*</span><span class="pas1-identifier">aleatoire</span><span class="pas1-symbol">(</span><span class="pas1-float">0.5</span><span class="pas1-space"> </span><span class="pas1-symbol">*</span><span class="pas1-space"> vitesse</span><span class="pas1-symbol">,</span><span class="pas1-space"> vitesse</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> dangley</span><span class="pas1-symbol">:=</span><span class="pas1-number">4</span><span class="pas1-symbol">*</span><span class="pas1-identifier">aleatoire</span><span class="pas1-symbol">(</span><span class="pas1-float">0.5</span><span class="pas1-space"> </span><span class="pas1-symbol">*</span><span class="pas1-space"> vitesse</span><span class="pas1-symbol">,</span><span class="pas1-space"> vitesse</span><span class="pas1-symbol">);
+</span><span class="pas1-reservedword">end</span><span class="pas1-symbol">;
+</span><span class="pas1-reservedword">procedure</span><span class="pas1-space"> TCadre</span><span class="pas1-symbol">.</span><span class="pas1-identifier">doEnterFrame</span><span class="pas1-symbol">;
+</span><span class="pas1-reservedword">var
+</span><span class="pas1-space"> i</span><span class="pas1-symbol">:</span><span class="pas1-datatype">integer</span><span class="pas1-symbol">;
+</span><span class="pas1-reservedword">begin
+</span><span class="pas1-space"> anglex</span><span class="pas1-symbol">:=</span><span class="pas1-identifier">anglex</span><span class="pas1-symbol">+</span><span class="pas1-identifier">danglex</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> angley</span><span class="pas1-symbol">:=</span><span class="pas1-identifier">angley</span><span class="pas1-symbol">+</span><span class="pas1-identifier">dangley</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> cosx </span><span class="pas1-symbol">:=</span><span class="pas1-space"> cos</span><span class="pas1-symbol">(</span><span class="pas1-identifier">anglex</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> sinx </span><span class="pas1-symbol">:=</span><span class="pas1-space"> sin</span><span class="pas1-symbol">(</span><span class="pas1-identifier">anglex</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> cosy </span><span class="pas1-symbol">:=</span><span class="pas1-space"> cos</span><span class="pas1-symbol">(</span><span class="pas1-identifier">angley</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> siny </span><span class="pas1-symbol">:=</span><span class="pas1-space"> sin</span><span class="pas1-symbol">(</span><span class="pas1-identifier">angley</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> </span><span class="pas1-reservedword">for</span><span class="pas1-space"> i</span><span class="pas1-symbol">:=</span><span class="pas1-number">0</span><span class="pas1-space"> </span><span class="pas1-reservedword">to</span><span class="pas1-space"> </span><span class="pas1-number">26</span><span class="pas1-space"> </span><span class="pas1-reservedword">do</span><span class="pas1-space"> Cercles</span><span class="pas1-symbol">[</span><span class="pas1-identifier">i</span><span class="pas1-symbol">].</span><span class="pas1-identifier">tourner</span><span class="pas1-symbol">;
+</span><span class="pas1-reservedword">end</span><span class="pas1-symbol">;
+</span><span class="pas1-reservedword">constructor</span><span class="pas1-space"> TCercle</span><span class="pas1-symbol">.</span><span class="pas1-identifier">Create</span><span class="pas1-symbol">(</span><span class="pas1-identifier">Name</span><span class="pas1-symbol">:</span><span class="pas1-reservedword">string</span><span class="pas1-symbol">;</span><span class="pas1-space"> Depth</span><span class="pas1-symbol">:</span><span class="pas1-datatype">integer</span><span class="pas1-symbol">);
+</span><span class="pas1-reservedword">begin
+</span><span class="pas1-space"> </span><span class="pas1-reservedword">inherited</span><span class="pas1-space"> Create</span><span class="pas1-symbol">(</span><span class="pas1-identifier">Cadre</span><span class="pas1-symbol">,</span><span class="pas1-identifier">Name</span><span class="pas1-symbol">,</span><span class="pas1-identifier">Depth</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> index</span><span class="pas1-symbol">:=</span><span class="pas1-identifier">Depth</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> lineStyle</span><span class="pas1-symbol">(</span><span class="pas1-number">0</span><span class="pas1-symbol">,</span><span class="pas1-space"> </span><span class="pas1-number">0</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> beginFill</span><span class="pas1-symbol">(</span><span class="pas1-hexadecimal">$ffffff</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> moveTo</span><span class="pas1-symbol">(</span><span class="pas1-space"> </span><span class="pas1-number">0</span><span class="pas1-symbol">,-</span><span class="pas1-float">17.5</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> curveTo</span><span class="pas1-symbol">(+</span><span class="pas1-float">16.0</span><span class="pas1-symbol">,-</span><span class="pas1-float">16.0</span><span class="pas1-symbol">,+</span><span class="pas1-float">17.5</span><span class="pas1-symbol">,</span><span class="pas1-space"> </span><span class="pas1-number">0</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> curveTo</span><span class="pas1-symbol">(+</span><span class="pas1-float">16.0</span><span class="pas1-symbol">,+</span><span class="pas1-float">16.0</span><span class="pas1-symbol">,</span><span class="pas1-space"> </span><span class="pas1-number">0</span><span class="pas1-symbol">,+</span><span class="pas1-float">17.5</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> curveTo</span><span class="pas1-symbol">(-</span><span class="pas1-float">16.0</span><span class="pas1-symbol">,+</span><span class="pas1-float">16.0</span><span class="pas1-symbol">,-</span><span class="pas1-float">17.5</span><span class="pas1-symbol">,</span><span class="pas1-space"> </span><span class="pas1-number">0</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> curveTo</span><span class="pas1-symbol">(-</span><span class="pas1-float">16.0</span><span class="pas1-symbol">,-</span><span class="pas1-float">16.0</span><span class="pas1-symbol">,</span><span class="pas1-space"> </span><span class="pas1-number">0</span><span class="pas1-symbol">,-</span><span class="pas1-float">17.5</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> endFill</span><span class="pas1-symbol">();
+</span><span class="pas1-space"> zz</span><span class="pas1-symbol">:=</span><span class="pas1-number">0</span><span class="pas1-symbol">;
+</span><span class="pas1-reservedword">end</span><span class="pas1-symbol">;
+</span><span class="pas1-reservedword">procedure</span><span class="pas1-space"> TCercle</span><span class="pas1-symbol">.</span><span class="pas1-identifier">tourner</span><span class="pas1-symbol">;
+</span><span class="pas1-reservedword">var
+</span><span class="pas1-space"> tt</span><span class="pas1-symbol">,</span><span class="pas1-identifier">xx</span><span class="pas1-symbol">,</span><span class="pas1-identifier">yy</span><span class="pas1-symbol">:</span><span class="pas1-datatype">double</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> d</span><span class="pas1-symbol">,</span><span class="pas1-identifier">sc</span><span class="pas1-symbol">:</span><span class="pas1-datatype">double</span><span class="pas1-symbol">;
+</span><span class="pas1-reservedword">begin
+</span><span class="pas1-space"> tt</span><span class="pas1-symbol">:=-</span><span class="pas1-space"> x</span><span class="pas1-symbol">*</span><span class="pas1-identifier">sinx</span><span class="pas1-symbol">+</span><span class="pas1-space"> z</span><span class="pas1-symbol">*</span><span class="pas1-identifier">cosx</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> xx</span><span class="pas1-symbol">:=</span><span class="pas1-space">  x</span><span class="pas1-symbol">*</span><span class="pas1-identifier">cosx</span><span class="pas1-symbol">+</span><span class="pas1-space"> z</span><span class="pas1-symbol">*</span><span class="pas1-identifier">sinx</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> yy</span><span class="pas1-symbol">:=</span><span class="pas1-space">  y</span><span class="pas1-symbol">*</span><span class="pas1-identifier">cosy</span><span class="pas1-symbol">+</span><span class="pas1-identifier">tt</span><span class="pas1-symbol">*</span><span class="pas1-identifier">siny</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> zz</span><span class="pas1-symbol">:=-</span><span class="pas1-space"> y</span><span class="pas1-symbol">*</span><span class="pas1-identifier">siny</span><span class="pas1-symbol">+</span><span class="pas1-identifier">tt</span><span class="pas1-symbol">*</span><span class="pas1-identifier">cosy</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> sc</span><span class="pas1-symbol">:=</span><span class="pas1-number">100</span><span class="pas1-symbol">*</span><span class="pas1-identifier">df</span><span class="pas1-symbol">/(</span><span class="pas1-identifier">df</span><span class="pas1-symbol">-</span><span class="pas1-identifier">zz</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> _xscale</span><span class="pas1-symbol">:=</span><span class="pas1-identifier">sc</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> _yscale</span><span class="pas1-symbol">:=</span><span class="pas1-identifier">sc</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> _x </span><span class="pas1-symbol">:=</span><span class="pas1-space"> x0 </span><span class="pas1-symbol">+</span><span class="pas1-space"> sc </span><span class="pas1-symbol">*</span><span class="pas1-space"> xx </span><span class="pas1-symbol">/</span><span class="pas1-space"> </span><span class="pas1-number">100</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> _y </span><span class="pas1-symbol">:=</span><span class="pas1-space"> y0 </span><span class="pas1-symbol">+</span><span class="pas1-space"> sc </span><span class="pas1-symbol">*</span><span class="pas1-space"> yy </span><span class="pas1-symbol">/</span><span class="pas1-space"> </span><span class="pas1-number">100</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> swapDepths</span><span class="pas1-symbol">(</span><span class="pas1-identifier">zz</span><span class="pas1-symbol">);
+</span><span class="pas1-reservedword">end</span><span class="pas1-symbol">;
+</span><span class="pas1-reservedword">begin
+</span><span class="pas1-space"> cadre</span><span class="pas1-symbol">:=</span><span class="pas1-identifier">TCadre</span><span class="pas1-symbol">.</span><span class="pas1-identifier">Create</span><span class="pas1-symbol">(</span><span class="pas1-number">100</span><span class="pas1-symbol">);
+</span><span class="pas1-space"> depth</span><span class="pas1-symbol">:=</span><span class="pas1-number">0</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> </span><span class="pas1-reservedword">for</span><span class="pas1-space"> i</span><span class="pas1-symbol">:=</span><span class="pas1-number">0</span><span class="pas1-space"> </span><span class="pas1-reservedword">to</span><span class="pas1-space"> </span><span class="pas1-number">2</span><span class="pas1-space"> </span><span class="pas1-reservedword">do</span><span class="pas1-space"> </span><span class="pas1-reservedword">begin
+</span><span class="pas1-space">  </span><span class="pas1-reservedword">for</span><span class="pas1-space"> j</span><span class="pas1-symbol">:=</span><span class="pas1-number">0</span><span class="pas1-space"> </span><span class="pas1-reservedword">to</span><span class="pas1-space"> </span><span class="pas1-number">2</span><span class="pas1-space"> </span><span class="pas1-reservedword">do</span><span class="pas1-space"> </span><span class="pas1-reservedword">begin
+</span><span class="pas1-space">   </span><span class="pas1-reservedword">for</span><span class="pas1-space"> k</span><span class="pas1-symbol">:=</span><span class="pas1-number">0</span><span class="pas1-space"> </span><span class="pas1-reservedword">to</span><span class="pas1-space"> </span><span class="pas1-number">2</span><span class="pas1-space"> </span><span class="pas1-reservedword">do</span><span class="pas1-space"> </span><span class="pas1-reservedword">begin
+</span><span class="pas1-space">    mc</span><span class="pas1-symbol">:=</span><span class="pas1-identifier">TCercle</span><span class="pas1-symbol">.</span><span class="pas1-identifier">Create</span><span class="pas1-symbol">(</span><span class="pas1-string">'c'</span><span class="pas1-symbol">+</span><span class="pas1-identifier">IntToStr</span><span class="pas1-symbol">(</span><span class="pas1-identifier">depth</span><span class="pas1-symbol">),</span><span class="pas1-identifier">depth</span><span class="pas1-symbol">);
+</span><span class="pas1-space">    mc</span><span class="pas1-symbol">.</span><span class="pas1-identifier">x</span><span class="pas1-symbol">:=</span><span class="pas1-identifier">largeur</span><span class="pas1-symbol">/</span><span class="pas1-number">2</span><span class="pas1-symbol">-</span><span class="pas1-identifier">dl</span><span class="pas1-symbol">*</span><span class="pas1-identifier">j</span><span class="pas1-symbol">;
+</span><span class="pas1-space">    mc</span><span class="pas1-symbol">.</span><span class="pas1-identifier">y</span><span class="pas1-symbol">:=</span><span class="pas1-identifier">largeur</span><span class="pas1-symbol">/</span><span class="pas1-number">2</span><span class="pas1-symbol">-</span><span class="pas1-identifier">dl</span><span class="pas1-symbol">*</span><span class="pas1-identifier">i</span><span class="pas1-symbol">;
+</span><span class="pas1-space">    mc</span><span class="pas1-symbol">.</span><span class="pas1-identifier">z</span><span class="pas1-symbol">:=</span><span class="pas1-identifier">largeur</span><span class="pas1-symbol">/</span><span class="pas1-number">2</span><span class="pas1-symbol">-</span><span class="pas1-identifier">dl</span><span class="pas1-symbol">*</span><span class="pas1-identifier">k</span><span class="pas1-symbol">;
+</span><span class="pas1-space">    cercles</span><span class="pas1-symbol">[</span><span class="pas1-identifier">depth</span><span class="pas1-symbol">]:=</span><span class="pas1-identifier">mc</span><span class="pas1-symbol">;
+</span><span class="pas1-space">    depth</span><span class="pas1-symbol">:=</span><span class="pas1-identifier">depth</span><span class="pas1-symbol">+</span><span class="pas1-number">1</span><span class="pas1-symbol">;
+</span><span class="pas1-space">   </span><span class="pas1-reservedword">end</span><span class="pas1-symbol">;
+</span><span class="pas1-space">  </span><span class="pas1-reservedword">end</span><span class="pas1-symbol">;
+</span><span class="pas1-space"> </span><span class="pas1-reservedword">end</span><span class="pas1-symbol">;
+</span><span class="pas1-reservedword">end</span><span class="pas1-symbol">.
+</span></span>
+</code></pre>
+      <hr>
+      <br>
+      <a href="http://sourceforge.net/projects/flashpascal">
+        <img src="http://sflogo.sourceforge.net/sflogo.php?group_id=236643&type=12" border="0" title="Get FlashPascal at SourceForge.net. Fast, secure and Free Open Source software downloads" alt="Get FlashPascal at SourceForge.net. Fast, secure and Free Open Source software downloads"/></a>
+      <a href="http://sourceforge.net/donate/index.php?group_id=236643">
+        <img src="http://images.sourceforge.net/images/project-support.jpg" width="80" height="30" border="0" alt="Support This Project"/></a>
+      <br>
+      <br>Regards, Paul TOTH & Péter Gábor
+    </div>
+  </body>
+</html>

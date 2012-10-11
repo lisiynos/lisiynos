@@ -1,0 +1,125 @@
+Flash Pascal developement history
+http://flashpascal.sf.net
+
+2008-06-14
+ version 0.1 - a Proof of concept for a SWF targeted Pascal compiler
+
+2008-06-17
+ version 0.2 - this is a fun project :D
+
+ SWFOptimize to concat PUSH operations
+ SWFDictionary to define a string pool
+ FOR loop support
+ ARRAY support
+ some changes in class construction
+
+2008-06-24
+ version 0.2+ - something like a compiler...can compile a basic Calc
+
+2008-07-02
+ version 0.3 - Flash Pascal translation of ZoneFlash.net tutorials (and new keywords)
+
+2008-07-05
+ version 0.3
+
+ new samples, new keywords
+ register usage optimized
+
+2008-07-15
+ version 0.3a
+
+ where is this #$@ bug on the ZoneFlash.pas sample ?!
+
+2008-07-25
+ version 0.4 -  now swapDepths() works, cause MovieClips have a name !
+
+ alias constructor need a Name parameter, "undefined" work until a depth test !
+
+ -> v0.3 (replace Parent by undefined, then call Parent's method - or _root for nil )
+    contructor Create(Parent:MovieClip; Depth:integer) as Parent.createEmptyMovieClip
+ -> v0.4 (remove the Parent parameter and use the provided Name)
+    contructor Create(Parent:MovieClip; Name:string; Depth:integer) as Parent.createEmptyMovieClip
+
+2008-08-06
+ version 0.5
+
+ added ZLIB compression
+ multiple dimension array
+ while statement
+ constant array (beginGradientFill)
+ kylix compatible !
+
+2008-08-22
+ version 0.5 - MineSweeper sample with some new keywords
+
+2008-09-03
+ version 0.5.1
+
+ using pasZLib
+ memory leaks fixed (GetArray, RepeatStatement)
+
+2008-11-26
+ version 0.5.2
+
+ new Deflate unit
+
+2009-07-15
+ version 0.6 - fix SWFFile()...I know my children take me to much time :)
+
+2011-03-17
+ version 0.6+ - ptrg joined to the project
+
+2011-04-04
+ version 0.7
+
+ compiling with Free Pascal requires delpi mode, so it is defined in the source code now
+ new keywords: Trace, XOR, SHL, SHR, SHRI, NOT, BoolToStr
+ new operators (same as in flash) for bit shifting added: >>  >>>  << (signed right shift, unsigned right shift, left shift)
+ the AND, OR, XOR, NOT operators now can handle both: bitwise and boolean
+ in external class references any identifiers are accepted (reserved words too)
+ possible swf errors was planned in uninitialized content of code:string in TCompiler.UnitInterface, now solved
+ file i/o operation exceptions on non-existing or locked files are solved now
+ new style of error message: shows the name of source file and the buggy line of code
+ can write simple html file with embeded flash for testing compiled files in browser (if -w is given on the commandline)
+ the draft of documentation included in the package
+ new classes imported in various interface units (without documentation yet), most of these units are under testing
+ samples rewritten for compiling with the new interface units
+ units are searched first in the directory of current file then in the 'units' subdirectory where FlashPascal.exe is located
+ Delphi and Kylix may not compile because I (ptrg) can't test the sources with them...
+
+2011.05.01
+ version 0.7.+
+ Development environment switched to FreePascal/Lazarus on 32bit Linux system, but targeted O/S is both Linux and Windows
+ - native Unix/Linux support is planned (the main problem is handling of case sensitive unit file names)
+ - windows version already runs on Unix/Linux with WINE from the begining
+
+2011.05.13
+ version 0.7.++
+ Paul TOTH sent me (ptrg) his unreleased source codes to merge with my latest sources
+ - new keywords: in, Length, Ord, Chr, Inc, Dec, Exit, Trunc
+ - new operator: <> (not equal)
+
+****.**.**
+ version 0.8
+ aliases for methods and properties of external classes supported by using the 'AS' keyword
+ some new features became available for the external classes because of the new usage of 'AS' keyword
+ string operations are multibyte compatible (UCS-2/UTF-8) except the # operator which accepts 8bit values only (ASCII codes)
+ source code and position can be displayed in all error messages (TExpression and TUserClass did not this)
+ High() and Low() functions to get array boundaries
+ command line parameters changed, now -w displays warnings, -t creates html test page (this was -w before)
+ compiler exits with different error codes (errorlevel) depending on execution results
+ NIL is compatible with all type of variables to test that they (eg. url parameters) are defined or not
+ new compiler directive $NOTE to display informations stored in the source code
+ empty statements (a single ;) are allowed, eg.: if a=b then ; {if a equals b then nothing to do}
+ fixed empty procedure bug (procedures in classes only)
+ fixed integer and floating point assignments and comparisions
+ mixed new line markers in source files are tolerated by the source parser
+ there's a nice logo on the updated web page
+ some other minor changes
+ and... working Linux executable in the package (set executable flag to it)
+
+(c)2008 by Paul TOTH <tothpaul@free.fr>
+http://tothpaul.free.fr
+
+Portions (c) 2011 by Péter Gábor (ptrg) <ptrg@users.sf.net>
+http://sf.net/users/ptrg

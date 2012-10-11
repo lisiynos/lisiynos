@@ -1,0 +1,530 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Рекурсия и рекуррентные соотношения</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#ve
+rsion=6,0,0,0" width="100"
+                height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
+            <param
+                    name="bgcolor" value="fff">
+            <param name="FlashVars" value="src=../audio/8016574696f623230301------------ffffff">
+            <param name="autoplay"
+                   value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff" width="100"
+                   height="70"
+                   type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=../audio/8016574696f623230301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+
+<div id="content" style="width:80%;">
+<h1> Рекурсивные алгоритмы и их построение</h1>
+
+<p>Помните детское стихотворение-считалку про 10 негритят? Оно может служить эпиграфом к любой работе на тему &quot;Рекурсия&quot;.</p>
+
+<p STYLE="text-indent: 1.27cm;">&laquo;10 негритят пошли купаться в море,</p>
+
+<p STYLE="text-indent: 1.27cm;">10 негритят резвились на просторе,</p>
+
+<p STYLE="text-indent: 1.27cm;">Один из них пропал – и вот вам результат:</p>
+
+<p STYLE="text-indent: 1.27cm;"><BR>
+</p>
+
+<p STYLE="text-indent: 1.27cm;">9
+    негритят пошли купаться в море,</p>
+
+<p STYLE="text-indent: 1.27cm;">9
+    негритят резвились на просторе,</p>
+
+<p STYLE="text-indent: 1.27cm;">Один
+    из них пропал – и вот вам результат:</p>
+
+<p STYLE="text-indent: 1.27cm;">…
+    … … … …</p>
+
+<p STYLE="text-indent: 1.27cm;">1
+    (из) негритят пошли(ел) купаться в море,</p>
+
+<p STYLE="text-indent: 1.27cm;">1
+    (из) негритят резвились(ся)на просторе,</p>
+
+<p STYLE="text-indent: 1.27cm;">Один
+    из них пропал – и вот вам результат:</p>
+
+<p STYLE="text-indent: 1.27cm;"><BR>
+</p>
+
+<p STYLE="text-indent: 1.27cm;">Нет
+    больше негритят!&raquo;</p>
+
+<p STYLE="text-indent: 1.27cm;"><BR>
+</p>
+
+<p>Первые три строчки этого стихотворения повторяются 10 раз с небольшим изменением - число негритят уменьшается с
+    каждым разом на единицу. И только, когда число негритят уменьшилось до нуля, стихотворение
+    заканчивается единственной строчкой &laquo;Нет больше негритят!&raquo;. Напишем процедуру, печатающую это
+    стихотворение.</p>
+
+<pre class="sh_pascal">
+procedure Negr(k: integer); {k - число негритят, параметр процедуры}
+begin
+  if k=0 then {проверка, что число негритят равно нулю}
+    Writeln('Нет больше негритят!') {выход из рекурсии }
+  else begin
+    Writeln(k,' негритят пошли купаться в море,');
+    Writeln(k,' негритят резвились на просторе,');
+    Writeln('Один и них пропал - и вот вам результат:');
+    Negr(k-1); {Вызов процедуры с уменьшенным на 1 параметром}
+  end 
+end;</pre>
+
+<p><BR>
+</p>
+
+<p>Вызов
+    этой процедуры в основной программе
+    будет выглядеть так: Negr</SPAN>(10).
+
+</p>
+
+<p><BR>
+</p>
+
+<p STYLE="text-indent: 1.27cm;">Интересным
+    является применение рекурсии при
+    создании рисунков.
+</p>
+
+<p><BR>
+</p>
+
+<p><I><strong>Пример
+    1</strong></I><strong>.</strong></p>
+
+<p>Рассмотрим
+    простейший рисунок из окружностей
+    разных радиусов.</p>
+<img class="image" src="../s2/draw/ris.png">
+
+<p>Если
+    вглядеться в него внимательно, то можно
+    заметить, что рисунок начинается с
+    центральной окружности самого большого
+    радиуса. Затем осуществляется переход
+    на концы горизонтального диаметра
+    окружности, которые должны играть роль
+    центров двух окружностей меньшего
+    радиуса (примерно в полтора раза). Этот
+    же процесс повторяется и с этими двумя
+    окружностями, и с полученными четырьмя
+    новыми, и так далее до тех пор, пока
+    уменьшающийся радиус окружности не
+    станет меньше первоначального в
+    1,5*1,5*1,5*1,5 раз (если посчитать, то должно
+    выполниться четыре вложенных вызова
+    рекурсивной процедуры).</p>
+
+<p>Рекурсивная
+    процедура, выполняющая такой рисунок,
+    должна иметь в качестве передаваемых
+    параметров координаты центра окружности
+    и величину радиуса.</p>
+
+<p>Программа,
+    при помощи которой будет нарисован этот
+    рисунок, может быть написана так:</p>
+  
+<pre class="sh_pascal">
+uses Graph;
+
+procedure Ris(x,y,r:integer);
+begin
+  If r>=10 then begin
+    Circle(x,y,r); { Рисуем окружность }
+    { Вызываем 2 раза рекурсивно саму себя }
+    Ris(x-r,y,r*2 div 3);
+    Ris(x+r,y,r*2 div 3)
+  end
+end;
+ 
+var GD,GM : integer;
+begin
+  GD := detect;
+  GM := 1;
+  InitGraph(GD,GM,'');
+  Ris(320,240,100); { Рисуем по центру экрана, самая большая окружность - 100 пикселей }
+  Readln;
+  CloseGraph;
+end.
+</pre>
+
+<p>Реализация на Delphi с сохранением в файл.</p>
+
+<pre class="sh_pascal">
+unit MainUnit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  Vcl.ExtCtrls, PngImage;
+
+type
+  TDrawForm = class(TForm)
+    Image: TImage;
+    procedure FormCreate(Sender: TObject);
+  private
+    procedure SaveToPNG(FileName: string);
+    procedure Circle(x, y, r: integer);
+    procedure Ris(x, y, r: integer);
+  public
+  end;
+
+var
+  DrawForm: TDrawForm;
+
+implementation
+
+{$R *.dfm}
+
+procedure TDrawForm.FormCreate(Sender: TObject);
+begin
+  { Не закрашивать фигуру }
+  Image.Canvas.Brush.Style := bsClear;
+  { Подстройка ширины и высоты картинки }
+  Image.Width := 559;
+  Image.Height := 220;
+  Image.Picture.Bitmap.Width := Image.Width;
+  Image.Picture.Bitmap.Height := Image.Height;
+  { Вызов рекурсивной процедуры }
+  Ris(Image.Width div 2, Image.Height div 2, 100);
+  { Сохранение в формате .png }
+  SaveToPNG('ris.png');
+end;
+
+{ Сохранение в формате .png: FileName - имя файла }
+procedure TDrawForm.SaveToPNG(FileName: string);
+var
+  png: TPngImage;
+begin
+  png := TPngImage.Create;
+  png.Assign(Image.Picture.Bitmap);
+  png.SaveToFile(FileName);
+  png.Free;
+end;
+
+{ Окружность с центром: x, y - центр окружности, r - радиус }
+procedure TDrawForm.Circle(x, y, r: integer);
+begin
+  Image.Canvas.Ellipse(x - r, y - r, x + r, y + r);
+end;
+
+{ Рекурсивная процедура }
+procedure TDrawForm.Ris(x, y, r: integer);
+begin
+  if r >= 15 then
+  begin
+    Circle(x, y, r);
+    Ris(x - r, y, r * 2 div 3);
+    Ris(x + r, y, r * 2 div 3)
+  end;
+end;
+
+end.
+</pre>
+
+<p><I><strong>Пример</strong></I><strong><I>
+    2.</I></SPAN></strong></p>
+
+<p>На
+    входном потоке находится слово
+    (последовательность литер), заканчивающаяся
+    пробелом. Написать программу, которая
+    позволит напечатать это слово &quot;задом
+    наперед&quot;, т.е. выписывая буквы слова
+    с конца.</p>
+
+<p>В
+    этом примере мы опишем процедуру, у
+    которой не будет параметров, т.к. при
+    каждом ее вызове будет вводиться одна
+    литера, которая будет сравниваться с
+    пробелом. Сама же программа будет
+    состоять только из вызова этой процедуры.</p>
+
+<p><BR>
+</p>
+
+<p><strong>Program</strong></SPAN>
+    REVERSE;</SPAN></p>
+
+<p><strong>Procedure</strong></SPAN>
+    REV;</SPAN></p>
+
+<p><strong>Var</strong></SPAN>
+    c:char;</SPAN></p>
+
+<p STYLE="text-indent: 1.35cm;"><SPAN LANG="en-
+US"><strong>Begin</strong></SPAN>
+    read(c);</SPAN></p>
+
+<p STYLE="text-indent: 2.57cm;"><strong>If</strong></SPAN>
+    c&lt;&gt;' '</SPAN></p>
+
+<p STYLE="text-indent: 2.57cm;"><strong>Then
+    begin</strong></SPAN>
+    REV; write(c) </SPAN><strong>end</strong></SPAN></p>
+
+<p STYLE="text-indent: 1.35cm;"><strong>End</strong></SPAN>;</p>
+
+<p><strong>BEGIN</strong></SPAN>
+    REV</SPAN></p>
+
+<p><strong>END</strong></SPAN>.</p>
+
+<p><BR>
+</p>
+
+<p style="text-indent:1.25cm;">
+    Теперь переходим к более сложным
+    задачам.</p>
+
+<p><BR>
+</p>
+
+<p><I>Пример
+    3.</I></p>
+
+<p style="text-indent:1.25cm;">
+    <strong>Фракталами</strong>
+    называются множества, части которых
+    являются повторением образов самих
+    множеств. Изображения фракталов вызывают
+    обычно у всех большой интерес.
+</p>
+
+<p style="text-indent:1.25cm;">
+    Рассмотрим процесс сгибания
+    бумажной полоски: если взять полоску
+    бумаги, согнуть ее пополам К раз и
+    развернуть полоску так, чтобы углы на
+    сгибах стали равны 90°,
+    то, посмотрев на торец полоски, можно
+    увидеть ломаную, которая называется
+    &quot;драконовой ломаной К-го порядка&quot;,
+    где K</SPAN>-количество
+    сгибов. Схема этого процесса изображена
+    ниже.</p>
+
+<p STYLE="text-indent: 1.27cm;">
+    <BR>
+</p>
+
+<P LANG="" STYLE="text-indent: 1.27cm;; color: #0000ff">
+<SPAN ID="Врезка1" DIR="LTR" STYLE="float: left; width: 10.17cm; height: 2.28cm; 
+border: none; padding: 0cm; ">
+	<p ALIGN=CENTER><IMG SRC="../s2/img/2.2_html_5dab8119.png" NAME="Объект2"
+                         ALIGN=BOTTOM WIDTH=381
+                         HEIGHT=86></p>
+</SPAN>
+    <IMG SRC="../s2/img/2.2_html_6f56b3c3.png" ALIGN=LEFT HSPACE=12>
+    <IMG SRC="../s2/img/2.2_html_66fd6fc8.png" ALIGN=LEFT HSPACE=12>
+    <IMG SRC="../s2/img/2.2_html_66fd6fc8.png" ALIGN=LEFT HSPACE=12>
+    <IMG SRC="../s2/img/2.2_html_66fd6fc8.png" ALIGN=LEFT HSPACE=12><BR>
+</p>
+<p STYLE="text-indent: 1.27cm;">
+    <BR>
+</p>
+
+<P LANG="" STYLE="text-indent: 1.27cm;">
+    <IMG SRC="../s2/img/2.2_html_m25cbe199.png" NAME="Объект3" ALIGN=LEFT HSPACE=12
+         WIDTH=48 HEIGHT=28><BR
+        CLEAR=LEFT><BR>
+</p>
+
+<p STYLE="text-indent: 1.27cm;">
+
+
+</p>
+
+<p STYLE="text-indent: 1.27cm;">
+    <BR>
+</p>
+
+<p STYLE="text-indent: 1.27cm;">
+    <BR>
+</p>
+
+<p><IMG SRC="../s2/img/2.2_html_7c967326.png" NAME="Объект4" ALIGN=LEFT
+        HSPACE=12 WIDTH=110
+        HEIGHT=169>Опишем
+    способ создания &laquo;драконовой&raquo;
+    ломаной.</p>
+
+<p STYLE="text-indent: 1.27cm;">
+    <BR>
+</p>
+
+<p STYLE="text-indent: 1.27cm;">
+    На ломаной нулевого порядка, как
+    на гипотенузе, строим прямой угол, на
+    полученных сторонах прямого угла строим
+    тоже прямые углы, но один развернут в
+    правую сторону, а другой - в левую. Данный
+    процесс повторяется К раз.</p>
+
+<p><BR>
+</p>
+
+<p style="text-indent:1.25cm;">
+    Напишем соответствующую программу,
+
+    которая по заданному числу К рисует
+    драконову ломаную К-го порядка.</p>
+
+<p style="text-indent:1.25cm;">
+    <BR>
+</p>
+
+<p style="text-indent:1.25cm;">
+    <strong>Program</strong></SPAN>
+    DRACON;</SPAN></p>
+
+<p style="text-indent:1.25cm;">
+    <strong>Uses</strong></SPAN>
+    Graph;</SPAN></p>
+
+<p style="text-indent:1.25cm;">
+    <strong>Var</strong></SPAN>
+    Gd,Gm,k:Integer;</SPAN></p>
+
+<p style="text-indent:1.25cm;">
+    <strong>Procedure</strong></SPAN>
+    st (x1, y1, x2, y2, k:Integer);</SPAN></p>
+
+<p STYLE="margin-left: 1.27cm; text-indent: 1.27cm;">
+    <strong>Var</strong></SPAN>
+    xn,yn:Integer;</SPAN></p>
+
+<p STYLE="text-indent: 1.27cm;">
+    <strong>Beg</strong></SPAN><SPAN LANG="en-
+US"><strong>in</strong></SPAN></p>
+
+<p STYLE="margin-left: 1.27cm; text-indent: 1.27cm;">
+    <strong>If</strong></SPAN>
+    k &gt; 0 </SPAN>
+</p>
+
+<P LANG="en-US" STYLE="margin-left: 1.27cm; text-indent: 1.27cm;">
+    <strong>then begin</strong></p>
+
+<p STYLE="margin-left: 3.25cm; text-indent: 1.25cm;">
+    xn:=(x1+x2)</SPAN><SPAN LANG="en-
+US"><strong>div</strong></SPAN>
+    2 + (y2-y1)</SPAN><strong>div</strong></SPAN><SPAN LANG="en-
+US">
+2;</SPAN></p>
+
+<p STYLE="margin-left: 3.25cm; text-indent: 1.25cm;">
+    yn:=(y1+y2)</SPAN><SPAN LANG="en-
+US"><strong>div</strong></SPAN>
+    2 - (x2-x1)</SPAN><strong>div</strong></SPAN><SPAN LANG="en-
+US">
+2;</SPAN></p>
+
+<P LANG="en-US" STYLE="margin-left: 3.25cm; text-indent: 1.25cm;">
+    st(x1,y1,xn,yn,k-1);</p>
+
+<P LANG="en-US" STYLE="margin-left: 3.25cm; text-indent: 1.25cm;">
+    st(x2,y2,xn,yn,k-1);</p>
+
+<p STYLE="margin-left: 1.98cm; text-indent: 1.27cm;">
+    <strong>end</strong></SPAN></p>
+
+<p STYLE="margin-left: 1.27cm; text-indent: 1.27cm;">
+    <strong>else</strong></SPAN>
+    Line(x1,y1,x2,y2);</SPAN></p>
+
+<p STYLE="text-indent: 1.27cm;">
+    <strong>End</strong></SPAN>;</SPAN></p>
+
+<P LANG="en-US" STYLE="text-indent: 1.27cm;">
+    <strong>Begin</strong></p>
+
+<P LANG="en-US" STYLE="margin-left: 1.27cm; text-indent: 1.27cm;">
+    Gd:=Detect; Gm:=1;</p>
+
+<P LANG="en-US" STYLE="margin-left: 1.27cm; text-indent: 1.27cm;">
+    InitGraph(Gd,Gm,'D:\BP\BGI');</p>
+
+<p STYLE="margin-left: 1.27cm; text-indent: 1.27cm;">
+    WriteLn ('Введите номер уровня ');</p>
+
+<P LANG="en-US" STYLE="margin-left: 1.27cm; text-indent: 1.27cm;">
+    Readln( k);</p>
+
+<P LANG="en-US" STYLE="margin-left: 1.27cm; text-indent: 1.27cm;">
+    st(200, 300, 500, 300, k);</p>
+
+<P LANG="en-US" STYLE="margin-left: 1.27cm; text-indent: 1.27cm;">
+    Readln;</p>
+
+<p STYLE="margin-left: 1.27cm; text-indent: 1.27cm;">
+    CloseGraph</SPAN>;</p>
+
+<p STYLE="text-indent: 1.27cm;">
+    <strong>End</strong></SPAN>.</p>
+
+<p STYLE="text-indent: 1.27cm;">
+    <BR>
+</p>
+
+<p STYLE="text-indent: 1.27cm;">
+    Если с помощью этой программы
+    построить ломаную дракона 14-го порядка,
+    то мы получим образ множества, называемого
+    фракталом Хартера-Хейтуэя, рисунок
+    которого приведен ниже.</p>
+
+<p><BR>
+</p>
+<IMG class="image" SRC="../s2/img/2.2_html_m14572a1e.png" NAME="Графический 
+объект1" WIDTH=406 HEIGHT=263
+     BORDER=0>
+
+<h2>Литература</h2>
+
+<OL STYLE="margin-left: 1.27cm">
+    <LI><p><strong>Павлова
+        М.В.</strong>,
+        <strong>Паньгина
+            Н.Н. Примеры и задачи на тему &laquo;Рекурсия&raquo;.
+            – &laquo;Компьютерные инструменты в
+            образовании&raquo;, 2001</strong></p>
+</OL>
+</div>
+
+</body>
+
+</html>

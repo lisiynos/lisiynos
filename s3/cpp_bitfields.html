@@ -1,0 +1,64 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Битовые поля на С/C++</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <script type="text/javascript" src="../syntax/load.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version
+=6,0,0,0" width="100" height="50">
+            <param name="movie"
+                   value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param
+                    name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param
+                    name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70" type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+<div id="content">
+
+    <h1>Битовые поля на С/C++</h1>
+
+    <h2><strong>Работа с отдельными битами числа</strong></h2>
+
+    Побитные операции:
+
+    <ul>
+        <li>& - побитное И</li>
+        <li>| - побитное ИЛИ</li>
+        <li>~ - побитное НЕ</li>
+    </ul>
+
+<pre class="sh_cpp">
+struct BF { // BitField
+  unsigned int data; // Данные
+  int get(int i){ // Получить значение i-ого бита 
+    // Обьединяем с битовой маской, в которой установлен только нужный бит 
+    // И потом сдвигаем результат на bit разрядов вправо
+    return (data & (1 &lt;&lt; i)) &gt;&gt; i;
+  };
+  void set(int i, int value){ // Установить значение value в бит с номером i
+    // Очищаем нужный бит и объединяем его по принципу ИЛИ с числом в котором все нули, а i-ый бит - value
+    data = (data & ~(1 &lt;&lt; i)) | (value &lt;&lt; i);
+  };
+};
+</pre>
+
+</div>
+</body>
+
+</html>

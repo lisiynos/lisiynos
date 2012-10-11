@@ -1,0 +1,7 @@
+_ReSharper.cpp
+Debug
+ipch
+*.sdf
+*.suo
+*.user
+*.filters

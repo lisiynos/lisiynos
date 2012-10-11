@@ -1,0 +1,85 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Построение выпуклой оболочки</title>
+    <link rel="stylesheet" type="text/css" href="../../style/style.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body>
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swfla
+sh.cab#version=6,0,0,0" width="100" height="50">
+            <param name="movie"
+                   value="../../audio/a_smsqulh3n.swf">
+            <param name="bgcolor"
+                   value="fff">
+            <param name="FlashVars"
+                   value="src=../audio/8016574696f643330301------------ffffff">
+            <param
+                    name="autoplay" value="false">
+            <embed src="../../audio/a_smsqulh3n.swf"
+                   bgcolor="fff" width="100" height="70" type="application/x-shockwave-
+flash" pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=../audio/8016574696f643330301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+
+<div id="content" style="width:80%;">
+    <h1>4.3. Построение выпуклой оболочки</h1>
+
+    <p>Выпуклой
+        оболочкой множества точек на плоскости является выпуклый
+        многоугольник с
+        вершинами из точек заданного множества. Существует несколько
+        алгоритмов
+        построения выпуклой оболочки. Самыми простыми для реализации
+        являются алгоритмы
+        <strong>Джарвиса</strong> и <strong>Грэхема</strong>.</p>
+
+    <p>Идея алгоритма
+        <strong>Джарвиса</strong> построения выпуклой оболочки (его называют еще алгоритмом
+        «заворачивания подарка») заключается в следующем:</p>
+
+    <ol>
+        <li>Ищется точка с минимальной координатой по оси $OX$.
+            От нее задается первоначальное вертикальное направление.
+        </li>
+        <li>По очереди, перебирая все остальные точки, ищется такая, чтобы вектор с концом в этой точке, а  началом в
+            исходной образовал с первоначальным вектором минимальный угол. Найденная таким образом точка будет точкой из
+            выпуклой оболочки.
+        </li>
+        <li>Найденная точка принимается за исходную, новый построенный вектор задает исходное направление и из
+            оставшихся
+            $N-2$ точек ищется следующая точка.
+        </li>
+        <li>Процесс продолжается до первоначальной выбранной точки.</li>
+    </ol>
+    <p>Идея алгоритма
+        <strong>Грэхема</strong> построения выпуклой оболочки  заключается в следующем:</p>
+
+    <ol>
+        <li>Найти левую верхнюю точку. Запомнить ее.</li>
+        <li>Отсортировать все остальные точки по возрастанию угла в полярной системе координат с центром в запомненной
+            точке.
+        </li>
+        <li>По очереди перебирая все отсортированные точки, исключать те, которые будут содержаться внутри выпуклой
+            оболочки. Оставшиеся при таком отборе точки и  составят выпуклую оболочку.
+        </li>
+    </ol>
+    <p><strong>Реализация на языке программирования Pascal.</strong></p>
+
+    <p>&nbsp;</p>
+</div>
+
+</body>
+
+</html>

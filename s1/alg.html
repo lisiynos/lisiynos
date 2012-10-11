@@ -1,0 +1,94 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Оценка сложности алгоритмов</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_java.js"></script>
+    <script type="text/javascript" src="../syntax/sh_python.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_basic.js"></script>
+    <script type="text/javascript" src="../syntax/sh_alg.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    <script src="../Scripts/swfobject_modified.js" type="text/javascript"></script>
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100"
+                height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70" type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+</div>
+
+<div id="content" style="width:80%;">
+
+    <h1>Оценка сложности алгоритмов</h1>
+
+    <p> Существует несколько способов измерения сложности алгоритма. Программисты обычно сосредотачивают внимание на
+        <strong>скорости</strong> алгоритма, но не менее важны и другие показатели – требования к <strong>объёму
+            памяти</strong>, например. Использование быстрого алгоритма не приведёт к ожидаемым результатам, если для
+        его работы понадобится больше памяти, чем есть у компьютера. </p>
+
+    <p> При сравнении различных алгоритмов важно знать, как их сложность зависит от объёма входных данных.  </p>
+
+    <p>$O(1)$ - время выполнения алгоритма константа (не зависит от количества элементов во входном множестве).</p>
+
+    <p>$O(n)$ - линейная сложность. </p>
+
+    <p>Пример: поиск минимального элемента в массиве (цикл по всем элементам массива).</p>
+
+    <p>$O(n^2)$ - квадратичная сложность. Например, сортировки &quot;пузырьком&quot;, вставками и т.д.</p>
+
+    <p>Пример: поиск двух точек на плоскости с максимальным расстоянием между ними.</p>
+
+    <p>$O(n^3)$ - кубическая сложность. </p>
+
+    <p>Пример: поиск треугольника максимальной площади с вершинами в точках на плоскости (перебор вершин тройным
+        циклом). </p>
+
+    <p>Оценка $O(n)$ ассимптотическая (при $n$ стремящемся к бесконечности).</p>
+
+    <p>$O(\ln{n})$ - <strong>Бинарный поиск</strong> - логарифмическая сложность. </p>
+
+    <p>$O(n\log{n})$ - быстрая сортировка Хоара (рус) - QuickSort, HeapSort, MergeSort.</p>
+
+    <p>При оценке сложности важна только самая старшая степень. Например:</p>
+
+    <p>$O(n^3+n^2+4n)=O(n^3)$</p>
+
+    <p>Константа так же отбрасывается, так как нам важно лишь во сколько раз возрастает время выполнения программы при
+        увеличении размера входных данных.</p>
+
+    <p>&nbsp;</p>
+
+    <p>&nbsp;</p>
+
+    <p>&nbsp;</p>
+
+    <p style='margin-bottom:6.0pt;text-align:justify;text-indent:
+20pt'>&nbsp;  </p>
+</div>
+</body>
+
+</html>

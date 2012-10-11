@@ -1,0 +1,7 @@
+*.filters
+*.suo
+*.user
+*.sdf
+Debug
+ipch
+*.opensdf

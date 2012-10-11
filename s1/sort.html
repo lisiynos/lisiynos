@@ -1,0 +1,718 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Сортировка</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_python.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version
+=6,0,0,0" width="100" height="50">
+            <param name="movie"
+                   value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param
+                    name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param
+                    name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70" type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+<div id="content" style="width:80%;">
+<h1>Сортировки</h1>
+
+<p>Алгоритмы сортировки - это методы для упорядочения элементов массива в каком-либо порядке. </p>
+
+<p> Алгоритмы сортировки оцениваются по скорости выполнения и количествую используемой памяти.</p>
+
+<p><strong>Время</strong> (скорость выполнения) - основной параметр, он измеряется относительно количества элементов
+    исходного массива. Например: $O(n)$ - время выполнения растёт пропорционально количеству элементов, $O(n^2)$ -
+    пропорционально квадрату количества элементов.</p>
+
+<p>При описании всех алгоритмов: <em>N</em> или $n$ - количество элементов в массиве. </p>
+
+<h2>Квадратичные сортировки, сортировка &quot;Пузырьком&quot;</h2>
+
+<p>Это самая простая сортировка, её следует применять когда у вас немного элементов (до десятков тысяч). Её сложность
+    $O(n^2)$, т.е. количество операций растёт как квадрат от количества элементов.</p>
+
+<p><strong>Шаги алгоритма:</strong></p>
+<ol>
+    <li>Считываем исходный массив в память.</li>
+    <li>Пока происходят изменения в массиве: сравниваем каждые два соседних элемента, и если они не стоят не в том
+        порядке, меняем их местами.
+    </li>
+    <li>Теперь массив отсортирован, выводим его.</li>
+</ol>
+<pre class="sh_pascal">
+{$APPTYPE CONSOLE} 
+
+var
+  N : Integer; { Количество элементов в массиве }
+  A : array [1..5000] of Integer; { Сортируемый массив }
+  i : Integer; { Переменная цикла }
+  temp : Integer; { Переменная для обмена местами двух элементов в массиве }
+  Changes : Boolean; { Есть ли изменения? }
+begin
+  { Ввод исходного массива из файла }
+  Reset(Input,'bubble.in');
+  Read(N); { Читаем количество элементов в массиве } 
+  for i:=1 to N do Read(A[i]); { Читаем сам массив }
+  { Сортировка }
+  repeat
+    Changes := false; { Пока изменений нет :) }
+    for i:=1 to N-1 do { Пробегаем по массиву сравнивая соседние элементы }
+      if A[i]>A[i+1] then begin { Если больший элемент слева, а должен быть справа }
+        temp := A[i]; { Меняем элементы местами при помощи временной переменной temp }
+        A[i] := A[i+1];
+        A[i+1] := temp;
+        Changes := true; { Изменения произошли! }
+      end;
+  until not Changes; { Заканчиваем когда нет изменений (значит, все элементы уже по-порядку) }
+  { Вывод отсортированного массива в файл }
+  Rewrite(Output,'bubble.out');
+  for i:=1 to N-1 do Write(A[i],' ');
+  Writeln(A[N])
+end.
+</pre>
+
+<p><strong>Модификация с максимумами:</strong></p>
+
+<p>В этой сортировке мы пробегаем массив <em>N</em> раз, каждый раз перемещая в конец массива самый большой при
+    сортировке по возрастанию (или самый маленький при сортировке по убыванию) элемент.</p>
+
+<p><strong>Шаги алгоритма:</strong></p>
+<ol>
+    <li>Считываем исходный массив в память.</li>
+    <li>Переносим в <em>N</em>-ый элемент максимум среди элементов 1..<em>N</em>.</li>
+    <li>Переносим в <em>N</em>-1-ый элемент максимум среди 1..<em>N</em>-1.</li>
+    <li>и так далее (делаем это <em>N</em> раз).</li>
+    <li>Теперь массив отсортирован, выводим его.</li>
+</ol>
+<pre class="sh_pascal">
+{$APPTYPE CONSOLE}
+
+var
+  N : Integer; { Количество элементов в массиве }
+  A : array [1..5000] of Integer; { Сортируемый массив }
+  i,j : Integer; { Переменные цикла }
+  temp : Integer; { Переменная для обмена местами двух элементов в массиве }
+begin
+  { Ввод исходного массива из файла }
+   ...
+  { Сортировка }
+  for i:=N downto 1 do { A[i] должно быть больше чем все A[j] слева от него }
+    for j:=1 to i-1 do { Проверяем все A[j] }
+      if A[j] > A[i] then begin {  Если какое-то A[j] больше чем A[i], то меняем их местами }
+        temp := A[i]; { Меняем элементы местами при помощи временной переменной temp }
+        A[i] := A[j];
+        A[j] := temp;
+      end;
+  { Вывод отсортированного массива в файл }
+    ...
+end.</pre>
+
+<p>Другой вариант, легче для запоминания:</p>
+
+<pre class="sh_pascal">
+  { Сортировка }  
+  for i := 1 to N-1 do
+    for j := i+1 to N do
+      if A[j] < A[i] then begin
+         temp:=A[i]; { Меняем элементы A[i] и A[j] местами }
+         A[i]:=A[j]; 
+         A[j]:=temp;
+       end;</pre>
+
+<p>Ну или можно вообще не запоминать как меняются индексы и писать i от 1 до <em>N</em> и j от 1 до <em>N</em>.</p>
+
+<p>Менять местами элементы можно без использования временной переменной, сложениями/вычитаниями (и - исходное значение):
+    <br>$A_j'=A_i+A_j$;
+    <br>$A_i'=A_j'-A_i=A_i+A_j-A_i=A_j$;
+    <br>$A_j''=A_j'-A_i'=A_i+A_j-A_j=A_i$
+</p>
+<pre class="sh_pascal">
+   A[j] := A[i] + A[j]; { A[j] := A[i]_и + A[j]_и }
+   A[i] := A[j] - A[i]; { A[i] := A[i]_и + A[j]_и - A[i]_и = A[j]_и }
+   A[j] := A[j] - A[i]; { A[j] := A[i]_и + A[j]_и - A[j]_и = A[i]_и }
+</pre>
+
+<p>Или при помощи операции XOR (используя $x \oplus x =0$):
+    <br>$A_i'=A_i \oplus A_j$;
+    <br>$A_j'=A_i' \oplus A_j = A_i \oplus A_j \oplus A_j = A_i$;
+    <br>$A_i''=A_i' \oplus A_j'= A_i \oplus A_j \oplus A_i = A_j$
+</p>
+
+<pre class="sh_pascal">
+   A[i] := A[i] xor A[j];
+   A[j] := A[i] xor A[j];
+   A[i] := A[i] xor A[j];
+</pre>
+<h2>Сортировка подсчётом</h2>
+
+<p>Когда диапазон чисел которые нужно отсортировать невелик по сравнению с их количеством, проще (и быстрее всего)
+    посчитать количество элементов каждого вида прямо при чтении входного файла и вывести их &quot;по видам&quot;.</p>
+
+<pre class="sh_pascal">
+{$APPTYPE CONSOLE}
+
+var
+  N : Integer; { Количество элементов в массиве }
+  Ai : Integer; { Элементы сортируемого массива }
+  P : array [1..1000] of Integer; { P[i] - количество элементов со значением i }
+  i : Integer; { Переменная цикла }
+begin
+  { Ввод исходного массива из файла }
+  Reset(Input,'sort.in');
+  Read(N); { Читаем количество элементов в массиве } 
+  for i:=1 to N do begin 
+    Read(Ai); { Читаем элементы массива }
+    { Считаем количество элементов каждого вида прямо при чтении файла }
+    P[Ai] := P[Ai] + 1; { Увеличиваем P[Ai] - количество элементов равных Ai }
+  end;
+  { Вывод отсортированного массива в файл }
+  Rewrite(Output,'sort.out');
+  for Ai:=1 to 1000 do { Пробегаем по всем возможным значениям }
+    for i:=1 to P[Ai] do { Выводим P[Ai] элементов Ai }
+      Write(Ai,' ');
+end.</pre>
+
+<div class="lesson">Сессия 3</div>
+<h2>"Быстрая сортировка" QuickSort</h2>
+
+<p>Один из быстрых известных универсальных алгоритмов сортировки массивов (в среднем $O(n \log n)$ обменов при
+    упорядочении $n$ элементов).</p>
+
+<p>Описание алгоритма:</p>
+<ul>
+    <li>
+        выбрать элемент, называемый опорным.
+    </li>
+    <li> сравнить все остальные элементы с опорным, на основании сравнения разбить множество на три — «меньшие
+        опорного»,
+        «равные» и «большие», расположить их в порядке меньшие-равные-большие.
+    </li>
+    <li> повторить рекурсивно для «меньших» и «больших».</li>
+</ul>
+<p><img src="sort/quicksort.gif" width="280" height="214" alt="Quicksort"></p>
+
+<pre class="sh_pascal">
+var A : array [1..1000000] of Integer; { Сортируемый массив }  
+
+procedure QuickSort( left,right : Integer );
+var i,j : Integer; m,temp: Integer;
+begin
+  i := left;
+  j := right;
+  m := A[(left + right) div 2]; { Медиана }
+  m := A[random(right-left+1) + left]; { Рандомизированный вариант QuickSort }
+  { При выборе разделяющего элемента случайным образом практически невозможно попасть на худший случай }
+  repeat
+    while A[i] < m do inc(i);
+    while m < A[j] do dec(j);
+    if i<=j then begin 
+      { Меняем A[i] и A[j] местами }
+      temp := A[i]; 
+      A[i] := A[j];
+      A[j] := temp;
+      inc(i); dec(j);
+    end;
+  until i>j;
+  if left < j then QuickSort(left,j); { Сортировка левого куска }
+  if i < right then QuickSort(i,right); { Сортировка правого куска }
+end;
+
+var
+  N : Integer; { Количество элементов в массиве }
+  i : Integer; { Переменная цикла }
+begin
+  { Ввод исходного массива из файла }
+  Reset(Input,'bubble.in');
+  Read(N); { Читаем количество элементов в массиве }
+  for i:=1 to N do Read(A[i]); { Читаем сам массив }
+  { Сортировка элементов с 1 по N }
+  QuickSort(1, N);
+  { Вывод отсортированного массива в файл }
+  Rewrite(Output,'bubble.out');
+  for i:=1 to N-1 do Write(A[i],' ');
+  Writeln(A[N]);
+end.</pre>
+
+<p>Реализация на C/C++</p>
+
+<pre class="sh_cpp">
+#include &lt;stdio.h&gt;
+#include &lt;iostream&gt;
+
+using namespace std;
+
+// Сортируемый массив
+int A[1000000];
+
+// Случайное целое число в заданном диапазоне
+int rand(int low, int high){
+  return rand() % (high - low + 1) + low;
+}
+
+// Поменять местами 2 элемента массива i-ый и j-ый
+void swap(int i, int j){
+  int temp = A[i];
+  A[i] = A[j];
+  A[j] = temp;
+}
+
+// Быстрая сортировка от элемента left до элемента right
+void qsort(int left, int right){
+  // Массивы из 1-ого элемента сортировать незачем
+  if(left &gt;= right) return;
+  int l = left, r = right; // Левая и правая границы
+  // Выбираем разделяющий элемент - может быть любым, 
+  // но выбор случайного элемента устойчив к худшим случаям
+  int m = A[rand(left,right)]; 
+  do {
+    while(A[l] &lt; m) l++; // Двигаем левую границу
+    while(A[r] &gt; m) r--; // Двигаем правую границу
+    if(l &lt;= r){ swap(l,r); l++; r--; } // Меняем элементы местами	
+  } while (l &lt;= r);	
+  qsort(left,r); // Сортируем левую половину массива
+  qsort(l,right); // Сортируем правую половину массива
+}
+
+int main(){
+  freopen("qsort.in","r",stdin);
+  freopen("qsort.out","w",stdout);
+  // Ввод исходных данных 
+  int N;
+  cin &gt;&gt; N;
+  for(int i=0;i&lt;N;i++) cin &gt;&gt; A[i];
+  // Сортировка
+  qsort(0,N-1);
+  // Вывод отсортированного массива
+  for(int i=0;i&ltN;i++) cout &lt;&lt; A[i] &lt;&lt; " ";
+  // Код возврата
+  return 0;
+}
+</pre>
+
+<h2>Сортировка слиянием - MergeSort</h2>
+
+<p>Алгоритм сортировки, который упорядочивает списки (или другие структуры данных, доступ к элементам которых можно
+    получать только последовательно) в определённом порядке. Эта сортировка — хороший пример использования принципа
+    «разделяй и властвуй». Сначала задача разбивается на несколько подзадач меньшего размера. Затем эти задачи решаются
+    с
+    помощью рекурсивного вызова или непосредственно, если их размер достаточно мал. Наконец, их решения комбинируются, и
+    получается решение исходной задачи.</p>
+
+<p>3 этапа алгоритма:
+<ol>
+    <li>Сортируемый массив разбивается на две части примерно одинакового размера;</li>
+    <li>Каждая из получившихся частей сортируется отдельно, например — тем же самым алгоритмом;</li>
+    <li>Два упорядоченных массива половинного размера соединяются в один.</li>
+</ol>
+</p>
+
+<pre class="sh_cpp">
+#include &ltassert.h&gt
+#include &ltstdlib.h&gt
+#include &ltiostream&gt
+
+using namespace std;
+
+const int N = 80;
+
+int A[N];
+int T[N]; // Временный массив - буфер
+
+void MergeSort( int left, int right ){
+	// Если в массиве один элемент - сортировать нечего =&gt сразу выходим
+	if(left &gt= right) return;
+
+	// Делим массив на 2 равные половинки
+	int m = (left + right) / 2; // Среднее арифметическое 
+
+	MergeSort(left,m); // Сортируем левую половину
+	MergeSort(m+1,right); // Сортируем правую половину
+
+	// Объединяем результаты
+	int l = left, r = m+1;
+	for(int i=left;i&lt=right;i++){
+		if(l &gt m) // Если левая половинка кончилась, то берём только из правой
+			T[i] = A[r++];
+		else if(r &gt right) // Если правая половинка кончилась, то берём только из правой
+			T[i] = A[l++];
+		else if(A[l] &lt A[r]) // Если обе не кончились, то берём минимальный элемент
+			T[i] = A[l++];
+		else 
+			T[i] = A[r++];
+	}
+
+	// Копируем обратно из временно буфера в A
+	for(int i=left;i&lt=right;i++)
+		A[i] = T[i];
+
+	// Проверка, что всё верно отсортировано
+	for(int i=left;i&lt=right-1;i++)
+		assert( A[i] &lt= A[i+1] );
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	// Заполняем случайным числами массив A
+	for(int i=0;i&ltN;i++) A[i] = rand() % 1000;
+
+	MergeSort(0,N-1);
+
+	// Вывод отсортированного массива
+	for(int i=0;i&ltN;i++) cout &lt&lt A[i] &lt&lt " ";
+	cout &lt&lt endl;
+
+	return 0;
+}
+</pre>
+
+
+<pre class="sh_cpp">
+// a - сортируемый массив, его левая граница lb, правая граница ub
+template&lt;class T&gt;
+void mergeSort(T a[], long lb, long ub) { 
+  long split;                   // индекс, по которому делим массив
+
+  if (lb < ub) {                // если есть более 1 элемента
+
+    split = (lb + ub)/2; // Центр обрабатываемого куска массива 
+
+    mergeSort(a, lb, split);       // сортировать левую половину 
+    mergeSort(a, split+1, last);// сортировать правую половину 
+    merge(a, lb, split, ub);    // слить результаты в общий массив
+  }
+}
+
+template&lt;class T&gt;
+void merge(T a[], long lb, long split, long ub) {
+// Слияние упорядоченных частей массива в буфер temp
+// с дальнейшим переносом содержимого temp в a[lb]...a[ub]
+
+  // текущая позиция чтения из первой последовательности a[lb]...a[split]
+  long pos1=lb;
+
+  // текущая позиция чтения из второй последовательности a[split+1]...a[ub]
+  long pos2=split+1;
+
+  // текущая позиция записи в temp
+  long pos3=0;  
+
+  T *temp = new T[ub-lb+1];
+
+  // идет слияние, пока есть хоть один элемент в каждой последовательности
+  while (pos1 <= split && pos2 <= ub) {
+    if (a[pos1] < a[pos2])
+      temp[pos3++] = a[pos1++];
+    else
+      temp[pos3++] = a[pos2++];
+  }
+
+  // одна последовательность закончилась - 
+  // копировать остаток другой в конец буфера 
+  while (pos2 <= ub)   // пока вторая последовательность непуста 
+    temp[pos3++] = a[pos2++];
+  while (pos1 <= split)  // пока первая последовательность непуста
+    temp[pos3++] = a[pos1++];
+
+  // скопировать буфер temp в a[lb]...a[ub]
+  for (pos3 = 0; pos3 < ub-lb+1; pos3++)
+    a[lb+pos3] = temp[pos3];
+
+  delete temp[ub-lb+1];
+}
+</pre>
+
+<h2>Реализация на Delphi</h2>
+
+<pre class="sh_pascal">
+var 
+  N : integer; { Количество элементов }
+  A, T: array [1 .. 1000000] of integer; { Сортируемый массив }
+  Inversions: int64 = 0; { Для подсчёта числа инверсий }
+
+procedure MSort(l, r: integer);
+var
+  e, i, j, k: integer;
+begin
+  if l >= r then
+    exit;
+  k := (l + r) div 2; { Средний элемент }
+  MSort(l, k);
+  MSort(k + 1, r);
+  i := l; { Первая половина массива }
+  j := k + 1; { Вторая половина массива }
+  { Слияние }
+  for e := l to r do begin { Куда записываем результат }
+     if i &gt; k then begin
+       T[e] := A[j];
+       Inc(j);
+       Inc(Inversions,k-i+1); { Подсчёт инверсий }
+     end else if j &gt; r then begin
+       T[e] := A[i];
+       Inc(i);
+     end else if A[i] &lt;= A[j] then begin
+       T[e] := A[i];
+       Inc(i);
+     end else begin
+       T[e] := A[j];
+       Inc(j);
+       Inc(Inversions,k-i+1); { Подсчёт инверсий }
+     end;
+  end;
+  { Обратное копирование из T }
+  for e := l to r do
+    A[e] := T[e];
+end;
+</pre>
+
+<h2>Heap - куча</h2>
+
+<p><b>Бинарное дерево</b> - у каждого родителя максимум 2 потомка</p>
+
+<p>Предок: $Parent = \frac{i}{2}$. Потомки: левый $l = 2i$, правый $r = 2i+1$.</p>
+
+<p>Основное свойство кучи, любая функция, которая допускает линейное упорядочивание.</p>
+
+<p><img src="sort/heap.gif" width="340" height="265" alt="Двоичная куча"></p>
+
+<h2>HeapSort - сортировка при помощи кучи</h2>
+
+<pre class="sh_pascal">
+{$APPTYPE CONSOLE}
+
+uses
+  SysUtils;
+
+var
+  N : integer; { Размер кучи }
+  A : array [1..1000000] of int64;
+  size : Integer;
+
+{ Обмен местами элементов с индексами i и j }
+procedure Swap( i,j : integer );
+var T : int64;
+begin
+  T := A[i];
+  A[i] := A[j];
+  A[j] := T;
+end;
+
+procedure Heapify( i:integer );
+var r,l : integer;
+begin
+  l := i*2;
+  r := i*2+1;
+  if l &lt;= N then
+    if A[l] > A[i] then begin
+      Swap(l,i);
+      Heapify(l);
+    end;
+  if r &lt;= N then
+    if A[r] &gt; A[i] then begin
+      Swap(r,i);
+      Heapify(r);
+    end;
+end;
+
+{ Построение кучи }
+procedure BuildHeap;
+var i: integer;
+begin
+  for i := N downto 1 do
+    Heapify(i);
+end;
+
+{ Сортировка кучей }
+procedure HeapSort;
+begin
+  BuildHeap;
+  size := N;
+  while N &gt; 1 do begin
+    Swap(N,1);  { Меняем местами максимальный элемент и элемент в конце кучи }
+    Dec(N);     { Уменьшаем кучу }
+    Heapify(1); { Восстанавливаем основное свойство кучи }
+  end;
+end;
+
+var i : integer;
+begin
+  Reset(Input,'heapsort.in');
+  Rewrite(Output,'heapsort.out');
+  { Чтение исходных данных }
+  Read(N);
+  for i := 1 to N do
+    Read(A[i]);
+  { Вызов сортировки }
+  HeapSort;
+  { Запись отсортированного массива }
+  for i := 1 to size do
+    Write(A[i],' ');
+end.</pre>
+
+<pre class="sh_cpp">
+#include &ltassert.h&gt
+#include &ltstdlib.h&gt
+#include &ltiostream&gt
+
+using namespace std;
+
+const int N = 80;
+
+// Массив, который на время станет двоичной кучей, чтобы потом стать отсортированным массивом
+int A[N];
+// Текущий размер кучи, т.е. сколько первых элементов массива A сейчас являются двоичной кучей
+int HeapSize;
+
+// Поменять местами 2 элемента массива i-ый и j-ый
+inline void swap(int i, int j){
+  int temp = A[i];
+  A[i] = A[j];
+  A[j] = temp;
+}
+
+// Выполняется ли основное свойство кучи
+bool heap_function(int parent, int child){
+	return A[parent] &gt A[child];
+}
+
+// Мы хотим сверху получить самый минимум
+// parent - корневой элемент
+// Мы обновили элемент parent и хотим чтобы куча снова была кучей
+void heap(int parent){
+	// -= Левый потомок =-
+	int left = 2*parent + 1;  
+	if(left &lt HeapSize) // Левый потомок есть
+		if(!heap_function(parent,left)){ // Проверка основного свойства кучи
+			// Меняем их местами
+			swap(left,parent);
+			heap(left); // Проталкиваем значение дальше
+		}
+	// -= Правый потомок =-
+	int right = 2*parent + 2;  
+	if(right &lt HeapSize) // Правый потомок есть
+		if(!heap_function(parent,right)){ // Проверка основного 
+			// Меняем их местами
+			swap(right,parent);
+			heap(right);
+		}
+}
+
+void HeapSort(){
+	HeapSize = N;
+	// Строим кучу
+	for(int i=N-1;i&gt=0;i--)
+		heap(i);
+	// Выводим очередной элемент
+	for(int i=0;i&ltN;i++){
+		// Ставим элемент с вершины кучи в конец массива
+		swap(0,HeapSize-1); 
+		// Уменьшаем кучу
+		HeapSize--; 
+		// Упорядочиваем вершину кучи
+		heap(0);
+	}
+	// Проверяем, что массив отсортирован
+	for(int i=0;i&ltN-1;i++)
+		assert( A[i] &lt= A[i+1] );
+}
+
+int main() {
+	// Заполняем случайным числами массив A
+	for(int i=0;i&ltN;i++) A[i] = rand() % 1000;
+
+	// Вызов сортировки
+	HeapSort();
+
+	// Вывод отсортированного массива
+	for(int i=0;i&ltN;i++) cout &lt&lt A[i] &lt&lt " ";
+	cout &lt&lt endl;
+
+	return 0;
+}
+
+
+</pre>
+
+
+<p>&nbsp;</p>
+
+<h2>Алгоритмы сортировки в стандартных библиотеках</h2>
+
+<p>Использование qsort в C/C++</p>
+
+<p>В C/C++ в STL (Standard Template Library, которую, как правило, можно использовать на олимпиадах) доступна библиотека
+    <strong>algorithm</strong> в которой в числе прочего есть реализованная процедура сортировки <strong>sort</strong>.
+</p>
+
+<pre class="sh_cpp">
+#include &lt;stdio.h&gt;<br>#include &lt;assert.h&gt;<br>#include &lt;math.h&gt;<br>#include &lt;string.h&gt;<br>#include &lt;vector&gt;<br>#include &lt;algorithm&gt;<br>
+#define MaxN 5000
+
+using namespace std;
+
+int a[MaxN + 3];
+int n;
+
+int main() {
+  freopen("bubble.in", "rt", stdin); // Открываем входной файл
+  freopen("bubble.out", "wt", stdout); // Открываем выходной файл
+  // Чтение исходных данных
+  scanf("%d", &n); // Чтение количества элементов 
+  int i;
+  for(i = 0; i < n; i++) scanf ("%d", &a[i]); 
+  // Вызов процедуры сортировки
+  sort(a, a + n);
+  // Вывод отсортированного массива в файл
+  for(i = 0; i < n - 1; i++)
+    printf("%d ", a[i]);
+  printf("%d\n", a[n - 1]);
+  return 0;
+}</pre>
+
+<p>В Python у списков (list) есть встроенный метод sort</p>
+
+<pre class="sh_python">
+# -*- coding: windows-1251 -*-
+import sys
+sys.stdin = open('bubble.in') # Открываем входной файл на чтение
+sys.stdout = open('bubble.out', 'w') # Открываем выхолной файл на запись
+# Ввод исходных данных
+N = input() # Считываем из первой строки целое число
+A = map(int,raw_input().split()) # Считываем строку, делим её на элементы и каждый приводим к типу целое
+# Сортировка массива
+A.sort()
+# Вывод массива
+for i in A:
+  print i,
+</pre>
+
+
+<p>&nbsp;</p>
+</div>
+
+</body>
+
+</html>
