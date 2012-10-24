@@ -5,9 +5,15 @@
     <link rel="stylesheet" type="text/css" href="../style/style.css">
     <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
     <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
     <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+
+
+
+
+
     </script>
     <script type="text/javascript"
             src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
@@ -17,8 +23,8 @@
 <div style="width:80%;">
     <div style="float:right;">
         <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#ve
-rsion=6,0,0,0" width="100"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100"
                 height="50">
             <param name="movie" value="../audio/a_smsqulh3n.swf">
             <param
@@ -35,47 +41,88 @@ rsion=6,0,0,0" width="100"
     </div>
 </div>
 
+<div id="content">
 
-<div id="content" style="width:80%;">
-<h1> Рекурсивные алгоритмы и их построение</h1>
+<h1>Понятие рекурсии и простейшие рекурсивные алгоритмы. Примеры задач. Рекурсивные алгоритмы и их построение</h1>
+
+<ul class="tags">
+    <li><a href="#">Рекурсия</a></li>
+</ul>
+
+<h2>Простейшая рекурсия (замена цикла)</h2>
+
+<p><strong>Факториал. Рекурсивный и итеративный способы вычисления.</strong></p>
+
+<p>Рекурсивный способ:</p>
+
+<pre class="sh_pascal">
+function fact(n : integer) : longint;
+begin
+  if n <= 1 then
+    fact := 1
+  else
+    fact := n * fact(n - 1);
+end;
+</pre>
+
+<pre class="sh_cpp">
+long fact(int N) {
+  if(N < 0) // если пользователь ввел отрицательное число
+    return 0; // возвращаем ноль
+  if (N == 0) // если пользователь ввел ноль,
+    return 1; // возвращаем факториал от нуля - не удивляетесь, но это 1 =)
+  else // Во всех остальных случаях
+    return N * fact(N - 1); // делаем рекурсию.
+}
+</pre>    
+
+<pre class="sh_cpp">
+int factorial(int n) {
+  return !n ? 1 : n * factorial(n - 1);
+}
+</pre>
+
+<h2>Рекурсивные функции</h2>
+
+<p><b>Рекурсивная функция</b> (лат. recursio — возвращение) — функция, которая в своей записи содержит вызов себя же.
+</p>
+
+<h2>Рекуррентные отношения</h2>
+
+<p>&nbsp;</p>
+
+<h2>Фракталы и фрактальные множества</h2>
+
+<h2>&nbsp;</h2>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
 
 <p>Помните детское стихотворение-считалку про 10 негритят? Оно может служить эпиграфом к любой работе на тему &quot;Рекурсия&quot;.</p>
 
-<p STYLE="text-indent: 1.27cm;">&laquo;10 негритят пошли купаться в море,</p>
+<div style="width: 150px; text-align: left">
+<pre>
+&laquo;10 негритят пошли купаться в море,
+10 негритят резвились на просторе,
+Один из них пропал – и вот вам результат:
 
-<p STYLE="text-indent: 1.27cm;">10 негритят резвились на просторе,</p>
+9 негритят пошли купаться в море,
+9 негритят резвились на просторе,
 
-<p STYLE="text-indent: 1.27cm;">Один из них пропал – и вот вам результат:</p>
+Один из них пропал – и вот вам результат:
 
-<p STYLE="text-indent: 1.27cm;"><BR>
-</p>
+…  … … … …
 
-<p STYLE="text-indent: 1.27cm;">9
-    негритят пошли купаться в море,</p>
+1 (из) негритят пошли(ел) купаться в море,
+1 (из) негритят резвились(ся) на просторе,
 
-<p STYLE="text-indent: 1.27cm;">9
-    негритят резвились на просторе,</p>
+Один из них пропал – и вот вам результат:
 
-<p STYLE="text-indent: 1.27cm;">Один
-    из них пропал – и вот вам результат:</p>
-
-<p STYLE="text-indent: 1.27cm;">…
-    … … … …</p>
-
-<p STYLE="text-indent: 1.27cm;">1
-    (из) негритят пошли(ел) купаться в море,</p>
-
-<p STYLE="text-indent: 1.27cm;">1
-    (из) негритят резвились(ся)на просторе,</p>
-
-<p STYLE="text-indent: 1.27cm;">Один
-    из них пропал – и вот вам результат:</p>
-
-<p STYLE="text-indent: 1.27cm;"><BR>
-</p>
-
-<p STYLE="text-indent: 1.27cm;">Нет
-    больше негритят!&raquo;</p>
+Нет больше негритят!&raquo;
+</pre>
+</div>
 
 <p STYLE="text-indent: 1.27cm;"><BR>
 </p>
@@ -93,7 +140,7 @@ begin
   else begin
     Writeln(k,' негритят пошли купаться в море,');
     Writeln(k,' негритят резвились на просторе,');
-    Writeln('Один и них пропал - и вот вам результат:');
+    Writeln('Один из них пропал - и вот вам результат:');
     Negr(k-1); {Вызов процедуры с уменьшенным на 1 параметром}
   end 
 end;</pre>
@@ -101,11 +148,7 @@ end;</pre>
 <p><BR>
 </p>
 
-<p>Вызов
-    этой процедуры в основной программе
-    будет выглядеть так: Negr</SPAN>(10).
-
-</p>
+<p>Вызов этой процедуры в основной программе будет выглядеть так: Negr(10).</p>
 
 <p><BR>
 </p>
@@ -254,8 +297,7 @@ end;
 end.
 </pre>
 
-<p><I><strong>Пример</strong></I><strong><I>
-    2.</I></SPAN></strong></p>
+<p><I><strong>Пример</strong></I><strong><I> 2.</I></strong></p>
 
 <p>На
     входном потоке находится слово
@@ -273,48 +315,22 @@ end.
     пробелом. Сама же программа будет
     состоять только из вызова этой процедуры.</p>
 
-<p><BR>
-</p>
+<pre class="sh_pascal">
+Procedure REV;
+var c:char;
+begin
+  read(c);
+  if c&lt;&gt;' ' then begin
+    REV; write(c) 
+  end
+end;
 
-<p><strong>Program</strong></SPAN>
-    REVERSE;</SPAN></p>
+BEGIN
+  REV
+END.
+</pre>
 
-<p><strong>Procedure</strong></SPAN>
-    REV;</SPAN></p>
-
-<p><strong>Var</strong></SPAN>
-    c:char;</SPAN></p>
-
-<p STYLE="text-indent: 1.35cm;"><SPAN LANG="en-
-US"><strong>Begin</strong></SPAN>
-    read(c);</SPAN></p>
-
-<p STYLE="text-indent: 2.57cm;"><strong>If</strong></SPAN>
-    c&lt;&gt;' '</SPAN></p>
-
-<p STYLE="text-indent: 2.57cm;"><strong>Then
-    begin</strong></SPAN>
-    REV; write(c) </SPAN><strong>end</strong></SPAN></p>
-
-<p STYLE="text-indent: 1.35cm;"><strong>End</strong></SPAN>;</p>
-
-<p><strong>BEGIN</strong></SPAN>
-    REV</SPAN></p>
-
-<p><strong>END</strong></SPAN>.</p>
-
-<p><BR>
-</p>
-
-<p style="text-indent:1.25cm;">
-    Теперь переходим к более сложным
-    задачам.</p>
-
-<p><BR>
-</p>
-
-<p><I>Пример
-    3.</I></p>
+<h3>Фракталы</h3>
 
 <p style="text-indent:1.25cm;">
     <strong>Фракталами</strong>
@@ -333,7 +349,7 @@ US"><strong>Begin</strong></SPAN>
     то, посмотрев на торец полоски, можно
     увидеть ломаную, которая называется
     &quot;драконовой ломаной К-го порядка&quot;,
-    где K</SPAN>-количество
+    где K-количество
     сгибов. Схема этого процесса изображена
     ниже.</p>
 
@@ -343,24 +359,24 @@ US"><strong>Begin</strong></SPAN>
 
 <P LANG="" STYLE="text-indent: 1.27cm;; color: #0000ff">
 <SPAN ID="Врезка1" DIR="LTR" STYLE="float: left; width: 10.17cm; height: 2.28cm; 
-border: none; padding: 0cm; ">
-	<p ALIGN=CENTER><IMG SRC="../s2/img/2.2_html_5dab8119.png" NAME="Объект2"
-                         ALIGN=BOTTOM WIDTH=381
-                         HEIGHT=86></p>
+border: none; padding: 0; ">
+	<p><IMG SRC="../s2/img/2.2_html_5dab8119.png"
+            WIDTH=441
+            HEIGHT=127></p>
 </SPAN>
-    <IMG SRC="../s2/img/2.2_html_6f56b3c3.png" ALIGN=LEFT HSPACE=12>
-    <IMG SRC="../s2/img/2.2_html_66fd6fc8.png" ALIGN=LEFT HSPACE=12>
-    <IMG SRC="../s2/img/2.2_html_66fd6fc8.png" ALIGN=LEFT HSPACE=12>
-    <IMG SRC="../s2/img/2.2_html_66fd6fc8.png" ALIGN=LEFT HSPACE=12><BR>
+    <IMG SRC="../s2/img/2.2_html_6f56b3c3.png">
+    <IMG SRC="../s2/img/2.2_html_66fd6fc8.png">
+    <IMG SRC="../s2/img/2.2_html_66fd6fc8.png">
+    <IMG SRC="../s2/img/2.2_html_66fd6fc8.png"><BR>
 </p>
 <p STYLE="text-indent: 1.27cm;">
     <BR>
 </p>
 
 <P LANG="" STYLE="text-indent: 1.27cm;">
-    <IMG SRC="../s2/img/2.2_html_m25cbe199.png" NAME="Объект3" ALIGN=LEFT HSPACE=12
-         WIDTH=48 HEIGHT=28><BR
-        CLEAR=LEFT><BR>
+    <IMG SRC="../s2/img/2.2_html_m25cbe199.png"
+         WIDTH=70 HEIGHT=21><BR
+        ><BR>
 </p>
 
 <p STYLE="text-indent: 1.27cm;">
@@ -376,10 +392,7 @@ border: none; padding: 0cm; ">
     <BR>
 </p>
 
-<p><IMG SRC="../s2/img/2.2_html_7c967326.png" NAME="Объект4" ALIGN=LEFT
-        HSPACE=12 WIDTH=110
-        HEIGHT=169>Опишем
-    способ создания &laquo;драконовой&raquo;
+<p><IMG SRC="../s2/img/2.2_html_7c967326.png" WIDTH=110 HEIGHT=169>Опишем способ создания &laquo;драконовой&raquo;
     ломаной.</p>
 
 <p STYLE="text-indent: 1.27cm;">
@@ -408,50 +421,44 @@ border: none; padding: 0cm; ">
 </p>
 
 <p style="text-indent:1.25cm;">
-    <strong>Program</strong></SPAN>
-    DRACON;</SPAN></p>
+    <strong>Program</strong>
+    DRACON;</p>
 
 <p style="text-indent:1.25cm;">
-    <strong>Uses</strong></SPAN>
-    Graph;</SPAN></p>
+    <strong>Uses</strong>
+    Graph;</p>
 
 <p style="text-indent:1.25cm;">
-    <strong>Var</strong></SPAN>
-    Gd,Gm,k:Integer;</SPAN></p>
+    <strong>Var</strong>
+    Gd,Gm,k:Integer;</p>
 
 <p style="text-indent:1.25cm;">
-    <strong>Procedure</strong></SPAN>
-    st (x1, y1, x2, y2, k:Integer);</SPAN></p>
+    <strong>Procedure</strong>
+    st (x1, y1, x2, y2, k:Integer);</p>
 
 <p STYLE="margin-left: 1.27cm; text-indent: 1.27cm;">
-    <strong>Var</strong></SPAN>
-    xn,yn:Integer;</SPAN></p>
+    <strong>Var</strong>
+    xn,yn:Integer;</p>
 
 <p STYLE="text-indent: 1.27cm;">
-    <strong>Beg</strong></SPAN><SPAN LANG="en-
+    <strong>Beg</strong><SPAN LANG="en-
 US"><strong>in</strong></SPAN></p>
 
 <p STYLE="margin-left: 1.27cm; text-indent: 1.27cm;">
-    <strong>If</strong></SPAN>
-    k &gt; 0 </SPAN>
+    <strong>If</strong>
+    k &gt; 0
 </p>
 
 <P LANG="en-US" STYLE="margin-left: 1.27cm; text-indent: 1.27cm;">
     <strong>then begin</strong></p>
 
-<p STYLE="margin-left: 3.25cm; text-indent: 1.25cm;">
-    xn:=(x1+x2)</SPAN><SPAN LANG="en-
-US"><strong>div</strong></SPAN>
-    2 + (y2-y1)</SPAN><strong>div</strong></SPAN><SPAN LANG="en-
+<p STYLE="margin-left: 3.25cm; text-indent: 1.25cm;"> xn:=(x1+x2)<SPAN LANG="en-US"><strong>div</strong></SPAN>
+    2 + (y2-y1)<strong>div</strong><SPAN LANG="en-
 US">
 2;</SPAN></p>
 
-<p STYLE="margin-left: 3.25cm; text-indent: 1.25cm;">
-    yn:=(y1+y2)</SPAN><SPAN LANG="en-
-US"><strong>div</strong></SPAN>
-    2 - (x2-x1)</SPAN><strong>div</strong></SPAN><SPAN LANG="en-
-US">
-2;</SPAN></p>
+<p STYLE="margin-left: 3.25cm; text-indent: 1.25cm;"> yn:=(y1+y2)<SPAN LANG="en-US"><strong>div</strong></SPAN> 2 -
+    (x2-x1)<strong>div</strong><SPAN LANG="en-US">2;</SPAN></p>
 
 <P LANG="en-US" STYLE="margin-left: 3.25cm; text-indent: 1.25cm;">
     st(x1,y1,xn,yn,k-1);</p>
@@ -460,14 +467,14 @@ US">
     st(x2,y2,xn,yn,k-1);</p>
 
 <p STYLE="margin-left: 1.98cm; text-indent: 1.27cm;">
-    <strong>end</strong></SPAN></p>
+    <strong>end</strong></p>
 
 <p STYLE="margin-left: 1.27cm; text-indent: 1.27cm;">
-    <strong>else</strong></SPAN>
-    Line(x1,y1,x2,y2);</SPAN></p>
+    <strong>else</strong>
+    Line(x1,y1,x2,y2);</p>
 
 <p STYLE="text-indent: 1.27cm;">
-    <strong>End</strong></SPAN>;</SPAN></p>
+    <strong>End</strong>;</p>
 
 <P LANG="en-US" STYLE="text-indent: 1.27cm;">
     <strong>Begin</strong></p>
@@ -491,10 +498,10 @@ US">
     Readln;</p>
 
 <p STYLE="margin-left: 1.27cm; text-indent: 1.27cm;">
-    CloseGraph</SPAN>;</p>
+    CloseGraph;</p>
 
 <p STYLE="text-indent: 1.27cm;">
-    <strong>End</strong></SPAN>.</p>
+    <strong>End</strong>.</p>
 
 <p STYLE="text-indent: 1.27cm;">
     <BR>
@@ -509,8 +516,7 @@ US">
 
 <p><BR>
 </p>
-<IMG class="image" SRC="../s2/img/2.2_html_m14572a1e.png" NAME="Графический 
-объект1" WIDTH=406 HEIGHT=263
+<IMG class="image" SRC="../s2/img/2.2_html_m14572a1e.png" WIDTH=615 HEIGHT=398
      BORDER=0>
 
 <h2>Литература</h2>

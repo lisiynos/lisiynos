@@ -1,0 +1,95 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Алгебра и теория чисел</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_python.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100" height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70" type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+<div id="content">
+    <h1>Алгебра и теория чисел: целочисленная арифметика, простые числа</h1>
+
+    <ul class="tags">
+        <li><a href="#">Алгоритмы теории чисел</a></li>
+    </ul>
+
+    <div class="description">
+        Описание для плана ;)
+    </div>
+
+
+<pre>
+Простые числа.
+  Проверка простоты - за полином.
+  Факторизация - за экспоненту.
+  Упоминание RSA.
+Вычисления по модулю.
+  Лемма (a + b) mod c = (a mod c + b mod c) mod c.
+  Лемма (a * b) mod c = (a mod c * b mod c) mod c.
+Задача: a * b mod c, оставаясь в целом типе.
+  Десятичное умножение в столбик.
+  Двоичное умножение в столбик.
+  Идея со сложением нужных из a, 2 a, 4 a, 8 a, ... .
+  Медленное умножение.
+  Код на Си и на Паскале.
+Задача: a ^ b mod c, оставаясь в целом типе.
+  Сложение -> умножение - то же, что и умножение -> возведение в степень.
+  Идея с перемножением нужных из a, a^2, a^4, a^8, ... .
+  Быстрое возведение в степень.
+  Код на Си.
+Мотивационная задача: проверка числа на простоту.
+  Периоды a, a^2, a^3, a^4, a^5, ... mod p на примере p = 7.
+  Малая теорема Ферма.
+  Функция Эйлера.
+  Теорема Эйлера - обобщение теоремы Ферма.
+  Лемма: \phi (m) = m - 1 равносильно тому, что m простое.
+  Тест Ферма.
+  Числа Кармайкла (минимальное - 561).
+  Корни из единицы по модулю m.
+  Лемма: m простое => корни из единицы только +-1.
+  Тест Миллера-Рабина.
+Матрицы.
+  Числа Фибоначчи.
+  Получение вектора (F_{n}, F_{n - 1}) из вектора (F_{n - 1}, F_{n - 2}).
+  Матрицы и правила умножения матриц.
+  Умножение матрицы ((1, 1), (1, 0)) на себя несколько раз справа и слева.
+  Наблюдение за тем, как в матрице получаются числа Фибоначчи.
+  Одно умножение на матрицу - это переход (n - 1) -> n.
+  Получение числа Фибоначчи с большим номером по модулю.
+  Быстрое возведение матрицы в степень.
+  Последовательность G_{n} = G_{n - 1} + 2 G_{n - 3} и соответствующая матрица.
+  H_{n} = H_{n - 1} + 2 H_{n - 3}, добавляем + 1, добавляем + n.
+</pre>
+
+</div>
+
+</body>
+</html>

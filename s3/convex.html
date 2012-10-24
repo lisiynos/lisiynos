@@ -1,0 +1,268 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Выпуклая оболочка C/C++</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_basic.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+
+
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100" height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff" width="100" height="70"
+                   type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+<div id="content">
+<h1>Выпуклая оболочка</h1>
+
+<p>Пример реализации выпуклой оболочки:</p>
+
+<pre class="sh_cpp">
+#include &lt;vector&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+
+struct point {
+  int x, y;
+  point () {}
+  point (int a, int b): x(a), y(b) {}
+  point operator - (point a) {
+    return point(x - a.x, y - a.y);
+  }
+};
+
+point p0, p1, p2;
+
+// Ориентированная площадь 
+int vp(point a, point b) {
+  return a.x*b.y - a.y*b.x;
+}
+
+// Расстояние между точками
+int dist(point p1, point p2) {
+  return (p2-p1).x * (p2-p1).x + (p2-p1).y*(p2-p1).y;
+}
+
+// Сравнение точек для сортировки
+bool l(point p1, point p2) {
+	return vp(p1 - p0, p2 - p0) &gt; 0 || (vp(p1 - p0, p2 - p0) == 0 && dist(p0, p2) &lt; dist(p0, p1));
+}
+
+point p[200]; // Точки 
+
+using namespace std;
+
+int main() {
+	freopen("convex.in", "r", stdin);
+	freopen("convex.out", "w", stdout);
+	int n, i, min_ind = 0;
+	cin &gt;&gt; n; // Количество точек
+	for (i=0; i&lt;n; i++) // Координаты точек
+		cin &gt;&gt; p[i].x &gt;&gt; p[i].y;
+	// Ищем самую левую точку
+	for (i=0; i&lt;n; i++) {
+		if(p[i].x &lt; p[min_ind].x)
+			min_ind = i;
+		else
+			if(p[i].x == p[min_ind].x) // А из "самых левых"
+				if(p[i].y &lt; p[min_ind].y) // Самую нижнюю
+					min_ind = i;
+	}
+	p0 = p[min_ind];
+	sort(p, p + n, l); // Сортируем точки по углу относительно p0
+	vector &lt;point&gt; ob;
+	for (i=0; i&lt;n; i++) {
+		while (ob.size() &gt;= 2 && vp(ob[ob.size() - 1] - ob[ob.size() - 2], p[i] - ob[ob.size() - 1]) &lt;= 0)
+			ob.pop_back();
+		ob.push_back(p[i]);
+	}
+	// Вывод выпуклой оболочки 
+	cout &lt;&lt; ob.size() &lt;&lt; endl; // Количество точек
+	for (int i = ob.size() - 1; i &gt;= 0; --i) {
+		printf("%d %d\n", ob[i].x, ob[i].y); // Координаты очередной точки
+	}
+	return 0;
+}
+</pre>
+
+<pre class="sh_cpp">
+#include &lt;cstdlib&gt;
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+#include &lt;cstdio&gt;
+#include &lt;assert.h&gt;
+
+using namespace std;
+
+const int MaxN = 105;
+const double eps = 1e-10;
+
+struct Point {
+    long long x, y;
+    Point() {
+        x = 0;
+        y = 0;
+    }
+};
+
+
+int used[MaxN];
+vector &lt;Point&gt; ans;
+Point a[MaxN];
+
+long long dist(Point a, Point b) {
+    return (b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y);
+}
+
+long long vec(Point a, Point b, Point c) {
+    return (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y);
+}
+
+long long scul(Point a, Point b, Point c) {
+    return (b.x - a.x) * (c.x - a.x) + (b.y - a.y) * (c.y - a.y);
+}
+
+int main() {
+    freopen("convex.in", "r", stdin);
+    freopen("convex.out", "w", stdout);
+    long long i = 0, j = 0, n = 0, x1 = 0, y1 = 0, v = 0, v1 = 0, d;
+    double fi = 0, curfi = 0;
+    Point p;
+
+    for (i = 0; i &lt; MaxN; i++) {
+        used[i] = 0;
+    }
+
+    cin &gt;&gt; n;
+
+    for (i = 1; i &lt;= n; i++) {
+        cin &gt;&gt; a[i].x &gt;&gt; a[i].y;
+    }
+
+    x1 = 100500;
+    y1 = 100500;
+
+    for (i = 1; i &lt;= n; i++) {
+        if (a[i].y &lt; y1) {
+            y1 = a[i].y;
+            x1 = a[i].x;
+            v = i;
+        } else {
+            if ((a[i].y == y1) && (a[i].x &lt; x1)) {
+                y1 = a[i].y;
+                x1 = a[i].x;
+                v = i;
+            }
+        }
+    }
+
+    //cout &lt;&lt; v &lt;&lt; endl;
+    used[v] = 1;
+    x1 = 100500;
+    fi = 0;
+    p.x = x1;
+    p.y = y1;
+    d = -1;
+
+    for (i = 1; i &lt;= n; i++) {
+        if(used[i] == 0) {
+            curfi = abs(atan2(vec(a[v], p, a[i]), scul(a[v], p, a[i])));
+
+            if (curfi &gt; fi) {
+                fi = curfi;
+                v1 = i;
+                d = dist(a[v], a[i]);
+            } else {
+                if ((abs(curfi - fi) &lt;= eps) && (dist(a[v], a[i]) &gt; d)) {
+                    fi = curfi;
+                    v1 = i;
+                    d = dist(a[v], a[i]);
+                }
+            }
+        }
+    }
+
+    //used[v1] = 1;
+    //cout &lt;&lt; v1 &lt;&lt; endl;
+    ans.push_back(a[v1]);
+    ans.push_back(a[v]);
+
+    while(1) {//
+        fi = -1;
+        v = -1;
+        d = -1;
+
+        for (i = 1; i &lt;= n; i++) {
+            if (used[i] == 0) {
+                int ind = ans.size() - 1;
+                assert( ind &gt;= 1 );
+                curfi = abs(atan2(vec(ans[ind], ans[ind - 1], a[i]), scul(ans[ind], ans[ind - 1], a[i])));
+
+                // cout &lt;&lt; "curfi = " &lt;&lt; curfi*180/M_PI &lt;&lt; " fi = " &lt;&lt; fi*180/M_PI &lt;&lt; endl;
+                //d = -1;
+                if (curfi &gt; fi + eps) {
+                    fi = curfi;
+                    v = i;
+                    d = dist(ans[ind], a[i]);
+                    // cout &lt;&lt; " new min " &lt;&lt; v &lt;&lt; " dist = " &lt;&lt; d &lt;&lt; endl;
+                } else {
+                    if ((abs(fi - curfi) &lt;= eps) && (d &lt; dist(a[i], ans[ind]))) {
+                        // cout &lt;&lt; 11 &lt;&lt; endl;
+                        fi = curfi;
+                        v = i;
+                        d = dist(ans[ind], a[i]);
+                        // cout &lt;&lt; " old min " &lt;&lt; v &lt;&lt; " dist = " &lt;&lt; d &lt;&lt; endl;
+                    }
+                }
+            }
+        }
+
+        // cout &lt;&lt; "add(" &lt;&lt; v &lt;&lt; ") " &lt;&lt; a[v].x &lt;&lt; " " &lt;&lt; a[v].y &lt;&lt; endl;
+        used[v] = 1;
+        ans.push_back(a[v]);
+
+        if ((ans[ans.size() - 1].x == ans[0].x) && (ans[ans.size() - 1].y == ans[0].y)) {
+            break;
+        }
+    }
+
+    cout &lt;&lt; ans.size() - 1 &lt;&lt; endl;
+
+    for (i = ans.size() - 1; i &gt; 0; i--) {
+        cout &lt;&lt; ans[i].x &lt;&lt; ' ' &lt;&lt; ans[i].y &lt;&lt; endl;
+    }
+}
+</pre>
+
+
+</div>
+
+</body>
+
+</html>

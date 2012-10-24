@@ -1,0 +1,39 @@
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage[russian]{olymp}
+\usepackage{graphics}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+\begin{document}
+
+\lstset{language=Java, showstringspaces=false}
+
+\input{parts/intro.tex}
+
+\begin{part}[Постановка задачи и простейшие методы решения]{Постановка задачи и простейшие методы решения}
+
+\input{parts/problem.tex}
+\input{parts/simple.tex}
+
+\end{part}
+
+\begin{part}[Дерево отрезков]{Дерево отрезков}
+
+\input{parts/treedesc.tex}
+\input{parts/requests_storing_building.tex}
+
+\end{part}
+
+\begin{part}[Реализация]{Реализация}
+
+\input{parts/java_realisation.tex}
+
+\end{part}
+
+\end{document}

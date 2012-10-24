@@ -1,0 +1,67 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Динамическое программирование: Лесенки, наибольшая возрастающая последовательность за $O(n\log{n})$, по
+        подотрезкам, по подмножествам, ДП по поддереву. ДП по профилю, ДП по изломанному профилю</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_pascal.js"></script>
+    <script type="text/javascript" src="../syntax/sh_java.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100" height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70" type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+<div id="content">
+
+    <h1>Динамическое программирование: Лесенки, наибольшая возрастающая последовательность за O(nlog(n)), по
+        подотрезкам, по подмножествам, ДП по поддереву. ДП по профилю, ДП по изломанному профилю</h1>
+
+    <ul class="tags">
+        <li><a href="#">Динамика</a></li>
+    </ul>
+
+    <p><strong>Динамическое программирование по профилю</strong> - способ оптимизации перебора количества вариантов с
+        помощью динамического программирования, когда одно из измерений небольшое.</p>
+
+    <p><strong>Профиль</strong> - один из столбцов (строк), удовлетворяющий условию задачи. Обычно используется в
+        качестве состояния динамики.</p>
+
+    <p>Обычно дана таблица и надо посчитать количество замощений этой таблицы некоторыми фигурами (замощение шахматной
+        доски доминошками). Можно перебрать все варианты и выбрать из них удовлетворяющие условию. </p>
+
+    <p>Но можно воспользоваться методом динамического программирования по профилю и сократить время по одной размерности
+        до линейной. </p>
+
+    <p>Пусть у нас есть правило по которому надо заполнить и для него нам надо $k$ предыдущих линий. Тогда можно
+        перебрать все замощения длиной $k\times n$. В итоге нужно заполнить данную таблицу этими замощениями.
+        Получается, что если перебирать все варианты нам понадобиться $O(a^{nm})$ времени, а если перебирать только
+        состояния и переходить по ним нам потребуется $O(a^{kn}*m)$ времени (где $а$ - количество способов замещения 1
+        клетки).</p>
+
+</div>
+</body>
+
+</html>

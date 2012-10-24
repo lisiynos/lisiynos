@@ -1,0 +1,138 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Правильные скобочные последовательности</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_python.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100" height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff" width="100" height="70"
+                   type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+<div id="content">
+    <h1>Правильные скобочные последовательности</h1>
+
+    <h3>Генерация правильных скобочных последовательностей</h3>
+
+
+    <p>Правила:</p>
+
+    <ol>
+        <li>На каждом шаге открывающих скобок должно быть больше или столько же, сколько открывающих.</li>
+        <li>К концу строки все открывающие скобки должны быть закрыты.</li>
+    </ol>
+
+
+<pre class="sh_python">
+# -*- utf-8 -*-
+import sys
+
+sys.stdin = open("brackets.in")
+sys.stdout = open("brackets.out", "w")
+n = int(input())
+
+# Количество пар скобок
+n = 4
+
+
+def gen(index=0, br_open=0, br_close=0, ans=['_'] * (2 * n)):
+    if index == 2 * n:
+        print("".join(ans))
+        return
+    # Если можем поставить открывающую скобку => ставим её
+    if br_open < n:
+        ans[index] = '('
+        gen(index + 1, br_open + 1, br_close, ans)  # Рекурсия
+    # Если можем поставить закрывающую скобку => ставим её
+    if br_close < br_open:
+        ans[index] = ')'
+        gen(index + 1, br_open, br_close + 1, ans)  # Рекурсия
+
+
+gen()
+</pre>
+
+    <p>$n = 2$</p>
+
+<pre>
+(())
+()()
+</pre>
+
+    <p>$n = 3$</p>
+
+<pre>
+((()))
+(()())
+(())()
+()(())
+()()()
+</pre>
+
+    <p>$n = 4$</p>
+<pre>
+(((())))
+((()()))
+((())())
+((()))()
+(()(()))
+(()()())
+(()())()
+(())(())
+(())()()
+()((()))
+()(()())
+()(())()
+()()(())
+()()()()
+</pre>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,282 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Памятка участнику олимпиады</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+
+    <script type="text/javascript">
+        $(function () {
+            /* For zebra striping */
+            $("table tr:nth-child(odd)").addClass("odd-row");
+            /* For cell text alignment */
+            $("table td:first-child, table th:first-child").addClass("first");
+            /* For removing the last border */
+            $("table td:last-child, table th:last-child").addClass("last");
+        });
+    </script>
+
+    <style type="text/css">
+
+        /*
+        Pretty Table Styling
+        CSS Tricks also has a nice writeup: http://css-tricks.com/feature-table-design/
+        */
+        table.pretty {
+            overflow: hidden;
+            border: 1px solid #d3d3d3;
+            background: #fefefe;
+            width: 70%;
+            margin: 5% auto 0;
+            -moz-border-radius: 5px; /* FF1+ */
+            -webkit-border-radius: 5px; /* Saf3-4 */
+            border-radius: 5px;
+            -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+            -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+        }
+
+        table.pretty th, table.pretty td {
+            padding: 18px 28px 18px;
+            text-align: center;
+        }
+
+        table.pretty th {
+            padding-top: 22px;
+            text-shadow: 1px 1px 1px #fff;
+            background: #e8eaeb;
+        }
+
+        table.pretty td {
+            border-top: 1px solid #e0e0e0;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        table.pretty tr.odd-row td {
+            background: #f6f6f6;
+        }
+
+        table.pretty td.first, table.pretty th.first {
+            text-align: left
+        }
+
+        table.pretty td.last {
+            border-right: none;
+        }
+
+        /*
+        Background gradients are completely unnessary but a neat effect.
+        */
+
+        table.pretty td {
+            background: -moz-linear-gradient(100% 25% 90deg, #fefefe, #f9f9f9);
+            background: -webkit-gradient(linear, 0% 0%, 0% 25%, from(#f9f9f9), to(#fefefe));
+        }
+
+        table.pretty tr.odd-row td {
+            background: -moz-linear-gradient(100% 25% 90deg, #f6f6f6, #f1f1f1);
+            background: -webkit-gradient(linear, 0% 0%, 0% 25%, from(#f1f1f1), to(#f6f6f6));
+        }
+
+        table.pretty th {
+            background: -moz-linear-gradient(100% 20% 90deg, #e8eaeb, #ededed);
+            background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(#ededed), to(#e8eaeb));
+        }
+
+        /*
+        I know this is annoying, but we need dditional styling so webkit will recognize rounded corners on background elements.
+        Nice write up of this issue: http://www.onenaught.com/posts/266/css-inner-elements-breaking-border-radius
+
+        And, since we've applied the background colors to td/th element because of IE, Gecko browsers also need it.
+        */
+
+        table.pretty tr:first-child th.first {
+            -moz-border-radius-topleft: 5px;
+            -webkit-border-top-left-radius: 5px; /* Saf3-4 */
+        }
+
+        table.pretty tr:first-child th.last {
+            -moz-border-radius-topright: 5px;
+            -webkit-border-top-right-radius: 5px; /* Saf3-4 */
+        }
+
+        table.pretty tr:last-child td.first {
+            -moz-border-radius-bottomleft: 5px;
+            -webkit-border-bottom-left-radius: 5px; /* Saf3-4 */
+        }
+
+        table.pretty tr:last-child td.last {
+            -moz-border-radius-bottomright: 5px;
+            -webkit-border-bottom-right-radius: 5px; /* Saf3-4 */
+        }
+    </style>
+</head>
+<body>
+
+<div id="content">
+
+    <h1>Памятка участнику олимпиады</h1>
+
+    <ul class="tags">
+        <li><a href="#">Олимпиада</a></li>
+    </ul>
+
+    <table class="pretty">
+        <thead>
+        <tr>
+            <th>Язык</th>
+            <th>Транслятор</th>
+            <th>Среда программирования</th>
+            <th>Операционная система</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>C/C++</td>
+            <td>GNU C/C++ 4.2</td>
+            <td>CodeBlocks 10.05, Eclipse CDT</td>
+            <td>Любая</td>
+        </tr>
+        <tr>
+            <td>C/C++</td>
+            <td>Microsoft Visual C++ 2005</td>
+            <td>Встроенная</td>
+            <td>MS Windows</td>
+        </tr>
+        <tr>
+            <td>Object Pascal</td>
+            <td>Free Pascal 2.6.0</td>
+            <td>Lazarus 1.0</td>
+            <td>Любая</td>
+        </tr>
+        <tr>
+            <td>Object Pascal</td>
+            <td>Borland/Embarcadero Delphi 7.0</td>
+            <td>Встроенная</td>
+            <td>MS Windows</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>
+        <i>Допускается использование более поздних версий ПО по сравнению с указанными в таблице.</i>
+    </p>
+
+
+    <table class="pretty">
+        <thead>
+        <tr>
+            <th>Язык</th>
+            <th>Транслятор</th>
+            <th>Среда программирования</th>
+            <th>Операционная система</th>
+        </tr>
+        </thead>
+        <tr>
+            <td>Borland C/C++</td>
+            <td>Borland C++ 3.1</td>
+            <td>Встроенная</td>
+            <td>MS Windows</td>
+        </tr>
+        <tr>
+            <td>C#</td>
+            <td>Microsoft Visual C# 2005</td>
+            <td>Встроенная</td>
+            <td>MS Windows</td>
+        </tr>
+        <tr>
+            <td>C#</td>
+            <td>Mono 2.0</td>
+            <td>MonoDevelop</td>
+            <td>Любая</td>
+        </tr>
+        <tr>
+            <td>Borland Pascal</td>
+            <td>Borland Pascal 7.0</td>
+            <td>Встроенная</td>
+            <td>MS Windows</td>
+        </tr>
+        <tr>
+            <td>Visual Basic</td>
+            <td>Microsoft Visual Basic 2005</td>
+            <td>Встроенная</td>
+            <td>MS Windows</td>
+        </tr>
+        <tr>
+            <td>Python 3</td>
+            <td>Python 3.1</td>
+            <td>IDLE или Wing IDE</td>
+            <td>Любая</td>
+        </tr>
+        <tr>
+            <td>Java
+            <td>Oracle JDK 1.6
+            <td>Eclipse JDT
+            <td>Любая</td>
+        </tr>
+    </table>
+
+
+    <p>Загрузить с сайтов</p>
+    <ul>
+        <li>FreePascal – <a href="http://freepascal.org/download.var">http://freepascal.org</a>;</li>
+        <li>MinGW – <a href="http://mingw.org">http://mingw.org</a>;</li>
+        <li>Eclipse – <a href="http://eclipse.org">http://eclipse.org</a>;</li>
+        <li>Code::Blocks – <a href="http://www.codeblocks.org">http://www.codeblocks.org</a>;</li>
+        <li>Far manager – <a href="http://farmanager.com/index.php?l=ru">http://farmanager.com/index.php?l=ru</a></li>
+    </ul>
+
+    <h2>Командные строки для компиляции решений</h2>
+
+
+    <table class="pretty">
+        <thead>
+        <tr>
+            <th>Компилятор</th>
+            <th>Командная строка</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Free Pascal 2.6.0</td>
+            <td>fpc &lt;исходный файл&gt;</td>
+        <tr>
+            <td>GNU С 4.6.1 (MinGW)</td>
+            <td>gcc -O2 -x c –Wl,--stack=67108864 исходный_файл</td>
+        </tr>
+        <tr>
+            <td>Visual C++ 2010</td>
+            <td>cl /O2 /EHs /TP исходный_файл</td>
+        <tr>
+            <td>GNU C++ 4.6.1 (MinGW)</td>
+            <td>g++ -O2 -x c++ –Wl,--stack=67108864 исходный_файл</td>
+        <tr>
+            <td>Borland/Embarcadero Delphi 7.0</td>
+            <td>dcc32 -сс исходный_файл</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>Размер файла с исходным текстом программы не должен превышать <b>256</b> килобайт. Время компиляции программы не
+        должно превышать <b>одной</b> минуты. В случае нарушения этих ограничений решение участника считается
+        неправильным и никакие баллы за эту задачу участнику не начисляются.</p>
+
+    <p>При проверке решений участников процесс предварительной проверки осуществляется в течение тура по мере посылки
+        решений на сервер соревнований. Результаты такой проверки сообщаются участнику сразу после ее завершения. В
+        зависимости от возможностей проверяющей системы на окончательную проверку может приниматься либо последнее
+        прошедшее предварительное тестирование решение одной и той же задачи, либо то, которое он должен указать. В
+        любом случае, участник олимпиады должен быть проинформирован до начала тура, каким образом будет определяться
+        решение, принимаемое системой для окончательной проверки.</p>
+
+    <p>Окончательная проверка и оценивание решений участников может осуществляться либо после окончания тура, либо во
+        время тура, если используемая жюри среда проведения соревнований позволяет это делать. Итоги такой проверки
+        являются предварительными и доводятся индивидуально до сведения каждого участника только после завершения
+        тура.</p>
+
+    <p>В заключение следует отметить, что результатом многократного исполнения программы участника с одними и теми же
+        входными файлами должны быть одинаковые выходные файлы, вне зависимости от времени запуска программы и ее
+        программного окружения. Региональное жюри вправе произвести неограниченное количество запусков программы
+        участника и выбрать наихудший результат по каждому из тестов.</p>
+</div>
+
+</body>
+
+</html>

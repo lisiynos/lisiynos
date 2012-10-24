@@ -1,4 +1,4 @@
-поиск максимального паросочетания (bipartile matching)
+// Поиск максимального паросочетания (bipartile matching)
 
 void dfs(int v, int color) {
   if(u[v] != 0)

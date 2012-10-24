@@ -12,8 +12,8 @@
 <div style="width:80%;">
     <div style="float:right;">
         <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version
-=6,0,0,0" width="100" height="50">
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100" height="50">
             <param name="movie"
                    value="../audio/a_smsqulh3n.swf">
             <param name="bgcolor" value="fff">
@@ -33,6 +33,10 @@
 
     <h1>Битовые поля на С/C++</h1>
 
+    <ul class="tags">
+        <li><a href="#">С/C++</a></li>
+    </ul>
+
     <h2><strong>Работа с отдельными битами числа</strong></h2>
 
     Побитные операции:
@@ -42,8 +46,49 @@
         <li>| - побитное ИЛИ</li>
         <li>~ - побитное НЕ</li>
     </ul>
-
+    <p><strong>Таблица истинности И</strong>:</p>
+    <table width="200" border="1">
+        <tr>
+            <td>&nbsp;</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+    </table>
+    <p><strong>Таблица истинности ИЛИ</strong>:</p>
+    <table width="200" border="1">
+        <tr>
+            <td>&nbsp;</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+    </table>
+    
 <pre class="sh_cpp">
+
+</pre>
+
+    <p><strong>Структура для удобной работы с битами числа:</strong></p>
+  <pre class="sh_cpp">
 struct BF { // BitField
   unsigned int data; // Данные
   int get(int i){ // Получить значение i-ого бита 
@@ -55,8 +100,7 @@ struct BF { // BitField
     // Очищаем нужный бит и объединяем его по принципу ИЛИ с числом в котором все нули, а i-ый бит - value
     data = (data & ~(1 &lt;&lt; i)) | (value &lt;&lt; i);
   };
-};
-</pre>
+};</pre>
 
 </div>
 </body>

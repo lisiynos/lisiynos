@@ -5,3 +5,4 @@ ipch
 *.suo
 *.user
 *.filters
+*.sln

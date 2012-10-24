@@ -1,0 +1,644 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Функциональное программирование (LISP + Haskell)</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_prolog.min.js"></script>
+
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="../highlight/styles/sunburst.css">
+    <script src="../highlight/highlight.pack.js"></script>
+    <script>
+        //        hljs.configure({
+        //            tabReplace: '    ', // 4 spaces
+        //          classPrefix: ''     // don't append class prefix
+        // … other options aren't changed
+        //languages: ['lisp']
+        //    });
+        /*$(document).ready(function () {
+         //hljs.configure({
+         //  languages: 'lisp'
+         //tabReplace: '    ', // 4 spaces
+         //classPrefix: ''     // don't append class prefix
+         // … other options aren't changed
+         //});
+         $('pre').each(function (i, block) {
+         hljs.highlightBlock(block);
+         });
+         }); */
+        //        hljs.initHighlightingOnLoad();
+        $(document).ready(function () {
+            $('pre.lisp').contents().unwrap().wrap('<pre><code class="lisp">');
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+</head>
+<body>
+<div id="content">
+<h1>Функциональные языки программирования: LISP (Scheme/Racket) + Haskell.
+    Использование рекурсии для решения задач</h1>
+
+<ul class="tags">
+    <li><a href="#">Функциональное программирование</a></li>
+    <li><a href="#">Lisp</a></li>
+    <li><a href="#">Haskell</a></li>
+</ul>
+
+<p><strong>Функциональное программирование</strong> &mdash; раздел дискретной математики и парадигма программирования, в
+    которой процесс вычисления трактуется как вычисление значений функций в математическом понимании (в отличие от
+    функций как подпрограмм в процедурном программировании). У функции в математике есть аргументы и результат, она
+    не меняет состояние остальной программы (отсутствуют <b>побочные эффекты</b>).</p>
+
+<p>Противопоставляется парадигме <strong>императивного</strong> программирования, которая описывает процесс
+    вычислений как последовательное изменение состояний (как в теории автоматов). </p>
+
+<p>Функциональное программирование предлагает обходиться вычислением результатов функций от исходных данных и
+    результатов других функций, и не предполагает явного хранения состояния программы. Соответственно, не
+    предполагает оно и изменяемость этого состояния (в отличие от императивного, где одной из базовых концепций
+    является <strong>переменная</strong>, <em>хранящая</em> своё значение и позволяющая <em>менять</em> его по мере
+    выполнения алгоритма). </p>
+
+
+<h3>Сильная (строгая) и слабая типизация</h3>
+
+<p>Слабая типизация - операции приведения типов. Строгая - надо явно приводить тип.</p>
+
+<p><b>Статическая типизация</b> - все типы известны на этапе компиляции.</p>
+
+<p><b>Динамическая типизация</b> - переменная может менять тип в процессе выполнения программы, на этапе компиляции типы
+    неизвестны.</p>
+
+
+<p>&nbsp;</p>
+
+<p>Сформулированная Джоном Мак-Карти (1958) концепция символьной обработки информации компьютером восходит к
+    идеям <a href="http://ru.wikipedia.org/wiki/%D0%A7%D1%91%D1%80%D1%87,_%D0%90%D0%BB%D0%BE%D0%BD%D0%B7%D0%BE"
+             title="Чёрч, Алонзо">Черча</a> и других математиков, известным как <a
+            href="http://ru.wikipedia.org/wiki/%D0%9B%D1%8F%D0%BC%D0%B1%D0%B4%D0%B0-%D0%B8%D1%81%D1%87%D0%B8%D1%81%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5"
+            title="Лямбда-исчисление">лямбда-исчисление</a> с конца 20-х годов XX века. </p>
+
+<p>Выбирая лямбда-исчисление как теоретическую модель, Мак-Карти предложил рассматривать функции как общее базовое
+    понятие, к которому достаточно естественно могут быть сведены все другие понятия, возникающие при
+    программировании. </p>
+
+<p>Существуют различия в понимании <a
+        href="http://ru.wikipedia.org/wiki/%D0%A4%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F_(%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0)"
+        title="Функция (математика)">функции в математике</a> и <a
+        href="http://ru.wikipedia.org/wiki/%D0%A4%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)"
+        title="Функция (программирование)">функции в программировании</a>, вследствие чего нельзя отнести <a
+        href="http://ru.wikipedia.org/wiki/%D0%A1%D0%B8_(%D1%8F%D0%B7%D1%8B%D0%BA_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)"
+        title="Си (язык программирования)">Си</a>-подобные языки к функциональным, использующим менее строгое
+    понятие. Функция в математике не может изменить вызывающее её окружение и запомнить результаты своей работы, а
+    только предоставляет результат вычисления функции.</p>
+
+<p>Программирование с использованием математического понятия функции вызывает некоторые трудности, поэтому
+    функциональные языки, в той или иной степени предоставляют и императивные возможности, что ухудшает дизайн
+    программы (например возможность безболезненных дальнейших изменений). </p>
+
+<p>Дополнительное отличие от <a
+        href="http://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D1%86%D0%B5%D0%B4%D1%83%D1%80%D0%BD%D0%BE%D0%B5_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5"
+        title="Процедурное программирование">императивных языков программирования</a> заключается в декларативности
+    описаний функций. Тексты программ на функциональных языках программирования <em>описывают</em> «как решить
+    задачу», но не <em>предписывают</em> последовательность действий для решения. </p>
+
+<p>Первым функциональным языком стал <a href="http://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D1%81%D0%BF"
+                                        title="Лисп">Лисп</a>.
+    Он был предложен Джоном Мак-Карти в качестве средства исследования границ применимости компьютеров, в частности,
+    методом решения задач искусственного интеллекта. </p>
+
+<p> Вариант данного языка широко используется в системе автоматизированного проектирования <a
+        href="http://ru.wikipedia.org/wiki/AutoCAD" title="AutoCAD">AutoCAD</a> и называется <a
+        href="http://ru.wikipedia.org/wiki/AutoLISP" title="AutoLISP">AutoLISP</a></p>
+
+<p>Основные преимущества функциональных языков:</p>
+
+<h3><strong>Краткость и простота</strong>
+</h3>
+
+<p>Программы на функциональных языках обычно намного короче и проще, чем те же самые программы на императивных
+    языках.<br>
+    <em>Пример (быстрая сортировка Хоара на абстрактном функциональном языке)</em>:</p>
+<pre>
+quickSort ([]) = []
+quickSort ([h : t]) = quickSort ([n | n &isin; t, n &lt;= h) + [h] + quickSort ([n | n &isin; t, n &gt; h])
+</pre>
+<h3><strong> Строгая типизация</strong></h3>
+
+<p>В функциональных языках большая часть ошибок может быть исправлена на стадии компиляции, поэтому стадия отладки и
+    общее время разработки программ сокращаются. Вдобавок к этому строгая типизация позволяет компилятору
+    генерировать более эффективный код и тем самым ускорять выполнение программ.</p>
+
+<p><strong>Модульность</strong></p>
+
+<p>Механизм модульности позволяет разделять программы на несколько сравнительно независимых частей (модулей) с чётко
+    определёнными связями между ними. Тем самым облегчается процесс проектирования и последующей поддержки больших
+    программных систем. Поддержка модульности не является свойством именно функциональных языков программирования,
+    однако поддерживается большинством таких языков.</p>
+
+<p><strong>Функции &mdash; объекты вычисления</strong></p>
+
+<p>В функциональных языках (равно как и вообще в языках программирования и математике) функции могут быть переданы
+    другим функциям в качестве аргумента или возвращены в качестве результата. Функции, принимающие функциональные
+    аргументы, называются функциями высших порядков или функционалами.</p>
+
+<h3>Чистота (нет побочных эффектов)</h3>
+
+<p>В чистом функциональном программировании оператор присваивания отсутствует, объекты нельзя изменять и уничтожать,
+    можно только создавать новые путем декомпозиции и синтеза существующих. О ненужных объектах позаботится
+    встроенный в язык сборщик мусора. Благодаря этому в чистых функциональных языках все функции свободны от
+    побочных эффектов.</p>
+
+<h3><strong>Отложенные (ленивые) вычисления</strong></h3>
+
+<p>В императивных языках программирования (например, C++) вызов функции приводит к вычислению всех аргументов. Этот
+    метод вызова функции называется <strong>вызов-по-значению</strong>. Если какой-либо аргумент не использовался в
+    функции, то результат вычислений пропадает, следовательно, вычисления были произведены впустую.
+    Противоположностью <strong>вызова-по-значению</strong> является <strong>вызов-по-необходимости</strong> (ленивые
+    вычисления). В этом случае аргумент вычисляется, только если он нужен для вычисления результата.</p>
+
+<h2>LISP</h2>
+
+<h3>Скачивание и установка</h3>
+
+<p>Скачать Racket: <a href="http://download.racket-lang.org">http://racket-lang.org</a></p>
+
+
+<p>Программы и данные неотличимы друг от друга &mdash; всё есть списки.</p>
+
+<p>Программа на языке LISP &mdash; список. Первый элемент списка &mdash; имя функции которую надо вызвать,
+    остальные &mdash; аргументы.</p>
+
+    <pre class="lisp">
+       (действие аргумент1 аргумент2 ...)
+    </pre>
+
+<p>Сначала вычисляются аргументы.</p>
+
+<p>Функция <b>list</b> конструирует список:</p>
+
+    <pre><code class="lisp">
+        (list 1 2 3)
+    </code></pre>
+
+<p>Условный оператор (больше похож на тернарный)</p>
+    <pre class="lisp">
+      (if условия если_верно если_нет)
+    </pre>
+
+<p>Объявление функции</p>
+    <pre class="lisp">
+      (define (имя_функции арг1 арг2) (код))
+    </pre>
+
+<p>Объявление константы</p>
+    <pre class="lisp">
+      (define pi 3.14)
+    </pre>
+
+<p>Литералы списков:</p>
+
+    <pre class="lisp">
+    '()  
+    '(2 3 4)
+    </pre>
+
+<p>Конструирование списка из головы и конца:</p>
+    <pre class="lisp">
+    (cons head tail)
+    </pre>
+
+<p>Голова списка</p>
+
+    <pre class="lisp">
+    (car L)
+    </pre>
+
+<p>Хвост списка</p>
+    <pre class="lisp">
+    (cdr L)
+    </pre>
+
+<p>Разберем и построим снова список <code>L</code>:</p>
+    <pre class="lisp">
+    (cons (car L) (cdr L))
+    </pre>
+
+<p>Арифметические функции: + - * /</p>
+
+<p><b>null?</b> &mdash; пуст ли список?</p>
+
+<h3>Вычисление длины списка</h3>
+    <pre class="lisp">
+    (define (length L)
+      (if (null? L)
+         0
+         (+ 1
+            (length (cdr L))
+         (
+      )      
+    )
+    </pre>
+
+<p>
+    <b>Получить элемент списка L с номером n</b>
+</p>
+
+    <pre class="lisp">
+    (define (get L n)
+      (if (= n 0)
+          (car L)
+          (get (cdr L) (- n 1))
+      )
+    )
+    </pre>
+
+<b>Факториал</b>
+
+    <pre class="lisp">
+    (define (fact n)
+      (if (= n 0)
+          1
+          (* n (fact (- n 1)))
+      )
+    )
+    </pre>
+
+<b>Применить одну операцию ко всем элементам списка</b>
+
+    <pre class="lisp">
+    (define (map F L)
+      (if (null? ()
+          '()
+          (cons (F (car L) (map F (cdr ())))
+      )
+    )
+    </pre>
+
+<p><code>(display ... out)</code> &mdash; вывод на экран</p>
+
+<p><code>(read in)</code> &mdash; чтение</p>
+
+<p><code>(close-output-port out)</code> &mdash; закрытие файла (нужно при работе в среде разработки)</p>
+
+
+<p>Тексты программ на функциональных языках программирования <em>описывают</em> «как решить задачу», но не <em>предписывают</em> последовательность
+    действий для решения. </p>
+
+<p>Первым спроектированным функциональным языком стал <a
+        href="http://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D1%81%D0%BF" title="Лисп">Лисп</a>. </p>
+
+<p><strong>Лисп</strong>/<strong>LISP</strong> (<em><span lang="en"
+                                                          xml:lang="en"><strong>LIS</strong>t <strong>P</strong>rocessing language</span></em> -
+    «язык обработки списков») &mdash; семейство ЯП, программы и данные в которых представляются системой вложенных
+    списков.</p>
+
+<p>Лисп является вторым в истории (после Фортрана) используемым по сей день высокоуровневым языком
+    программирования. </p>
+
+<p><a href="http://ru.wikipedia.org/wiki/Лисп">http://ru.wikipedia.org/wiki/Лисп</a></p>
+
+<h2>Haskell</h2>
+
+<p><strong>Haskell (Хаскель, Хаскелл)</strong> - стандартизованный чистый функциональный ЯП общего назначения (один
+    из самых распространённых с поддержкой отложенных/ленивых вычислений). Типизация строгая, статическая, с
+    автоматическим выводом типов. </p>
+
+<p>Концепция языка отражает идею математика Хаскелла Карри, писавшего, что «доказательство &mdash; это программа, а
+    доказываемая формула &mdash; это тип программы». Именно в честь Х. Карри язык и получил своё название. </p>
+
+<h2>Решение задач на LISP</h2>
+
+<pre class="lisp">
+#lang racket
+
+;; Демонстрация стандартных функций LISP
+;; display вывод на экран 
+(display "Это LISP :) ")
+(display "Тут можно складывать сразу много чисел: ")
+;; Первый параметр списка - функция, остальные - аргументы
+(+ 1 2 4 -10)
+(display " ..и умножать тоже... ")
+(* 2 3 4)
+(display ".. вычитаем из первого аргумента все остальные..")
+(- 10 5 5)
+(display ".. делим первый аргумент на все остальные..")
+(/ 1 2 3)
+
+(display "Остаток от деления 5 на 3: ")
+(remainder 5 3)
+
+(display "Логические операции: ")
+(display "Логическое И: ")
+(and #f #f) (and #f #t) (and #t #f) (and #t #t)
+
+(display "Логическое ИЛИ: ") (newline)
+(or #f #f) (or #f #t) (or #t #f) (or #t #t)
+
+(display "Сравнение (операция равно): ")
+(eq? 2 1) 
+
+(display "Не равно: ")
+(not (eq? 2 1))
+</pre>
+
+<h3>Наибольший общий делитель</h3>
+
+<pre class="lisp">
+#lang racket
+; Открываем входной файл как in
+(define in (open-input-file "gcd.in"))
+; Открываем выходной файл как out, перезаписываем его если он уже есть
+(define out (open-output-file "gcd.out" #:exists 'replace))
+; Функция gcd, если y равен нулю, то возвращает x,
+; иначе вызывает саму себя с параметрами y и остаток от деления x на y
+(define (gcd x y) (if (zero? y) x (gcd y (remainder x y))))
+; Считываем два числа из входного файла, передаём их на вход функции gcd и выводим в выходной файл ответ
+(display (gcd (read in) (read in)) out)
+; Сбрасываем буфер вывода
+(flush-output out)
+</pre>
+
+<h3>Разворот списка</h3>
+<pre class="lisp">
+#lang racket
+(define (R L)
+  (if (null? L) ;; Если список пустой,
+      L  ;; то возвращаем его же
+      (append (R (cdr L)) ;; переворачиваем конец
+              (list (car L))
+              )
+      )
+  )
+
+;; Тесты
+(R '())
+(R '(1))
+(R '(1 2)) ;; '(2 1)
+(R '(1 2 3))
+(R '(234 34 2 3))
+</pre>
+
+<h3>Скобки</h3>
+<pre class="lisp">
+#lang racket
+
+;; Открывающая скобка
+(define (openBracket x)
+  (or (eq? x #\() (eq? x #\[) (eq? x #\{)))
+
+;; Закрывающая скобка
+(define (closeBracket x)
+  (or (eq? x #\)) (eq? x #\]) (eq? x #\})))
+
+
+;; Правильная закрывающая скобка
+(define (match open close)
+  (or (and (eq? open #\() (eq? close #\)))
+      (and (eq? open #\[) (eq? close #\]))
+      (and (eq? open #\{) (eq? close #\}))
+      )
+  )
+
+
+
+(define (check L s)
+  (if (null? L)
+      (null? s)
+      (if (openBracket (car L)) ;; Открывающая скобка
+          (check (cdr L) (cons (car L) s))
+          (if (closeBracket (car L))
+              (if (null? s)
+                  #f ;; Пустой стек
+                  (and (match (car s) (car L)) ;; На вершине стека должна быть нужная скобка => продолжаем
+                      (check (cdr L) (cdr s)) ;; И дальше всё в порядке
+                      )
+                  )
+              #f ;; Неверный символ
+              )
+          )
+      )
+  )
+
+(define (checkStr s)
+  (check (string->list s) '()))
+
+;; Тесты
+(checkStr "")
+(checkStr "()")
+(checkStr "(())")
+(checkStr "([])")
+(checkStr "([{}])")
+(checkStr "(]")
+(checkStr "(()")
+</pre>
+
+<h3>Быстрое возведение в степень</h3>
+
+<pre class="lisp">
+#lang racket
+
+;; a в степени b
+(define (pow a b)
+  (if (eq? b 0)
+      1  ;; a^0 = 1
+      (if(eq? (remainder b 2) 0) ;; Если b - чётная
+         (* (pow a (/ b 2)) ;; то делим степень на 2
+            (pow a (/ b 2))
+            )
+         (* a (pow a (- b 1)))
+         )
+      )
+  )
+
+(pow 2 0)
+(pow 2 1)
+(pow 2 2)
+(pow 2 3)
+</pre>
+
+
+<h3>Обратная польская нотация</h3>
+
+<pre class="lisp">
+#lang racket
+; Открываем входной файл как in
+(define in(open-input-file"rpn.in"))
+; Открываем выходной файл как out, перезаписываем его если он уже есть
+(define out(open-output-file"rpn.out"#:exists 'replace))
+
+; Выполнение операции
+(define (do f e s operation)
+  (f
+   (cdr e)
+   (cons (operation (car (cdr s)) (car s)) (cdr (cdr s)))))
+
+; Функция f: e - оставшаяся часть выражения, s - стек
+(define (f e s)
+  (if(null? e)
+     (car s)
+     (if(eq? (car e) '+) (do f e s +)
+        (if(eq? (car e) '-) (do f e s -)
+           (if(eq? (car e) '*) (do f e s *)
+              (if(eq? (car e) '/) (do f e s /)
+                 (f (cdr e) (cons (car e) s)))
+              )))))
+
+; Считываем из входного файла, подаём на вход функции f и выводим результат в выходной файл
+(display (f (read in) '()) out)
+; Сбрасываем буфер вывода
+(flush-output out)
+</pre>
+
+<pre style='color:#000000;background:#ffffff;'><html>
+<body style='color:#000000; background:#ffffff; '>
+<pre>
+#lang racket
+<span style='color:#696969; '>; Открываем входной файл как in</span>
+<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>define</span> in<span
+        style='color:#808030; '>(</span><span
+        style='color:#800000; font-weight:bold; '>open-input-file"rpn.in"</span><span
+        style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
+<span style='color:#696969; '>; Открываем выходной файл как out, перезаписываем его если он уже есть</span>
+<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>define</span> out<span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>open-output-file"rpn.out"#:exists</span> <span
+        style='color:#800080; '>'replace</span><span style='color:#808030; '>)</span><span
+        style='color:#808030; '>)</span>
+
+<span style='color:#696969; '>; Выполнение операции</span>
+<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>define</span> <span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>do</span> f e s operation<span
+        style='color:#808030; '>)</span>
+  <span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>f</span>
+   <span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>cdr</span> e<span
+        style='color:#808030; '>)</span>
+   <span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>cons</span> <span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>operation</span> <span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>car</span> <span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>cdr</span> s<span
+        style='color:#808030; '>)</span><span style='color:#808030; '>)</span> <span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>car</span> s<span
+        style='color:#808030; '>)</span><span style='color:#808030; '>)</span> <span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>cdr</span> <span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>cdr</span> s<span
+        style='color:#808030; '>)</span><span style='color:#808030; '>)</span><span
+        style='color:#808030; '>)</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
+
+<span style='color:#696969; '>; Функция f: e - оставшаяся часть выражения, s - стек</span>
+<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>define</span> <span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>f</span> e s<span
+        style='color:#808030; '>)</span>
+  <span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>if</span><span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>null?</span> e<span
+        style='color:#808030; '>)</span>
+     <span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>car</span> s<span
+        style='color:#808030; '>)</span>
+     <span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>if</span><span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>eq?</span> <span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>car</span> e<span
+        style='color:#808030; '>)</span> <span style='color:#800080; '>'+</span><span
+        style='color:#808030; '>)</span> <span style='color:#808030; '>(</span><span
+        style='color:#800000; font-weight:bold; '>do</span> f e s <span style='color:#808030; '>+</span><span
+        style='color:#808030; '>)</span>
+        <span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>if</span><span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>eq?</span> <span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>car</span> e<span
+        style='color:#808030; '>)</span> <span style='color:#800080; '>'-</span><span
+        style='color:#808030; '>)</span> <span style='color:#808030; '>(</span><span
+        style='color:#800000; font-weight:bold; '>do</span> f e s -<span style='color:#808030; '>)</span>
+           <span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>if</span><span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>eq?</span> <span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>car</span> e<span
+        style='color:#808030; '>)</span> <span style='color:#800080; '>'*</span><span
+        style='color:#808030; '>)</span> <span style='color:#808030; '>(</span><span
+        style='color:#800000; font-weight:bold; '>do</span> f e s *<span style='color:#808030; '>)</span>
+              <span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>if</span><span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>eq?</span> <span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>car</span> e<span
+        style='color:#808030; '>)</span> <span style='color:#800080; '>'</span><span
+        style='color:#808030; '>/</span><span style='color:#808030; '>)</span> <span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>do</span> f e s <span
+        style='color:#808030; '>/</span><span style='color:#808030; '>)</span>
+                 <span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>f</span> <span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>cdr</span> e<span
+        style='color:#808030; '>)</span> <span style='color:#808030; '>(</span><span
+        style='color:#800000; font-weight:bold; '>cons</span> <span style='color:#808030; '>(</span><span
+        style='color:#800000; font-weight:bold; '>car</span> e<span style='color:#808030; '>)</span> s<span
+        style='color:#808030; '>)</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
+              <span style='color:#808030; '>)</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span><span
+        style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
+
+<span style='color:#696969; '>; Считываем из входного файла, подаём на вход функции f и выводим результат в выходной файл</span>
+<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>display</span> <span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>f</span> <span
+        style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>read</span> in<span
+        style='color:#808030; '>)</span> <span style='color:#800080; '>'</span><span
+        style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span> out<span
+        style='color:#808030; '>)</span>
+<span style='color:#696969; '>; Сбрасываем буфер вывода</span>
+<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>flush-output</span> out<span
+        style='color:#808030; '>)</span>
+</pre>
+
+<h3>Haskell - строгая типизация</h3>
+
+
+<pre class="haskell">
+
+</pre>
+
+<h2>Логическое программирование - Prolog</h2>
+
+<p><strong>Пролог</strong> (фр. <strong>Pro</strong>grammation en <strong>Log</strong>ique) - язык и система
+    логического программирования, основанные на языке предикатов математической логики дизъюнктов Хорна,
+    представляющей собой подмножество логики предикатов первого порядка.
+
+</p>
+
+<p>Основными понятиями в языке Пролог являются факты, правила логического вывода и запросы, позволяющие описывать
+    базы знаний, процедуры логического вывода и принятия решений.
+
+</p>
+
+<p><strong>Факты</strong> в языке Пролог описываются логическими предикатами с конкретными значениями. </p>
+
+<p><strong>Правила</strong> в Прологе записываются в форме правил логического вывода с логическими заключениями и
+    списком логических условий. </p>
+
+<p>Особую роль в интерпретаторе Пролога играют конкретные запросы к базам знаний, на которые система логического
+    программирования генерирует ответы «истина» и «ложь». Для обобщённых запросов с переменными в качестве
+    аргументов созданная система Пролог выводит конкретные данные в подтверждение истинности обобщённых сведений и
+    правил вывода.</p>
+
+<p>Факты в базах знаний на языке Пролог представляют конкретные сведения (знания). </p>
+
+<p>Обобщённые сведения и знания в языке Пролог задаются правилами логического вывода (определениями) и наборами
+    таких правил вывода (определений) над конкретными фактами и обобщёнными сведениями.
+</p>
+
+<p>Начало истории языка относится к 1970-м годам. </p>
+
+<p>Будучи декларативным языком программирования, Пролог воспринимает в качестве программы некоторое описание задачи
+    или баз знаний и сам производит логический вывод, а также поиск решения задач, пользуясь механизмом поиска с
+    возвратом и унификацией.
+
+</p>
+
+<p>Пролог критикуется в первую очередь за неполную декларативную природу. Создание программ в полностью
+    декларативном стиле практически невозможно, требуется прибегать к процедурным приёмам, что приводит к резкому
+    возрастанию сложности создания и отладки программ, а также плохой контролируемости промежуточных
+    результатов. </p>
+
+<p>Другим часто подвергаемым критике свойством языка является отсутствие типизации. В языке предопределён порядок
+    обхода дерева решений в глубину и стандартизированы операторы, позволяющие вмешиваться в этот процесс (такие как
+    оператор отсечения ! или ветвления ->) и не позволяющие распараллелить программу, задействовав в поиске решения
+    несколько процессоров или узлов сети.</p></div>
+
+
+</body>
+</html>
+
+

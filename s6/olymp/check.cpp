@@ -1,7 +1,7 @@
 //#include <cmath>
 #include "testlib.h"
 
-int main( int argc, char* argv[] ) {
+int main( int argc, char* argv[]) {
   setName("Чекер для задачи A+B");
   registerTestlibCmd(argc, argv);
   int a = inf.readInt(), b = inf.readInt(); // Чтение исходных данных

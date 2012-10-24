@@ -1,151 +1,144 @@
 <html>
 <head>
-  <meta http-equiv=Content-Type content="text/html; charset=utf-8">
-  <title>Машины Тьюринга и система Поста</title>
-  <link rel="stylesheet" type="text/css" href="../../style/style.css">
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Машины Тьюринга и система Поста</title>
+    <link rel="stylesheet" type="text/css" href="../../style/style.css">
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-  </script>
-  <script type="text/javascript"
-          src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
 
 </head>
 <body>
 <div style="width:80%;">
-  <div style="float:right;">
-    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-            codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swfla
-sh.cab#version=6,0,0,0" width="100" height="50">
-      <param name="movie"
-             value="../../audio/a_smsqulh3n.swf">
-      <param name="bgcolor"
-             value="fff">
-      <param name="FlashVars"
-             value="src=../audio/8016574696f613132301------------ffffff">
-      <param
-          name="autoplay" value="false">
-      <embed src="../../audio/a_smsqulh3n.swf"
-             bgcolor="fff" width="100" height="70" type="application/x-shockwave-
-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="src=../audio/8016574696f613132301------------ffffff"></embed>
-    </object>
-  </div>
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100" height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param name="FlashVars" value="src=../audio/8016574696f613132301------------ffffff">
+            <param name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff" width="100" height="70"
+                   type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=../audio/8016574696f613132301------------ffffff"></embed>
+        </object>
+    </div>
 </div>
 
 <div id="content">
 <h1>Машины Тьюринга и система Поста</h1>
 
-<h2><strong>Машины Тьюринга</span></strong></h2>
+<h2><strong>Машины Тьюринга</strong></h2>
 
 <p><strong>Машина Тьюринга</strong> - конечный автомат с подсоединенной к нему лентой бесконечной длины, на
-  которую он может записывать выходные сигналы и которая является в то же время
-  источником входных сигналов. </p>
+    которую он может записывать выходные сигналы и которая является в то же время
+    источником входных сигналов. </p>
 
 <p>Чтобы управлять процессом считывания и записи, машина может передвигать ленту влево, вправо,
-  либо оставлять на месте. Важная особенность этой модели - дискретность. Лента
-  считается разделенной на клетки, в каждую из которых записывается только один
-  символ.</p>
+    либо оставлять на месте. Важная особенность этой модели - дискретность. Лента
+    считается разделенной на клетки, в каждую из которых записывается только один
+    символ.</p>
 
 <p align=center style='text-align:center;text-indent:21.3pt;'><img
-    width=299 height=94 src="img/image004.jpg"></span></p>
+        width=299 height=94 src="img/image004.jpg"></p>
 
 <p>Лента машины Тьюринга является ее важнейшим элементом, она моделирует всю внешнюю среду.
-  Конечно, внешняя среда на самом деле тоже имеет свои границы, хотя бы в силу
-  ограниченности Вселенной, но для наших целей это не слишком обременительное
-  ограничение. Машина Тьюринга гораздо лучше моделирует реальный компьютер, чем
-  конечный автомат. Действительно, все внешние устройства можно считать лентой
-  конечной длины, которая может наращиваться (увеличение емкости внешних
-  устройств памяти) по мере необходимости.</p>
+    Конечно, внешняя среда на самом деле тоже имеет свои границы, хотя бы в силу
+    ограниченности Вселенной, но для наших целей это не слишком обременительное
+    ограничение. Машина Тьюринга гораздо лучше моделирует реальный компьютер, чем
+    конечный автомат. Действительно, все внешние устройства можно считать лентой
+    конечной длины, которая может наращиваться (увеличение емкости внешних
+    устройств памяти) по мере необходимости.</p>
 
-<h2>Тезис Тьюринга</span></h2>
+<h2>Тезис Тьюринга</h2>
 
 <p><strong>Если у задачи есть алгоритм решения, то можно построить
-  такую машину Тьюринга, которая решает эту задачу.</span></strong></p>
+    такую машину Тьюринга, которая решает эту задачу.</span></strong></p>
 
 <p>На первый
-  взгляд этот тезис кажется теоремой, но доказать ее нельзя, так как у нас нет
-  строгого определения алгоритма. </span></p>
+    взгляд этот тезис кажется теоремой, но доказать ее нельзя, так как у нас нет
+    строгого определения алоритма. </span></p>
 
 <p>Кому-то,
-  наоборот, это может показаться очевидным, так как мы привыкли отождествлять
-  алгоритм с его программной реализацией на компьютере. Но как раз последнее
-  утверждение и надо доказывать. Компьютер - это инженерное устройство, имеющее
-  точное описание, машина Тьюринга - понятие абстрактное, но тоже имеющее строгое
-  математическое описание; и то, что обе машины - реальная (почти реальная, так
-  как память разрешается наращивать без ограничений) и теоретическая - имеют
-  одинаковые возможности, не совсем очевидно. Более того, на первый взгляд
-  возможности компьютера гораздо шире возможностей машины Тьюринга. И все же
-  можно доказать, что эти устройства равносильны, и все, что может сделать
-  компьютер с неограниченной памятью, может выполнить машина Тьюринга. Для
-  теоретических целей она гораздо удобнее, так как ее чрезвычайно простое
-  устройство не затемняет основных свойств алгоритмов.</span></p>
+    наоборот, это может показаться очевидным, так как мы привыкли отождествлять
+    алгоритм с его программной реализацией на компьютере. Но как раз последнее
+    утверждение и надо доказывать. Компьютер - это инженерное устройство, имеющее
+    точное описание, машина Тьюринга - понятие абстрактное, но тоже имеющее строгое
+    математическое описание; и то, что обе машины - реальная (почти реальная, так
+    как память разрешается наращивать без ограничений) и теоретическая - имеют
+    одинаковые возможности, не совсем очевидно. Более того, на первый взгляд
+    возможности компьютера гораздо шире возможностей машины Тьюринга. И все же
+    можно доказать, что эти устройства равносильны, и все, что может сделать
+    компьютер с неограниченной памятью, может выполнить машина Тьюринга. Для
+    теоретических целей она гораздо удобнее, так как ее чрезвычайно простое
+    устройство не затемняет основных свойств алгоритмов.</p>
 
 <p>Идея машины
-  Тьюринга появилась в 1936 году, когда не было еще электронной вычислительной
-  техники. Фактически, это и была первая попытка создать <i>теоретический
-    компьютер</i> как способ строгого определения алгоритма.</span></p>
+    Тьюринга появилась в 1936 году, когда не было еще электронной вычислительной техники. Фактически, это и была первая
+    попытка создать <i>теоретический компьютер</i> как способ строгого определения алгоритма.</p>
 
-<h2><strong>Описание машины
-  Тьюринга</span></strong></h2>
+<h2><strong>Описание машины Тьюринга</strong></h2>
 
-<p>Машину Тьюринга
-  можно описать:</p>
+<p>Машину Тьюринга можно описать:</p>
 <ul>
-  <li> с помощью таблицы (в таблице, кроме нового состояния и выходного
-    символа, нужно описать еще и результат сдвига ленты).
-  </li>
-  <li> в виде графа, при этом результат сдвига ленты можно записывать в <!-- невнятное построение фразы -->
-    вершину графа (дуги, соответствующие сохранению состояния и символа на ленте,
-    когда входной символ,  считывающийся с ленты, совпадает с выходным символом,
-    который пишется на ленту, можно опускать, чтобы не перегружать схему).
-  </li>
+    <li> с помощью таблицы (в таблице, кроме нового состояния и выходного
+        символа, нужно описать еще и результат сдвига ленты).
+    </li>
+    <li> в виде графа, при этом результат сдвига ленты можно записывать в <!-- невнятное построение фразы -->
+        вершину графа (дуги, соответствующие сохранению состояния и символа на ленте,
+        когда входной символ,  считывающийся с ленты, совпадает с выходным символом,
+        который пишется на ленту, можно опускать, чтобы не перегружать схему).
+    </li>
 </ul>
 <p>Таблицу можно не рисовать, а лишь перечислить все ее
-  элементы. Например, набор пятерок (</span>Q</span><sub>1</span></sub> </span>a</span><sub>1</span></sub> </span>
-  Q</span><sub>2</span></sub> </span>a</span><sub>2</span></sub> </span>T</span>) описывает машину Тьюринга, где </span>
-  Q</span><sub>1</span></sub> - исходное состояние машины, </span>a</span><sub>1</span></sub>- просматриваемый символ
-  ленты (входной символ), </span>Q</span><sub>2</span></sub> - новое состояние машины, </span>a</span>
-  <sub>2</span></sub>- символ, записываемый на ленту, </span>T</span> - указатель сдвига ленты
-  (Т=</span>R</span>-переход
-  к просмотру правого символа, Т=</span>L</span> - левого,  если, вместо Т, стоит прочерк, то это означает,
-  что сдвига ленты не происходит).</span></p>
+    элементы. Например, набор пятерок (</span>Q</span><sub>1</span></sub> </span>a</span><sub>1</span></sub> </span>
+    Q</span><sub>2</span></sub> </span>a</span><sub>2</span></sub> </span>T</span>) описывает машину Тьюринга,
+    где </span>
+    Q</span><sub>1</span></sub> - исходное состояние машины, </span>a</span><sub>1</span></sub>- просматриваемый символ
+    ленты (входной символ), </span>Q</span><sub>2</span></sub> - новое состояние машины, </span>a</span>
+    <sub>2</span></sub>- символ, записываемый на ленту, </span>T</span> - указатель сдвига ленты
+    (Т=</span>R</span>-переход
+    к просмотру правого символа, Т=</span>L</span> - левого,  если, вместо Т, стоит прочерк, то это означает,
+    что сдвига ленты не происходит).</span></p>
 
 <p><i>Пример.</span></i></p>
 
 <p>Рассмотрим
-  машину Тьюринга, которая осуществляет перевод записи натурального числа из
-  единичного кода в двоичный. Единичный код числа </span>N</span> - это </span>N</span> единиц, записанных подряд
-  на ленте (остальные клетки ленты пусты или заполнены нулями).</span></p>
+    машину Тьюринга, которая осуществляет перевод записи натурального числа из
+    единичного кода в двоичный. Единичный код числа </span>N</span> - это </span>N</span> единиц, записанных подряд
+    на ленте (остальные клетки ленты пусты или заполнены нулями).</span></p>
 
 <p><i>Замечание.</span></i></p>
 
 <p>Конечного
-  автомата для решения этой задачи не существует. <em>Доказательство:</em> Действительно, пусть такой
-  автомат существует и </span><span lang=EN-US style='font-size:12.0pt;
+    автомата для решения этой задачи не существует. <em>Доказательство:</em> Действительно, пусть такой
+    автомат существует и </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>M</span><span style='font-size:12.0pt;line-height:
 92%;color:black'> - число его состояний. Переведем в двоичную запись число из 2</span><sup>M</span></sup> единиц. Тогда
-  на выходе
-  должна получиться единица с </span><span lang=EN-US style='font-size:12.0pt;
+    на выходе
+    должна получиться единица с </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>M</span><span style='font-size:12.0pt;line-height:
 92%;color:black'> нулями. Но на вход автомата подается постоянный символ
     (единица), поэтому последовательность на выходе должна повторяться не более,
     чем через </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>M</span>
-  (число всех состояний автомата) символов. Следовательно, единица с </span>M</span> нулями на выходе
-  появиться не может.</span></p>
+    (число всех состояний автомата) символов. Следовательно, единица с </span>M</span> нулями на выходе
+    появиться не может.</p>
 
-<p><i>Идея решения.</span></i></p>
+<p><i>Идея решения.</i></p>
 
 <p>Идея решения связана с алгоритмом перевода числа в двоичную
-  систему - делением его на 2 с выделением частного и остатка. При этом остаток -
-  есть очередная (с конца) цифра, а к частному применяются те же операции. Работа
-  заканчивается, когда частное равно нулю.</span></p>
+    систему - делением его на 2 с выделением частного и остатка. При этом остаток -
+    есть очередная (с конца) цифра, а к частному применяются те же операции. Работа
+    заканчивается, когда частное равно нулю.</span></p>
 
 <p>Деление на 2
-  моделируется в машине Тьюринга вычеркиванием единиц через одну (заменой их
-  другим символом, например, </span><span lang=EN-US style='font-size:12.0pt;
+    моделируется в машине Тьюринга вычеркиванием единиц через одну (заменой их
+    другим символом, например, </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>x</span><span style='font-size:12.0pt;line-height:
 92%;color:black'>), При встрече с очередной единицей происходит переход из
     состояния </span><span lang=EN-US style='font-size:12.0pt;
@@ -158,7 +151,7 @@ color:black'>(нечет) или наоборот. Остаток  опреде
       четностью-нечетностью числа просмотренных единиц, то есть, если при встрече с
       нулем (предполагается, что все клетки ленты, кроме единиц, изображающих число,
       заполнены нулями) текущим состоянием будет </span>Q</span><sub>0</span></sub>, то остаток равен 0, и
-  состояние </span><span lang=EN-US style='font-size:12.0pt;
+    состояние </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>Q</span><sub><span style='font-size:12.0pt;
 color:black'>0</span></sub><span style='font-size:12.0pt;
 color:black'> переходит в состояние </span><span lang=EN-US style='font-size:
@@ -169,16 +162,16 @@ color:black'>(запоминается остаток 0), если при вст
 color:black'>Q</span><sub><span style='font-size:12.0pt;
 color:black'>1</span></sub><span style='font-size:12.0pt;
 color:black'>, то остаток равен 1, и состояние </span>Q</span><sub>1</span></sub> переходит в состояние </span>Q</span>
-  <sub>3 </span></sub>(запоминается остаток 1).
-  Все эти действия совершаются при движении ленты в одну сторону. При обратном
-  (холостом) движении ленты ни количество оставшихся единиц, ни количество
-  символов х (вычеркнутых единиц) не меняется. После встречи нуля,
-  ограничивающего число с другой стороны, вместо него ставится один из двух
-  знаков: <i>а, </i>если остаток равен нулю,  или </span><i>b</span></i>, если остаток равен
-  единице. Это и есть очередная (с конца) цифра числа в двоичной записи. Теперь
-  движение ленты пойдет в обратном направлении, при этом состояние </span>Q</span><sub>2 </span></sub>(или </span>
-  Q</span><sub>3</span></sub>)<sub> </sub> переходит в
-  состояние </span><span lang=EN-US style='font-size:12.0pt;
+    <sub>3 </span></sub>(запоминается остаток 1).
+    Все эти действия совершаются при движении ленты в одну сторону. При обратном
+    (холостом) движении ленты ни количество оставшихся единиц, ни количество
+    символов х (вычеркнутых единиц) не меняется. После встречи нуля,
+    ограничивающего число с другой стороны, вместо него ставится один из двух
+    знаков: <i>а, </i>если остаток равен нулю,  или </span><i>b</span></i>, если остаток равен
+    единице. Это и есть очередная (с конца) цифра числа в двоичной записи. Теперь
+    движение ленты пойдет в обратном направлении, при этом состояние </span>Q</span><sub>2 </span></sub>(или </span>
+    Q</span><sub>3</span></sub>)<sub> </sub> переходит в
+    состояние </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>Q</span><sub><span style='font-size:12.0pt;
 color:black'>4</span></sub><span style='font-size:12.0pt;
 color:black'>, которое имеет смысл поиска начала текущего частного и
@@ -186,770 +179,644 @@ color:black'>, которое имеет смысл поиска начала т
   или нулем. </span></p>
 
 <p>Ниже
-  представлены состояния ленты в моменты перехода в состояние </span>Q</span><sub>4</span></sub>, то есть перед
-  очередным
-  движением вправо. В первой строке представлено исходное состояние ленты.</span></p>
+    представлены состояния ленты в моменты перехода в состояние </span>Q</span><sub>4</span></sub>, то есть перед
+    очередным
+    движением вправо. В первой строке представлено исходное состояние ленты.</span></p>
 <table border=1 cellspacing=0 cellpadding=0
        style='border-collapse:collapse;border:none'>
 <tr>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0  5.4pt 0  5.4pt'>
-    <p>0</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+        <p>0</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0  5.4pt 0  5.4pt'>
-    <p>1</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+        <p>1</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0  5.4pt 0  5.4pt'>
-    <p>1</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+        <p>1</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0  5.4pt 0  5.4pt'>
-    <p>1</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+        <p>1</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0  5.4pt 0  5.4pt'>
-    <p>1</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+        <p>1</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0  5.4pt 0  5.4pt'>
-    <p>1</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+        <p>1</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0  5.4pt 0  5.4pt'>
-    <p>1</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+        <p>1</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0  5.4pt 0  5.4pt'>
-    <p>1</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+        <p>1</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0  5.4pt 0  5.4pt'>
-    <p>1</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+        <p>1</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0  5.4pt 0  5.4pt'>
-    <p>1</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+        <p>1</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0  5.4pt 0  5.4pt'>
-    <p>1</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+        <p>1</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0  5.4pt 0  5.4pt'>
-    <p>0</span></p>
-  </td>
+        <p>0</span></p>
+    </td>
 </tr>
 <tr>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
+        <p>&nbsp;</span></p>
+    </td>
 </tr>
 <tr>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>a</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>a</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>1</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>1</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>1</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>1</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>1</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>1</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>1</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>1</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>1</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>1</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>0</span></p>
-  </td>
+        <p>0</span></p>
+    </td>
 </tr>
 <tr>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p><span
-        style='font-size:12.0pt;font-family:Symbol;color:black'>D</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p><span
+                style='font-size:12.0pt;font-family:Symbol;color:black'>D</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
+        <p>&nbsp;</span></p>
+    </td>
 </tr>
 <tr>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>b</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>b</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>a</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>a</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>1</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>1</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>1</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>1</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>0</span></p>
-  </td>
+        <p>0</span></p>
+    </td>
 </tr>
 <tr>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p><span
-        style='font-size:12.0pt;font-family:Symbol;color:black'>D</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p><span
+                style='font-size:12.0pt;font-family:Symbol;color:black'>D</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
+        <p>&nbsp;</span></p>
+    </td>
 </tr>
 <tr>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>a</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>a</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>b</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>b</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>a</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>a</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>1</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>1</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>0</span></p>
-  </td>
+        <p>0</span></p>
+    </td>
 </tr>
 <tr>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p><span
-        style='font-size:12.0pt;font-family:Symbol;color:black'>D</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p><span
+                style='font-size:12.0pt;font-family:Symbol;color:black'>D</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
+        <p>&nbsp;</span></p>
+    </td>
 </tr>
 <tr>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0  5.4pt 0  5.4pt'>
-    <p>b</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>b</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>a</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>a</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>b</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>b</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>a</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>a</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>x</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>x</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>0</span></p>
-  </td>
+        <p>0</span></p>
+    </td>
 </tr>
 <tr>
-  <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
+    <td width=43 valign=top style='width:31.9pt;border:solid windowtext 1.0pt;
   border-top:none;padding:0  5.4pt 0  5.4pt'>
-    <p><span
-        style='font-size:12.0pt;font-family:Symbol;color:black'>D</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p><span
+                style='font-size:12.0pt;font-family:Symbol;color:black'>D</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
-  <td width=43 valign=top style='width:31.9pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+        <p>&nbsp;</span></p>
+    </td>
+    <td width=43 valign=top style='width:31.9pt;border-style: none;border-right: 1.0pt solid windowtext;border-bottom: 1.0pt solid windowtext;
   padding:0  5.4pt 0  5.4pt'>
-    <p>&nbsp;</span></p>
-  </td>
+        <p>&nbsp;</span></p>
+    </td>
 </tr>
 </table>
 
 <p>&nbsp;</span></p>
 
 <p>Построим теперь
-  граф машины Тьюринга, решающей эту задачу. Ее описание, как  уже упоминалось
-  выше, можно представить наборами из пяти символов (считываемый символ,
-  состояние, записываемый символ, новое состояние, переход на просмотр соседнего
-  символа).</span></p>
+    граф машины Тьюринга, решающей эту задачу. Ее описание, как  уже упоминалось
+    выше, можно представить наборами из пяти символов (считываемый символ,
+    состояние, записываемый символ, новое состояние, переход на просмотр соседнего
+    символа).</span></p>
 
 <p>&nbsp;</span></p>
 
@@ -959,47 +826,47 @@ color:black'>, которое имеет смысл поиска начала т
 <p>&nbsp;</span></p>
 
 <p>В начальный
-  момент лента установлена так, что обозревается самая левая единица числа.</span></p>
+    момент лента установлена так, что обозревается самая левая единица числа.</span></p>
 
 <p>Q</span><sub>0 </span></sub>1 </span>Q</span><sub>1</span></sub> </span>x</span> </span>R</span> {обозревается левая
-  единица числа, она заменяется на </span><span lang=EN-US style='font-size:12.0pt;
+    единица числа, она заменяется на </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>x</span><span style='font-size:12.0pt;line-height:
 92%;color:black'> (вычеркивается), и </span></p>
 
 <p style='text-align:justify;text-indent:2.0cm;line-height:
 92%'>машина
-  переходит к просмотру правого соседнего символа};</span></p>
+    переходит к просмотру правого соседнего символа};</span></p>
 
 <p>Q</span><sub>1</span></sub> 1 </span>Q</span><sub>0</span></sub> 1 </span>R</span> (следующая "четная"
-  единица сохраняется}; </span></p>
+    единица сохраняется}; </span></p>
 
 <p>Q<sub>0</span></sub> 0 </span>Q</span><sub>2</span></sub> - </span>L</span> {если все единицы
-  просмотрены (то есть очередной символ - ноль) и их число</span></p>
+    просмотрены (то есть очередной символ - ноль) и их число</span></p>
 
 <p style='text-align:justify;text-indent:2.0cm;line-height:
 92%'> четно
-  (состояние </span><span lang=EN-US style='font-size:12.0pt;
+    (состояние </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>Q</span><sub><span style='font-size:12.0pt;
 color:black'>0</span></sub><span style='font-size:12.0pt;
 color:black'>), запоминаем четность или, что то же самое, остаток 0 </span></p>
 
 <p style='text-align:justify;text-indent:2.0cm;line-height:
 92%'>(переход в
-  состояние </span><span lang=EN-US style='font-size:12.0pt;
+    состояние </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>Q</span><sub><span style='font-size:12.0pt;
 color:black'>2</span></sub><span style='font-size:12.0pt;
 color:black'>) и начинаем передвигать ленту в обратном </span></p>
 
 <p style='text-align:justify;text-indent:2.0cm;line-height:
 92%'>направлении без
-  изменения ее содержания};</span></p>
+    изменения ее содержания};</span></p>
 
 <p>Q</span><sub>1</span></sub> 0 </span>Q</span><sub>3</span></sub>- </span>L</span> {действие, аналогичное
-  предыдущему, но с запоминанием нечетности </span></p>
+    предыдущему, но с запоминанием нечетности </span></p>
 
 <p style='text-align:justify;text-indent:2.0cm;line-height:
 92%'>просмотренных
-  единиц (состояние </span><span lang=EN-US style='font-size:12.0pt;line-height:
+    единиц (состояние </span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;color:black'>Q</span><sub><span style='font-size:12.0pt;
 color:black'>3</span></sub><span style='font-size:12.0pt;
 color:black'>)}.</span></p>
@@ -1007,17 +874,17 @@ color:black'>)}.</span></p>
 <p>&nbsp;</span></p>
 
 <p>Далее нужно
-  перечислить все комбинации, описывающие движение ленты без изменения
-  содержания: если машина находится в состояниях </span>Q</span><sub>2</span></sub> или </span>Q</span>
-  <sub>3</span></sub>, а на ленте находятся 1
-  или </span>x</span>, то просматривается
-  следующий слева символ. Таких пятерок 4, например,  </span></p>
+    перечислить все комбинации, описывающие движение ленты без изменения
+    содержания: если машина находится в состояниях </span>Q</span><sub>2</span></sub> или </span>Q</span>
+    <sub>3</span></sub>, а на ленте находятся 1
+    или </span>x</span>, то просматривается
+    следующий слева символ. Таких пятерок 4, например,  </span></p>
 
 <p>Q</span><sub>3</span></sub> </span>x</span> </span>Q</span><sub>3</span></sub> </span>x</span> </span>L</span>
-       </span></p>
+         </span></p>
 
 <p> </span>Q</span><sub>3</span></sub> 1 </span>Q</span><sub>3</span></sub> 1 </span>L</span>    и то же самое с
-  заменой </span><span lang=EN-US style='font-size:12.0pt;
+    заменой </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>Q</span><sub><span style='font-size:12.0pt;
 color:black'>3</span></sub><span style='font-size:12.0pt;
 color:black'> на </span><span lang=EN-US style='font-size:12.0pt;line-height:
@@ -1026,13 +893,13 @@ color:black'>2</span></sub><span style='font-size:12.0pt;
 color:black'> .</span></p>
 
 <p>Наконец, когда
-  лента доходит до нуля, вместо него пишется <i>a</i> или </span><i>b</span></i><i>,</span></i> в зависимости от
-  четности
-  просмотренных единиц (состоянию </span><span lang=EN-US style='font-size:12.0pt;
+    лента доходит до нуля, вместо него пишется <i>a</i> или </span><i>b</span></i><i>,</span></i> в зависимости от
+    четности
+    просмотренных единиц (состоянию </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>Q</span><sub><span style='font-size:12.0pt;
 color:black'>2</span></sub><span style='font-size:12.0pt;
 color:black'> соответствует символ <i>a,</i> состоянию </span>Q</span><sub>3</span></sub><i> </span></i> -
-  символ </span><i>b</span></i><i>)</span></i>:</span></p>
+    символ </span><i>b</span></i><i>)</span></i>:</span></p>
 
 <p>Q</span><sub>2</span></sub> 0 </span>Q</span><sub>4</span></sub> </span>a</span> </span>R</span> </span>или </span>
 </p>
@@ -1040,27 +907,28 @@ color:black'> соответствует символ <i>a,</i> состояни
 <p>Q</span><sub>3</span></sub> 0 </span>Q</span><sub>4</span></sub> </span>b</span> </span>R</span> </span></p>
 
 <p>Переходим к
-  следующему  движению ленты вправо, пропуская все цифры  </span><i>a</span></i> и </span><i>b</span></i><i> </span></i>двоичной
-  записи числа,
-  которое постепенно формируется слева от единичной записи:</span></p>
+    следующему  движению ленты вправо, пропуская все цифры  </span><i>a</span></i> и </span>
+    <i>b</span></i><i> </span></i>двоичной
+    записи числа,
+    которое постепенно формируется слева от единичной записи:</span></p>
 
 <p>Q</span><sub>4</span></sub> </span>a</span> </span>Q</span><sub>4</span></sub> </span>a</span> </span>R</span></p>
 
 <p>Q</span><sub>4</span></sub> </span>b</span> </span>Q</span><sub>4</span></sub> </span>b</span> </span>R</span></p>
 
 <p class=MsoHeading9>Далее
-  пропускаем также все вычеркнутые единицы</span></p>
+    пропускаем также все вычеркнутые единицы</span></p>
 
 <p>Q</span><sub>4</span></sub> </span>x</span> </span>Q</span><sub>4</span></sub> </span>x</span> </span>R</span></p>
 
 <p>Перевод числа в двоичную
-  запись может закончиться либо продолжиться в зависимости от того, какой символ
-  при движении вправо будет встречен первым: ноль или единица. Если в состоянии </span>Q</span><sub>4</span></sub>
-  машине встречается ноль,
-  то это означает, что все единицы вычеркнуты, и машина переходит в состояние </span>Q</span><sub>5</span></sub>
-  (фактически, это означает
-  остановку, так как в описании машины нет пятерок, имеющих в качестве исходного
-  состояние </span><span lang=EN-US style='font-size:12.0pt;
+    запись может закончиться либо продолжиться в зависимости от того, какой символ
+    при движении вправо будет встречен первым: ноль или единица. Если в состоянии </span>Q</span><sub>4</span></sub>
+    машине встречается ноль,
+    то это означает, что все единицы вычеркнуты, и машина переходит в состояние </span>Q</span><sub>5</span></sub>
+    (фактически, это означает
+    остановку, так как в описании машины нет пятерок, имеющих в качестве исходного
+    состояние </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>Q</span><sub><span style='font-size:12.0pt;
 color:black'>5</span></sub><span style='font-size:12.0pt;
 color:black'>):</span></p>
@@ -1068,15 +936,16 @@ color:black'>):</span></p>
 <p>Q</span><sub>4</span></sub> 0 </span>Q</span><sub>5 </span></sub> -  -  </span></p>
 
 <p>Если же очередной символ
-  не ноль, а единица, то вычеркиваем ее и переходим в состояние </span>Q</span><sub>1</span></sub>:</span></p>
+    не ноль, а единица, то вычеркиваем ее и переходим в состояние </span>Q</span><sub>1</span></sub>:</span></p>
 
 <p>Q</span><sub>4</span></sub> 1 </span>Q</span><sub>1</span></sub> </span>x</span> </span>R</span>  {переход к
-  повторению
-  процесса подсчета единиц}. </span></p>
+    повторению
+    процесса подсчета единиц}. </span></p>
 
 <p>Единственные изменения,
-  которые надо внести - пропуск символа </span><i>x</span></i> в состояниях </span>Q</span><sub>0</span></sub> и </span>
-  Q</span><sub>1</span></sub>:</span></p>
+    которые надо внести - пропуск символа </span><i>x</span></i> в состояниях </span>Q</span><sub>0</span></sub>
+    и </span>
+    Q</span><sub>1</span></sub>:</span></p>
 
 <p>Q</span><sub>1</span></sub> </span>x</span> </span>Q</span><sub>1</span></sub> </span>x</span> </span>R</span></p>
 
@@ -1087,23 +956,23 @@ color:black'>):</span></p>
 <p><i>Замечание.</span></i> </span></p>
 
 <p>Перечисление
-  наборов можно воспринимать как описание машины Тьюринга, то есть как описание
-  алгоритма. Представленное описание действительно напоминает программу для
-  компьютера, только "команды" исполняются не обязательно в порядке их
-  расположения в тексте. Очередная "команда" определяется по текущему состоянию и
-  обозреваемому символу. Неоднозначности при описании машины Тьюринга быть не
-  должно. </span></p>
+    наборов можно воспринимать как описание машины Тьюринга, то есть как описание
+    алгоритма. Представленное описание действительно напоминает программу для
+    компьютера, только "команды" исполняются не обязательно в порядке их
+    расположения в тексте. Очередная "команда" определяется по текущему состоянию и
+    обозреваемому символу. Неоднозначности при описании машины Тьюринга быть не
+    должно. </span></p>
 
 <p>Сравним машину
-  Тьюринга для получения двоичной записи натурального числа с привычным описанием
-  алгоритма, решающего ту же задачу.</span></p>
+    Тьюринга для получения двоичной записи натурального числа с привычным описанием
+    алгоритма, решающего ту же задачу.</span></p>
 
 <p>&nbsp;</span></p>
 
 <p>D</span>- пустая строка; </span>M</span>:=</span>N</span></p>
 
 <p>ЦИКЛ-ПОКА </span>M</span><span
-    lang=EN-US style='font-size:12.0pt;font-family:Symbol;
+        lang=EN-US style='font-size:12.0pt;font-family:Symbol;
 color:black'>&sup1;</span><span style='font-size:12.0pt;
 color:black'>0 </span></p>
 
@@ -1112,91 +981,91 @@ color:black'>0 </span></p>
 <p>   ЕСЛИ </span>M</span>=0 ТО добавить к строке </span>D</span> символ </span>a</span> справа</span></p>
 
 <p>   ИНАЧЕ добавить к строке
-  </span>D</span> символ </span>b</span> справа</span></p>
+    </span>D</span> символ </span>b</span> справа</span></p>
 
 <p>КЦ</span></p>
 
 <p>&nbsp;</span></p>
 
 <p>Мы видим, что
-  алгоритм включает и оператор присваивания, и арифметическую операцию, и
-  условный оператор, и цикл, то есть основные стандартные конструкции алгоритмического
-  языка. Это подтверждает гипотезу о том, что машина Тьюринга может моделировать
-  любую компьютерную программу.</span></p>
+    алгоритм включает и оператор присваивания, и арифметическую операцию, и
+    условный оператор, и цикл, то есть основные стандартные конструкции алгоритмического
+    языка. Это подтверждает гипотезу о том, что машина Тьюринга может моделировать
+    любую компьютерную программу.</span></p>
 
 <p><i>Задача 9.</span></i> </span></p>
 
 <p>Опишите машину
-  Тьюринга для вычисления остатка при делении на три. Существует ли конечный
-  автомат для решения этой задачи?  Если да, то постройте его.</span></p>
+    Тьюринга для вычисления остатка при делении на три. Существует ли конечный
+    автомат для решения этой задачи?  Если да, то постройте его.</span></p>
 
 <p><i>Задача 10.</span></i> </span></p>
 
 <p class=MsoBodyTextIndent>Опишите
-  машину Тьюринга для перемножения чисел в единичном коде.</span> (Напомним, что конечного
-  автомата для решения этой задачи не существует).</span></p>
+    машину Тьюринга для перемножения чисел в единичном коде.</span> (Напомним, что конечного
+    автомата для решения этой задачи не существует).</span></p>
 
 <p><i>Замечания.</span></i></p>
 
 <p>1. В машине Тьюринга можно
-  использовать полубесконечную ленту, а число символов алфавита можно уменьшить
-  до двух за счет увеличения числа ее состояний (а можно и наоборот: использовать
-  только два состояния за счет расширения алфавита).</span></p>
+    использовать полубесконечную ленту, а число символов алфавита можно уменьшить
+    до двух за счет увеличения числа ее состояний (а можно и наоборот: использовать
+    только два состояния за счет расширения алфавита).</span></p>
 
 <p><i>2. </span></i>Развивая теорию машин
-  Тьюринга, можно доказать, что существует универсальная машина Тьюринга, которая
-  может выполнить все то, что делает любая другая машина. Иными словами, эта
-  машина Тьюринга моделирует любую другую машину Тьюринга и, тем самым, выполняет
-  любой алгоритм. Универсальная машина Тьюринга, таким образом, является моделью
-  алгоритмически разрешимой задачи.</span></p>
+    Тьюринга, можно доказать, что существует универсальная машина Тьюринга, которая
+    может выполнить все то, что делает любая другая машина. Иными словами, эта
+    машина Тьюринга моделирует любую другую машину Тьюринга и, тем самым, выполняет
+    любой алгоритм. Универсальная машина Тьюринга, таким образом, является моделью
+    алгоритмически разрешимой задачи.</span></p>
 
 <p>Мы не будем
-  доказывать эту теорему. Отметим только механизм построения универсальной
-  машины: </span></p>
+    доказывать эту теорему. Отметим только механизм построения универсальной
+    машины: </span></p>
 
 <p>"Половину"
-  ленты универсальной машины Тьюринга занимают описания всех существующих машин
-  Тьюринга (а сделать это можно вследствие дискретности их описания), другая
-  половина оставляется как рабочая область. Универсальная машина является
-  интерпретирующей машиной, то есть по заданной метке она находит на ленте место
-  с описанием нужной машины Тьюринга (нужного алгоритма) и интерпретирует ее
-  "команды" в рабочей области ленты. </span></p>
+    ленты универсальной машины Тьюринга занимают описания всех существующих машин
+    Тьюринга (а сделать это можно вследствие дискретности их описания), другая
+    половина оставляется как рабочая область. Универсальная машина является
+    интерпретирующей машиной, то есть по заданной метке она находит на ленте место
+    с описанием нужной машины Тьюринга (нужного алгоритма) и интерпретирует ее
+    "команды" в рабочей области ленты. </span></p>
 
 <p>Можно подумать,
-  что универсальная машина Тьюринга обязательно должна иметь очень большой
-  алфавит или очень большое число состояний. Но М. Минский описал конструкцию
-  универсальной машины, которая имеет всего 4 символа и 7 состояний!</span></p>
+    что универсальная машина Тьюринга обязательно должна иметь очень большой
+    алфавит или очень большое число состояний. Но М. Минский описал конструкцию
+    универсальной машины, которая имеет всего 4 символа и 7 состояний!</span></p>
 
 <h1>Границы возможности машин
-  Тьюринга</span></h1>
+    Тьюринга</span></h1>
 
 <p style='text-indent:1.0cm;'>Машина Тьюринга является строгим определением алгоритма.</span></p>
 
 <p class=MsoBodyText3>Поэтому
-  вопрос о возможностях машин Тьюринга равносилен вопросу о существовании
-  алгоритмов для решения задач. </span></p>
+    вопрос о возможностях машин Тьюринга равносилен вопросу о существовании
+    алгоритмов для решения задач. </span></p>
 
 <p>Оказывается,
-  есть задачи, для которых не существует алгоритма решения. </span></p>
+    есть задачи, для которых не существует алгоритма решения. </span></p>
 
 <p><i><strong>Теорема Успенского-Райса</strong></span></i></p>
 
 <p>Нельзя написать
-  программу, которая, получив на входе текст произвольной программы, смогла бы
-  определить, может зациклиться данная программа или нет. </span></p>
+    программу, которая, получив на входе текст произвольной программы, смогла бы
+    определить, может зациклиться данная программа или нет. </span></p>
 
 <p class=MsoHeading8><strong>Замечание</strong></span><strong>:</strong> Эта
-  теорема называется проблемой останова. </span></p>
+    теорема называется проблемой останова. </span></p>
 
 <p><i>Доказательство.</span></i> </span></p>
 
 <p>Пусть такая
-  программа существует. Обозначим ее </span><span lang=EN-US style='font-size:
+    программа существует. Обозначим ее </span><span lang=EN-US style='font-size:
 12.0pt;color:black'>S</span><span style='font-size:12.0pt;
 color:black'>. На ее вход подается текст любой программы </span>T</span>, результатом </span>S</span>(</span>T</span>)
-  работы программы </span>S</span> является </span>True</span>, если </span>T</span> -текст
-  <хорошей>
-    программы, и </span><span lang=EN-US style='font-size:12.0pt;
+    работы программы </span>S</span> является </span>True</span>, если </span>T</span> -текст
+    <хорошей>
+        программы, и </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>False</span><span style='font-size:12.0pt;
 color:black'>, если </span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;color:black'>T</span><span style='font-size:12.0pt;
@@ -1204,199 +1073,201 @@ color:black'> - текст "зацикливающейся" программы.<
 </p>
 
 <p>Теперь напишем программу </span>P</span>, текст </span>T</span>1 которой представлен
-  ниже.</span></p>
+    ниже.</span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'><strong>ЕСЛИ</strong> </span><span lang=EN-US style='font-size:12.0pt;font-family:
+        style='font-size:12.0pt;font-family:"Courier New";color:black'><strong>ЕСЛИ</strong> </span><span lang=EN-US
+                                                                                                          style='font-size:12.0pt;font-family:
 "Courier New";color:black'>S</span><span style='font-size:12.0pt;line-height:
 92%;font-family:"Courier New";color:black'>(</span><span lang=EN-US
                                                          style='font-size:12.0pt;font-family:"Courier New";color:black'>T</span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>)
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>)
     {Т -текст хорошей программы}</span></p>
 
 <p><span style='font-family:"Courier New";color:black;font-style:normal'> <strong>ТО</strong> <strong>ПОВТОРЯТЬ</strong> x:=x {искусственное зацикливание}</span>
 </p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'><strong>ИНАЧЕ</strong></span><span lang=EN-US style='font-size:12.0pt;
+        style='font-size:12.0pt;font-family:"Courier New";color:black'><strong>ИНАЧЕ</strong></span><span lang=EN-US
+                                                                                                          style='font-size:12.0pt;
 font-family:"Courier New";color:black'> STOP</span><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'> {останов работы
     программы}</span></p>
 
 <p>Какой результат
-  </span>S</span>(</span>T</span>1) даст программа </span>S</span> при вводе текста этой
-  программы?  Предположим, что </span><span lang=EN-US style='font-size:12.0pt;
+    </span>S</span>(</span>T</span>1) даст программа </span>S</span> при вводе текста этой
+    программы?  Предположим, что </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>True</span><span style='font-size:12.0pt;
 color:black'>, тогда это означает, что программа </span>P</span> останавливается при вводе
-  любого текста. Следовательно, по смыслу программы </span>P</span>, она будет зацикливаться
-  при вводе текста </span><span lang=EN-US style='font-size:12.0pt;line-height:
+    любого текста. Следовательно, по смыслу программы </span>P</span>, она будет зацикливаться
+    при вводе текста </span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;color:black'>T</span><span style='font-size:12.0pt;
 color:black'>1, и это означает, что программа </span>S</span> работает неправильно. Но
-  выдать </span><span lang=EN-US style='font-size:12.0pt;
+    выдать </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>False</span><span style='font-size:12.0pt;
 color:black'> она не может по тем же причинам, так как это означает, что
             программа P может зациклиться, а тогда, по содержанию программы </span>P</span>, она должна, наоборот,
-  обязательно остановиться.</span></p>
+    обязательно остановиться.</span></p>
 
 <p><i>Замечание.</span></i> </span></p>
 
 <p>На первый
-  взгляд, может показаться, что приведенное доказательство содержит замкнутый
-  круг. На самом деле это не так, хотя некоторая необычность в нем есть.
-  Необычность состоит в том, что "нехорошая" программа строится на основе
-  программы распознавателя. То есть "противник" должен знать текст программы-распознавателя,
-  чтобы придумать нераспознаваемую программу.</span></p>
+    взгляд, может показаться, что приведенное доказательство содержит замкнутый
+    круг. На самом деле это не так, хотя некоторая необычность в нем есть.
+    Необычность состоит в том, что "нехорошая" программа строится на основе
+    программы распознавателя. То есть "противник" должен знать текст программы-распознавателя,
+    чтобы придумать нераспознаваемую программу.</span></p>
 
 <p><i>Пример.</span></i> </span></p>
 
 <p>Рассмотрим
-  пример построения нераспознаваемой программы в конкретном случае. Пусть
-  гипотетическая программа решения задачи останова выглядит так:</span></p>
+    пример построения нераспознаваемой программы в конкретном случае. Пусть
+    гипотетическая программа решения задачи останова выглядит так:</span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>ПРОГРАММА
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>ПРОГРАММА
 </span><span lang=EN-US style='font-size:12.0pt;font-family:
 "Courier New";color:black'>S</span><span style='font-size:12.0pt;line-height:
 92%;font-family:"Courier New";color:black'>(</span><span lang=EN-US
                                                          style='font-size:12.0pt;font-family:"Courier New";color:black'>T</span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>)</span></p>
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>)</span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>НАЧАЛО</span></p>
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>НАЧАЛО</span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'> 
+        style='font-size:12.0pt;font-family:"Courier New";color:black'> 
 ЕСЛИ в тексте </span><span lang=EN-US style='font-size:12.0pt;
 font-family:"Courier New";color:black'>T</span><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'> анализируемой программы
 содержится слово </span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>   
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>   
   ТО </span><span lang=EN-US style='font-size:12.0pt;font-family:
 "Courier New";color:black'>S</span><span style='font-size:12.0pt;line-height:
 92%;font-family:"Courier New";color:black'>(</span><span lang=EN-US
                                                          style='font-size:12.0pt;font-family:"Courier New";color:black'>T</span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>):=</span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>):=</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>False</span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>   
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>   
 ИНАЧЕ </span><span lang=EN-US style='font-size:12.0pt;
 font-family:"Courier New";color:black'>S</span><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'>(</span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>T</span><span style='font-size:12.0pt;font-family:
 "Courier New";color:black'>):=</span><span lang=EN-US style='font-size:12.0pt;
 font-family:"Courier New";color:black'>True</span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>КОНЕЦ</span></p>
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>КОНЕЦ</span></p>
 
 <p>Тогда программа противника
-  выглядит так:</span></p>
+    выглядит так:</span></p>
 
 <p>&nbsp;</span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>ПРОГРАММА
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>ПРОГРАММА
 </span><span lang=EN-US style='font-size:12.0pt;font-family:
 "Courier New";color:black'>P</span><span style='font-size:12.0pt;line-height:
 92%;font-family:"Courier New";color:black'>(</span><span lang=EN-US
                                                          style='font-size:12.0pt;font-family:"Courier New";color:black'>T</span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>)</span></p>
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>)</span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>НАЧАЛО</span></p>
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>НАЧАЛО</span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'> 
+        style='font-size:12.0pt;font-family:"Courier New";color:black'> 
 ЕСЛИ </span><span lang=EN-US style='font-size:12.0pt;
 font-family:"Courier New";color:black'>S</span><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'>(</span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>T</span><span style='font-size:12.0pt;font-family:
 "Courier New";color:black'>) </span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>   
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>   
 ТО ПОВТОРЯТЬ x:=x {искусственное зацикливание}</span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>   
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>   
 ИНАЧЕ </span><span lang=EN-US style='font-size:12.0pt;
 font-family:"Courier New";color:black'>STOP</span><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'> {останов работы
 программы}</span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>КОНЕЦ
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>КОНЕЦ
 </span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>ПОДПРОГРАММА
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>ПОДПРОГРАММА
 </span><span lang=EN-US style='font-size:12.0pt;font-family:
 "Courier New";color:black'>S</span><span style='font-size:12.0pt;line-height:
 92%;font-family:"Courier New";color:black'>(</span><span lang=EN-US
                                                          style='font-size:12.0pt;font-family:"Courier New";color:black'>T</span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>)</span></p>
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>)</span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>НАЧАЛО
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>НАЧАЛО
 S</span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'> 
+        style='font-size:12.0pt;font-family:"Courier New";color:black'> 
 ЕСЛИ в тексте </span><span lang=EN-US style='font-size:12.0pt;
 font-family:"Courier New";color:black'>T</span><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'> анализируемой программы
 содержится </span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>   
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>   
 слово  <повторять></span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>   
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>   
 ТО </span><span lang=EN-US style='font-size:12.0pt;font-family:
 "Courier New";color:black'>S</span><span style='font-size:12.0pt;line-height:
 92%;font-family:"Courier New";color:black'>(</span><span lang=EN-US
                                                          style='font-size:12.0pt;font-family:"Courier New";color:black'>T</span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>):=</span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>):=</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>False</span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>   
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>   
 ИНАЧЕ </span><span lang=EN-US style='font-size:12.0pt;
 font-family:"Courier New";color:black'>S</span><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'>(</span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>T</span><span style='font-size:12.0pt;font-family:
 "Courier New";color:black'>):=</span><span lang=EN-US style='font-size:12.0pt;
 font-family:"Courier New";color:black'>True</span></p>
 
 <p><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>КОНЕЦ
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>КОНЕЦ
 </span><span lang=EN-US style='font-size:12.0pt;font-family:
 "Courier New";color:black'>S</span></p>
 
 <p style='text-align:justify;text-indent:21.3pt;line-height:
 92%'>Текст </span>T</span>1 этой программы содержит
-  слово "повторять", поэтому, по нашей гипотезе, эта программа должна
-  зациклиться. Но она остановится, так как подпрограмма </span>S</span> обнаружит это слово и
-  присвоит </span><span lang=EN-US style='font-size:12.0pt;
+    слово "повторять", поэтому, по нашей гипотезе, эта программа должна
+    зациклиться. Но она остановится, так как подпрограмма </span>S</span> обнаружит это слово и
+    присвоит </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>S</span>(</span>T</span>1) значение </span>False</span>. Но тогда в программе P
-  выполнится команда </span><span lang=EN-US style='font-size:12.0pt;line-height:
+    выполнится команда </span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;color:black'>STOP</span><span style='font-size:12.0pt;
 color:black'>, и она остановится. Таким образом, построена программа, которая
     будет останавливаться, хотя и содержит <недозволенное> слово в своем тексте.</span></p>
 <p><i>Замечание</span></i>.</span></p>
 
 <p>В приведенных
-  рассуждениях мы не использовали модель машины Тьюринга. Но, как уже говорилось,
-  обычное описание алгоритма эквивалентно описанию его в форме машины Тьюринга.</span></p>
+    рассуждениях мы не использовали модель машины Тьюринга. Но, как уже говорилось,
+    обычное описание алгоритма эквивалентно описанию его в форме машины Тьюринга.</span></p>
 
 <p><i>Задача 11.</span></i></p>
 
@@ -1411,94 +1282,94 @@ color:black'>Сформулируйте то же в терминах униве
 <h3><strong>ЯЗЫКОВАЯ СИСТЕМА ПОСТА</span></strong><span style='font-size:12.0pt;
 color:black'>&nbsp;</span></h3>
 
-<h4 style='margin-left:0cm;text-align:justify;text-indent:1.0cm;line-height:
+<h4 style='margin-left:0;text-align:justify;text-indent:1.0cm;line-height:
 92%'>Моделирование вычислительных процессов
-  посредством конечных автоматов и машин Тьюринга, с которым мы только что
-  познакомились, отражает только процедурную сторону проблемы. В то же время
-  компьютерная программа по названию известной книги создателя языка "Паскаль"
-  Вирта есть "алгоритм
-  +структура данных". Поэтому моделировать можно не действия,
-  которые производятся над данными, а структуру самих данных. (Кстати, в
-  объектно-ориентированном программировании акцент делается именно на описании
-  данных.)</span></h4>
+    посредством конечных автоматов и машин Тьюринга, с которым мы только что
+    познакомились, отражает только процедурную сторону проблемы. В то же время
+    компьютерная программа по названию известной книги создателя языка "Паскаль"
+    Вирта есть "алгоритм
+    +структура данных". Поэтому моделировать можно не действия,
+    которые производятся над данными, а структуру самих данных. (Кстати, в
+    объектно-ориентированном программировании акцент делается именно на описании
+    данных.)</span></h4>
 
 <p style='text-indent:1.0cm;'>Работу машины Тьюринга (а значит, и любой алгоритм) можно
-  рассматривать как преобразование в соответствии с некоторыми правилами
-  исходного набора символов на ленте. Обратим внимание на принципиальное отличие
-  такого подхода к описанию алгоритмов. Мы описываем не операции, а множество
-  допустимых цепочек символов на ленте, которые могут получаться при работе
-  машины Тьюринга.</span></p>
+    рассматривать как преобразование в соответствии с некоторыми правилами
+    исходного набора символов на ленте. Обратим внимание на принципиальное отличие
+    такого подхода к описанию алгоритмов. Мы описываем не операции, а множество
+    допустимых цепочек символов на ленте, которые могут получаться при работе
+    машины Тьюринга.</span></p>
 
 <p style='text-indent:1.0cm;'>При изучении подхода Поста мы будем иметь дело с языковыми
-  понятиями: языками, грамматиками, грамматическими понятиями и правилами,
-  алфавитами, правильными выражениями языка. С такими терминами мы уже
-  сталкивались при изучении русского или иностранного языка, а также при изучении
-  конкретного алгоритмического языка. В математике языковая терминология тоже
-  используется, только термины немного другие: математические символы - вместо
-  алфавита, аксиомы и правила логического вывода - вместо грамматических понятий
-  и правил, теоремы - вместо правильных предложений языка.</span></p>
+    понятиями: языками, грамматиками, грамматическими понятиями и правилами,
+    алфавитами, правильными выражениями языка. С такими терминами мы уже
+    сталкивались при изучении русского или иностранного языка, а также при изучении
+    конкретного алгоритмического языка. В математике языковая терминология тоже
+    используется, только термины немного другие: математические символы - вместо
+    алфавита, аксиомы и правила логического вывода - вместо грамматических понятий
+    и правил, теоремы - вместо правильных предложений языка.</span></p>
 
 <p>Каноническая
-  система, представляющая собой множество таких правил вывода и некоторых
-  изначально установленных положений, вовсе не описывает процесса. Она лишь
-  определяет объем множества последовательностей путем (рекурсивного) описания
-  того, как находить последовательности из этого множества.</span></p>
+    система, представляющая собой множество таких правил вывода и некоторых
+    изначально установленных положений, вовсе не описывает процесса. Она лишь
+    определяет объем множества последовательностей путем (рекурсивного) описания
+    того, как находить последовательности из этого множества.</span></p>
 
 <p><i>Пример.</span></i> </span></p>
 
 <p>Рассмотрим
-  простое описание языка из нескольких слов с помощью грамматических правил.</span></p>
+    простое описание языка из нескольких слов с помощью грамматических правил.</span></p>
 
 <p>&lt;<strong>слово</strong>&gt;::=
-  &lt;приставка&gt;&lt;корень&gt;&lt;суффикс&gt;&lt;окончание&gt;</span></p>
+    &lt;приставка&gt;&lt;корень&gt;&lt;суффикс&gt;&lt;окончание&gt;</span></p>
 
 <p>&lt;приставка&gt;::=по | </span><span
-    style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>на</span></p>
+        style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>на</span></p>
 
 <p>&lt;корень&gt;::=ход</span><span
-    style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span> | сад</span></p>
+        style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span> | сад</span></p>
 
 <p>&lt;суффикс&gt;::=к</span><span
-    style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span> | очк</span></p>
+        style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span> | очк</span></p>
 
 <p>&lt;окончание&gt;::=а | </span><span
-    style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>и</span></p>
+        style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>и</span></p>
 
 <p style='text-indent:1.0cm;'>Описанный язык включает 16 различных слов: "походка",
-  "насадочки" и пр.</span></p>
+    "насадочки" и пр.</span></p>
 
 <p class=MsoBodyText3>Язык
-  описан своей грамматикой. </span></p>
+    описан своей грамматикой. </span></p>
 
 <p>Описание грамматики
-  включает в себя: название наиболее общего понятия языка, которое называется еще
-  выделенным нетерминальным символом (в нашем примере это &lt;слово&gt;), набор
-  грамматических правил (у нас их 5), специальные символы для записи правил
-  (символ
-  <::
-  => читается как
-  <это>, символ <</span><span style='font-size:12.0pt;
+    включает в себя: название наиболее общего понятия языка, которое называется еще
+    выделенным нетерминальным символом (в нашем примере это &lt;слово&gt;), набор
+    грамматических правил (у нас их 5), специальные символы для записи правил
+    (символ
+    <::
+    => читается как
+    <это>, символ <</span><span style='font-size:12.0pt;
 font-family:Symbol;color:black'>&frac12;</span>> читается как
-    <или>, в
-      угловые скобки берутся понятия языка или, как их еще называют, нетерминальные
-      символы, которые играют вспомогательную роль для генерации правильных выражений
-      языка), наконец, алфавит или множество терминальных символов (в нашем примере
-      это обычный русский алфавит).</span>
+        <или>, в
+            угловые скобки берутся понятия языка или, как их еще называют, нетерминальные
+            символы, которые играют вспомогательную роль для генерации правильных выражений
+            языка), наконец, алфавит или множество терминальных символов (в нашем примере
+            это обычный русский алфавит).</span>
 </p>
 
 <p>Такой способ
-  описания языков называется описанием в форме Бэкуса-Наура.</span></p>
+    описания языков называется описанием в форме Бэкуса-Наура.</span></p>
 
 <p>Все правильные
-  выражения (в данном случае - слова) порождаются из выделенного
-  последовательными
-  <расшифровками> нетерминальных символов. За один шаг один из
-    нетерминальных символов выражения заменяется одной из его возможных расшифровок
-    по правилу, в левой части которого стоит этот символ.</span>
+    выражения (в данном случае - слова) порождаются из выделенного
+    последовательными
+    <расшифровками> нетерминальных символов. За один шаг один из
+        нетерминальных символов выражения заменяется одной из его возможных расшифровок
+        по правилу, в левой части которого стоит этот символ.</span>
 </p>
 <p>Вот как выглядит
-  грамматический вывод слова
-  <походка>:</span>
+    грамматический вывод слова
+    <походка>:</span>
 </p>
 <p>&lt;слово&gt;</span></p>
 
@@ -1515,124 +1386,124 @@ font-family:Symbol;color:black'>&frac12;</span>> читается как
 <p><i>Задача 13.</span></i></p>
 
 <p>Ниже
-  представлена грамматика для генерации предложений языка, определяющего
-  родственные связи.</span></p>
+    представлена грамматика для генерации предложений языка, определяющего
+    родственные связи.</span></p>
 
 <p>&lt;<strong>родственная связь</strong>&gt;::=&lt;начало
-  цепочки&gt;&lt;цепочка&gt;</span></p>
+    цепочки&gt;&lt;цепочка&gt;</span></p>
 
 <p>&lt;начало
-  цепочки&gt;::=&lt;сын&gt;</span><span style='font-size:12.0pt;
+    цепочки&gt;::=&lt;сын&gt;</span><span style='font-size:12.0pt;
 font-family:Symbol;color:black'>&frac12;</span><span style='font-size:12.0pt;
 color:black'>&lt;дочь&gt;</span><span style='font-size:12.0pt;
 font-family:Symbol;color:black'>&frac12;</span>&lt;отец&gt; </span><span
-      style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>&lt;мать&gt; </span><span
-      style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>&lt;брат&gt;</span><span
-      style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>&lt;сестра&gt;</span></p>
+            style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>&lt;мать&gt; </span><span
+            style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>&lt;брат&gt;</span><span
+            style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>&lt;сестра&gt;</span></p>
 
 <p>&lt;цепочка&gt;::=&lt;цепочка&gt;&lt;окончание
-  цепочки&gt;</span><span style='font-size:12.0pt;font-family:
+    цепочки&gt;</span><span style='font-size:12.0pt;font-family:
 Symbol;color:black'>&frac12;</span><span style='font-size:12.0pt;line-height:
 92%;font-family:Symbol;color:black'>&AElig;</span></p>
 
 <p>&lt;окончание
-  цепочки&gt;::=&lt;сына&gt;</span><span style='font-size:12.0pt;line-height:
+    цепочки&gt;::=&lt;сына&gt;</span><span style='font-size:12.0pt;line-height:
 92%;font-family:Symbol;color:black'>&frac12;</span><span style='font-size:12.0pt;
 color:black'>&lt;дочери&gt;</span><span style='font-size:12.0pt;
 font-family:Symbol;color:black'>&frac12;</span>&lt;отца&gt;</span><span
-      style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>&lt;матери&gt; </span><span
-      style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>&lt;брата&gt;</span><span
-      style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>&lt;сестры&gt;</span></p>
+            style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>&lt;матери&gt; </span><span
+            style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>&lt;брата&gt;</span><span
+            style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>&lt;сестры&gt;</span></p>
 
 <p class=MsoBodyText3>Проведите
-  грамматический разбор (это означает то же, что грамматический вывод) следующей
-  родственной связи:</span></p>
+    грамматический разбор (это означает то же, что грамматический вывод) следующей
+    родственной связи:</span></p>
 
 <p class=MsoBodyText2>"сын
-  брата отца матери".</span></p>
+    брата отца матери".</span></p>
 
 <p><i>Замечание.</span></i> </span></p>
 
 <p>В третьем
-  правиле этой грамматики используется значок </span><span style='font-size:12.0pt;
+    правиле этой грамматики используется значок </span><span style='font-size:12.0pt;
 font-family:Symbol;color:black'>&AElig;</span>, означающий, что цепочка
-  предков может быть пустой. Кроме того, в этом же правиле используется
-  рекурсивное определение: нетерминальный символ &lt;цепочка&gt; стоит в обоих
-  частях определения.</span>&nbsp;</span></p>
+    предков может быть пустой. Кроме того, в этом же правиле используется
+    рекурсивное определение: нетерминальный символ &lt;цепочка&gt; стоит в обоих
+    частях определения.</span>&nbsp;</span></p>
 
 <h2><strong>Синтаксический анализ</span></strong>&nbsp;</span></h2>
 
 <p>Несмотря на то,
-  что для общих систем Поста обеспечить алгоритмическое распознавание языка невозможно,
-  существуют языки, для которых эффективные процедуры распознавания не только
-  существуют, но и могут быть алгоритмически построены. К таким языкам относятся
-  языки, описываемые контекстно-свободными грамматиками с некоторыми
-  дополнительными ограничениями. Правая часть каждого правила
-  контекстно-свободной грамматики состоит из одного нетерминального символа.
-  Дополнительное условие называется однозначностью ветвления по первому символу и
-  будет описано на примере.</span>&nbsp;</span></p>
+    что для общих систем Поста обеспечить алгоритмическое распознавание языка невозможно,
+    существуют языки, для которых эффективные процедуры распознавания не только
+    существуют, но и могут быть алгоритмически построены. К таким языкам относятся
+    языки, описываемые контекстно-свободными грамматиками с некоторыми
+    дополнительными ограничениями. Правая часть каждого правила
+    контекстно-свободной грамматики состоит из одного нетерминального символа.
+    Дополнительное условие называется однозначностью ветвления по первому символу и
+    будет описано на примере.</span>&nbsp;</span></p>
 
 <p><i>Пример.</span></i> </span></p>
 
 <p>Рассмотрим
-  технологию построения синтаксического анализатора для языка арифметических
-  выражений в полной скобочной записи (для краткости будем называть их
-  формулами).</span></p>
+    технологию построения синтаксического анализатора для языка арифметических
+    выражений в полной скобочной записи (для краткости будем называть их
+    формулами).</span></p>
 
 <p>В этот язык
-  должны входить выражения вида </span><span lang=EN-US style='font-size:12.0pt;
+    должны входить выражения вида </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>b</span><span style='font-size:12.0pt;line-height:
 92%;color:black'>, (</span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;color:black'>a</span><span style='font-size:12.0pt;
 color:black'>-</span><span lang=EN-US style='font-size:12.0pt;
 color:black'>f</span>),
-  ((</span>h</span>*</span>c</span>)/(</span>d</span>+</span>g</span>)), которые состоят из
-  переменных, обозначенных строчными латинскими буквами, знаков арифметических
-  операций и круглых скобок. Каждое арифметическое действие заключается в скобки.
-  Таким образом, выражения (2+</span><span lang=EN-US style='font-size:12.0pt;
+    ((</span>h</span>*</span>c</span>)/(</span>d</span>+</span>g</span>)), которые состоят из
+    переменных, обозначенных строчными латинскими буквами, знаков арифметических
+    операций и круглых скобок. Каждое арифметическое действие заключается в скобки.
+    Таким образом, выражения (2+</span><span lang=EN-US style='font-size:12.0pt;
 color:black'>a</span><span style='font-size:12.0pt;line-height:
 92%;color:black'>), (ab), c/d не войдут в наш язык: первое выражение содержит
 недозволенный символ <2>, во втором - отсутствует знак арифметической операции,
 третье - не заключено в скобки.</span></p>
 
 <p style='text-indent:1.0cm;'>Грамматика, определяющая
-  этот язык, устроена очень просто:</span><span style='font-size:12.0pt;
+    этот язык, устроена очень просто:</span><span style='font-size:12.0pt;
 color:black'>&nbsp;</span></p>
 
 <p><span style='font-size:12.0pt;
 color:black'>&lt;формула&gt;::=&lt;переменная&gt;</span><span
-    lang=EN-US style='font-size:12.0pt;font-family:Symbol;
+        lang=EN-US style='font-size:12.0pt;font-family:Symbol;
 color:black'>&frac12;</span><span style='font-size:12.0pt;
 color:black'>(&lt;формула&gt;&lt;знак операции&gt;&lt;формула&gt;)</span></p>
 
 <p><span style='font-size:12.0pt;
 color:black'>&lt;переменная&gt;::=</span>a</span><span lang=EN-US
                                                        style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>b</span><span
-    lang=EN-US style='font-size:12.0pt;font-family:Symbol;
+        lang=EN-US style='font-size:12.0pt;font-family:Symbol;
 color:black'>&frac12;</span><span lang=EN-US style='font-size:12.0pt;
 color:black'>c</span><span lang=EN-US style='font-size:12.0pt;
 font-family:Symbol;color:black'>&frac12;</span>:</span><span
-    style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>z</span></p>
+        style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>z</span></p>
 
 <p><span style='font-size:12.0pt;
 color:black'>&lt;знак операции&gt;::=+</span><span
-    style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>-</span><span lang=EN-US
-                                                                                         style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>*</span><span
-    lang=EN-US
-    style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>/</span>&nbsp;</span></p>
+        style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>-</span><span lang=EN-US
+                                                                                             style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>*</span><span
+        lang=EN-US
+        style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>/</span>&nbsp;</span></p>
 
 <p>Для построения
-  синтаксического анализа сделаем преобразование грамматики из формы Бэкуса-Наура
-  в форму графа. Такое представление грамматики называется синтаксической
-  диаграммой.</span></p>
+    синтаксического анализа сделаем преобразование грамматики из формы Бэкуса-Наура
+    в форму графа. Такое представление грамматики называется синтаксической
+    диаграммой.</span></p>
 
 <p>Синтаксическая
-  диаграмма строится по следующим правилам.</span>&nbsp;</span></p>
+    диаграмма строится по следующим правилам.</span>&nbsp;</span></p>
 
 <p><i>Правило 1. </span></i></p>
 
 <p>Каждый
-  терминальный символ </span><span lang=EN-US style='font-size:12.0pt;line-height:
+    терминальный символ </span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;color:black'>t</span><span style='font-size:12.0pt;
 color:black'> изображается кружочком (вершиной графа), помеченным самим
 символом </span><span lang=EN-US style='font-size:12.0pt;
@@ -1653,25 +1524,25 @@ color:black'>Правило 2.</span></i><span style='font-size:12.0pt;
 color:black'> </span></p>
 
 <p>Каждый
-  нетерминальный символ </span><span lang=EN-US style='font-size:12.0pt;
+    нетерминальный символ </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>N</span><span style='font-size:12.0pt;line-height:
 92%;color:black'> изображается прямоугольником (вершиной графа), помеченным
 этим же символом </span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;color:black'>N</span><span style='font-size:12.0pt;
 color:black'>.</span></p>
 
-<p align="center">&nbsp;</p>
+<p style="text-align: center">&nbsp;</p>
 <table cellpadding=0 cellspacing=0 align=left>
-  <tr>
-    <td width=231 height=15></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td width=102 height=44 bgcolor=white style='border:.75pt solid black;
+    <tr>
+        <td width=231 height=15></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td width=102 height=44 bgcolor=white style='border:.75pt solid black;
   vertical-align:top;background:white'>&nbsp;
-      <div align="center">N</div>
-    </td>
-  </tr>
+            <div align="center">N</div>
+        </td>
+    </tr>
 </table>
 
 &nbsp;</span></p>
@@ -1684,21 +1555,21 @@ color:black'>.</span></p>
 <p><i>Правило 3</span></i>.</span></p>
 
 <p> Последовательность
-  терминальных и нетерминальных симоволов изображается соединением
-  соответствующих вершин дугами в порядке их следования. Например, изображение
-  последовательности </span><span lang=EN-US style='font-size:12.0pt;line-height:
+    терминальных и нетерминальных симоволов изображается соединением
+    соответствующих вершин дугами в порядке их следования. Например, изображение
+    последовательности </span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;color:black'>N</span><span style='font-size:12.0pt;
 color:black'>1 </span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;color:black'>N</span><span style='font-size:12.0pt;
 color:black'>2 синтаксической диаграммой имеет вид: </span></p>
 <table cellpadding=0 cellspacing=0 align=left>
-  <tr>
-    <td width=173 height=12></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td><img width=227 height=45 src="img/image007.gif"></td>
-  </tr>
+    <tr>
+        <td width=173 height=12></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><img width=227 height=45 src="img/image007.gif"></td>
+    </tr>
 </table>
 
 &nbsp;</span></p>
@@ -1707,20 +1578,20 @@ color:black'>2 синтаксической диаграммой имеет ви
 
 <p>&nbsp;</span></p>
 <h5><i>Правило
-  4</span></i>. </span></h5>
+    4</span></i>. </span></h5>
 
 <h5 style='text-align:justify;text-indent:1.0cm;'>Значку <</span><span lang=EN-US style='font-family:Symbol;
 color:black'>&frac12;</span>> сопоставляется
-  ветвление. Например, </span>N</span>1</span><span lang=EN-US style='font-family:Symbol;
+    ветвление. Например, </span>N</span>1</span><span lang=EN-US style='font-family:Symbol;
 color:black'>&frac12;</span>N</span>2 на синтаксической диаграмме  выглядит так.</span></h5>
 <table cellpadding=0 cellspacing=0 align=left>
-  <tr>
-    <td width=173 height=10></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td><img width=234 height=92 src="img/image008.gif"></td>
-  </tr>
+    <tr>
+        <td width=173 height=10></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><img width=234 height=92 src="img/image008.gif"></td>
+    </tr>
 </table>
 
 &nbsp;</span></p>
@@ -1734,8 +1605,8 @@ color:black'>&frac12;</span>N</span>2 на синтаксической диаг
 <p>&nbsp;</p>
 
 <p class=MsoBodyText>Синтаксическая
-  диаграмма для языка полных арифметических скобочных записей, построенная на
-  основе этих правил, показана на рисунке.</span></p>
+    диаграмма для языка полных арифметических скобочных записей, построенная на
+    основе этих правил, показана на рисунке.</span></p>
 
 <p><span style='font-size:12.0pt;
 color:black'>&nbsp;</span></p>
@@ -1743,13 +1614,13 @@ color:black'>&nbsp;</span></p>
 <p>
 
 <table cellpadding=0 cellspacing=0 align=left>
-  <tr>
-    <td width=29 height=7></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td><img width=540 height=239 src="img/image009.gif"></td>
-  </tr>
+    <tr>
+        <td width=29 height=7></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><img width=540 height=239 src="img/image009.gif"></td>
+    </tr>
 </table>
 
 &nbsp;</span></p>
@@ -1785,13 +1656,13 @@ color:black'>&nbsp;</span></p>
 color:black'>&nbsp;</span></p>
 
 <p>Если каждое
-  ветвление в диаграмме определяется однозначно очередным терминальным символом
-  (это условие в дальнейшем будем называть условием однозначности ветвления), то
-  на основе следующих правил по этой диаграмме можно написать программу
-  синтаксического анализа. Заметим, что для нашей грамматики условие однозначности
-  ветвления выполнено, так как единственное ветвление осуществляется на основе
-  проверки, является ли очередной символ выражения открывающей скобкой или же
-  латинской буквой.</span><span style='font-size:12.0pt;
+    ветвление в диаграмме определяется однозначно очередным терминальным символом
+    (это условие в дальнейшем будем называть условием однозначности ветвления), то
+    на основе следующих правил по этой диаграмме можно написать программу
+    синтаксического анализа. Заметим, что для нашей грамматики условие однозначности
+    ветвления выполнено, так как единственное ветвление осуществляется на основе
+    проверки, является ли очередной символ выражения открывающей скобкой или же
+    латинской буквой.</span><span style='font-size:12.0pt;
 color:black'>&nbsp;</span></p>
 
 <p><i><span style='font-size:12.0pt;
@@ -1799,24 +1670,24 @@ color:black'>Правило 1.</span></i><span style='font-size:12.0pt;
 color:black'> </span></p>
 
 <p style='text-indent:1.0cm;'>Терминальному символу </span>t</span> синтаксической диаграммы
-  в программе синтаксического анализа сопоставляется элементарный оператор
-  распознавания:</span></p>
+    в программе синтаксического анализа сопоставляется элементарный оператор
+    распознавания:</span></p>
 
 <p><span style='font-size:12.0pt;
 color:black'>&nbsp;</span></p>
 
 <p><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'>ЕСЛИ </span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>ch</span><span style='font-size:12.0pt;font-family:
 "Courier New";color:black'>=</span><span lang=EN-US style='font-size:12.0pt;
 font-family:"Courier New";color:black'>t</span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'> </span><span style='font-size:12.0pt;font-family:
 "Courier New";color:black'>ТО </span><span lang=EN-US style='font-size:12.0pt;
 font-family:"Courier New";color:black'>read</span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>(</span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>(</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>ch</span><span style='font-size:12.0pt;font-family:
 "Courier New";color:black'>) ИНАЧЕ </span><span lang=EN-US style='font-size:
 12.0pt;font-family:"Courier New";color:black'>error</span></p>
@@ -1825,10 +1696,10 @@ color:black'>ch</span><span style='font-size:12.0pt;font-family:
 color:black'>&nbsp;</span></p>
 
 <p>Здесь
-  переменная </span><span lang=EN-US style='font-size:12.0pt;
+    переменная </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>ch</span>
-  обозначает текущий символ записи выражения, процедура </span>read</span>(</span>ch</span>) считывает следующий
-  символ записи, процедура </span><span lang=EN-US style='font-size:12.0pt;
+    обозначает текущий символ записи выражения, процедура </span>read</span>(</span>ch</span>) считывает следующий
+    символ записи, процедура </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>error</span><span style='font-size:12.0pt;
 color:black'> обрабатывает ошибку (в простейшем варианте просто
 прерывает дальнейший анализ выражения).</span></p>
@@ -1838,18 +1709,18 @@ color:black'> обрабатывает ошибку (в простейшем в�
 <p><i>Правило 2.</span></i></p>
 
 <p><i> </span></i>Нетерминальному символу </span>N</span> синтаксической диаграммы
-  сопоставляется процедура распознавания этого символа (при выполнении программы
-  анализа вызывается соответствующая процедура).</span></p>
+    сопоставляется процедура распознавания этого символа (при выполнении программы
+    анализа вызывается соответствующая процедура).</span></p>
 
 <p>&nbsp;</span></p>
 
 <p><i>Правило 3. </span></i></p>
 
 <p>Последовательности
-  терминальных или нетерминальных символов соответствует линейная программа, в
-  которой последовательно перечислены соответствующие символам операторы и
-  процедуры распознавания. Последовательность заключается в операторные скобки.
-  Например, для последовательности </span><span lang=EN-US style='font-size:12.0pt;
+    терминальных или нетерминальных символов соответствует линейная программа, в
+    которой последовательно перечислены соответствующие символам операторы и
+    процедуры распознавания. Последовательность заключается в операторные скобки.
+    Например, для последовательности </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>N</span><span style='font-size:12.0pt;line-height:
 92%;color:black'>1 </span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;color:black'>N</span><span style='font-size:12.0pt;
@@ -1863,13 +1734,13 @@ font-family:"Courier New";color:black'>НАЧАЛО</span></p>
 
 <p><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'>  </span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>N</span><span style='font-size:12.0pt;font-family:
 "Courier New";color:black'>1</span></p>
 
 <p><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'>  </span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>N</span><span style='font-size:12.0pt;font-family:
 "Courier New";color:black'>2</span></p>
 
@@ -1882,39 +1753,39 @@ color:black'>&nbsp;</span></p>
 color:black'>Правило 4. </span></i></p>
 
 <p style='text-indent:1.0cm;'>Ветвлению соответствует
-  оператор условного перехода. Так, диаграмме с ветвлением N1</span><span
-      style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>N</span>2 соответствует такая
-  программа распознавания:</span></p>
+    оператор условного перехода. Так, диаграмме с ветвлением N1</span><span
+            style='font-size:12.0pt;font-family:Symbol;color:black'>&frac12;</span>N</span>2 соответствует такая
+    программа распознавания:</span></p>
 
 <p><span style='font-size:12.0pt;
 color:black'>&nbsp;</span></p>
 
 <p><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'>ЕСЛИ </span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>ch</span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;font-family:Symbol;color:black'>&Icirc;</span><span lang=EN-US
                                                         style='font-size:12.0pt;font-family:"Courier New";color:black'>L</span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>(</span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>(</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>N</span><span style='font-size:12.0pt;font-family:
 "Courier New";color:black'>1) ТО </span><span lang=EN-US style='font-size:12.0pt;
 font-family:"Courier New";color:black'>N</span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>1
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>1
 ИНАЧЕ</span></p>
 
 <p><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'>ЕСЛИ </span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>ch</span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;font-family:Symbol;color:black'>&Icirc;</span><span lang=EN-US
                                                         style='font-size:12.0pt;font-family:"Courier New";color:black'>L</span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>(</span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>(</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>N</span><span style='font-size:12.0pt;font-family:
 "Courier New";color:black'>2) ТО </span><span lang=EN-US style='font-size:12.0pt;
 font-family:"Courier New";color:black'>N</span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>2
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>2
 ИНАЧЕ </span><span lang=EN-US style='font-size:12.0pt;
 font-family:"Courier New";color:black'>error</span></p>
 
@@ -1922,25 +1793,25 @@ font-family:"Courier New";color:black'>error</span></p>
 color:black'>&nbsp;</span></p>
 
 <p>Здесь </span>L</span>(</span>N</span>1) обозначает множество
-  начальных символов, с которых может начинаться
-  <расшифровка> нетерминального
-    символа </span><span lang=EN-US style='font-size:12.0pt;
+    начальных символов, с которых может начинаться
+    <расшифровка> нетерминального
+        символа </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>N</span>1.
-    (Заметим, что множества начальных символов </span>N</span>1 и </span>N</span>2 не имеют общих элементов
-    в силу однозначности ветвления. Если же это условие не выполняется, строить
-    синтаксический анализатор по предложенным правилам нельзя ).</span>
+        (Заметим, что множества начальных символов </span>N</span>1 и </span>N</span>2 не имеют общих элементов
+        в силу однозначности ветвления. Если же это условие не выполняется, строить
+        синтаксический анализатор по предложенным правилам нельзя ).</span>
 </p>
 
 <p>После
-  применения к диаграмме языка полных скобочных записей арифметических выражений
-  перечисленных правил, получается следующая программа синтаксического анализа
-  этого языка.</span></p>
+    применения к диаграмме языка полных скобочных записей арифметических выражений
+    перечисленных правил, получается следующая программа синтаксического анализа
+    этого языка.</span></p>
 
 <p>&nbsp;</span></p>
 
 <p><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'>ПРОГРАММА </span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>FORMULA</span></p>
 
 <p><span style='font-size:12.0pt;
@@ -1948,33 +1819,33 @@ font-family:"Courier New";color:black'>НАЧАЛО</span></p>
 
 <p><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'>  ЕСЛИ </span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>ch</span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;font-family:Symbol;color:black'>&Icirc;</span><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'>[</span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>a</span><span style='font-size:12.0pt;font-family:
 "Courier New";color:black'>..</span><span lang=EN-US style='font-size:12.0pt;
 font-family:"Courier New";color:black'>z</span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>]
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>]
 ТО </span></p>
 
 <p><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'>    ЕСЛИ </span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>ch</span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;font-family:Symbol;color:black'>&Icirc;</span><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'>[</span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>a</span><span style='font-size:12.0pt;font-family:
 "Courier New";color:black'>..</span><span lang=EN-US style='font-size:12.0pt;
 font-family:"Courier New";color:black'>z</span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>]
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>]
 ТО </span><span lang=EN-US style='font-size:12.0pt;font-family:
 "Courier New";color:black'>read</span><span style='font-size:12.0pt;line-height:
 92%;font-family:"Courier New";color:black'>(</span><span lang=EN-US
                                                          style='font-size:12.0pt;font-family:"Courier New";color:black'>ch</span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>)
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>)
 ИНАЧЕ </span><span lang=EN-US style='font-size:12.0pt;
 font-family:"Courier New";color:black'>error</span></p>
 
@@ -1983,7 +1854,7 @@ font-family:"Courier New";color:black'>  ИНАЧЕ</span></p>
 
 <p><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'>    ЕСЛИ </span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>ch</span><span style='font-size:12.0pt;font-family:
 "Courier New";color:black'>=`(` ТО </span></p>
 
@@ -1992,33 +1863,33 @@ font-family:"Courier New";color:black'>    НАЧАЛО</span></p>
 
 <p><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'>      ЕСЛИ </span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>ch</span><span style='font-size:12.0pt;font-family:
 "Courier New";color:black'>=`(` ТО </span><span lang=EN-US style='font-size:
 12.0pt;font-family:"Courier New";color:black'>read</span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>(</span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>(</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>ch</span><span style='font-size:12.0pt;font-family:
 "Courier New";color:black'>) ИНАЧЕ </span><span lang=EN-US style='font-size:
 12.0pt;font-family:"Courier New";color:black'>error</span></p>
 
 <p><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'>      </span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>FORMULA</span></p>
 
 <p><span lang=EN-US style='font-size:
 12.0pt;font-family:"Courier New";color:black'>      </span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>ЕСЛИ</span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>ЕСЛИ</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'> ch</span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;font-family:Symbol;color:black'>&Icirc;</span><span lang=EN-US
                                                         style='font-size:12.0pt;font-family:"Courier New";color:black'>{`+`,`-`,`*`,`/`}
 </span><span style='font-size:12.0pt;font-family:"Courier New";
 color:black'>ТО</span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;font-family:"Courier New";color:black'> read(ch) </span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>ИНАЧЕ</span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>ИНАЧЕ</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'> error</span></p>
 
 <p><span lang=EN-US style='font-size:
@@ -2026,13 +1897,13 @@ color:black'> error</span></p>
 
 <p><span lang=EN-US style='font-size:
 12.0pt;font-family:"Courier New";color:black'>      </span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>ЕСЛИ
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>ЕСЛИ
 </span><span lang=EN-US style='font-size:12.0pt;font-family:
 "Courier New";color:black'>ch</span><span style='font-size:12.0pt;line-height:
 92%;font-family:"Courier New";color:black'>=`)` ТО </span><span lang=EN-US
                                                                 style='font-size:12.0pt;font-family:"Courier New";color:black'>read</span><span
-    style='font-size:12.0pt;font-family:"Courier New";color:black'>(</span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        style='font-size:12.0pt;font-family:"Courier New";color:black'>(</span><span
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>ch</span><span style='font-size:12.0pt;font-family:
 "Courier New";color:black'>) ИНАЧЕ </span><span lang=EN-US style='font-size:
 12.0pt;font-family:"Courier New";color:black'>error</span></p>
@@ -2042,7 +1913,7 @@ font-family:"Courier New";color:black'>    КОНЕЦ</span></p>
 
 <p><span style='font-size:12.0pt;
 font-family:"Courier New";color:black'>    ИНАЧЕ </span><span
-    lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
+        lang=EN-US style='font-size:12.0pt;font-family:"Courier New";
 color:black'>error</span></p>
 
 <p><span style='font-size:12.0pt;
@@ -2055,39 +1926,39 @@ font-family:"Courier New";color:black'>&nbsp;</span></p>
 color:black'>Замечание. </span></i></p>
 
 <p>Простота
-  построения алгоритма синтаксического анализа основана на использовании рекурсии
-  (в нашем примере программа обращается к себе дважды).</span></p>
+    построения алгоритма синтаксического анализа основана на использовании рекурсии
+    (в нашем примере программа обращается к себе дважды).</span></p>
 
 <p>Алгоритм синтаксического
-  анализа представлен в псевдокоде, который легко перевести на любой
-  алгоритмический язык, допускающий рекурсивный вызов процедур.</span></p>
+    анализа представлен в псевдокоде, который легко перевести на любой
+    алгоритмический язык, допускающий рекурсивный вызов процедур.</span></p>
 
 <p>Нетрудно видеть,
-  что программа иногда осуществляет лишние проверки и поэтому не является идеальной.
-  Однако такая запись в точности соответствует последовательному применению
-  перечисленных правил.</span>&nbsp;</span></p>
+    что программа иногда осуществляет лишние проверки и поэтому не является идеальной.
+    Однако такая запись в точности соответствует последовательному применению
+    перечисленных правил.</span>&nbsp;</span></p>
 
 <h1 style='text-indent:1.0cm;'>Пример
-  описания алгоритма языком допустимых выражений</span>&nbsp;</span></h1>
+    описания алгоритма языком допустимых выражений</span>&nbsp;</span></h1>
 
 <p>Как уже
-  говорилось, посредством описания языка можно определять алгоритмы.</span></p>
+    говорилось, посредством описания языка можно определять алгоритмы.</span></p>
 
 <p>Построим
-  грамматику, порождающую все правильные примеры сложения натуральных чисел
-  неограниченной длины в двоичной записи. Ранее мы построили конечный автомат,
-  решающий эту задачу.</span></p>
+    грамматику, порождающую все правильные примеры сложения натуральных чисел
+    неограниченной длины в двоичной записи. Ранее мы построили конечный автомат,
+    решающий эту задачу.</span></p>
 
 <p style='text-indent:1.0cm;'>Будем использовать привычную запись сложения
-  <в столбик>,
-    например:</span>&nbsp;</span>
+    <в столбик>,
+        например:</span>&nbsp;</span>
 </p>
 <p style='text-indent:1.0cm;'>&nbsp;</p>
 
 <p style='text-indent:1.0cm;'>   0 1 1 0 0 1 0 0</span></p>
 
 <p style='text-indent:1.0cm;'>+            0 0 1 0 1 1 0
-  1</span></p>
+    1</span></p>
 
 <p style='text-indent:1.0cm;'>   -----------</span></p>
 
@@ -2096,43 +1967,43 @@ color:black'>Замечание. </span></i></p>
 <p style='text-indent:1.0cm;'>&nbsp;</span></p>
 
 <p style='text-indent:1.0cm;'>В качестве алфавита языка
-  возьмем тройки цифр одного разряда. Различных троек будет восемь.</span></p>
+    возьмем тройки цифр одного разряда. Различных троек будет восемь.</span></p>
 
 <p><span style='font-size:12.0pt;
 color:black'>&nbsp;</span></p>
 
 <p align=center style='text-align:center;'>0          0          0          0          1          1          1         
-  1</span>
+    1</span>
 </p>
 
 <p align=center style='text-align:center;'>0          0          1          1          0          0          1         
-  1</span>
+    1</span>
 </p>
 
 <p align=center style='text-align:center;'>0          1          0          1          0          1          0         
-  1</span>
+    1</span>
 </p>
 
 <p><span style='font-size:12.0pt;
 color:black'>&nbsp;</span></p>
 
 <p>Проанализируем,
-  как из этих троек можно составлять правильные примеры на сложение.</span></p>
+    как из этих троек можно составлять правильные примеры на сложение.</span></p>
 
 <p style='text-indent:1.0cm;'>Во-первых, вторая, третья и пятая тройки не могут быть
-  крайними правыми тройками в примере, так как они могут быть правильными только
-  в случаях, когда имеет место перенос единицы из предыдущего разряда.</span></p>
+    крайними правыми тройками в примере, так как они могут быть правильными только
+    в случаях, когда имеет место перенос единицы из предыдущего разряда.</span></p>
 
 <p>Первая,
-  четвертая и шестая тройки, наоборот, могут быть крайними правыми тройками,
-  причем в этом случае переноса из последнего разряда не будет.</span></p>
+    четвертая и шестая тройки, наоборот, могут быть крайними правыми тройками,
+    причем в этом случае переноса из последнего разряда не будет.</span></p>
 
 <p>Седьмая и
-  восьмая тройки тоже могут стоять в крайней правой позиции, но при этом будет
-  иметь место перенос единицы из последнего разряда.</span></p>
+    восьмая тройки тоже могут стоять в крайней правой позиции, но при этом будет
+    иметь место перенос единицы из последнего разряда.</span></p>
 
 <p>Введем
-  нетерминальные символы </span><span lang=EN-US style='font-size:12.0pt;
+    нетерминальные символы </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>A</span><span style='font-size:12.0pt;line-height:
 92%;color:black'> и </span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;color:black'>B</span><span style='font-size:12.0pt;
@@ -2149,22 +2020,22 @@ color:black'>&nbsp;</span></p>
 
 <h5>A</span>::=     0 </span><span lang=EN-US style='font-family:Symbol;
 color:black'>&frac12;</span>       1</span><span
-    lang=EN-US style='font-family:Symbol;color:black'>&frac12;</span>        0</span><span lang=EN-US style='font-family:Symbol;
+        lang=EN-US style='font-family:Symbol;color:black'>&frac12;</span>        0</span><span lang=EN-US style='font-family:Symbol;
 color:black'>&frac12;</span>A</span>     0 </span><span lang=EN-US style='font-family:Symbol;
 color:black'>&frac12;</span> </span>A</span>   1 </span><span
-    lang=EN-US style='font-family:Symbol;color:black'>&frac12;</span> </span>A</span>   0</span></h5>
+        lang=EN-US style='font-family:Symbol;color:black'>&frac12;</span> </span>A</span>   0</span></h5>
 
 <p style='text-indent:36.0pt;'>0          1          1          0          1          1</span></p>
 
 <p>&nbsp;</span></p>
 
 <p>Если к
-  законченному примеру добавить вторую тройку справа, пример станет
-  незаконченным. Рассмотрим другие возможности порождения незаконченного примера.
-  Во-первых, вторая тройка сама является незаконченным примером. Далее, если к
-  незаконченному примеру добавить третью или пятую тройку, пример останется
-  незаконченным. Объединяя эти наблюдения, получаем второе правило искомой
-  грамматики:</span></p>
+    законченному примеру добавить вторую тройку справа, пример станет
+    незаконченным. Рассмотрим другие возможности порождения незаконченного примера.
+    Во-первых, вторая тройка сама является незаконченным примером. Далее, если к
+    незаконченному примеру добавить третью или пятую тройку, пример останется
+    незаконченным. Объединяя эти наблюдения, получаем второе правило искомой
+    грамматики:</span></p>
 
 <p>&nbsp;</span></p>
 
@@ -2181,8 +2052,8 @@ color:black'>&frac12;</span> </span>B</span>   0</span></h5>
 color:black'>&nbsp;</span></p>
 
 <p style='text-indent:1.0cm;'>Наконец, если к
-  незаконченному примеру добавить седьмую или восьмую тройку, он станет
-  законченным. В первое правило добавим эти две возможности и получим:</span></p>
+    незаконченному примеру добавить седьмую или восьмую тройку, он станет
+    законченным. В первое правило добавим эти две возможности и получим:</span></p>
 
 <p><span style='font-size:12.0pt;
 color:black'>&nbsp;</span></p>
@@ -2191,13 +2062,14 @@ color:black'>&nbsp;</span></p>
 </p>
 
 <h2 align=left style='text-align:left;'>A</span>::=     0 </span><span
-    lang=EN-US style='font-family:Symbol;color:black'>&frac12;</span>       1</span><span lang=EN-US style='font-family:Symbol;
+        lang=EN-US style='font-family:Symbol;color:black'>&frac12;</span>       1</span><span lang=EN-US style='font-family:Symbol;
 color:black'>&frac12;</span>        0</span><span
-    lang=EN-US style='font-family:Symbol;color:black'>&frac12;</span>A</span>     0 </span><span
-    lang=EN-US style='font-family:Symbol;color:black'>&frac12;</span> </span>A</span>   1 </span><span lang=EN-US
-                                                                                                       style='font-family:Symbol;
+        lang=EN-US style='font-family:Symbol;color:black'>&frac12;</span>A</span>     0 </span><span
+        lang=EN-US style='font-family:Symbol;color:black'>&frac12;</span> </span>A</span>   1 </span><span lang=EN-US
+                                                                                                           style='font-family:Symbol;
 color:black'>&frac12;</span> </span>A</span>   0 </span><span
-    lang=EN-US style='font-family:Symbol;color:black'>&frac12;</span> </span>B</span>   1</span><span lang=EN-US style='font-family:Symbol;
+        lang=EN-US style='font-family:Symbol;color:black'>&frac12;</span> </span>B</span>   1</span><span lang=EN-US
+                                                                                                          style='font-family:Symbol;
 color:black'>&frac12;</span> </span>B</span>    1</span></h2>
 
 <p style='margin-left:36.0pt;'>0          1          1          0          1          1          0          1</span>
@@ -2217,32 +2089,32 @@ color:black'>Замечание.</span></i><span style='font-size:12.0pt;
 color:black'> </span></p>
 
 <p>Построенная
-  грамматика состоит из правил очень простого вида: это либо замена
-  нетерминального символа терминальным, либо дописывание справа терминального
-  символа к нетерминальному. Оказывается, такая структура правил характерна
-  именно для тех языков, которые распознаются конечными автоматами. </span></p>
+    грамматика состоит из правил очень простого вида: это либо замена
+    нетерминального символа терминальным, либо дописывание справа терминального
+    символа к нетерминальному. Оказывается, такая структура правил характерна
+    именно для тех языков, которые распознаются конечными автоматами. </span></p>
 
 <p>&nbsp;</span></p>
 
 <p class=MsoBodyText2>Языки,
-  распознаваемые конечными автоматами, называются регулярными.</span></p>
+    распознаваемые конечными автоматами, называются регулярными.</span></p>
 
 <p class=MsoBodyText2>Конечно, не все языки являются регулярными.
-  Рассмотрим несколько похожих языков.</span></p>
+    Рассмотрим несколько похожих языков.</span></p>
 
 <p>&nbsp;</span></p>
 
 <p class=MsoBodyText2 align=left style='text-align:left;'><i>Пример 1.</span></i> </span></p>
 
 <p>Первый из них -
-  это множество цепочек двух символов <</span><span lang=EN-US style='font-size:
+    это множество цепочек двух символов <</span><span lang=EN-US style='font-size:
 12.0pt;color:black'>a</span><span style='font-size:12.0pt;
 color:black'>> и <</span><span lang=EN-US style='font-size:
 12.0pt;color:black'>b</span><span style='font-size:12.0pt;
 color:black'>>, в которых сначала идут только символы <</span>a</span>>, а после них -  только
-  символы <</span><span lang=EN-US style='font-size:12.0pt;
+    символы <</span><span lang=EN-US style='font-size:12.0pt;
 color:black'>b</span>>.
-  Например, </span><span lang=EN-US style='font-size:12.0pt;
+    Например, </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>abb</span><span style='font-size:12.0pt;
 color:black'>, </span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;color:black'>a</span><span style='font-size:12.0pt;
@@ -2261,26 +2133,26 @@ color:black'> и т.п. Обычно, такой язык обозначают �
 
 <p style='margin-left:18.0pt;text-indent:10.35pt;line-height:
 92%'>1)   Постройте
-  грамматику языка {</span><span lang=EN-US style='font-size:12.0pt;line-height:
+    грамматику языка {</span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;color:black'>a<sup>n</sup>b<sup>m</sup></span><span style='font-size:12.0pt;
 color:black'>}.</span></p>
 
-<p class=MsoBodyTextIndent2 style='margin-left:0cm;text-align:justify;
+<p class=MsoBodyTextIndent2 style='margin-left:0;text-align:justify;
 text-indent:1.0cm;'>2) Постройте
-  конечный автомат, который распознает слова этого языка (это означает, что он
-  приходит в конечное состояние на словах этого языка и только на них).</span></p>
+    конечный автомат, который распознает слова этого языка (это означает, что он
+    приходит в конечное состояние на словах этого языка и только на них).</span></p>
 
 <p class=MsoBodyTextIndent2 style='text-indent:-18.0pt;'><i>Пример 2.</span></i></p>
 
 <p>Теперь
-  рассмотрим второй язык {</span><span lang=EN-US style='font-size:12.0pt;
+    рассмотрим второй язык {</span><span lang=EN-US style='font-size:12.0pt;
 color:black'>a<sup>n</sup>b<sup>n</sup></span>}. Этот язык является
-  подмножеством первого языка и состоит только из тех его слов, которые содержат
-  одинаковое количество тех и других букв. Оказывается, что нельзя построить
-  конечный автомат, распознающий этот язык. Причина состоит в том, что конечный
-  автомат
-  <не умеет считать>, поэтому после ввода всех символов <</span>a</span>> он не сможет определить,
-    то ли количество символов <</span><span lang=EN-US style='font-size:12.0pt;
+    подмножеством первого языка и состоит только из тех его слов, которые содержат
+    одинаковое количество тех и других букв. Оказывается, что нельзя построить
+    конечный автомат, распознающий этот язык. Причина состоит в том, что конечный
+    автомат
+    <не умеет считать>, поэтому после ввода всех символов <</span>a</span>> он не сможет определить,
+        то ли количество символов <</span><span lang=EN-US style='font-size:12.0pt;
 color:black'>b</span><span style='font-size:12.0pt;line-height:
 92%;color:black'>> введено. Более строго доказать этот факт можно, опираясь на
 теорему о поведении конечного автомата, работающего автономно (то есть когда на
@@ -2288,8 +2160,8 @@ color:black'>b</span><span style='font-size:12.0pt;line-height:
 </p>
 
 <p>Для этого языка
-  можно построить грамматику, которая порождает нужные последовательности, не
-  <считая> числа символов:</span>
+    можно построить грамматику, которая порождает нужные последовательности, не
+    <считая> числа символов:</span>
 </p>
 
 <p><span style='font-size:12.0pt;
@@ -2303,25 +2175,25 @@ color:black'>&AElig;</span></h5>
 '>&nbsp;</span></p>
 
 <p>Грамматика
-  состоит из одного правила. Значок </span><span lang=EN-US style='font-size:
+    состоит из одного правила. Значок </span><span lang=EN-US style='font-size:
 12.0pt;font-family:Symbol;color:black'>&AElig;</span> обозначает
-  <пустой>
-    символ, его вставка, например, в выражение </span>aSb</span>, вместо </span>S</span>, порождает слово </span>
-    ab</span>. Правило позволяет
-    одновременно добавлять по одному символу каждого вида слева и справа и, тем
-    самым, снимает проблему подсчета числа символов.</span>
+    <пустой>
+        символ, его вставка, например, в выражение </span>aSb</span>, вместо </span>S</span>, порождает слово </span>
+        ab</span>. Правило позволяет
+        одновременно добавлять по одному символу каждого вида слева и справа и, тем
+        самым, снимает проблему подсчета числа символов.</span>
 </p>
 <p><i>Задача 15.</span></i></p>
 
 <p><i> </span></i>Постройте синтаксический
-  анализатор для этого языка.</span></p>
+    анализатор для этого языка.</span></p>
 
 <p>&nbsp;</p>
 
 <p style='text-align:justify;text-indent:21.3pt;line-height:
 92%'>Однако решить
-  таким же способом проблему подсчета символов для следующего языка уже не
-  удастся.</span></p>
+    таким же способом проблему подсчета символов для следующего языка уже не
+    удастся.</span></p>
 
 <p style='text-align:justify;text-indent:21.3pt;line-height:
 92%'>&nbsp;</span></p>
@@ -2329,29 +2201,29 @@ color:black'>&AElig;</span></h5>
 <p><i>Пример 3. </span></i></p>
 
 <p>Рассмотрим язык
-  {</span>a<sup>n</sup>b<sup>n</sup>c<sup>n</sup></span>}. Оказывается, для его
-  описания требуются новые грамматические конструкции. </span></p>
+    {</span>a<sup>n</sup>b<sup>n</sup>c<sup>n</sup></span>}. Оказывается, для его
+    описания требуются новые грамматические конструкции. </span></p>
 
 <h2><strong>Моделирование вывода
-  теорем</span></strong></h2>
+    теорем</span></strong></h2>
 
 <p class=MsoBodyText>Система Поста создавалась как модель логического
-  вывода в любой аксиоматической теории. Логический вывод определяется так же,
-  как грамматический вывод, только правила (которые у Поста называются
-  продукциями) сложнее: замене подвергаются не только нетерминальные символы, но
-  и цепочки терминальных и нетерминальных символов. Вместо выделенного
-  нетерминального символа, с которого начинается вывод, рассматривается одна или
-  несколько аксиом - цепочек терминальных символов. Далее, по правилам вывода
-  осуществляются преобразования этих аксиом, и все полученные при этом выражения
-  называются теоремами.</span></p>
+    вывода в любой аксиоматической теории. Логический вывод определяется так же,
+    как грамматический вывод, только правила (которые у Поста называются
+    продукциями) сложнее: замене подвергаются не только нетерминальные символы, но
+    и цепочки терминальных и нетерминальных символов. Вместо выделенного
+    нетерминального символа, с которого начинается вывод, рассматривается одна или
+    несколько аксиом - цепочек терминальных символов. Далее, по правилам вывода
+    осуществляются преобразования этих аксиом, и все полученные при этом выражения
+    называются теоремами.</span></p>
 
 <p class=MsoBodyText>Проиллюстрируем на примере осуществление
-  логического вывода в системе Поста. Вернемся к задаче, которая, как мы уже
-  знаем, не допускает реализации конечным автоматом, но может быть выполнена
-  машиной Тьюринга, то есть имеет алгоритм решения. Это задача перемножения
-  натуральных чисел неограниченной длины. Для простоты (но, не умаляя общности)
-  числа будем рассматривать в единичной записи. Например, равенство 2</span>x</span>3=6 запишется
-  как 11</span>x</span>111=111111.</span></p>
+    логического вывода в системе Поста. Вернемся к задаче, которая, как мы уже
+    знаем, не допускает реализации конечным автоматом, но может быть выполнена
+    машиной Тьюринга, то есть имеет алгоритм решения. Это задача перемножения
+    натуральных чисел неограниченной длины. Для простоты (но, не умаляя общности)
+    числа будем рассматривать в единичной записи. Например, равенство 2</span>x</span>3=6 запишется
+    как 11</span>x</span>111=111111.</span></p>
 
 <p class=MsoBodyText><i>Пример.</span></i> </span></p>
 
@@ -2382,29 +2254,29 @@ color:black'>CB</span></p>
 <h5>AxB</span>=</span>C</span> ::= </span>BxA</span>=</span>C</span></h5>
 
 <p class=MsoNormal>Первое из этих
-  правил определяет распределительный закон умножения (дистрибутивность), который
-  в более привычной форме записывается как (A+1)x</span>B</span>=</span>AxB</span>+</span>B</span> или, если
-  произведение </span>AxB</span> обозначить через </span>C</span>, как (A+1)xB=C+B.
-  Прибавление 1 к числу в единичной записи осуществляется простым приписыванием 1
-  к записи числа, поэтому знак <+> можно опустить, и мы получим равенство в той
-  форме, как оно дано в описании грамматики.</span></p>
+    правил определяет распределительный закон умножения (дистрибутивность), который
+    в более привычной форме записывается как (A+1)x</span>B</span>=</span>AxB</span>+</span>B</span> или, если
+    произведение </span>AxB</span> обозначить через </span>C</span>, как (A+1)xB=C+B.
+    Прибавление 1 к числу в единичной записи осуществляется простым приписыванием 1
+    к записи числа, поэтому знак <+> можно опустить, и мы получим равенство в той
+    форме, как оно дано в описании грамматики.</span></p>
 
 <p class=MsoNormal>Второе правило
-  - переместительный закон умножения (коммутативность). </span>A</span> и </span>B</span> - произвольные числа в
-  единичной записи. Грамматический вывод начинается с аксиомы. Каждый шаг вывода
-  связан с заменой очередного выражения по одному из двух правил.</span></p>
+    - переместительный закон умножения (коммутативность). </span>A</span> и </span>B</span> - произвольные числа в
+    единичной записи. Грамматический вывод начинается с аксиомы. Каждый шаг вывода
+    связан с заменой очередного выражения по одному из двух правил.</span></p>
 
 <p class=MsoNormal><i>Пример. </span></i></p>
 
 <p class=MsoNormal>Приведем пример
-  вывода равенства 11</span><span lang=EN-US style='font-size:12.0pt;line-height:
+    вывода равенства 11</span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;color:black'>x</span><span style='font-size:12.0pt;
 color:black'>111=111111 в построенной грамматике. Эту же задачу можно
 сформулировать как грамматический разбор или распознавание данного предложения
 языка.</span></p>
 
 <p class=MsoBodyText>Разбор начнем с выделенной строки символов в
-  левой части первого правила.</span></p>
+    левой части первого правила.</span></p>
 
 <p class=MsoNormal><span style='font-size:12.0pt;
 color:black'>1</span><span lang=EN-US style='font-size:12.0pt;
@@ -2436,25 +2308,25 @@ color:black'>x</span><span style='font-size:12.0pt;line-height:
 color:black'>Задача 15. </span></i></p>
 
 <p class=MsoNormal>Постройте
-  грамматики описания следующих языков, используя единичную запись натуральных
-  чисел.</span></p>
+    грамматики описания следующих языков, используя единичную запись натуральных
+    чисел.</span></p>
 
 <p class=MsoNormal style='margin-left:36.0pt;text-align:justify;text-indent:
 1.0cm;'><span style='font-size:12.0pt;
 color:black'>1)<span style='font:7.0pt ""'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span>язык
-  четных чисел;</span></p>
+    четных чисел;</span></p>
 
 <p class=MsoNormal style='margin-left:36.0pt;text-align:justify;text-indent:
 1.0cm;'><span style='font-size:12.0pt;
 color:black'>2)<span style='font:7.0pt ""'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span>язык
-  сложения натуральных чисел.</span></p>
+    сложения натуральных чисел.</span></p>
 
 <p class=MsoNormal><i>Задача 16.</span></i></p>
 
 <p style='text-indent:1.0cm;'>Объясните содержательно, какое множество натуральных чисел
-  в единичной записи определяет следующая грамматика:</span></p>
+    в единичной записи определяет следующая грамматика:</span></p>
 
 <p class=MsoNormal><span style='font-size:12.0pt;
 color:black'>1#1 - аксиома</span></p>
@@ -2482,39 +2354,39 @@ color:black'>Замечание.</span></i><span style='font-size:12.0pt;
 color:black'> </span></p>
 
 <p class=MsoNormal>Появление в
-  левой части правил вывода цепочек терминальных и нетерминальных символов можно
-  трактовать как использование в определении грамматических правил контекста.
-  Большинство правил естественного языка связано с контекстом. Даже в приведенном
-  выше примере языка из 16 слов любая попытка составить слово, используя не все
-  его части, а, например, только приставку и корень, требует использования контекста.
-  Например, есть слово
-  <поход>, но нет слова
-    <наход>.</span>
+    левой части правил вывода цепочек терминальных и нетерминальных символов можно
+    трактовать как использование в определении грамматических правил контекста.
+    Большинство правил естественного языка связано с контекстом. Даже в приведенном
+    выше примере языка из 16 слов любая попытка составить слово, используя не все
+    его части, а, например, только приставку и корень, требует использования контекста.
+    Например, есть слово
+    <поход>, но нет слова
+        <наход>.</span>
 </p>
 
 <p class=MsoNormal>Расширим этот
-  язык двумя правилами с контекстом.</span></p>
+    язык двумя правилами с контекстом.</span></p>
 
 <p class=MsoNormal>по&lt;корень&gt;&lt;суффикс&gt;&lt;окончание&gt;::=по&lt;корень&gt;</span></p>
 
 <p class=MsoNormal>&lt;приставка&gt;сад&lt;суффикс&gt;&lt;окончание&gt;::=сад&lt;суффикс&gt;и</span></p>
 
 <p class=MsoNormal>Первое правило добавляет
-  слова "поход" и
-  "посад", второе -
-  "садки" и
-  "садочки".</span></p>
+    слова "поход" и
+    "посад", второе -
+    "садки" и
+    "садочки".</span></p>
 
 <p class=MsoNormal><i>Задача 17.</span></i> </span></p>
 
 <p class=MsoNormal>Опишите язык {</span>a<sup>n</sup>b<sup>n</sup>c<sup>n</sup></span>}, используя продукции
-  Поста.</span></p>
+    Поста.</span></p>
 
 <h2><strong>Описание
-  математических теорий и процедуры нахождения доказательств</span></strong></h2>
+    математических теорий и процедуры нахождения доказательств</span></strong></h2>
 
 <p class=MsoNormal>Пост показал,
-  что, используя правила вида </span><span lang=EN-US style='font-size:12.0pt;
+    что, используя правила вида </span><span lang=EN-US style='font-size:12.0pt;
 color:black'>gA</span><span style='font-size:12.0pt;line-height:
 92%;color:black'>::=</span><span lang=EN-US style='font-size:12.0pt;line-height:
 92%;color:black'>Ah</span><span style='font-size:12.0pt;
@@ -2530,18 +2402,18 @@ color:black'>, можно описать формально любую мате�
     эффективная процедура, процесс проверки является также эффективным.</span></p>
 
 <p class=MsoNormal>Можно
-  представить и механизм проверки правильности теоремы, если ее вывод
-  (доказательство) отсутствует. Для этого нужно перебирать все возможные выводы,
-  сравнивая результат с искомым. Если такая теорема может быть выведена, то рано
-  или поздно мы натолкнемся на ее доказательство. Если же теорема не может быть
-  выведена в данной теории, то ответ никогда не будет получен.</span></p>
+    представить и механизм проверки правильности теоремы, если ее вывод
+    (доказательство) отсутствует. Для этого нужно перебирать все возможные выводы,
+    сравнивая результат с искомым. Если такая теорема может быть выведена, то рано
+    или поздно мы натолкнемся на ее доказательство. Если же теорема не может быть
+    выведена в данной теории, то ответ никогда не будет получен.</span></p>
 
 <p class=MsoNormal>Таким образом,
-  у нас есть процедура получения доказательств теорем, но нет процедуры проверки,
-  является ли данное выражение языка теоремой. В общем случае отыскание такой
-  процедуры невозможно. Теорема Геделя утверждает, что такой процедуры нет для
-  арифметики. В то же время в некоторых теориях, например, в алгебре высказываний
-  (булевой алгебре), в евклидовой геометрии такие процедуры есть.</span></p>
+    у нас есть процедура получения доказательств теорем, но нет процедуры проверки,
+    является ли данное выражение языка теоремой. В общем случае отыскание такой
+    процедуры невозможно. Теорема Геделя утверждает, что такой процедуры нет для
+    арифметики. В то же время в некоторых теориях, например, в алгебре высказываний
+    (булевой алгебре), в евклидовой геометрии такие процедуры есть.</span></p>
 </div>
 
 </body>

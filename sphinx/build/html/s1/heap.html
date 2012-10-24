@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Двоичная куча &mdash; Документация Дистанционная сессия по информатике 0.1</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Документация Дистанционная сессия по информатике 0.1" href="../index.html" />
+    <link rel="up" title="Первая сессия — весна" href="index.html" />
+    <link rel="next" title="Вторая сессия — лето" href="../s2/index.html" />
+    <link rel="prev" title="Тестирующая система (TestSys)" href="testsys.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Дистанционная сессия по информатике</a>
+      </div>
+
+    <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider"></li>
+            
+            
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Навигация <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Двоичная куча</a><ul>
+<li><a class="reference internal" href="#id2">Сохранение кучи в памяти</a></li>
+<li><a class="reference internal" href="#id3">Использование</a></li>
+<li><a class="reference internal" href="#id4">Реализация</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="id1">
+<h1>Двоичная куча<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<p><em>Двоичная куча</em> (или <em>пирамида</em>) &#8212; структура данных, позволяющая находить минимальный элемент массива за время <span class="math">\(O(1)\)</span> и модифицировать массив за время <span class="math">\(O(\log n)\)</span>.</p>
+<p>Куча основана на использовании двоичного дерева со специальным свойством: значение любого узла должно быть меньше значений обоих его потомков.</p>
+<div class="figure align-center">
+<img alt="../_images/heap.png" src="../_images/heap.png" />
+<p class="caption">Пример кучи наоборот &#8212; значение узла <em>больше</em> значений потомков.</p>
+</div>
+<div class="section" id="id2">
+<h2>Сохранение кучи в памяти<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Пронумеруем элементы кучи от 0 до <span class="math">\(n-1\)</span>. Заметим, что тогда индексы потомков узла <span class="math">\(i\)</span> можно вычислить как <span class="math">\(2i+1\)</span> и <span class="math">\(2i+2\)</span>, а индекс предка как <span class="math">\((i-1)/2\)</span>. Значит, можно сохранить кучу в линейный список и переходить по узлам дерева с помощью индексов.</p>
+</div>
+<div class="section" id="id3">
+<h2>Использование<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Куча поддерживает следующие операции:</p>
+<ul class="simple">
+<li>Построение кучи</li>
+<li>Извлечение минимума</li>
+<li>Добавление элемента</li>
+</ul>
+<p>Для построения кучи используется вспомогательная функция <tt class="docutils literal"><span class="pre">heapify</span></tt>:, которая опускает ключ ниже в дерево для восстановления свойства кучи.</p>
+</div>
+<div class="section" id="id4">
+<h2>Реализация<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Реализация кучи на языке Python состоит из четырёх функций. Предполагается, что в программе объявлен массив <tt class="docutils literal"><span class="pre">H</span></tt>, в котором сохранена куча.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">heapify</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Эта функция восстанавливает свойство кучи для элемента v и его потомков, проталкивая его вниз если нужно.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">m</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="c"># Сравним значение в v со значениями в его потомках, если они есть, и найдем минимальное:</span>
+    <span class="k">if</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">H</span><span class="p">)</span> <span class="ow">and</span> <span class="n">H</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">H</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">H</span><span class="p">)</span> <span class="ow">and</span> <span class="n">H</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">H</span><span class="p">[</span><span class="n">m</span><span class="p">]:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">v</span> <span class="o">+</span> <span class="mi">2</span>
+
+    <span class="c"># Если m не равно v, то узел m имеет ключ, меньший ключа v, что нарушает кучу.</span>
+    <span class="c"># Значит, требуется поменять местами v и m и продолжить восстанавливать кучу из m.</span>
+    <span class="k">if</span> <span class="n">m</span> <span class="o">!=</span> <span class="n">v</span><span class="p">:</span>
+        <span class="n">H</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">H</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">H</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">H</span><span class="p">[</span><span class="n">m</span><span class="p">]</span>
+        <span class="n">heapify</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">build_heap</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Эта функция превращает произвольный массив H в кучу.</span>
+<span class="sd">    Для этого вызывается функция heapify для всех узлов, у которых есть потомки</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">H</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">heapify</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">get_min</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Эта функция удаляет из кучи минимальный элемент и возвращает его.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">m</span> <span class="o">=</span> <span class="n">H</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c"># Запоминаем текущий минимум</span>
+    <span class="n">H</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">H</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="c"># Переносим последний элемент на первое место.</span>
+    <span class="n">heapify</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c"># Проталкиваем корень вниз для восстановления кучи</span>
+    <span class="k">return</span> <span class="n">m</span> <span class="c"># И возвращаем минимальное значение</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Эта функция добавляет новый элемент в кучу.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c"># Сначала элемент добавляется в конец</span>
+    <span class="n">H</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">H</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="c"># Затем он поднимается наверх, пока его ключ меньше ключа родителя (это нарушает свойство кучи)</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">H</span><span class="p">[(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]:</span>
+        <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">H</span><span class="p">[(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">H</span><span class="p">[(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">],</span> <span class="n">H</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, Максим Кольцов, Денис Степулёнок.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,119 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Разбор задач: динамика</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_java.js"></script>
+    <script type="text/javascript" src="../syntax/sh_python.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_basic.js"></script>
+    <script type="text/javascript" src="../syntax/sh_alg.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});        
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100" height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70" type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+<div id="content">
+
+    <h1>Разбор задач, день 3</h1>
+ 
+    <h2>Кролик</h2>
+
+    <p>Зайчик прыгает по прямой просеке, для удобства разделённой на $n$ клеток.
+Клетки пронумерованы по порядку натуральными числами от $1$ до $n$.
+Некоторые клетки заболочены: если зайчик прыгнет на такую клетку, ему
+несдобровать. Некоторые другие клетки просеки поросли вкусной зелёной
+травой: прыгнув на такую клетку, зайчик сможет отдохнуть и подкрепиться.</p>
+
+<p>Зайчик начинает свой путь из клетки с номером $1$ и хочет попасть
+в клетку с номером $n$, по пути ни разу не провалившись в болото
+и скушав как можно больше вкусной зелёной травы. Конструктивные особенности
+зайчика таковы, что из клетки с номером $k$ он может прыгнуть лишь
+в клетки с номерами $k + 1$, $k + 3$ и $k + 5$.</p>
+
+<p>
+Выясните, какое максимальное количество клеток с травой сможет посетить
+зайчик на своём пути.</p>
+
+
+<pre class="sh_python">
+S = "....." + S
+F = [-1 for x in range(len(S))]
+F[5] = 0
+</pre>
+
+
+    <p> В некоторой стране $N$ городов и $M$ дорог. Каждая дорога представляет собой
+        отрезок прямой, соединяющий два различных города, причём известно, что ни
+        на одной дороге нет других городов, кроме тех, что задают её концы.
+        Расстоянием между двумя городами считается минимальная суммарная длина дорог,
+        по которым надо пройти, чтобы попасть из одного города в другой.
+        Требуется вычислить наибольшее из таких расстояний.</p>
+ 
+<pre class="sh_python">
+# Открываем входной и выходной файлы
+import sys
+sys.stdin = open("maxdist.in") 
+sys.stdout = open("maxdist.out", "w")
+
+N = int(input()) # Количество городов
+Inf = 1e20 # Обозначение для бесконечности
+A = [[Inf]*N for i in range(N)] # Создаём матрицу A размера NxN 
+for i in range(N): A[i][i] = 0  # Заполняем главную диагональ нулями 
+
+C = [map(int,raw_input().split()) for i in range(N)] # Считываем координаты городов
+
+# Вводим дороги и считаем их длины
+from math import sqrt 
+
+M = int(raw_input())
+for k in range(M):
+  i,j = map(int,raw_input().split())
+  i -= 1
+  j -= 1
+  A[i][j] = sqrt( (C[i][0]-C[j][0])**2 + (C[i][1]-C[j][1])**2 )
+  A[j][i] = A[i][j]
+
+# Алгоритм Флойда-Уоршалла
+for k in range(N):
+  for i in range(N):
+    for j in range(N):
+      t = A[i][k] + A[k][j]
+      if t &lt; A[i][j]:
+        A[i][j] = t
+
+# Выбираем максимальное из расстояний
+maxdist = max(map(max,A))
+
+# Выводим ответ
+print -1 if maxdist == Inf else maxdist
+</pre>
+
+</div>
+</body>
+
+</html>

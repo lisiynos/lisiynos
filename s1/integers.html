@@ -14,26 +14,24 @@
 
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+
+
+
     </script>
     <script type="text/javascript"
             src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
-
-    <script src="../Scripts/swfobject_modified.js" type="text/javascript"></script>
 </head>
 <body onLoad="sh_highlightDocument();">
 <div style="width:80%;">
     <div style="float:right;">
         <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version
-=6,0,0,0" width="100" height="50">
-            <param name="movie"
-                   value="../audio/a_smsqulh3n.swf">
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100" height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
             <param name="bgcolor" value="fff">
-            <param
-                    name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
-            <param
-                    name="autoplay" value="false">
+            <param name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param name="autoplay" value="false">
             <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
                    width="100" height="70" type="application/x-shockwave-flash"
                    pluginspage="http://www.macromedia.com/go/getflashplayer"
@@ -41,11 +39,15 @@
         </object>
     </div>
 </div>
-</div>
 
-<div id="content" style="width:80%;">
+<div id="content">
 
-<h1> Алгоритмы над целыми числами </h1>
+<h1>Алгоритмы над целыми числами. Проверка на простоту, разложение на множители. Наибольший общий
+    делитель и наименьшее общее кратное: алгоритм Евклида. Признак Паскаля. Расширенный алгоритм Евклида</h1>
+
+<ul class="tags">
+    <li><a href="#">Алгоритмы над целыми числами</a></li>
+</ul>
 
 <p>Алгоритмы над целыми числами применяются при решении множества задач: для сокращения дробей, разложения на
     множители.</p>
@@ -101,32 +103,32 @@
 
 <p><strong>Задача.</strong> Найти НОД двух натуральных чисел $a$ и $b$.</p>
 
-<p>Используем для решения задачи алгоритм Евклида с вычитаниями.<u> </u></p>
+<p>Используем для решения задачи алгоритм Евклида с вычитаниями.<cite> </cite></p>
 
-<p><u>Реализация на Pascal:</u></p>
+<p><cite>Реализация на Pascal:</cite></p>
 <pre class="sh_pascal">
 function GCD( a,b:integer ):integer; { определение НОД двух чисел }
 begin
-  while a <> b do 
+  while a <> b do
     if a > b then a:=a-b else b:=b-a;
   GCD := b;
 end;
- 
+
 begin { Пример использования }
-  writeln(GCD(10,15)); { Выведет 5 } 
+  writeln(GCD(10,15)); { Выведет 5 }
 end.</pre>
 
-<p><u>Реализация на <a href="../s3/cpp/cpp.html">С/C++</a>:</u></p>
+<p><cite>Реализация на <a href="../s3/cpp.html">С/C++</a>:</cite></p>
 
 <pre class="sh_cpp">
 #include &lt;stdio.h&gt;
 
-int GCD( int a, int b ){ // определение НОД двух чисел 
-  while(a != b) 
+int GCD( int a, int b ){ // определение НОД двух чисел
+  while(a != b)
     if (a > b) a-=b; else b-=a;
   return b;
 }
- 
+
 int main(){ // Пример использования
   printf("%d",GCD(10,15)); // Выведет 5
   return 0;
@@ -198,32 +200,32 @@ int main(){ // Пример использования
 <p>Рассмотрим алгоритм и процедуру-функцию к решению задачи 1.1, используя для нахождения НОД двух
     чисел алгоритм Евклида с делением.</p>
 
-<p><u>Алгоритм</u>:</p>
+<p><span style="text-decoration: underline;">Алгоритм</span>:</p>
 
 <pre>
-<u>Функция</u> Вычисление_НОД(целое <strong>a</strong>, целое <strong>b</strong>)
-  <u>Пока</u> (<strong>b</strong> &lt;&gt; 0)
-    <strong>r</strong> := <strong>a</strong> по модулю <strong>b</strong>  (остаток от деления <strong>a</strong> на <strong>b</strong>), <strong>r</strong> - временная переменная (буфер) 
+<cite>Функция</cite> Вычисление_НОД(целое <strong>a</strong>, целое <strong>b</strong>)
+  <span style="text-decoration: underline;">Пока</span> (<strong>b</strong> &lt;&gt; 0)
+    <strong>r</strong> := <strong>a</strong> по модулю <strong>b</strong>  (остаток от деления <strong>a</strong> на <strong>b</strong>), <strong>r</strong> - временная переменная (буфер)
     <strong>a</strong> := <strong>b</strong>
     <strong>b</strong> := <strong>r</strong>
-  <u>конец цикла</u>
+  <cite>конец цикла</cite>
   Вывод результата - <strong>a</strong>
-<u>Конец функции</u>
+<cite>Конец функции</cite>
 </pre>
 
-<p><u>Реализация на Pascal</u>:</p>
+<p><cite>Реализация на Pascal</cite>:</p>
 
 <pre class="sh_pascal">
 function GCD( a,b:int64 ):int64; { Функция для вычисления НОД при помощи деления }<br>begin<br>  if b = 0 then { Если b = 0 }<br>    GCD := a {  следовательно a=НОД }<br>  else { Пока b &lt;&gt; 0 }<br>    GCD := GCD(b,a mod b); { Вычисляем остаток от деления a на b, а заменяем на b, b заменяем на r }
 end;
- 
+
 begin
   writeln(GCD(264, 192)); { Выведет: 24 }
 end.</pre>
 
-<p><a href="../s2/python/python.html">Реализация на Python:</a></p>
+<p><a href="../s2/python.html">Реализация на Python:</a></p>
 <pre class="sh_python">
-def GCD(a,b): # Функция для вычисления НОД при помощи деления   
+def GCD(a,b): # Функция для вычисления НОД при помощи деления
   return a if b == 0 else GCD(b,a%b) # Вычисляем остаток от деления a на b, а заменяем на b, b заменяем на r=a mod b
   # НОД = a если b = 0 иначе НОД=НОД(b,r), r - остаток от деления a на b
 
@@ -237,11 +239,11 @@ print GCD(264, 192) # Выведет: 24 </pre>
 <p> $GCD(a_1,a_2,...,a_n) = GCD(GCD(a_1,a_2,...,a_{n-1}), a_n)$.</p>
 
 <p>Ниже приведена функция нахождения НОД для массива натуральных чисел $a(1..n)$ с использованием цикла.</p>
-  
+
 <pre class="sh_pascal" style="text-align:left;">
 function GCD( ... )...
     ....
-  
+
 function GCDM( a : array of int64 ):int64;
 var d : int64; i : integer;
 begin
@@ -250,7 +252,7 @@ begin
     d := GCD(d, a[i]);
   GCDM := d;
 end;
- 
+
 begin { Пример вызова }
   writeln(GCDM([15,10,25]));
 end.  </pre>
@@ -338,13 +340,13 @@ end.  </pre>
 <p style='margin-bottom:6.0pt;text-align:justify;text-indent:        20pt'>Решение:</p>
 
 <p style='text-align:justify;text-indent:20pt'>258 = 114 &#183; 2
-    + 30; q<sub>1</sub> = 2; </p>
+    + 30; $q_1 = 2$; </p>
 
 <p style='text-align:justify;text-indent:20pt'>114 = 30 &#183; 3
-    + 24; q<sub>2 </sub>= 3; </p>
+    + 24; $q_2 = 3$; </p>
 
 <p style='text-align:justify;text-indent:20pt'> 30 = 24 &#183; 1
-    + 6; q<sub>3 </sub>= 1; </p>
+    + 6; $q_3 = 1$; </p>
 
 <p style='text-align:justify;text-indent:20pt'> 24 = 6 &#183; 4; НОД(258,114) = 6</p>
 
@@ -392,7 +394,7 @@ begin
   while b <> 0 do begin
     q := a div b; { Частное }
     r := a mod b; { Остаток }
-    a := b; 
+    a := b;
     b := r;
     x := x0 - x1 * q; y := y0 - y1 * q;
     x0 := x1; y0 := y1;
@@ -407,7 +409,7 @@ begin
   for test := 1 to 1000000 do begin { Прогоняем тесты }
     a := random(2000)+1; { Генерируем 2 случайных числа }
     b := random(2000)+1;
-    GCD := dioph2(a,b,x0,y0); 
+    GCD := dioph2(a,b,x0,y0);
     assert( a*x0+b*y0 = GCD ); { Проверка что ответ верный! }
   end;
 end.</pre>
@@ -460,276 +462,251 @@ end.</pre>
 <p>Знак &#8593; пределяет выражение, как в ячейке выше и для
     наглядности таблицы используется в пассивных столбцах, не участвующих в
     текущих вычислениях. В каждой строке подчеркивается текущий найденный набор.</p>
-<table border=0 cellspacing=0 cellpadding=0
+<table border=0
        style='margin-left:34.1pt;border-collapse:collapse'>
 <tr>
-    <td width=71 valign=top style='width:23.45pt;border:solid black 1.0pt;
-  border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        $a_1$ </p>
+    <td width=71 style='width:23.45pt;border:solid black 1.0pt; border-right:none;padding:0 5.4pt 0 5.4pt'>
+        $a_1$
     </td>
-    <td width=87 valign=top style='width:54.0pt;border:solid black 1.0pt;
-  border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        набор </p>
+    <td width=87 style='width:54.0pt;border:solid black 1.0pt; border-right:none;padding:0 5.4pt 0 5.4pt'>
+        набор
     </td>
-    <td width=71 valign=top style='width:27.0pt;border:solid black 1.0pt;
-  border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        $a_2$ </p>
+    <td width=71 style='width:27.0pt;border:solid black 1.0pt; border-right:none;padding:0 5.4pt 0 5.4pt'>
+        $a_2$
     </td>
-    <td width=87 valign=top style='width:54.0pt;border:solid black 1.0pt;
-  border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        набор </p>
+    <td width=87 style='width:54.0pt;border:solid black 1.0pt; border-right:none;padding:0 5.4pt 0 5.4pt'>
+        набор
     </td>
-    <td width=71 valign=top style='width:27.0pt;border:solid black 1.0pt;
-  border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        $a_3$ </p>
+    <td width=71 style='width:27.0pt;border:solid black 1.0pt; border-right:none;padding:0 5.4pt 0 5.4pt'>
+        $a_3$
     </td>
-    <td width=87 valign=top style='width:54.0pt;border:solid black 1.0pt;
-  border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        набор </p>
+    <td width=87 style='width:54.0pt;border:solid black 1.0pt; border-right:none;padding:0 5.4pt 0 5.4pt'>
+        набор
     </td>
-    <td width=294 valign=top style='width:172.35pt;border:solid black 1.0pt;
-  padding:0cm 5.4pt 0cm 5.4pt'>
-        примечание</p>
+    <td width=294 style='width:172.35pt;border:solid black 1.0pt; padding:0 5.4pt 0 5.4pt'> примечание
     </td>
 </tr>
 <tr>
-    <td width=71 valign=top style='width:22.45pt;border-top:none;border-left:
-  solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;
-  background:#E6E6E6;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 style='width:22.45pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;
+  background:#E6E6E6;padding:0 5.4pt 0 5.4pt'>
         18
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         (1,0,0)
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         42
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         (0,1,0)
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         10
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
-        (0,0,1)</p>
+    <td width=87 style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
+        (0,0,1)
     </td>
-    <td width=294 valign=top style='width:172.35pt;border:solid black 1.0pt;
-  border-top:none;background:#E6E6E6;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=294 style='width:172.35pt;border:solid black 1.0pt;
+  border-top:none;background:#E6E6E6;padding:0 5.4pt 0 5.4pt'>
         $GCD(a,b)=GCD(b,r)$
-        $r=a-bq$; $0 \le r < |b|$</p>
+        $r=a-bq$; $0 \le r &lt; |b|$
     </td>
 </tr>
 <tr>
-    <td width=71 valign=top style='width:22.45pt;border-top:none;border-left:
-  solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;
-  padding:0cm 5.4pt 0cm 5.4pt'>
-        6</p>
+    <td width=71 style='width:22.45pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;
+  padding:0 5.4pt 0 5.4pt'>
+        6
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        <u>(-2</u><u>,1,0) </u>
+    <td width=87
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
+        <span style="text-decoration: underline;">(-2</span><span style="text-decoration: underline;">,1,0) </span>
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         18
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         (1,0,0)
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
-    <td width=294 valign=top style='width:172.35pt;border:solid black 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        6 = 42 – 18 &#183; 2</p>
+    <td width=294 style='width:172.35pt;border:solid black 1.0pt;
+  border-top:none;padding:0 5.4pt 0 5.4pt'>
+        6 = 42 – 18 · 2
 
         <p>(-2,1,0) = (0,1,0) - (1,0,0) &#183; 2</p>
     </td>
 </tr>
 <tr>
-    <td width=71 valign=top style='width:22.45pt;border-top:none;border-left:
-  solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 style='width:22.45pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;
+  padding:0 5.4pt 0 5.4pt'>
         6
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         (-2,1,0)
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         0
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        <u>(7,-3,0)</u>
+    <td width=87
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
+        <cite>(7,-3,0)</cite>
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
-    <td width=294 valign=top style='width:172.35pt;border:solid black 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=294 style='width:172.35pt;border:solid black 1.0pt;
+  border-top:none;padding:0 5.4pt 0 5.4pt'>
         0 = 18 – 6 &#183; 3
 
         <p>(7,-3,0) = (1,0,0) - (-2,1,0) &#183; 3</p></td>
 </tr>
 <tr>
-    <td width=71 valign=top style='width:22.45pt;border-top:none;border-left:
-  solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 style='width:22.45pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;
+  padding:0 5.4pt 0 5.4pt'>
         4
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        <u>(2,-1,1) </u>
+    <td width=87
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
+        <cite>(2,-1,1) </cite>
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        6 </p>
+    <td width=71
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
+        6
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        (-2,1,0) </p>
+    <td width=87
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
+        (-2,1,0)
     </td>
-    <td width=294 valign=top style='width:172.35pt;border:solid black 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        4 = 10 – 6 &#183; 1</p>
+    <td width=294 style='width:172.35pt;border:solid black 1.0pt;
+  border-top:none;padding:0 5.4pt 0 5.4pt'>
+        4 = 10 – 6 · 1
 
         <p>(2,-1,1) = (0,0,1) - (-2,1,0) </p>
     </td>
 </tr>
 <tr>
-    <td width=71 valign=top style='width:22.45pt;border-top:none;border-left:
-  solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 style='width:22.45pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;
+  padding:0 5.4pt 0 5.4pt'>
         2
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        <u>(-4,2,-1) </u>
+    <td width=87
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
+        <cite>(-4,2,-1) </cite>
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         4
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         (2,-1,1)
     </td>
-    <td width=294 valign=top style='width:172.35pt;border:solid black 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        2 = 6 – 4 &#183; 1</p>
+    <td width=294 style='width:172.35pt;border:solid black 1.0pt;
+  border-top:none;padding:0 5.4pt 0 5.4pt'>
+        2 = 6 – 4 · 1
 
         <p>(-4,2,-1) = (-2,1,0)
             - (2,-1,1) </p>
     </td>
 </tr>
 <tr>
-    <td width=71 valign=top style='width:22.45pt;border-top:none;border-left:
-  solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;
-  padding:0cm 5.4pt 0cm 5.4pt'>
-        2 </p>
+    <td width=71 style='width:22.45pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;
+  padding:0 5.4pt 0 5.4pt'>
+        2
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         (-4,2,-
-        1) </p>
+        1)
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         0
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        <u>(10,-
-            5,3) </u>
+    <td width=87
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
+        <cite>(10,-
+            5,3) </cite>
     </td>
-    <td width=294 valign=top style='width:172.35pt;border:solid black 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=294 style='width:172.35pt;border:solid black 1.0pt;
+  border-top:none;padding:0 5.4pt 0 5.4pt'>
         0 = 4 – 2 &#183; 2
 
         <p>(10,-5,3) = (2,-1,1)
             - (-4,2,-1) &#183; 2</p></td>
 </tr>
 <tr>
-    <td width=71 valign=top style='width:22.45pt;border-top:none;border-left:
-  solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;
-  background:#E6E6E6;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 style='width:22.45pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;
+  background:#E6E6E6;padding:0 5.4pt 0 5.4pt'>
         2
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         (-4,2,-1)
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         0
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         (7,-
         3,0)
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         0
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         (10,-5,3)
     </td>
-    <td width=294 valign=top style='width:172.35pt;border:solid black 1.0pt;
-  border-top:none;background:#E6E6E6;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=294 style='width:172.35pt;border:solid black 1.0pt;
+  border-top:none;background:#E6E6E6;padding:0 5.4pt 0 5.4pt'>
         итоговая строка результатов
     </td>
 </tr>
@@ -771,14 +748,11 @@ end.</pre>
 
 <p><strong>Функция</strong> GCD(n, a(), x()) </p>
 
-<p>Задать набор <span lang=EN-
-                      US>N а_1          
-  {1,0,…,0}</p>
+<p>Задать набор N а_1{1,0,…,0}</p>
 
 <p><strong>Цикл</strong> i от 2 до n </p>
 
-<p> Задать набор N а$_i $ {0,…0,1$_<span lang=EN-
-                                         US>i  $,0,…,0}</p>
+<p> Задать набор N а$_i $ {0,…0,1$_i $,0,…,0}</p>
 
 <p><strong>Пока</strong> a(i ) &#8800; 0</p>
 
@@ -792,8 +766,7 @@ end.</pre>
     = Na_1 - q*Na$_i $ { покомпонентно} </p>
 
 <p> a (1) = t
-    Na _1 = <span lang=EN-
-                  US>Nt</p>
+    Na _1 = Nt</p>
 
 <p><strong>Конец пока</strong></p>
 
@@ -805,18 +778,17 @@ end.</pre>
 <p> GCD = a(1)
     {НОД коэффициентов}</p>
 
-<p> x () = <span lang=EN-
-                 US>Na _1</p>
+<p> x () = Na _1</p>
 
 <p> {набор Na _1 содержит
     частное решение уравнения}</p>
 
 <p><strong>конец функции</strong></p>
 
-<p><u>Реализация на Pascal:</u></p>
+<p><cite>Реализация на Pascal:</cite></p>
 
 <pre class="sh_pascal" style="text-align:left;">
-type 
+type
   TVector = array [1..100] of Integer;
 
 var
@@ -865,7 +837,7 @@ begin
 end.
 </pre>
 
-<p style='text-align:justify'><strong>Задача </strong><strong>(Тренинг).</strong>
+<p style='text-align:justify'><strong>Задача:</strong>
     Разменять 14 рублей “трешками” и “пятерками”.</p>
 
 <h2>Задачи переливания</h2>
@@ -889,9 +861,8 @@ end.
 <p style='margin-left:60.55pt;text-indent:-18.0pt'>2) Из
     первого сосуда доливаем второй (если возможно)</p>
 
-<p style='margin-left:60.55pt;text-indent:-18.0pt'>3) Из
-    второго сосуда, если он полон, выливаем (<strong><span style='font-family:
-Symbol'>- 1 </strong>для y<strong>)</strong></p>
+<p style='margin-left:60.55pt;text-indent:-18.0pt'>3) Из второго сосуда, если он полон, выливаем (<strong>-1</strong>для
+    y<strong>)</strong></p>
 
 <p>Последующий
     пункт алгоритма выполняется, если невозможно выполнить предыдущий пункт.
@@ -919,31 +890,26 @@ Symbol'>- 1 </strong>для y<strong>)</strong></p>
 <p style='margin-bottom:6.0pt;text-indent:20pt'>7 * 3 + 5
     *(-3) = 6; $x$ = 3, $y$ = -3</p>
 
-<p>Решений у
-    такого уравнения бесконечно много. Если выберем сосуд 5 л в качестве
+<p>Решений у такого уравнения бесконечно много. Если выберем сосуд 5 л в качестве
     первого – получим решение: </p>
 
 <p>5 * 4 + 7 * (-2) = 6.</p>
 
-<p>Количество
-    шагов переливаний может зависеть от того, какой вместительности сосуд считать
+<p>Количество шагов переливаний может зависеть от того, какой вместительности сосуд считать
     за “первым” (например, если в задаче заменить 5-литровый сосуд 3-литровым).</p>
 
-<p>Для
-    закрепления алгоритма при решении тренировочных задач 1.3 и 1.4 воспользуйтесь
+<p>Для закрепления алгоритма при решении тренировочных задач 1.3 и 1.4 воспользуйтесь
     программой <strong> «</strong><a href="http://spill.exe/">Переливай-ка</a><strong>».</strong></p>
 
-<p><strong>Задача 1.3</strong>.
-    <strong>(Тренинг).</strong> Разлить поровну 16 ведер кваса, находящегося в 16-ведерном
+<p><strong>Задача 1.3:</strong> Разлить поровну 16 ведер кваса, находящегося в 16-ведерном
     бочонке, имея два пустых бочонка по 11 и 6 ведер.</p>
 
-<p><strong>Задача 1.4</strong>.<strong>
-    (Тренинг).</strong> Имеются три бочонка вместимостью 6, 3 и 7 ведер. В первом и
+<p><strong>Задача 1.4:</strong> Имеются три бочонка вместимостью 6, 3 и 7 ведер. В первом и
     третьем содержится 4 и 6 ведер кваса соответственно. Требуется разделить квас
     поровну между первым и третьим бочонком (по 5 вёдер).</p>
 
-
-<h2>1.4 Простые числа</h2>
+    
+<h2>Простые числа</h2>
 
 <p>Натуральное
     число называется <strong>простым,</strong> если оно не имеет делителей кроме единицы и
@@ -956,60 +922,60 @@ Symbol'>- 1 </strong>для y<strong>)</strong></p>
 <p><strong>Задача 1.5</strong>.
     Определить простые делители натурального числа $n$.</p>
 
-<div style="float:right;padding:0px;"><p><u>Basic</u>:</p>
+<div style="float:right;padding:0;"><p><cite>Basic</cite>:</p>
 
 <pre class="sh_basic">
-INPUT n 
-PRINT n; "="; 
-WHILE (n mod 2 = 0) 
-  n = n \ 2 
-  IF n <> 1 THEN 
-    PRINT " 2 * "; 
-  ELSE 
-    PRINT " 2 ": END 
-  END IF 
-WEND 
-i = 3 
-WHILE i <= n 
-  IF n mod i = 0 THEN 
-    PRINT i; 
-    n = n \ i 
-    IF n<>1 THEN PRINT "*"; 
-  ELSE 
-    i = i + 2 
-  END IF 
-WEND 
+INPUT n
+PRINT n; "=";
+WHILE (n mod 2 = 0)
+  n = n \ 2
+  IF n <> 1 THEN
+    PRINT " 2 * ";
+  ELSE
+    PRINT " 2 ": END
+  END IF
+WEND
+i = 3
+WHILE i <= n
+  IF n mod i = 0 THEN
+    PRINT i;
+    n = n \ i
+    IF n<>1 THEN PRINT "*";
+  ELSE
+    i = i + 2
+  END IF
+WEND
 </pre>
 </div>
 
 <div style="width:300pt">
-    <p><u>Алгоритм:</u></p>
+    <p><cite>Алгоритм:</cite></p>
 
 <pre class="sh_alg">
-Ввести n 
+Ввести n
 Вывести n " ="
 Пока n делится на 2:
   n разделить на 2
   Если n ≠ 1 то
-    Вывести " 2 * " 
+    Вывести " 2 * "
   иначе
     Вывести " 2"
     Закончить программу
 i = 3
 Пока i ≤ n
   Если n делится на i то
-    Вывести i 
-    n разделить на i 
+    Вывести i
+    n разделить на i
     Если n ≠ 1 то вывести "*"
   иначе
     i = i + 2
 </pre>
 </div>
 
-<p><u>Delphi:</u></p>
+<p><cite>Delphi:</cite></p>
 <pre class="sh_pascal">
 {$APPTYPE CONSOLE}
-var 
+var
   N : int64;
   i : longint;
 begin
@@ -1040,7 +1006,7 @@ end.
     решето. В результате чего на папирусе оставались лишь простые числа. Этот
     алгоритм нахождения простых чисел носит название <strong>решета Эратосфена.</strong></p>
 
-<div style="float:right;padding:0px;margin:0px;"><p><u>Basic</u>:</p>
+<div style="float:right;padding:0;margin:0;"><p><cite>Basic</cite>:</p>
 
 <pre class="sh_basic">
 INPUT "Введите N "; N
@@ -1059,57 +1025,57 @@ NEXT i
 </pre>
 </div>
 
-<p><u>Алгоритм:</u></p>
+<p><cite>Алгоритм:</cite></p>
 
-<p><u>Ввести</u> $N$ <br>
-    <u>Массив</u> ${a_i}$, $i=1,...,N$ (элементы массива нулевые)<br>
-    <u>Цикл</u> $i = 2 .. n$ <br>
-    <u>Если</u> $a_i = 0$ <u>то</u><br>
+<p><cite>Ввести</cite> $N$ <br>
+    <cite>Массив</cite> ${a_i}$, $i=1,...,N$ (элементы массива нулевые)<br>
+    <cite>Цикл</cite> $i = 2 .. n$ <br>
+    <cite>Если</cite> $a_i = 0$ <cite>то</cite><br>
     Шаг=i</p>
 
-<p><u>Для</u> j = j + h <u>до</u> n <u>с шагом</u> h</p>
+<p><cite>Для</cite> j = j + h <cite>до</cite> n <cite>с шагом</cite> h</p>
 
 <p> a(j) = 1</p>
 
-<p><u>конец</u> <u>цикла</u></p>
+<p><cite>конец</cite> <cite>цикла</cite></p>
 
-<p><u>конец</u> <u>если</u></p>
+<p><cite>конец</cite> <cite>если</cite></p>
 
-<p><u>конец</u> <u>цикла</u></p>
+<p><cite>конец</cite> <cite>цикла</cite></p>
 
-<p><u>Для</u> от i = 2 <u>до</u> n</p>
+<p><cite>Для</cite> от i = 2 <cite>до</cite> n</p>
 
-<p><u>Если</u> a(i) = 0 <u>то</u> <u>вывести</u>
+<p><cite>Если</cite> a(i) = 0 <cite>то</cite> <span style="text-decoration: underline;">вывести</span>
     i;</p>
 
-<p><u>конец</u> <u>цикла</u></p>
+<p><cite>конец</cite> <cite>цикла</cite></p>
 
 Основная идея этой реализации алгоритма заключается в том, что индексы элементов массива представляют собой числа, а
 элементы массива – признаки того, являются ли эти числа простыми (значение 0) или составными (значение 1).
 
 <pre class="sh_pascal">
 { Решето Эратосфена }
-var 
+var
   { Индексы элементов массива simple - числа, а элементы массива simple – признаки того, являются ли эти числа простыми }
-  simple : array [2..30000] of Boolean; { Является ли число простым? }
+  simple : array [2..30000000] of Boolean; { Является ли число простым? }
   N,i,j : Integer;
 begin
   { Ввод исходных данных: число N до которого искать простые числа }
   Write('Введите N: '); ReadLn(N);
   { Сначала &quot;выписываем&quot; все числа от 2 до N }
-  for i := 2 to N do 
-    simple[i] := true;  
-  { Проходим в цикле все числа от 2 до N и выводим из них только простые }  
-  for i := 2 to N do 
+  for i := 2 to N do
+    simple[i] := true;
+  { Проходим в цикле все числа от 2 до N и выводим из них только простые }
+  for i := 2 to N do
     if simple[i] then begin
-      { Вывод результата - очередного простого числа }  
-      Write(i,' ');    
+      { Вывод результата - очередного простого числа }
+      Write(i,' ');
       { Для простого числа i вычёркиваем все кратные ему }
       j := 2*i; { Первое кратное - удвоенное число i }
       while j &lt;= N do begin { Если оно попадает в допустимый диапазон }
-        simple[j] := false; { то мы его вычёркиваем } 
+        simple[j] := false; { то мы его вычёркиваем }
         j := j + i; { и переходим к следующему кратному i числу }
-      end;  
+      end;
     end;
 end.</pre>
 
@@ -1143,7 +1109,6 @@ end.</pre>
             <param name="quality" value="high">
             <param name="wmode" value="opaque">
             <param name="swfversion" value="9.0.45.0">
-            <param name="expressinstall" value="../Scripts/expressInstall.swf">
             <!-- Браузер отображает следующее альтернативное содержимое для пользователей Flash Player 6.0 и более старых версий. -->
             <div>
                 <h4>Для содержимого этой страницы требуется более новая версия Adobe Flash Player.</h4>
@@ -1158,9 +1123,6 @@ end.</pre>
     </object>
 </p>
 </div>
-<script type="text/javascript">
-    swfobject.registerObject("FlashID2");
-</script>
-</body>
 
+</body>
 </html>

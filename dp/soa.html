@@ -1,0 +1,55 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Сервис-ориентированная архитектура</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_xml.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+</head>
+<body onload="sh_highlightDocument()">
+<div id="content">
+    <h1>Сервис-ориентированная архитектура</h1>
+
+    <p><strong>SOA, service-oriented architecture</strong> - модульный подход к разработке программного обеспечения,
+        основанный на использовании распределённых, слабо связанных заменяемых компонентов,
+        оснащённых стандартизированными интерфейсами для взаимодействия по стандартизированным протоколам.</p>
+
+    <p>Программные комплексы, разработанные в соответствии с SOA, обычно реализуются как набор веб-сервисов,
+        взаимодействующих по протоколу SOAP (или jini, CORBA, REST).</p>
+
+    <p><strong>SOAP (Simple Object Access Protocol - простой протокол доступа к объектам)</strong> -
+        протокол обмена структурированными сообщениями в распределённой вычислительной среде. Первоначально SOAP
+        предназначался в основном для реализации удалённого вызова процедур (RPC). Сейчас протокол используется для
+        обмена произвольными сообщениями в формате XML, а не только для вызова процедур. SOAP является расширением
+        протокола XML-RPC.</p>
+
+    <p>SOAP может использоваться с любым протоколом прикладного уровня: SMTP, FTP, HTTP, HTTPS и др. Однако его
+        взаимодействие с каждым из этих протоколов имеет свои особенности, которые должны быть определены отдельно. Чаще
+        всего SOAP используется поверх HTTP.</p>
+
+    <p>SOAP является одним из стандартов, на которых базируются технологии веб-служб.</p>
+
+    <p>Пример SOAP-запроса на сервер интернет-магазина:</p>
+
+    <pre class="sh_xml">
+&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+    &lt;soap:Body&gt;
+        &lt;getProductDetails xmlns="http://warehouse.example.com/ws"&gt;
+            &lt;productID&gt;12345&lt;/productID&gt;
+        &lt;/getProductDetails&gt;
+    &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+    </pre>
+
+    <p>WSDL - XML-документ описывающий web-сервис. Он определяет месторасположение сервиса и отображаемые им операции
+        (или методы), позволяющие обращаться к этому сервису. WSDL-файл описывает:
+        o Сервисы, доступные через интерфейс web-сервиса, такие как список имен
+        методов и сообщений-атрибутов.
+        o Тип данных сообщений.
+        o Адрес сервиса, используемый для его вызова.</p>
+
+    <p>&nbsp;</p>
+</div>
+</body>
+</html>

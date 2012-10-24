@@ -12,10 +12,9 @@
 <div style="width:80%;">
     <div style="float:right;">
         <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version
-=6,0,0,0" width="100" height="50">
-            <param name="movie"
-                   value="../audio/a_smsqulh3n.swf">
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100" height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
             <param name="bgcolor" value="fff">
             <param
                     name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
@@ -33,6 +32,10 @@
 
     <h1>ООП на С/C++</h1>
 
+    <ul class="tags">
+        <li><a href="#">С/C++</a></li>
+    </ul>
+
     <h2>Оператор *this</h2>
 
     <p>this является указателем внутри объекта на сам объект.</p>
@@ -46,7 +49,7 @@
     <p><strong>public наследование - </strong>в классе-наследнике доступны все свойства класса-предка кроме private, и
         они также доступны извне.</p>
 
-    <p><strong>private</strong> - класс-наследник наследует свойства и методы &quot;только для себя&quot;. Т.е.</p>
+    <p><strong>private</strong> - класс-наследник наследует свойства и методы &quot;только для себя&quot;.</p>
 
     <p><strong>protected </strong>- класс-наследник наследует свойства и передают их своим наследникам.</p>
 
@@ -54,13 +57,15 @@
 
     <p>Создадим три класса: A, B и C - которые будут выводит экземпляр какого класса вызван.</p>
 
+    <p>Ключевое слово <b>virtual</b> объявляет метод виртуальным.</p>
+
 <pre class="sh_cpp">
 #include &lt;iostream&gt;
 
 use namespace std;
 
 class A {
-  // virtual
+  // virtual // Раскомментируйте эту строку
   void nv(){
     cout << "nv A" << endl;
   };
@@ -78,6 +83,12 @@ class C : public B {
   };
 };
 
+class D : public B, public C {
+  void show(){
+    cout << "show D" << endl;
+  };
+};
+
 void main(){
   A* a[3];
   // Заводим всех типов
@@ -90,9 +101,6 @@ void main(){
     
 }
 </pre>
-
-    <h2>Битовые поля</h2>
-
 </div>
 </body>
 

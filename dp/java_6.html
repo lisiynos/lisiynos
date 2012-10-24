@@ -1,0 +1,139 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Java 6. </title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <script type="text/javascript" src="../syntax/load.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+</head>
+<body onLoad="sh_highlightDocument();">
+<div id="content">
+
+    <h1>Java 6. </h1>
+
+
+    <h2>Модели разработки</h2>
+
+    <ul>
+        <li>Гибкие методы разработки</li>
+        <li>Жёсткие методы разработки</li>
+    </ul>
+
+    <p><strong>Гибкая методология разработки</strong> (Agile software development, agile-методы) - серия подходов к
+        разработке ПО, ориентированных на использование итеративной разработки, динамическое формирование требований и
+        обеспечение их реализации в результате постоянного взаимодействия внутри самоорганизующихся рабочих групп,
+        состоящих из специалистов различного профиля. </p>
+
+
+    <p><b></b></p>
+
+
+    <h2>XP – Экстремальное программирование: принципы, особенности</h2>
+
+    <p><strong>Экстремальное программирование (Extreme Programming, XP)</strong> - одна из гибких методологий разработки
+        программного обеспечения. Авторы: Кент Бек, Уорд Каннингем, Мартин Фаулер и др. </p>
+
+    <p><strong>Основные приёмы: </strong></p>
+    <ul>
+        <li><strong>Короткий цикл обратной связи (Fine scale feedback):</strong>
+            <ul>
+                <li>Разработка через тестирование (Test driven development)</li>
+                <li>Игра в планирование (Planning game)</li>
+                <li>Заказчик всегда рядом (Whole team, Onsite customer)</li>
+                <li>Парное программирование (Pair programming)</li>
+            </ul>
+        </li>
+        <li><strong>Непрерывный, а не пакетный процесс:</strong>
+            <ul>
+                <li>Непрерывная интеграция (Continuous Integration)</li>
+                <li>Рефакторинг (Design Improvement, Refactor)</li>
+                <li>Частые небольшие релизы (Small Releases)</li>
+            </ul>
+        </li>
+        <li><strong>Понимание, разделяемое всеми:</strong>
+            <ul>
+                <li> Простота (Simple design)</li>
+                <li> Метафора системы (System metaphor)</li>
+                <li> Коллективное владение кодом (Collective code ownership) или выбранными шаблонами проектирования
+                    (Collective patterns ownership)
+                </li>
+                <li>Стандарты кодирования (Coding standard or Coding conventions)</li>
+            </ul>
+        </li>
+        <li><strong>Социальная защищенность программиста (Programmer welfare):</strong>
+            <ul>
+                <li>40-часовая рабочая неделя (Sustainable pace, Forty hour week)</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p>В XP особое внимание уделяется двум разновидностям <strong>тестирования</strong>: </p>
+    <ul>
+        <li> тестирование модулей (unit testing);</li>
+        <li> приёмочное тестирование (acceptance testing).</li>
+    </ul>
+    <p>Разработчик не может быть уверен в правильности написанного им кода до тех пор, пока не сработают абсолютно все
+        тесты модулей разрабатываемой им системы. Тесты модулей позволяют разработчикам убедиться в том, что их код
+        работает корректно. Они также помогают другим разработчикам понять, зачем нужен тот или иной фрагмент кода и как
+        он функционирует. Тесты модулей также позволяют разработчику без каких-либо опасений выполнять рефакторинг
+        (refactoring). </p>
+
+    <p><strong>Приемочные</strong> тесты позволяют убедиться в том, что система действительно обладает заявленными
+        возможностями. Кроме того, приёмочные тесты позволяют проверить корректность функционирования разрабатываемого
+        продукта. </p>
+
+    <p>Для XP приоритетным является подход <strong>TDD</strong> (Разработка через тестирование, Test Driven
+        Development) - сначала пишется тест, который не проходит, затем пишется код, чтобы тест прошел, а уже после
+        делается рефакторинг кода. </p>
+
+
+    <h2>Работа с Git</h2>
+
+
+    <p></p>
+
+
+    <h3>Сценарии на проверку e-mail</h3>
+
+
+    <p></p>
+
+
+    <h2>Дата и время</h2>
+
+    <h2>Потоки в Java</h2>
+
+
+    <h2>JUnit подробнее</h2>
+
+<pre class="sh_java">
+#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+
+using namespace std; // Пространство имён, чтобы не писать везде std::cin
+
+int main() { // Основная функция
+    cout &lt;&lt; "Hello World!" &lt;&lt; endl; // Выводим на экран
+    cout &lt;&lt; "Enter two numbers" &lt;&lt; endl;
+    int a, b; // Объявляем 2 переменные целого типа
+    cin &gt;&gt; a &gt;&gt; b; // Вводим их с клавиатуры
+    cout &lt;&lt; a &lt;&lt; " + " &lt;&lt; b &lt;&lt; " = " &lt;&lt; a + b &lt;&lt; endl; // Вывод суммы
+    system("pause"); // Нажмите любую клавишу...
+    return 0; // Программа завершилась удачно, 0 - код возврата
+}
+</pre>
+
+    <h3>Какие вопросы наиболее часто задают на собеседовании?</h3>
+
+    <p>Несколько полезных ссылочек:</p>
+
+    <ol>
+        <li><a href="http://www.quizful.net/test">http://www.quizful.net/test</a></li>
+        <li><a href="http://levelp.ru/knowledge-base/questions-on-the-interview/">http://levelp.ru/knowledge-base/questions-on-the-interview/</a>
+    </ol>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Алгоритмы на строках</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100" height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70" type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+<div id="content">
+
+    <h1>Алгоритмы на строках</h1>
+
+    <ul class="tags">
+        <li><a href="#">Алгоритмы на строках</a></li>
+    </ul>
+
+    <h2>Алгоритм Кнута-Морриса-Пратта (КМП-алгоритм)</h2>
+
+    <p><b>Поиск подстроки в строке:</b>
+        даны образец для поиска $S$ и строка $T$, найти индекс, начиная с которого $S$ содержится в строке $T$.
+        Если $S$ не содержится в $T$  - вернуть индекс, который не может быть интерпретирован как позиция в строке
+        (например, отрицательное число).</p>
+
+    <p>При необходимости отслеживать каждое вхождение образца в текст имеет смысл завести дополнительную функцию,
+        вызываемую при каждом обнаружении образца.</p>
+
+    <h3>Описание алгоритма и оценка времени работы</h3>
+
+    <p>Рассмотрим сравнение строк на позиции $i$, где образец $S[0, m - 1]$ сопоставляется с частью текста
+        $T[ i, i + m - 1 ]$. Предположим, что первое несовпадение произошло между $T[i + j]$ и
+        $S[ j ]$, где $1 < j < m$. Тогда $T[ i, i + j - 1 ] = S[ 0, j - 1 ] = P$ и $a = T[ i + j ] \ne S[ j ] = b$.</p>
+
+    <p> При сдвиге вполне можно ожидать, что префикс (начальные символы) образца $S$ сойдется с каким-нибудь суффиксом
+        (конечные символы) текста $P$. Длина наиболее длинного префикса, являющегося одновременно суффиксом, есть
+        <b>префикс-функция</b> от строки $S$ для индекса $j$.</p>
+
+    <p>Это приводит нас к следующему алгоритму: пусть $\rm{\pi}[ j ]$ — префикс-функция от строки $S[ 0, m - 1 ]$ для
+        индекса $j$. Тогда после сдвига мы можем возобновить сравнения с места $T[ i + j ]$ и $S[ \rm{\pi}[ j ] ]$ без
+        потери возможного местонахождения образца. Можно показать, что таблица $\rm{\pi}$ может быть вычислена
+        (амортизационно) за $\Theta( m )$ сравнений перед началом поиска. А поскольку строка $T$ будет пройдена ровно
+        один раз, суммарное время работы алгоритма будет равно $\Theta(m + n)$, где
+        $n$ — длина текста $T$.</p>
+
+
+</div>
+</body>
+
+</html>

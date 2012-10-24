@@ -1,0 +1,148 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>template. Шаблонные функции. Стратегии</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body onLoad="sh_highlightDocument();">
+<div id="content">
+    <h1>Ключевое слово template. Шаблонные функции. Стратегии</h1>
+
+    <h2>Обобщённое программирование.</h2>
+
+    <p><b>Обобщённое программирование (generic programming)</b> - парадигма программирования, заключающаяся в таком
+        описании данных и алгоритмов, которое можно применять к различным типам данных, не меняя само это описание. В
+        том или ином виде поддерживается разными языками программирования.
+    </p>
+
+    <h2>Описание шаблона. Шаблонные функции (min, max и т.д.)</h2>
+
+  <pre class="sh_cpp">
+// Описание шаблонной функции
+template &lt;typename T&gt; T max(T x, T y) {
+  if (x < y)
+    return y;
+  else
+    return x;
+}
+...
+// Применение шаблонной функции
+ 
+int a = max(10,15);
+...
+double f = max(123.11, 123.12);
+...
+
+// Функция минимума 
+template &lt;typename T&gt; T min(T x, T y) { // T - параметр шаблона, T - произвольный тип данных для которого определена операция меньше "<"
+  return (x < y) ? x : y;
+}
+
+// Примеры использования:
+min(1, 2);
+min('a','b');
+min(string("abc"),string("cde"));
+  </pre>
+    <h2>Шаблонные классы.</h2>
+
+    <p>
+
+    </p>
+
+    <h2>Контейнеры</h2>
+
+<pre class="sh_cpp">
+// Стек на основе массива
+template&lt;typename T, int size&gt; // T - тип элемента, size - размер стека
+class Stack {
+  // По-умолчанию private
+  T data[size]; // данные
+  int count; // количество элементов
+public:
+  Stack() : count(0) {}
+  //Stack() { count = 0; }
+  // Поместить на вершину стека
+  void push(T x){ data[count++] = x; }
+  // Получить значение с вершины стека
+  T pop(){ return data[--count]; }
+  // Пуст ли стек?
+  bool empty(){ return count == 0; }
+};
+</pre>
+
+
+    <h1>Стандартная библиотека шаблонов STL: контейнеры, итераторы, алгоритмы, адаптеры, функторы (vector,
+        algorithm) </h1>
+
+    <p><b>Библиотека стандартных шаблонов (STL) (Standard Template Library)</b> - набор согласованных обобщённых
+        алгоритмов, контейнеров, средств доступа к их содержимому и различных вспомогательных функций в C++.
+    </p>
+
+    <p>В библиотеке выделяют пять основных компонентов:</p>
+
+    <ul>
+        <li>Контейнер (container) — хранение набора объектов в памяти.</li>
+        <li>Итератор (iterator) — обеспечение средств доступа к содержимому контейнера.</li>
+        <li>Алгоритм (algorithm) — определение вычислительной процедуры.</li>
+        <li>Адаптер (adaptor) — адаптация компонентов для обеспечения различного интерфейса.</li>
+        <li>Функциональный объект (functor) — сокрытие функции в объекте для использования другими компонентами.
+        </li>
+    </ul>
+
+    <h2>Контейнеры</h2>
+
+    <p>Контейнеры библиотеки STL можно разделить на четыре категории: последовательные, ассоциативные,
+        контейнеры-адаптеры и псевдоконтейнеры.</p>
+
+    <h3>Последовательные контейнеры</h3>
+
+    <p><strong>vector</strong> - C-подобный динамический массив произвольного доступа с автоматическим изменением
+        размера при добавлении/удалении элемента. </p>
+    
+<pre class="sh_cpp">
+vector&lt;int&gt; myVector;      // Пустой (ноль элементов) вектор из элементов типа int
+vector&lt;float&gt; myVector(10) // Вектор из 10-и элементов типа float
+vector&lt;char&gt; myVector(5, ' ') // Вектор, состоящий из 5-и пробелов
+ 
+class T {
+ ...
+};
+n = 10;
+vector&lt;T&gt; myVector(n); // Вектор из 10-и элементов пользовательского типа T
+</pre>
+
+    <p><strong>list</strong> - <a
+            href="http://ru.wikipedia.org/wiki/%D0%94%D0%B2%D1%83%D1%81%D0%B2%D1%8F%D0%B7%D0%BD%D1%8B%D0%B9_%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA"
+            title="Двусвязный список">Двусвязный список</a>, элементы которого хранятся в произвольных кусках памяти, в
+        отличие от контейнера vector, где элементы хранятся в непрерывной области памяти. Поиск <a
+                href="http://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B5%D1%80%D0%B5%D0%B1%D0%BE%D1%80"
+                title="Полный перебор">перебором</a> медленнее, чем у вектора из-за большего времени доступа к элементу.
+        Доступ по индексу за $O(n)$. В любом месте контейнера вставка и удаление производятся очень быстро — за $O(1)$.
+    </p>
+
+    <p><strong>deque</strong> - <a href="http://ru.wikipedia.org/wiki/%D0%94%D1%8D%D0%BA" title="Дэк">Дэк</a>. Контейнер
+        похож на vector, но с возможностью быстрой вставки и удаления элементов на обоих концах за $O(1)$. Реализован в
+        виде <a href="http://ru.wikipedia.org/wiki/%D0%94%D0%B2%D1%83%D1%81%D0%B2%D1%8F%D0%B7%D0%BD%D1%8B%D0%B9_%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA"
+                title="Двусвязный список">двусвязанного списка</a> <a
+                href="http://ru.wikipedia.org/wiki/%D0%98%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D0%BD%D1%8B%D0%B9_%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2"
+                title="Индексный массив">линейных массивов</a>. С другой стороны, в отличие от vector, дек не
+        гарантирует расположение всех своих элементов в непрерывном участке памяти, что делает невозможным безопасное
+        использование <a
+                href="http://ru.wikipedia.org/w/index.php?title=%D0%90%D1%80%D0%B8%D1%84%D0%BC%D0%B5%D1%82%D0%B8%D0%BA%D0%B0_%D1%83%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9&action=edit&redlink=1"
+                title="Арифметика указателей (страница отсутствует)">арифметики указателей</a> для доступа к элементам
+        контейнера.</p>
+
+    <p>&nbsp;</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Утечки памяти (memory leaks)</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+</head>
+<body onload="sh_highlightDocument()">
+<div id="content">
+    <h1>Утечки памяти (memory leaks)</h1>
+
+    <p><strong>Утечка памяти (memory leak)</strong> - процесс неконтролируемого уменьшения объёма свободной оперативной
+        памяти (RAM) компьютера, связанный с ошибками в работающих программах, вовремя не освобождающих ненужные уже
+        участки памяти, или с ошибками системных служб контроля памяти.</p>
+
+    <pre class="sh_cpp">
+/*1*/ char *pointer = NULL;
+/*2*/ for( int i = 0; i < 10; i++ ) {
+/*3*/   pointer = new char[100];
+/*4*/ }
+/*5*/ delete [] pointer;</pre>
+
+    <p>Утечки памяти приводят к тому, что потребление памяти программой неконтролируемо
+        возрастает, в результате рано или поздно вступают в действие архитектурные ограничения
+        среды исполнения, и тогда новое выделение памяти становится невозможным. В этой
+        ситуации в программе, которая запрашивает память, обычно происходит аварийная
+        остановка. Это может по стечению обстоятельств произойти и совсем с другой
+        программой после того, как программа, подверженная утечкам, потребит всю память
+        ЭВМ.</p>
+
+    <h3>Способы предотвращения:</h3>
+    <ol>
+        <li>Отказ от использования динамической памяти (использовать статическое выделение памяти или стек).</li>
+        <li>Использовать "умные" указатели.</li>
+        <li>Использовать "Сборщик мусора"</li>
+    </ol>
+
+    <h3>Ссылки</h3>
+
+    <ol>
+        <li><a href="http://www.drmemory.org"><b>Dr. Memory</b> - Memory Debugger for Windows and Linux</a></li>
+    </ol>
+</div>
+</body>
+</html>

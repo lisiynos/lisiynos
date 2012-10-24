@@ -12,11 +12,12 @@
 
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+
+
     </script>
     <script type="text/javascript"
             src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
-
 </head>
 <body onLoad="sh_highlightDocument();">
 <div style="width:80%;">
@@ -25,13 +26,13 @@
                 codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version
 =6,0,0,0" width="100" height="50">
             <param name="movie"
-                   value="../../audio/a_smsqulh3n.swf">
+                   value="../audio/a_smsqulh3n.swf">
             <param name="bgcolor" value="fff">
             <param
                     name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
             <param
                     name="autoplay" value="false">
-            <embed src="../../audio/a_smsqulh3n.swf" bgcolor="fff"
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
                    width="100" height="70" type="application/x-shockwave-flash"
                    pluginspage="http://www.macromedia.com/go/getflashplayer"
                    FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
@@ -40,7 +41,7 @@
 </div>
 </div>
 
-<div id="content" style="width:80%;">
+<div id="content">
 
 <h1>Динамическое программирование, "объект по номеру и номер по объекту"</h1>
 
@@ -127,9 +128,9 @@ num - { номер }
 
 <p><strong>Задача.</strong> Найти НОД двух натуральных чисел $a$ и $b$.</p>
 
-<p>Используем для решения задачи алгоритм Евклида с вычитаниями.<u> </u></p>
+<p>Используем для решения задачи алгоритм Евклида с вычитаниями.<cite> </cite></p>
 
-<p><u>Реализация на Pascal:</u></p>
+<p><cite>Реализация на Pascal:</cite></p>
 <pre class="sh_pascal">
 function GCD( a,b:integer ):integer; { определение НОД двух чисел }
 begin
@@ -142,7 +143,7 @@ begin { Пример использования }
   writeln(GCD(10,15)); { Выведет 5 } 
 end.</pre>
 
-<p><u>Реализация на <a href="../cpp/cpp.html">С/C++</a>:</u></p>
+<p><cite>Реализация на <a href="../cpp.html">С/C++</a>:</cite></p>
 
 <pre class="sh_cpp">
 #include &lt;stdio.h&gt;
@@ -224,20 +225,20 @@ int main(){ // Пример использования
 <p>Рассмотрим алгоритм и процедуру-функцию к решению задачи 1.1, используя для нахождения НОД двух
     чисел алгоритм Евклида с делением.</p>
 
-<p><u>Алгоритм</u>:</p>
+<p><cite>Алгоритм</cite>:</p>
 
 <pre>
-<u>Функция</u> GCD(a, b)
-  <u>Делать пока</u> (b &lt;&gt; 0)
+<cite>Функция</cite> GCD(a, b)
+  <cite>Делать пока</cite> (b &lt;&gt; 0)
     r = a Mod b    
     a = b
     b = r
-  <u>конец</u> <u>пока</u>
+  <cite>конец</cite> <cite>пока</cite>
   nod = a
-<u>Конец функции</u>
+<cite>Конец функции</cite>
 </pre>
 
-<p><u>Реализация на Pascal</u>:</p>
+<p><cite>Реализация на Pascal</cite>:</p>
 
 <pre class="sh_pascal">
 function GCD( a,b:int64 ):int64; { Функция для вычисления НОД при помощи деления }<br>begin<br>  if b = 0 then { Если b = 0 }<br>    GCD := a {  следовательно a=НОД }<br>  else { Пока b &lt;&gt; 0 }<br>    GCD := GCD(b,a mod b); { Вычисляем остаток от деления a на b, а заменяем на b, b заменяем на r }
@@ -247,7 +248,7 @@ begin
   writeln(GCD(264, 192)); { Выведет: 24 }
 end.</pre>
 
-<p><a href="../../s2/python/python.html">Реализация на Python:</a></p>
+<p><a href="../../s2/python.html">Реализация на Python:</a></p>
 <pre class="sh_python">
 def GCD(a,b): # Функция для вычисления НОД при помощи деления   
   return a if b == 0 else GCD(b,a%b) # Вычисляем остаток от деления a на b, а заменяем на b, b заменяем на r=a mod b
@@ -490,201 +491,191 @@ end.</pre>
        style='margin-left:34.1pt;border-collapse:collapse'>
 <tr>
     <td width=71 valign=top style='width:23.45pt;border:solid black 1.0pt;
-  border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  border-right:none;padding:0 5.4pt 0 5.4pt'>
         $a_1$ </p>
     </td>
     <td width=87 valign=top style='width:54.0pt;border:solid black 1.0pt;
-  border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  border-right:none;padding:0 5.4pt 0 5.4pt'>
         набор </p>
     </td>
     <td width=71 valign=top style='width:27.0pt;border:solid black 1.0pt;
-  border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  border-right:none;padding:0 5.4pt 0 5.4pt'>
         $a_2$ </p>
     </td>
     <td width=87 valign=top style='width:54.0pt;border:solid black 1.0pt;
-  border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  border-right:none;padding:0 5.4pt 0 5.4pt'>
         набор </p>
     </td>
     <td width=71 valign=top style='width:27.0pt;border:solid black 1.0pt;
-  border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  border-right:none;padding:0 5.4pt 0 5.4pt'>
         $a_3$ </p>
     </td>
     <td width=87 valign=top style='width:54.0pt;border:solid black 1.0pt;
-  border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  border-right:none;padding:0 5.4pt 0 5.4pt'>
         набор </p>
     </td>
     <td width=294 valign=top style='width:172.35pt;border:solid black 1.0pt;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+  padding:0 5.4pt 0 5.4pt'>
         примечание</p>
     </td>
 </tr>
 <tr>
-    <td width=71 valign=top style='width:22.45pt;border-top:none;border-left:
-  solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;
-  background:#E6E6E6;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top style='width:22.45pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;
+  background:#E6E6E6;padding:0 5.4pt 0 5.4pt'>
         18</p>
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 valign=top style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         (1,0,0)</p>
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         42</p>
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 valign=top style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         (0,1,0)</p>
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         10</p>
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 valign=top style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         (0,0,1)</p>
     </td>
     <td width=294 valign=top style='width:172.35pt;border:solid black 1.0pt;
-  border-top:none;background:#E6E6E6;padding:0cm 5.4pt 0cm 5.4pt'>
+  border-top:none;background:#E6E6E6;padding:0 5.4pt 0 5.4pt'>
         $GCD(a,b)=GCD(b,r)$
         $r=a-bq$; $0 \le r < |b|$</p>
     </td>
 </tr>
 <tr>
-    <td width=71 valign=top style='width:22.45pt;border-top:none;border-left:
-  solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top style='width:22.45pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;
+  padding:0 5.4pt 0 5.4pt'>
         6</p>
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        <u>(-2</u><u>,1,0) </u></p>
+    <td width=87 valign=top
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
+        <cite>(-2</cite><cite>,1,0) </cite></p>
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         18 </p>
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 valign=top
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         (1,0,0)</p>
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 valign=top
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
     <td width=294 valign=top style='width:172.35pt;border:solid black 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  border-top:none;padding:0 5.4pt 0 5.4pt'>
         6 = 42 – 18 &#183; 2</p>
 
         <p>(-2,1,0) = (0,1,0) - (1,0,0) &#183; 2</p>
     </td>
 </tr>
 <tr>
-    <td width=71 valign=top style='width:22.45pt;border-top:none;border-left:
-  solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top style='width:22.45pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;
+  padding:0 5.4pt 0 5.4pt'>
         6 </p>
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 valign=top
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         (-2,1,0) </p>
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         0 </p>
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        <u>(7,-
-            3,0 )</u></p>
+    <td width=87 valign=top
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
+        <cite>(7,-
+            3,0 )</cite></p>
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 valign=top
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
     <td width=294 valign=top style='width:172.35pt;border:solid black 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  border-top:none;padding:0 5.4pt 0 5.4pt'>
         0 = 18 – 6 &#183; 3</p>
 
         <p>(7,-3,0) = (1,0,0) - (-2,1,0) &#183; 3</p></td>
 </tr>
 <tr>
-    <td width=71 valign=top style='width:22.45pt;border-top:none;border-left:
-  solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top style='width:22.45pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;
+  padding:0 5.4pt 0 5.4pt'>
         4 </p>
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        <u>(2,-
-            1,1) </u></p>
+    <td width=87 valign=top
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
+        <cite>(2,-
+            1,1) </cite></p>
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 valign=top
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         6 </p>
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 valign=top
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         (-2,1,0) </p>
     </td>
     <td width=294 valign=top style='width:172.35pt;border:solid black 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  border-top:none;padding:0 5.4pt 0 5.4pt'>
         4 = 10 – 6 &#183; 1</p>
 
         <p>(2,-1,1) = (0,0,1) - (-2,1,0) </p>
     </td>
 </tr>
 <tr>
-    <td width=71 valign=top style='width:22.45pt;border-top:none;border-left:
-  solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top style='width:22.45pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;
+  padding:0 5.4pt 0 5.4pt'>
         2 </p>
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        <u>(-4,2,-
-            1) </u></p>
+    <td width=87 valign=top
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
+        <cite>(-4,2,-
+            1) </cite></p>
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 valign=top
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         4 </p>
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 valign=top
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         (2,-
         1,1) </p>
     </td>
     <td width=294 valign=top style='width:172.35pt;border:solid black 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  border-top:none;padding:0 5.4pt 0 5.4pt'>
         2 = 6 – 4 &#183; 1</p>
 
         <p>(-4,2,-1) = (-2,1,0)
@@ -692,76 +683,69 @@ end.</pre>
     </td>
 </tr>
 <tr>
-    <td width=71 valign=top style='width:22.45pt;border-top:none;border-left:
-  solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top style='width:22.45pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;
+  padding:0 5.4pt 0 5.4pt'>
         2 </p>
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 valign=top
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         (-4,2,-
         1) </p>
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 valign=top
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         &#8593;
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top
+        style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
         0 </p>
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;padding:0cm 5.4pt 0cm 5.4pt'>
-        <u>(10,-
-            5,3) </u></p>
+    <td width=87 valign=top
+        style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;padding:0 5.4pt 0 5.4pt'>
+        <cite>(10,-
+            5,3) </cite></p>
     </td>
     <td width=294 valign=top style='width:172.35pt;border:solid black 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt'>
+  border-top:none;padding:0 5.4pt 0 5.4pt'>
         0 = 4 – 2 &#183; 2</p>
 
         <p>(10,-5,3) = (2,-1,1)
             - (-4,2,-1) &#183; 2</p></td>
 </tr>
 <tr>
-    <td width=71 valign=top style='width:22.45pt;border-top:none;border-left:
-  solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:none;
-  background:#E6E6E6;padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top style='width:22.45pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;
+  background:#E6E6E6;padding:0 5.4pt 0 5.4pt'>
         2 </p>
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 valign=top style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         (-4,2,-
         1) </p>
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         0 </p>
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 valign=top style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         (7,-
         3,0) </p>
     </td>
-    <td width=71 valign=top style='width:27.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=71 valign=top style='width:27.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         0 </p>
     </td>
-    <td width=87 valign=top style='width:54.0pt;border-top:none;border-left:solid black 1.0pt;
-  border-bottom:solid black 1.0pt;border-right:none;background:#E6E6E6;
-  padding:0cm 5.4pt 0cm 5.4pt'>
+    <td width=87 valign=top style='width:54.0pt;border-style: none;border-bottom: 1.0pt solid black;border-left: 1.0pt solid black;background:#E6E6E6;
+  padding:0 5.4pt 0 5.4pt'>
         (10,-
         5,3) </p>
     </td>
     <td width=294 valign=top style='width:172.35pt;border:solid black 1.0pt;
-  border-top:none;background:#E6E6E6;padding:0cm 5.4pt 0cm 5.4pt'>
+  border-top:none;background:#E6E6E6;padding:0 5.4pt 0 5.4pt'>
         итоговая строка результатов</p>
     </td>
 </tr>
@@ -803,9 +787,7 @@ end.</pre>
 
 <p><strong>Функция</strong> GCD(n, a(), x()) </p>
 
-<p>Задать набор <span lang=EN-
-                      US>N а_1          
-  {1,0,…,0}</p>
+<p>Задать набор N а_1           {1,0,…,0}</p>
 
 <p>  <strong>Цикл</strong> i от 2 до n </p>
 
@@ -845,7 +827,7 @@ end.</pre>
 
 <p><strong>конец функции</strong></p>
 
-<p><u>Реализация на Pascal:</u></p>
+<p><cite>Реализация на Pascal:</cite></p>
 
 <pre class="sh_pascal" style="text-align:left;">
 type 
@@ -988,7 +970,7 @@ Symbol'>- 1 </strong>для y<strong>)</strong></p>
 <p><strong>Задача 1.5</strong>.
     Определить простые делители натурального числа $n$.</p>
 
-<div style="float:right;padding:0px;"><p><u>Basic</u>:</p>
+<div style="float:right;padding:0;"><p><cite>Basic</cite>:</p>
 
 <pre class="sh_basic">
 INPUT n 
@@ -1015,7 +997,7 @@ WEND
 </div>
 
 <div style="width:300pt">
-    <p><u>Алгоритм:</u></p>
+    <p><cite>Алгоритм:</cite></p>
 
 <pre class="sh_alg">
 Ввести n 
@@ -1038,7 +1020,7 @@ i = 3
 </pre>
 </div>
 
-<p><u>Delphi:</u></p>
+<p><cite>Delphi:</cite></p>
 <pre class="sh_pascal">
 {$APPTYPE CONSOLE}
 var 
@@ -1072,7 +1054,7 @@ end.
     решето. В результате чего на папирусе оставались лишь простые числа. Этот
     алгоритм нахождения простых чисел носит название <strong>решета Эратосфена.</strong></p>
 
-<div style="float:right;padding:0px;margin:0px;"><p><u>Basic</u>:</p>
+<div style="float:right;padding:0;margin:0;"><p><cite>Basic</cite>:</p>
 
 <pre class="sh_basic">
 INPUT "Введите N "; N
@@ -1091,30 +1073,30 @@ NEXT i
 </pre>
 </div>
 
-<p><u>Алгоритм:</u></p>
+<p><cite>Алгоритм:</cite></p>
 
-<p><u>Ввести</u> $N$ <br>
-    <u>Массив</u> ${a_i}$, $i=1,...,N$ (элементы массива нулевые)<br>
-    <u>Цикл</u> $i = 2 .. n$ <br>
-       <u>Если</u> $a_i = 0$ <u>то</u><br>
+<p><cite>Ввести</cite> $N$ <br>
+    <cite>Массив</cite> ${a_i}$, $i=1,...,N$ (элементы массива нулевые)<br>
+    <cite>Цикл</cite> $i = 2 .. n$ <br>
+       <cite>Если</cite> $a_i = 0$ <cite>то</cite><br>
                 Шаг=i</p>
 
-<p><u>Для</u> j = j + h <u>до</u> n <u>с шагом</u> h</p>
+<p><cite>Для</cite> j = j + h <cite>до</cite> n <cite>с шагом</cite> h</p>
 
 <p>                             a(j) = 1</p>
 
-<p>                   <u>конец</u> <u>цикла</u></p>
+<p>                   <cite>конец</cite> <cite>цикла</cite></p>
 
-<p>              <u>конец</u> <u>если</u></p>
+<p>              <cite>конец</cite> <cite>если</cite></p>
 
-<p><u>конец</u> <u>цикла</u></p>
+<p><cite>конец</cite> <cite>цикла</cite></p>
 
-<p><u>Для</u> от i = 2 <u>до</u> n</p>
+<p><cite>Для</cite> от i = 2 <cite>до</cite> n</p>
 
-<p>              <u>Если</u> a(i) = 0 <u>то</u> <u>вывести</u>
+<p>              <cite>Если</cite> a(i) = 0 <cite>то</cite> <cite>вывести</cite>
     i;</p>
 
-<p><u>конец</u> <u>цикла</u></p>
+<p><cite>конец</cite> <cite>цикла</cite></p>
 
 Основная идея этой реализации алгоритма заключается в том, что индексы элементов массива представляют собой числа, а
 элементы массива – признаки того, являются ли эти числа простыми (значение 0) или составными (значение 1).

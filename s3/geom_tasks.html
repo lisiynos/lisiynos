@@ -1,0 +1,85 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Задачи на Вычислительную геометрию - разбор</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="float:right;">
+    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+            codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="100"
+            height="50">
+        <param name="movie" value="../audio/a_smsqulh3n.swf">
+        <param
+                name="bgcolor" value="fff">
+        <param name="FlashVars" value="src=../audio/8016574696f623230301------------ffffff">
+        <param name="autoplay"
+               value="false">
+        <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff" width="100"
+               height="70"
+               type="application/x-shockwave-flash"
+               pluginspage="http://www.macromedia.com/go/getflashplayer"
+               FlashVars="src=../audio/8016574696f623230301------------ffffff"></embed>
+    </object>
+</div>
+
+<div id="content">
+
+    <h1>Разбор задач по вычислительной геометрии</h1>
+
+    <ul class="tags">
+        <li><a href="#">Геометрия</a></li>
+    </ul>
+
+    <h3>Длина вектора</h3>
+
+    <p>Вычислить длину вектора $\overrightarrow{a}=(x,y,z)$</p>
+
+    <p>Ответ: $\overrightarrow{a}=\sqrt{x^2+y^2+z^2}$</p>
+
+    <h3>Прямая по 2-м точкам</h3>
+
+    <p>$ax_1+by_1+c=0$<br>
+        $ax_2+by_2+c=0$</p>
+
+    <h3>Окружность</h3>
+
+    <p>
+        Дано: $R$ - радиус окружности<br>
+        Диаметр: $2R$<br>
+        Длина окружности: $2{\pi}R$<br>
+        Площадь окружности: ${\pi}R^2$
+    </p>
+
+    <h3>Колпак</h3>
+
+    <p>Определите максимальный размер шара, который можно спрятать под "колпаком" - круглым прямым конусом
+        (основание является кругом, ось конуса перпендикулярна основанию).</p>
+
+    <p><b>Дано:</b>
+    <ul>
+        <li>длина образующей конуса $L$</li>
+        <li>диаметр основания $D$</li>
+    </ul>
+
+    <p>
+        <img src="geom_tasks/pack.png"><br>
+        Радиус основания конуса: $R=\frac{D}{2}$<br>
+        Высота конуса: $H = \sqrt{L^2-R^2}$<br>
+        Маленький треугольник и большой подобны: $\frac{l}{L} = \frac{r}{R}$, отсюда $l = \frac{rL}{R}$<br>
+        С другой стороны: $H = l + r = \frac{rL}{R} + r = \frac{rL}{R} + \frac{rR}{R} = \frac{r(L+R)}{R}$<br>
+        Тогда радиус шара: $r = \frac{ RH } {L+R} = \frac{ DH } {2L+D} = \frac{ D\sqrt{L^2-R^2} } {2L+D}$
+    </p>
+</div>
+</body>
+
+</html>

@@ -265,10 +265,7 @@
       </regional-settings>
     </general-settings>
   </component>
-  <component name="ProjectResources">
-    <default-html-doctype>jar:file:\C:\Program Files (x86)\JetBrains\PhpStorm 4.0.1\lib\webide.jar!\resources\html5-schema\html5.rnc</default-html-doctype>
-  </component>
-  <component name="ProjectRootManager" version="2" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 2.7.3 (C:/Python27/python.exe)" project-jdk-type="Python SDK" />
   <component name="SvnBranchConfigurationManager">
     <option name="myConfigurationMap">
       <map>

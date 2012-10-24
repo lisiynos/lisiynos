@@ -2,7 +2,7 @@
 <head>
     <meta http-equiv=Content-Type content="text/html; charset=utf-8">
     <title>Сортировка</title>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../style/style.css">
     <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
     <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
@@ -11,6 +11,12 @@
     <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+
+
+
+
+
+
     </script>
     <script type="text/javascript"
             src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
@@ -20,15 +26,12 @@
 <div style="width:80%;">
     <div style="float:right;">
         <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version
-=6,0,0,0" width="100" height="50">
-            <param name="movie"
-                   value="../audio/a_smsqulh3n.swf">
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100" height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
             <param name="bgcolor" value="fff">
-            <param
-                    name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
-            <param
-                    name="autoplay" value="false">
+            <param name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param name="autoplay" value="false">
             <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
                    width="100" height="70" type="application/x-shockwave-flash"
                    pluginspage="http://www.macromedia.com/go/getflashplayer"
@@ -37,8 +40,14 @@
     </div>
 </div>
 
-<div id="content" style="width:80%;">
-<h1>Сортировки</h1>
+<div id="content">
+
+<h1>Сортировки. Квадратичные сортировки (сортировка выбором, «пузырьковая сортировка»). Сортировка подсчётом. Быстрая
+    сортировка QuickSort.</h1>
+
+<ul class="tags">
+    <li><a href="#">Сортировка</a></li>
+</ul>
 
 <p>Алгоритмы сортировки - это методы для упорядочения элементов массива в каком-либо порядке. </p>
 
@@ -134,14 +143,14 @@ end.</pre>
 <p>Другой вариант, легче для запоминания:</p>
 
 <pre class="sh_pascal">
-  { Сортировка }  
-  for i := 1 to N-1 do
-    for j := i+1 to N do
-      if A[j] < A[i] then begin
-         temp:=A[i]; { Меняем элементы A[i] и A[j] местами }
-         A[i]:=A[j]; 
-         A[j]:=temp;
-       end;</pre>
+{ Сортировка }  
+for i := 1 to N-1 do
+  for j := i+1 to N do
+    if A[j] < A[i] then begin
+      temp:=A[i]; { Меняем элементы A[i] и A[j] местами }
+      A[i]:=A[j]; 
+      A[j]:=temp;
+    end;</pre>
 
 <p>Ну или можно вообще не запоминать как меняются индексы и писать i от 1 до <em>N</em> и j от 1 до <em>N</em>.</p>
 
@@ -196,7 +205,6 @@ begin
       Write(Ai,' ');
 end.</pre>
 
-<div class="lesson">Сессия 3</div>
 <h2>"Быстрая сортировка" QuickSort</h2>
 
 <p>Один из быстрых известных универсальных алгоритмов сортировки массивов (в среднем $O(n \log n)$ обменов при
@@ -291,8 +299,8 @@ void qsort(int left, int right){
   do {
     while(A[l] &lt; m) l++; // Двигаем левую границу
     while(A[r] &gt; m) r--; // Двигаем правую границу
-    if(l &lt;= r){ swap(l,r); l++; r--; } // Меняем элементы местами	
-  } while (l &lt;= r);	
+    if(l &lt;= r){ swap(l,r); l++; r--; } // Меняем элементы местами  
+  } while (l &lt;= r);  
   qsort(left,r); // Сортируем левую половину массива
   qsort(l,right); // Сортируем правую половину массива
 }
@@ -310,7 +318,31 @@ int main(){
   for(int i=0;i&ltN;i++) cout &lt;&lt; A[i] &lt;&lt; " ";
   // Код возврата
   return 0;
-}
+}</pre>
+
+
+<p>Самая короткая рекурсивная реализация QSort на Python</p>
+<pre class="sh_python">
+# -*- utf-8 -*-
+# Различные реализации QSort (сортировки Хоара)
+
+from random import *
+
+
+def qsort(A):
+    """ Самая коротка рекурсивная реализация qsort на Python """
+    # Если длина массива 0 или 1, то сразу возвращаем его как есть
+    if len(A) <= 1:
+        return A
+    # Выбираем разделяющий элемент
+    y = choice(A)
+    # Делим массив на три куска и вызываем qsort для них
+    return qsort([x for x in A if x < y]) + [x for x in A if x == y] + qsort([x for x in A if x > y])
+
+
+# Генерируем случайный массив
+A = [randint(-10 ** 10, 10 ** 10) for i in range(100000)]
+assert qsort(A) == sorted(A)
 </pre>
 
 <h2>Сортировка слиянием - MergeSort</h2>
@@ -328,7 +360,6 @@ int main(){
     <li>Каждая из получившихся частей сортируется отдельно, например — тем же самым алгоритмом;</li>
     <li>Два упорядоченных массива половинного размера соединяются в один.</li>
 </ol>
-</p>
 
 <pre class="sh_cpp">
 #include &ltassert.h&gt
@@ -337,58 +368,60 @@ int main(){
 
 using namespace std;
 
-const int N = 80;
+const int N = 100000; // Количество элементов в массиве
 
-int A[N];
+int A[N]; // Сортируемый массив
 int T[N]; // Временный массив - буфер
 
+// left - левая граница сортируемого участка
+// right - правая граница
 void MergeSort( int left, int right ){
-	// Если в массиве один элемент - сортировать нечего =&gt сразу выходим
-	if(left &gt= right) return;
+  // Если в массиве один элемент - сортировать нечего =&gt сразу выходим
+  if(left &gt= right) return;
 
-	// Делим массив на 2 равные половинки
-	int m = (left + right) / 2; // Среднее арифметическое 
+  // Делим массив на 2 равные половинки
+  int m = (left + right) / 2; // Среднее арифметическое 
 
-	MergeSort(left,m); // Сортируем левую половину
-	MergeSort(m+1,right); // Сортируем правую половину
+  MergeSort(left,m); // Сортируем левую половину
+  MergeSort(m+1,right); // Сортируем правую половину
 
-	// Объединяем результаты
-	int l = left, r = m+1;
-	for(int i=left;i&lt=right;i++){
-		if(l &gt m) // Если левая половинка кончилась, то берём только из правой
-			T[i] = A[r++];
-		else if(r &gt right) // Если правая половинка кончилась, то берём только из правой
-			T[i] = A[l++];
-		else if(A[l] &lt A[r]) // Если обе не кончились, то берём минимальный элемент
-			T[i] = A[l++];
-		else 
-			T[i] = A[r++];
-	}
+  // Объединяем результаты - операция Merge (слияние)
+  int l = left, r = m+1;
+  for(int i = left; i&lt = right; i++){
+    if(l &gt m) // Если левая половинка кончилась, то берём только из правой
+      T[i] = A[r++];
+    else if(r &gt right) // Если правая половинка кончилась, то берём только из правой
+      T[i] = A[l++];
+    else if(A[l] &lt A[r]) // Если обе не кончились, то берём минимальный элемент
+      T[i] = A[l++];
+  else 
+      T[i] = A[r++];
+  }
 
-	// Копируем обратно из временно буфера в A
-	for(int i=left;i&lt=right;i++)
-		A[i] = T[i];
+  // Копируем обратно из временно буфера в A
+  for(int i = left; i&lt=right; i++) 
+    A[i] = T[i];
 
-	// Проверка, что всё верно отсортировано
-	for(int i=left;i&lt=right-1;i++)
-		assert( A[i] &lt= A[i+1] );
+  // Проверка, что всё верно отсортировано
+  for(int i = left; i&lt = right-1; i++)
+    assert( A[i] &lt= A[i+1] );
 }
 
-int _tmain(int argc, _TCHAR* argv[])
-{
-	// Заполняем случайным числами массив A
-	for(int i=0;i&ltN;i++) A[i] = rand() % 1000;
+int main() {
+  // Заполняем случайным числами массив A
+  for(int i=0;i&ltN;i++) A[i] = rand() % 1000;
 
-	MergeSort(0,N-1);
+  // Вызов сортировки всех элементов
+  MergeSort(0,N-1);
 
-	// Вывод отсортированного массива
-	for(int i=0;i&ltN;i++) cout &lt&lt A[i] &lt&lt " ";
-	cout &lt&lt endl;
+  // Вывод отсортированного массива
+  for(int i=0;i&ltN;i++) cout &lt&lt A[i] &lt&lt " ";
+  cout &lt&lt endl;
 
-	return 0;
-}
-</pre>
+  return 0;
+}</pre>
 
+<p>Вариант с использованием шаблонов:</p>
 
 <pre class="sh_cpp">
 // a - сортируемый массив, его левая граница lb, правая граница ub
@@ -503,8 +536,7 @@ end;
 <pre class="sh_pascal">
 {$APPTYPE CONSOLE}
 
-uses
-  SysUtils;
+uses SysUtils;
 
 var
   N : integer; { Размер кучи }
@@ -523,8 +555,8 @@ end;
 procedure Heapify( i:integer );
 var r,l : integer;
 begin
-  l := i*2;
-  r := i*2+1;
+  l := i*2; { Левый потомок }
+  r := i*2+1; { Правый потомок }
   if l &lt;= N then
     if A[l] > A[i] then begin
       Swap(l,i);
@@ -593,72 +625,65 @@ inline void swap(int i, int j){
   A[j] = temp;
 }
 
-// Выполняется ли основное свойство кучи
+// Выполняется ли основное свойство кучи?
 bool heap_function(int parent, int child){
-	return A[parent] &gt A[child];
+  return A[parent] &gt A[child];
 }
 
 // Мы хотим сверху получить самый минимум
 // parent - корневой элемент
 // Мы обновили элемент parent и хотим чтобы куча снова была кучей
 void heap(int parent){
-	// -= Левый потомок =-
-	int left = 2*parent + 1;  
-	if(left &lt HeapSize) // Левый потомок есть
-		if(!heap_function(parent,left)){ // Проверка основного свойства кучи
-			// Меняем их местами
-			swap(left,parent);
-			heap(left); // Проталкиваем значение дальше
-		}
-	// -= Правый потомок =-
-	int right = 2*parent + 2;  
-	if(right &lt HeapSize) // Правый потомок есть
-		if(!heap_function(parent,right)){ // Проверка основного 
-			// Меняем их местами
-			swap(right,parent);
-			heap(right);
-		}
+  // -= Левый потомок =-
+  int left = 2*parent + 1;  
+  if(left &lt HeapSize) // Левый потомок есть
+    if(!heap_function(parent,left)){ // Проверка основного свойства кучи
+    // Меняем их местами
+    swap(left,parent);
+    heap(left); // Проталкиваем значение дальше
+  }
+  // -= Правый потомок =-
+  int right = 2*parent + 2;  
+  if(right &lt HeapSize) // Правый потомок есть
+    if(!heap_function(parent,right)){ // Проверка основного 
+      // Меняем их местами
+      swap(right,parent);
+      heap(right);
+    }
 }
 
 void HeapSort(){
-	HeapSize = N;
-	// Строим кучу
-	for(int i=N-1;i&gt=0;i--)
-		heap(i);
-	// Выводим очередной элемент
-	for(int i=0;i&ltN;i++){
-		// Ставим элемент с вершины кучи в конец массива
-		swap(0,HeapSize-1); 
-		// Уменьшаем кучу
-		HeapSize--; 
-		// Упорядочиваем вершину кучи
-		heap(0);
-	}
-	// Проверяем, что массив отсортирован
-	for(int i=0;i&ltN-1;i++)
-		assert( A[i] &lt= A[i+1] );
+  HeapSize = N;
+  // Строим кучу
+  for(int i=N-1;i&gt=0;i--)
+    heap(i);
+  // Выводим очередной элемент
+  for(int i=0;i&ltN;i++){
+    // Ставим элемент с вершины кучи в конец массива
+    swap(0,HeapSize-1); 
+    // Уменьшаем кучу
+    HeapSize--; 
+    // Упорядочиваем вершину кучи
+    heap(0);
+  }
+  // Проверяем, что массив отсортирован
+  for(int i=0;i&ltN-1;i++)
+    assert( A[i] &lt= A[i+1] );
 }
 
 int main() {
-	// Заполняем случайным числами массив A
-	for(int i=0;i&ltN;i++) A[i] = rand() % 1000;
+  // Заполняем случайным числами массив A
+  for(int i=0;i&ltN;i++) A[i] = rand() % 1000;
 
-	// Вызов сортировки
-	HeapSort();
+  // Вызов сортировки
+  HeapSort();
 
-	// Вывод отсортированного массива
-	for(int i=0;i&ltN;i++) cout &lt&lt A[i] &lt&lt " ";
-	cout &lt&lt endl;
+  // Вывод отсортированного массива
+  for(int i=0;i&ltN;i++) cout &lt&lt A[i] &lt&lt " ";
+  cout &lt&lt endl;
 
-	return 0;
-}
-
-
-</pre>
-
-
-<p>&nbsp;</p>
-
+  return 0;
+}</pre>
 <h2>Алгоритмы сортировки в стандартных библиотеках</h2>
 
 <p>Использование qsort в C/C++</p>
@@ -709,8 +734,6 @@ for i in A:
   print i,
 </pre>
 
-
-<p>&nbsp;</p>
 </div>
 
 </body>

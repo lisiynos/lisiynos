@@ -1,0 +1,137 @@
+﻿\begin{section}[Пример реализации дерева отрезков на Java]{Пример реализации дерева отрезков на Java}
+
+Пример реализации дерева отрезков на сумме без групповых операций.
+В конструкторе $SegTree$ параметр $numberOfValues$~--- количество элементов 
+в массиве, над которым строится дерево отрезков. Элементы массива читаются
+из входного потока методом $nextLong$. В массиве $tree$ хранится само дерево отрезков,
+$size$~--- количество листьев в дереве отрезков, $inf$~--- нейтральный элемент,
+для сложения равный нулю.
+
+Реализация снизу:
+
+\begin{lstlisting}
+
+public class SegTree {
+    private long[] tree;
+    private int size;
+    private final long inf = 0;
+
+    private void update(int vertex) {
+      this.tree[vertex] = calc(this.tree[vertex * 2],
+          this.tree[vertex * 2 + 1]);
+    }
+
+    private long calc(long a, long b) {
+      return a + b;
+    }
+
+    public SegTree(int numberOfValues) throws IOException {
+      this.size = 1;
+      while (this.size < numberOfValues) {
+        this.size *= 2;
+      }
+      this.tree = new long[this.size * 2];
+      Arrays.fill(tree, inf);
+      for (int i = 0; i < numberOfValues; i++)
+        tree[i + size] = nextLong();
+      for (int i = size - 1; i > 0; i--)
+        update(i);
+    }
+
+    public void set(int pos, long newValue) {
+      pos += size;
+      this.tree[pos] = newValue;
+      while (pos > 1) {
+        pos /= 2;
+        update(pos);
+      }
+    }
+
+    public long get(int left, int right) {
+      left += this.size;
+      right += this.size;
+      long answer = this.inf;
+      while (left <= right) {
+        if (left % 2 == 1) {
+          answer = calc(answer, this.tree[left]);
+          left++;
+        }
+        if (right % 2 == 0) {
+          answer = calc(answer, this.tree[right]);
+          right--;
+        }
+        left /= 2;
+        right /= 2;
+      }
+      return answer;
+    }
+}
+
+\end{lstlisting}
+
+\newpage
+Реализация сверху:
+
+\begin{lstlisting}
+  public class SegTree {
+    private Vertex[] tree;
+    private int size;
+    private final long inf = 0;
+
+    private class Vertex {
+      private long left;
+      private long right;
+      private long value;
+
+      public Vertex(long left, long right, long value) {
+        this.left = left;
+        this.right = right;
+        this.value = value;
+      }
+    }
+
+    public SegTree(int numberOfElements) throws IOException {
+      size = 1;
+      while (size < numberOfElements)
+        size *= 2;
+      tree = new Vertex[size * 2];
+      for (int i = 0; i < numberOfElements; i++) {
+        tree[i + size] = new Vertex(i, i, nextLong());
+      }
+      for (int i = numberOfElements; i < size; i++)
+        tree[i + size] = new Vertex(i, i, inf);
+      for (int i = size - 1; i > 0; i--) {
+        tree[i] = new Vertex(tree[i * 2].left, tree[i * 2 + 1].right,
+            tree[i * 2].value + tree[i * 2 + 1].value);
+      }
+    }
+
+    public long get(int vertex, int left, int right) {
+      if (tree[vertex].left > right || tree[vertex].right < left)
+        return inf;
+      if (tree[vertex].left >= left && tree[vertex].right <= right)
+        return tree[vertex].value;
+      long answer = get(vertex * 2, left, right)
+          + get(vertex * 2 + 1, left, right);
+      return answer;
+    }
+
+    public void set(int vertex, int left, int right, long value) {
+      if (tree[vertex].left > right || tree[vertex].right < left)
+        return;
+      if (tree[vertex].left >= left && tree[vertex].right <= right) {
+        tree[vertex].value = value;
+        return;
+      }
+      set(vertex * 2, left, right, value);
+      set(vertex * 2 + 1, left, right, value);
+      tree[vertex].value = tree[vertex * 2].value
+          + tree[vertex * 2 + 1].value;
+    }
+
+  }
+
+
+\end{lstlisting}
+
+\end{section}

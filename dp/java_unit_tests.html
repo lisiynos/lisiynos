@@ -1,0 +1,394 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Пример модульных тестов на Java</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_java.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+</head>
+<body onLoad="sh_highlightDocument();">
+<div id="content">
+<h1>Пример модульных тестов на Java</h1>
+
+<p><b>TDD (Test-driven development), разработка через тестирование</b> -
+    техника разработки программного обеспечения, которая основывается на
+    повторении очень коротких циклов разработки: </p>
+<ul>
+    <li>сначала пишется тест, покрывающий желаемое изменение,</li>
+    <li>затем пишется код, который позволит пройти тест,</li>
+    <li>и под конец проводится рефакторинг нового кода к соответствующим стандартам.</li>
+</ul>
+
+<img src="img/tdd.png">
+
+<p>Конечный результат:</p>
+
+<pre class="sh_java">
+/**
+ * Реализация функций
+ */
+public class A {
+    public static int add(int a, int b) {
+        return a + b;
+    }
+
+    public static int fact(int N) throws Exception {
+        if (N < 0)
+            throw new Exception("Факториал от отрицательного числа не существует");
+        if (N == 0)
+            return 1;
+        if (N >= 2)
+            return fact(N - 1) * N;
+        return N;
+    }
+}
+</pre>
+
+<p>Модульные тесты:</p>
+
+<pre class="sh_java">
+import org.junit.Assert;
+import org.junit.Test;
+
+import static junit.framework.Assert.assertEquals;
+
+/**
+ * Тестирование класса A
+ */
+public class ATest {
+
+    @Test
+    public void add() {
+        assertEquals(7, A.add(2, 5));
+        assertEquals(12, A.add(3, 9));
+    }
+
+    @Test
+    public void fact() throws Exception {
+        assertEquals(1, A.fact(1));
+        assertEquals(1 * 2, A.fact(2));
+        assertEquals(1 * 2 * 3, A.fact(3));
+        assertEquals(1 * 2 * 3 * 4, A.fact(4));
+        assertEquals(1 * 2 * 3 * 4 * 5, A.fact(5));
+        assertEquals(1 * 2 * 3 * 4 * 5 * 6, A.fact(6));
+        assertEquals(1 * 2 * 3 * 4 * 5 * 6 * 7, A.fact(7));
+        assertEquals(1, A.fact(0));
+        try {
+            A.fact(-1);
+            Assert.fail("Не должно работать!");
+        } catch (Exception ex) {
+            assertEquals("Факториал от отрицательного числа не существует",
+                    ex.getMessage());
+        }
+    }
+}
+</pre>
+
+<p>Конечно же, TDD следует рассматривать как разворачивающийся во времени процесс.</p>
+
+<p>Рассмотрим написание кода по шагам:</p>
+
+<p>Начинаем с теста, создаём тест для тестирования класса A.</p>
+
+<pre class="sh_java">
+import junit.framework.Assert;
+import org.junit.Test;
+
+// Тестирование класса A
+public class ATest {
+    @Test // Аннотация, показывающая, что этот метод - тест.
+    public void testAdd() {
+        Assert.assertEquals(7, A.add(2, 5));
+    }
+}
+</pre>
+
+<p>Запускаем тест, код даже не компилируется. Значит надо реализовать класс A, чтобы тест выполнялся.</p>
+
+<p>Создаём минимальную реализацию, чтобы код вообще компилировался.</p>
+
+<pre class="sh_java">
+/**
+ * Реализация функций - JavaDoc комментарий
+ */
+public class A {
+    public static int add(int a, int b) {
+        return 0;
+    }
+}
+</pre>
+
+<p>Код компилируется, но тест не срабатывает. Ожидается 7, а результат 0.</p>
+
+<p>Исправляем код простейшим из пришедших в голову способов.</p>
+
+<pre class="sh_java">
+public class A {
+    public static int add(int a, int b) {
+        return 7;
+    }
+}
+</pre>
+
+<p>Запускаем тест, он проходит (Зелёная полоска). Добавляем новый тест.</p>
+
+<pre class="sh_java">
+import junit.framework.Assert;
+import org.junit.Test;
+
+import static junit.framework.Assert.*;
+
+public class ATest {
+    @Test
+    public void testAdd() {
+        assertEquals(7, A.add(2, 5)); // Первый тест
+        assertEquals(12, A.add(3, 9)); // Второй тест
+    }
+}
+</pre>
+
+<p>Теперь исправляем код, и сразу обобщаем его (рефакторинг).</p>
+
+<pre class="sh_java">
+public class A {
+    public static int add(int a, int b) {
+        return a + b;
+    }
+}
+</pre>
+
+<p>Со сложением вроде бы всё понятно, перейдём к реализации более сложной фукнции - факториал.
+    Факториал - это произведение всех чисел от 1 до N. $N! = 1*2*3*...*N$.
+</p>
+
+<pre class="sh_java">
+import junit.framework.Assert;
+import org.junit.Test;
+
+import static junit.framework.Assert.*;
+
+public class ATest {
+
+    @Test // Тестируем сложение
+    public void add() {
+        assertEquals(7, A.add(2, 5));
+        assertEquals(12, A.add(3, 9));
+    }
+
+    @Test // Тестируем факториал
+    public void fact(){
+        assertEquals(1, A.fact(1));
+        assertEquals(2, A.fact(2));
+    }
+}
+</pre>
+
+<p>Первая "наивная" реализация факториала:</p>
+
+<pre class="sh_java">
+public class A {
+    public static int add(int a, int b) {
+        return a + b;
+    }
+    public static int fact(int N) {
+        return N;
+    }
+}
+</pre>
+
+<p>Добавляем ещё тест:</p>
+
+<pre class="sh_java">
+    @Test
+    public void fact() {
+        assertEquals(1, A.fact(1));
+        assertEquals(1 * 2, A.fact(2));
+        assertEquals(1 * 2 * 3, A.fact(3));
+    }
+</pre>
+
+<p>Тест не срабатывает - красная полоска. Добавляем if, обрабатывающий ещё и число 3.</p>
+
+<pre class="sh_java">
+    public static int fact(int N) {
+        if (N == 3)
+            return 6;
+        return N;
+    }
+</pre>
+
+<p>Очередной шаг, добавляем тест. Двигаемся маленькими-маленькими шажками, чтобы отработать технику TDD.</p>
+
+<pre class="sh_java">
+    @Test
+    public void fact() {
+        assertEquals(1, A.fact(1));
+        assertEquals(1 * 2, A.fact(2));
+        assertEquals(1 * 2 * 3, A.fact(3));
+        assertEquals(1 * 2 * 3 * 4, A.fact(4));
+    }
+</pre>
+
+<p>Тест опять не проходит - Красная полоска. Исправляем код, добавляем ещё один if.</p>
+
+<pre class="sh_java">
+    public static int fact(int N) {
+        if (N == 4)
+            return 24;
+        if (N == 3)
+            return 6;
+        return N;
+    }
+</pre>
+
+<p>Добавляем ещё один тест, с числом 5.</p>
+
+<pre class="sh_java">
+    @Test
+    public void fact() {
+        assertEquals(1, A.fact(1));
+        assertEquals(1 * 2, A.fact(2));
+        assertEquals(1 * 2 * 3, A.fact(3));
+        assertEquals(1 * 2 * 3 * 4, A.fact(4));
+        assertEquals(1 * 2 * 3 * 4 * 5, A.fact(5));
+    }
+</pre>
+
+<p>Снова добавляем if.</p>
+
+<pre class="sh_java">
+    public static int fact(int N) {
+        if (N == 5)
+            return 1*2*3*4*5;
+        if (N == 4)
+            return 24;
+        if (N == 3)
+            return 6;
+        return N;
+    }
+</pre>
+
+<p>Смотрим на череду if'ов и думаем как их обобщить (рефакторинг), а то код становится "скучным", однообразным.</p>
+
+<p>Обобщение код - каждый раз творчество, каждый раз озарение, инсайт.</p>
+
+<pre class="sh_java">
+    public static int fact(int N) {
+        if (N >= 3)
+            return fact(N - 1) * N;
+        return N;
+    }
+</pre>
+
+<p>Отлично! Всё работает (полоска зелёная). Добавляем ещё тест.</p>
+
+<pre class="sh_java">
+    @Test
+    public void fact() {
+        assertEquals(1, A.fact(1));
+        assertEquals(1 * 2, A.fact(2));
+        assertEquals(1 * 2 * 3, A.fact(3));
+        assertEquals(1 * 2 * 3 * 4, A.fact(4));
+        assertEquals(1 * 2 * 3 * 4 * 5, A.fact(5));
+        assertEquals(1 * 2 * 3 * 4 * 5 * 6, A.fact(6));
+    }
+</pre>
+
+<p>Тест срабатывает сразу, даже без модификации кода. Добавляем ещё тест.</p>
+
+<pre class="sh_java">
+   @Test
+    public void fact() {
+        assertEquals(1, A.fact(1));
+        assertEquals(1 * 2, A.fact(2));
+        assertEquals(1 * 2 * 3, A.fact(3));
+        assertEquals(1 * 2 * 3 * 4, A.fact(4));
+        assertEquals(1 * 2 * 3 * 4 * 5, A.fact(5));
+        assertEquals(1 * 2 * 3 * 4 * 5 * 6, A.fact(6));
+        assertEquals(1 * 2 * 3 * 4 * 5 * 6 * 7, A.fact(7));
+    }
+</pre>
+
+<p>Тест опять срабатывает сразу, без модификации кода. Это скучно! Скорее всего, тест будет правильно работать и на
+    последующих тестах.
+    Надо придумать необычный тест, который не укладывается в наши условия. Добавим факториал от 0.
+</p>
+
+<pre class="sh_java">
+    @Test
+    public void fact() {
+        assertEquals(1, A.fact(1));
+        assertEquals(1 * 2, A.fact(2));
+        assertEquals(1 * 2 * 3, A.fact(3));
+        assertEquals(1 * 2 * 3 * 4, A.fact(4));
+        assertEquals(1 * 2 * 3 * 4 * 5, A.fact(5));
+        assertEquals(1 * 2 * 3 * 4 * 5 * 6, A.fact(6));
+        assertEquals(1 * 2 * 3 * 4 * 5 * 6 * 7, A.fact(7));
+        assertEquals(1, A.fact(0));
+    }
+</pre>
+
+<p>И сразу же реализуем его отдельным if'ом.</p>
+
+<pre class="sh_java">
+    public static int fact(int N) {
+        if (N == 0)
+            return 1;
+        if (N >= 2)
+            return fact(N - 1) * N;
+        return N;
+    }
+</pre>
+
+<p>Подумаем над обработкой ошибок, если в фукцию вычисления факториала передадут отрицательное число, надо выкинуть
+    исключение.
+    Пишем соответствующий тест.
+</p>
+
+<pre class="sh_java">
+    @Test
+    public void fact() throws Exception {
+        assertEquals(1, A.fact(1));
+        assertEquals(1 * 2, A.fact(2));
+        assertEquals(1 * 2 * 3, A.fact(3));
+        assertEquals(1 * 2 * 3 * 4, A.fact(4));
+        assertEquals(1 * 2 * 3 * 4 * 5, A.fact(5));
+        assertEquals(1 * 2 * 3 * 4 * 5 * 6, A.fact(6));
+        assertEquals(1 * 2 * 3 * 4 * 5 * 6 * 7, A.fact(7));
+        assertEquals(1, A.fact(0));
+        try {
+            A.fact(-1);
+            Assert.fail("Не должно работать!");
+        } catch (Exception ex) {
+            assertEquals("Факториал от отрицательного числа не существует!",
+                    ex.getMessage());
+        }
+    }
+</pre>
+
+<p>Реализуем последний случай:</p>
+
+<pre class="sh_java">
+    public static int fact(int N) throws Exception {
+        if (N < 0)
+            throw new Exception("Факториал от отрицательного числа не существует!");
+        if (N == 0)
+            return 1;
+        if (N >= 2)
+            return fact(N - 1) * N;
+        return N;
+    }
+</pre>
+
+<p>На этом всё. Продолжим писать код, когда придумаем новые функции или новые тесты к существующим!</p>
+
+<h3>Литература:</h3>
+<ol>
+    <li>Кент Бек. Экстремальное программирование.</li>
+    <li>Кент Бек. Экстремальное программирование: разработка через тестирование. СПб. Питер, 2003 г.</li>
+</ol>
+
+</div>
+</body>
+</html>

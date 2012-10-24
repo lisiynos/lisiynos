@@ -1,0 +1,86 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Графы на C/C++</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <script type="text/javascript" src="../syntax/load.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="100" height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70" type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+<div id="content">
+
+<h1>Разбор задач на графы на С/C++</h1>
+
+<h3>Количество простых путей</h3>
+
+<p>Простой путь - это путь на клеточном поле, который проходит через каждую клетку не более одного раза.</p>
+
+<p>Нужно вычислить количество возможных простых путей из клетки с координатами $(0,0)$ длины $K$.</p>
+
+<pre class="sh_cpp">
+#include &lt;cstdlib&gt;
+#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+bool used[55][55]; // Клетка использована
+
+long long Answer = 0;
+int K;
+
+void R(int x, int y, int t) {
+  if (used[x][y]) return;
+  if (t == K) { Answer++; return; }
+  used[x][y] = true; // visit - посещаем вершину
+  // Идём во все стороны
+  R(x + 1, y, t + 1); R(x, y + 1, t + 1);     
+  R(x - 1, y, t + 1); R(x, y - 1, t + 1);    
+  used[x][y] = false; // leave - выходим из вершины
+}
+
+#define task  "paths"
+int main() {
+  freopen(task".in", "r", stdin);
+  freopen(task".out", "w", stdout);
+  cin &gt;&gt; K;
+  for(int i = 0; i &lt; 50; i++)
+    for(int j = 0; j &lt; 50; j++) 
+      used[i][j] = false;
+  R(20, 20, 0);
+  cout &lt;&lt; Answer;
+}</pre>
+
+
+
+</div>
+</body>
+
+</html>

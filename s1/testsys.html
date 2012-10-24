@@ -8,46 +8,45 @@
     <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
     <script type="text/javascript" src="../syntax/sh_java.js"></script>
     <script type="text/javascript" src="../syntax/sh_python.min.js"></script>
-    <script type="text/javascript" src="../syntax/sh_basic.js"></script>
     <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
 </head>
 <body onLoad="sh_highlightDocument();">
 <div style="width:80%;">
     <div style="float:right;">
         <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version
-=6,0,0,0" width="100" height="50">
-            <param name="movie"
-                   value="../audio/a_smsqulh3n.swf">
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100" height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
             <param name="bgcolor" value="fff">
-            <param
-                    name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
-            <param
-                    name="autoplay" value="false">
-            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
-                   width="100" height="70" type="application/x-shockwave-flash"
+            <param name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff" width="100" height="70"
+                   type="application/x-shockwave-flash"
                    pluginspage="http://www.macromedia.com/go/getflashplayer"
                    FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
         </object>
     </div>
 </div>
-</div>
 
-<div id="content" style="width:80%;">
+<div id="content">
 
-    <h1>Работа с тестирующей системой </h1>
+<ul class="tags">
+    <li><a href="#">TestSys</a></li>
+</ul>
 
-    <p>Тестирующая система <strong>TestSys</strong> расположена по адресу: <a
-            href="http://ts.lokos.net">ts.lokos.net</a>.
-    </p>
+<h1>Работа с тестирующей системой, расшифровка сообщений. "Задача A+B" на разных языках</h1>
 
-    <p>Для входа в систему следует использовать логин (обычно - 2 цифры) и пароль выданные преподавателем.</p>
+<p>Тестирующая система <strong>TestSys</strong> расположена по адресу: <a
+        href="http://ts.lokos.net">ts.lokos.net</a>.
+</p>
 
-    <h2>Задача "A+B" на разных языках программирования</h2>
+<p>Для входа в систему следует использовать логин (обычно - 2 цифры) и пароль выданные преподавателем.</p>
 
-    <p>Нужно ввести из входного файла два целых числа и вывести их сумму в выходной файл.</p>
+<h2>Задача "A+B" на разных языках программирования</h2>
 
-    <h3>Pascal</h3>
+<p>Нужно ввести из входного файла два целых числа и вывести их сумму в выходной файл.</p>
+
+<h3>Pascal</h3>
 
 <pre class="sh_pascal">
 const FN = 'aplusb'; { Название входного и выходного файла }
@@ -60,7 +59,7 @@ begin
 end.
 </pre>
 
-    <h3>Delphi</h3>
+<h3>Delphi</h3>
 
 <pre class="sh_pascal">
 {$APPTYPE CONSOLE}
@@ -74,7 +73,7 @@ begin
 end.
 </pre>
 
-    <h3>C/C++</h3>
+<h3>C/C++</h3>
 
 <pre class="sh_cpp">
 #include &lt;stdio.h&gt;
@@ -90,38 +89,206 @@ int main() {
 }
 </pre>
 
-    <h2>Сообщения тестирующей системы</h2>
+<h2>Сообщения тестирующей системы</h2>
 
-    <ul>
-        <li><strong>Accepted</strong><strong> - </strong> Все в порядке! Ваша программа принята! Она откомпилировалась без ошибок и прошла все тесты.</li>
-        <li><strong>Presentation</strong><strong> Error (PE)</strong> - неправильный формат вывода, проверяющая
-            программа не
-            смогла прочитать ваш выходной файл или ваша программа вообще не создала выходной файл.
-        </li>
-        <li><strong>Wrong</strong><strong> Answer (WA)</strong>- неправильный ответ на тест. </li>
-        <li><strong>Compile Error (CE)</strong> - ошибки компиляции программы. Посмотрите что вы отправляете (нажмите view в отправках).</li>
-        <li><strong>Runtime Error (RE)</strong> - ошибка времени выполнения (выход за границы массива, переполнение
-            переменной, деление на ноль, корень из отрицательного числа, ошибка в имени входного файла).
-        </li>
-        <li><strong>Time Limit (TL)</strong> - ваша программа выполнялась на каком-то тесте больше времени по условию
-            задачи.
-        </li>
-        <li><strong>Memory Limit (ML)</strong> - ваша программа использовала больше памяти, чем разрешено по условию
-            задачи.
-        </li>
-    </ul>
+<ul>
+    <li><strong>Accepted</strong><strong> - </strong> Все в порядке! Ваша программа принята! Она откомпилировалась без
+        ошибок и прошла все тесты.
+    </li>
+    <li><strong>Presentation Error (PE)</strong> - неправильный формат вывода, проверяющая
+        программа не
+        смогла прочитать ваш выходной файл или ваша программа вообще не создала выходной файл.
+    </li>
+    <li><strong>Wrong Answer (WA)</strong>- неправильный ответ на тест. </li>
+    <li><strong>Compile Error (CE)</strong> - ошибки компиляции программы. Посмотрите что вы отправляете (нажмите view в
+        отправках).
+    </li>
+    <li><strong>Runtime Error (RT)</strong> - ошибка времени выполнения (выход за границы массива, переполнение
+        переменной, деление на ноль, корень из отрицательного числа, ошибка в имени входного файла).
+    </li>
+    <li><strong>Time Limit (TL)</strong> - ваша программа выполнялась на каком-то тесте больше времени по условию
+        задачи.
+    </li>
+    <li><strong>Memory Limit (ML)</strong> - ваша программа использовала больше памяти, чем разрешено по условию
+        задачи.
+    </li>
+</ul>
 
-    <p>&nbsp;</p>
+<h2>Компиляторы</h2>
+<ul>
+    <li>Pascal: Borland Delphi 7.0, Free Pascal 2.6.0;</li>
+    <li>C/C++: Visual C++ 2010 Express Edition, GNU C++ 4.6.1 (MinGW), Code::Blocks 10.05;</li>
+    <li>C#: Visual C# 2010 Express Edition;</li>
+    <li>Java: Sun JDK 7 update 9, Eclipse 4.2.</li>
+    <li>Python: Python 3.3.0, Wing IDE 101 4.1.9.</li>
+</ul>
 
-    <p>&nbsp;</p>
+<h1>Примеры ошибок в решениях:</h1>
 
-    <p>&nbsp;</p>
+<h2>Presentation Error (PE)</h2>
 
-    <p>&nbsp;</p>
+<p>Неправильное имя выходного файла:</p>
 
-    <p style='margin-bottom:6.0pt;text-align:justify;text-indent:
-20pt'>&nbsp;  </p>
+<pre class="sh_pascal">
+{$APPTYPE CONSOLE}
+var A,B : Int64;
+begin
+  Assign(Input,'aplusb.in'); Reset(Input);
+  Assign(Output,'YA_NE_POMNU.out'); Rewrite(Output);
+  Read(A,B);
+  Write(A+B);  
+end.
+</pre>
+
+<p>Программа выводит на экран вместо файла:</p>
+
+<pre class="sh_pascal">
+{$APPTYPE CONSOLE}
+var A,B : Int64;
+begin
+  Assign(Input,'aplusb.in'); Reset(Input);
+  { Assign(Output,'aplusb.out'); Rewrite(Output); }
+  Read(A,B);
+  Write(A+B);  
+end.
+</pre>
+
+<h2>Wrong Answer (WA)</h2>
+
+<p>Неверное решение:</p>
+<pre class="sh_pascal">
+{$APPTYPE CONSOLE}
+var A,B : Int64;
+begin
+  Assign(Input,'aplusb.in'); Reset(Input);
+  Assign(Output,'aplusb.out'); Rewrite(Output);
+  Read(A,B);
+  Write(A-B);  
+end.
+</pre>
+
+<p>Точности/разрядности типов данных не хватает:</p>
+<pre class="sh_pascal">
+{$APPTYPE CONSOLE}
+var A,B : Extended;
+begin
+  Assign(Input,'aplusb.in'); Reset(Input);
+  Assign(Output,'aplusb.out'); Rewrite(Output);
+  Read(A,B);
+  Write((A+B):0:0);  
+end.
+</pre>
+
+<h2>Compile Error (CE)</h2>
+
+<pre class="sh_pascal">
+{$APPTYPE CONSOLE}
+var A,B : Int64;
+begin
+  ЯВНО НЕВЕРНАЯ СТРОКА!!!
+  Assign(Input,'aplusb.in'); Reset(Input);
+  Assign(Output,'aplusb.out'); Rewrite(Output);
+  Read(A,B);
+  Write(A+B);  
+end.
+</pre>
+
+<p>Комментарий тестирующей системы:</p>
+
+<pre>
+Borland Delphi Version 15.0 
+Copyright (c) 1983,2002 Borland Software Corporation 
+a.dpr(4) Error: Illegal character in input file: 'Я' ($DF) 
+a.dpr(4) Error: Illegal character in input file: 'А' ($C0) 
+a.dpr(4) Error: Illegal character in input file: '!' ($21) 
+a.dpr(9) 
+</pre>
+
+<h2>Runtime Error (RE)</h2>
+
+<p>Программа завершилась с ненулевым кодом возврата, либо создала исключительную ситуацию (exception) и не обработала
+    ее.</p>
+
+<pre class="sh_pascal">
+{$APPTYPE CONSOLE}
+var A,B : Integer; { Integer переполняется на больших числах }
+begin
+  Assign(Input,'aplusb.in'); Reset(Input);
+  Assign(Output,'aplusb.out'); Rewrite(Output);
+  Read(A,B);
+  Write(A+B);  
+end.
+</pre>
+
+<pre class="sh_pascal">
+{$APPTYPE CONSOLE}
+var A,B : Int64; 
+begin
+  Assign(Input,'aplusb.in'); Reset(Input);
+  Assign(Output,'aplusb.out'); Rewrite(Output);
+  Read(A,B);
+  Write(A div B); { Когда B равно 0, тут будет деление на ноль! }
+end.
+</pre>
+
+<p>Для поиска RE в программе на Delphi используйте директивы:</p>
+
+<pre class="sh_pascal">
+{$O Off} { Выключаем оптимизацию }
+{$R+} { Включаем проверку границ массивов }
+{$Q+} { Включаем проверку переполнений }
+</pre>
+
+<h2>Time Limit (TL)</h2>
+
+<p>Программа не завершилась за отведенный период времени.</p>
+
+<b>Возможные причины:</b>
+<ul>
+    <li>Неэффективное решение;</li>
+    <li>Ошибка в программе (например, зацикливание).</li>
+</ul>
+
+<pre class="sh_pascal">
+{$APPTYPE CONSOLE}
+var 
+  A,B : Int64;
+  I,K : Integer;  
+begin  
+  Assign(Input,'aplusb.in'); Reset(Input);
+  Assign(Output,'aplusb.out'); Rewrite(Output);
+  Read(A,B);
+  { Цикл выполняется слишком долго!!! }
+  for I:=Low(Integer) to High(Integer) do 
+    K := I;           
+  Write(A+B);  
+end.
+</pre>
+
+<h2>Memory Limit (ML)</h2>
+
+<p>Программа попыталась использовать больше памяти, чем разрешается.</p>
+
+<pre class="sh_pascal">
+{$APPTYPE CONSOLE}
+var 
+  A,B : Int64;
+  T : array [1..100000000] of Integer; { Слишком большой массив!!! }
+  I : Integer;
+begin
+  Assign(Input,'aplusb.in'); Reset(Input);
+  Assign(Output,'aplusb.out'); Rewrite(Output);
+  for I:=Low(T) to High(T) do T[I]:=2135;
+  Read(A,B);
+  Write(A+B);  
+end.
+</pre>
+
+
+<h2>Delphi XE2</h2>
+
+<img src="testsys/delphi_xe2.png">
+
 </div>
 </body>
-
 </html>

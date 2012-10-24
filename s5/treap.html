@@ -1,0 +1,292 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Декартово дерево</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_python.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100" height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70" type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+<div id="content">
+<h1>Двоичные деревья поиска. Декартово дерево</h1>
+
+<ul class="tags">
+    <li><a href="#">Декартово дерево</a></li>
+</ul>
+
+<p><strong>Декартово дерево</strong> — это двоичное дерево, в узлах которого хранятся: ссылки на правое и левое
+    поддерево, ссылка на родительский узел (необязательно), ключи <strong>x</strong> и <strong>y</strong>, которые
+    являются двоичным деревом поиска по ключу <strong>x</strong> и двоичной кучей по ключу <strong>y</strong>.
+    А именно, для любого узла дерева <strong>n</strong> ключи <strong>x</strong> узлов правого (левого) поддерева больше
+    (меньше либо равны) ключа <strong>x</strong> узла <strong>n</strong>, ключи y узлов правого и левого детей больше
+    либо равны ключу <strong>y</strong> узла <strong>n</strong>.</p>
+
+<p>Ссылка на родительский узел не обязательна, она желательна только для линейного алгоритма построения дерева. </p>
+
+<p><strong>Декартово дерево </strong>- это структура данных, объединяющая в себе бинарное дерево поиска и бинарную
+    кучу
+    (отсюда и второе её название: treap (tree+heap) и дерамида (дерево+пирамида).</p>
+
+<img src="structures/treap.png" width="1470" height="608">
+
+<pre class="sh_pascal">
+type
+  Treap = ^TNode;
+  TNode = record
+    x,y : Integer; { x - ключ, y - приоритет (произвольные сравнимые типы данных) }
+    Left,Right : Treap; { Левое и правое поддерево }
+  end;</pre>
+
+<h3>Merge (склеивание)</h3>
+
+<p><img src="structures/treap_merge.png"></p>
+
+<p><img src="structures/treap_merge2.png"></p>
+
+<pre class="sh_pascal">
+{ Слияние декартовых деревьев }
+function Merge( L,R : Treap ):Treap;
+begin
+  if L = nil then { Левого поддерева нет }
+    Result := R     { => результат - правое поддерево }
+  else if R = nil then { Правого поддерева нет }
+    Result := L     { => результат - левое поддерево }
+  else if L.y > R.y then begin { У левого приоритет выше }
+    { => левое становится корнем }
+    { Левое поддерево у него сохраняется }
+    L.Right := Merge(L.Right,R);
+    Result := L;
+  end else begin { У правого приоритет выше или равен }
+    { Правое поддерево сохраняется }
+    { Левое поддерево = результат слияния левого с
+      левым сыном правого поддерева }
+    R.Left := Merge(L,R.Left);
+    Result := R;
+  end;
+end;
+</pre>
+
+<h3>Split (разрезание)</h3>
+
+<p><img src="structures/treap_split.png"></p>
+
+<p><img src="structures/treap_split2.png"></p>
+
+<pre class="sh_pascal">
+{ Операция разрезания дерева T по ключу x на 2 поддерева L и R }
+procedure Split( T:Treap; x:Integer; var L,R:Treap);
+var Temp : Treap; { Временное дерево }
+begin
+  Temp := nil;
+  if T = nil then begin { Если дерево пустое }
+    L := nil; { то результат разрезания пустой }
+    R := nil;
+  end else
+  if T.x &lt;= x then begin
+    if T.Right = nil then
+      R := nil
+    else
+      Split(T.Right,x,Temp,R);
+    L := T;
+    L.Right := Temp;
+  end else begin
+    if T.Left = nil then
+      L := nil
+    else
+      Split(T.Left,x,L,Temp);
+    R := T;
+    R.Left := Temp;
+  end;
+end;
+</pre>
+
+<h3>Добавление новой вершины</h3>
+
+<img src="structures/treap_add.png">
+
+<pre class="sh_pascal">
+{ Добавление вершины с ключём x в дерево T }
+procedure Add( var T:Treap; x:integer );
+var NV,L,R : Treap;
+begin
+  new(NV); { Создаём новый узел }
+  NV.x := x; { У него ключ x }
+  NV.y := Random(High(Integer)); { И случайный приоритет }
+  NV.Left := nil; { Нет поддеревьев }
+  NV.Right := nil;
+  Split(T,x,L,R); { Разрезаем исходное дерево по ключу x }
+  { Склеиваем 3 получившихся дерева }
+  T := Merge(Merge(L,NV),R);
+end;
+</pre>
+
+<h3>Удаление вершины с заданным ключом x</h3>
+
+<img src="structures/treap_delete.png">
+
+<pre class="sh_pascal">
+{ Удаление вершины }
+procedure Delete( var T:Treap; x:integer );
+var L,R,M,Rs : Treap;
+begin
+  Split(T,x-1,L,R);
+  Split(R,x,M,Rs);
+  { Удаляем одну верхнюю вершину в M }
+  if M <> nil then begin
+    if M.Left = nil then
+      M := M.Right
+    else
+      M := M.Left;
+  end;
+  { Сливаем вместе оставшиеся куски }
+  T := Merge(L,Merge(M,Rs));
+end;
+</pre>
+
+<h3>Поиск минимума и максимума</h3>
+
+<pre class="sh_pascal">
+{ Поиск минимума в дереве }
+function MinT( T:Treap ):integer;
+begin
+  if T = nil then { Если дерево пустое, то минимума нет }
+    MinT := High(integer)
+  else if T.Left = nil then { Левого поддерева нет => текущий элемент - минимум }
+    MinT := T.x
+  else
+    MinT := MinT(T.Left); { Минимум в левом поддереве }
+end;
+
+{ Поиск максимума в дереве - аналогично минимуму, только идём вправо }
+function MaxT( T:Treap ):integer;
+begin
+  if T = nil then
+    MaxT := Low(Integer)
+  else if T.Right = nil then
+    MaxT := T.x
+  else
+    MaxT := MaxT(T.Right);
+end;
+</pre>
+
+<h3>Поиск значения в дереве</h3>
+
+<pre class="sh_pascal">
+{ Поиск значения в дереве }
+function Find( T:Treap; x:integer ):boolean;
+begin
+  if T = nil then
+    Find := false { Не найдено }
+  else if T.x = x then begin
+    Find := true; { x найдено в текущей вершине }
+  end else if x < T.x then
+    Find := Find(T.Left,x) { Поищем слева }
+  else
+    Find := Find(T.Right,x); { Поищем справа }
+end;
+</pre>
+
+<h3>Вычисление высоты дерева</h3>
+
+<pre class="sh_pascal">
+{ Высота дерева }
+function Height( T:Treap ):integer;
+begin
+  if T = nil then
+    Result := 0
+  else
+    Result := max(Height(T.Left),Height(T.Right))+1;
+end;
+</pre>
+
+<h3>Тестирование всех операций</h3>
+
+<pre class="sh_pascal">
+var
+  T : Treap = nil;
+  i,j : Integer;
+begin
+  Randomize;
+  { Проверяем что сейчас ничего в дереве нет }
+  for i := -10 to 10 do
+    assert( not Find(T,i) );
+  { Добавляем вершины }
+  for i := 1 to 1000000 do begin
+    Add(T,i);
+    assert( not Find(T,-1) ); { Вершины -1 по-прежнему нет }
+    for j := 1 to min(10,i) do { Добавленные вершины есть }
+      assert( Find(T,j) );
+    assert( not Find(T,i+1) ); { Вершин с большим номером нет }
+  end;  
+  Writeln('Высота дерева (оценка: 4*log(N)): ',Height(T));
+  assert( Find(T,10) );
+  Delete(T,10);
+  assert( not Find(T,10) );
+end.
+</pre>
+
+<h3>Решение задачи поиска чисел в массиве</h3>
+
+<pre class="sh_pascal">
+var
+  T : Treap = nil;
+  N,M,x,i : Integer;
+begin
+  Reset(Input,'find.in');
+  Rewrite(Output,'find.out');
+
+  Randomize;
+  Read(N,M);
+  for i := 1 to N do begin
+    Read(x);
+    Add(T,x);
+  end;
+  for i := 1 to M do begin
+    Read(x);
+    if Find(T,x) then
+      Writeln('YES')
+    else
+      Writeln('NO');
+  end;
+end.
+</pre>
+
+<h3>Ссылки</h3>
+
+<ul>
+    <li><a href="http://ru.wikipedia.org/wiki/Декартово_дерево">Декартово дерево в Википедии</a></li>
+    <li><a href="http://habrahabr.ru/blogs/algorithm/101818/">Декартово дерево - статья на Хабрахабре</a></li>
+    <li><a href="http://e-maxx.ru/algo/treap">Реализация декартова дерева на C/C++</a></li>
+</ul>
+
+</div>
+
+</body>
+
+</html>

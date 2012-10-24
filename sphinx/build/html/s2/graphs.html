@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Простейшие понятие о графах. Представления графов в памяти, классические алгоритмы &mdash; Документация Дистанционная сессия по информатике 0.1</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Документация Дистанционная сессия по информатике 0.1" href="../index.html" />
+    <link rel="up" title="Вторая сессия — лето" href="index.html" />
+    <link rel="prev" title="Вторая сессия — лето" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Дистанционная сессия по информатике</a>
+      </div>
+
+    <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider"></li>
+            
+            
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Навигация <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Простейшие понятие о графах. Представления графов в памяти, классические алгоритмы</a><ul>
+<li><a class="reference internal" href="#id2">Введение</a></li>
+<li><a class="reference internal" href="#id3">История возникновения теории графов</a><ul>
+<li><a class="reference internal" href="#id4">Леонард Эйлер и задача о Кёнигсберских мостах</a></li>
+<li><a class="reference internal" href="#id5">Проблема четырёх красок</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">Определения теории графов</a></li>
+<li><a class="reference internal" href="#id7">Представление графов в памяти</a><ul>
+<li><a class="reference internal" href="#id8">Матрица смежности</a></li>
+<li><a class="reference internal" href="#id9">Список смежности</a></li>
+<li><a class="reference internal" href="#id10">Другие способы</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id11">Основные задачи теории графов</a><ul>
+<li><a class="reference internal" href="#id12">Обходы графа</a><ul>
+<li><a class="reference internal" href="#dfs">Обход в глубину (DFS)</a></li>
+<li><a class="reference internal" href="#bfs">Обход в ширину (BFS)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id13">Поиск кратчайших путей</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id14">Другие задачи</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="id1">
+<h1>Простейшие понятие о графах. Представления графов в памяти, классические алгоритмы<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<div class="section" id="id2">
+<h2>Введение<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Теория графов &#8212; раздел математики и информатики, нашедший широкое применение в современных прикладных задачах. В первую очередь, это задачи поиска маршрута на картах, но её применение не ограничивается навигационными приложениями. Графы возникают там, где между данными существуют какие-либо нелинейные связи. Например, это могут быть компьютеры, соединённые в сеть. Или же это могут быть задачи, которые надо выполнить в каком-то порядке, причём некоторые задачи надо выполнять строго после каких-то других. Существуют алгоритмы, позволяющие вычислить оптимальный порядок выполнения таких задач.</p>
+</div>
+<div class="section" id="id3">
+<h2>История возникновения теории графов<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
+<div class="section" id="id4">
+<h3>Леонард Эйлер и задача о Кёнигсберских мостах<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Родоначальником теории графов считается Леонард Эйлер. В 1736 году в одном из своих писем он формулирует и предлагает решение задачи о семи кёнигсбергских мостах, ставшей впоследствии одной из классических задач теории графов.</p>
+<p>Издавна среди жителей Кёнигсберга (теперь Калининграда) была распространена такая загадка: как пройти по всем мостам, не проходя ни по одному из них дважды? Многие кёнигсбержцы пытались решить эту задачу как теоретически, так и практически, во время прогулок. Но никому это не удавалось, однако не удавалось и доказать, что это даже теоретически невозможно.</p>
+<p>В 1736 году задача о семи мостах заинтересовала выдающегося математика, члена Петербургской академии наук Леонарда Эйлера, о чём он написал в письме итальянскому математику и инженеру Мариони от 13 марта 1736 года. В этом письме Эйлер пишет о том, что он смог найти правило, пользуясь которым легко определить, можно ли пройти по всем мостам, не проходя дважды ни по одному из них (в случае семи мостов Кёнигсберга это невозможно).</p>
+<p>Для того, чтобы решить эту задачу, Эйлер сделал специальные обозначения. Каждую часть суши (остров или берег реки) он обозначил кружком на бумаге, а затем соединил линиями те кружки, между которыми существуют мосты. Такие обозначения подчеркивают, что в этой задаче фактическое расположение, форма, длина и другие свойства объектов не представляют интереса, важны только связи между ними. Такая картинка на бумаге или на экране компьютера называется <em>графом</em>. Кружки &#8212; это его <em>вершины</em>, а линии &#8212; <em>рёбра</em>. Размышляя над этой и другими картинками из кружков и линий, Эйлер пришел к следующим выводам о графах:</p>
+<ul class="simple">
+<li>Число нечётных вершин (вершин, к которым ведёт нечётное число рёбер) графа должно всегда быть чётно. То есть, просто не может существовать графа, который имел бы нечётное число нечётных вершин.</li>
+<li>Если все вершины графа чётные, то его можно начертить не отрывая карандаша от бумаги, при этом начинать можно с любой вершины графа и завершить его в ней же.</li>
+<li>Граф с более чем двумя нечётными вершинами невозможно начертить одним росчерком</li>
+</ul>
+<p>Граф кёнигсбергских мостов имел четыре нечётные вершины (т.е. все), следовательно, невозможно пройти по всем мостам, не проходя ни по одному из них дважды.</p>
+<img alt="blin" src="../_images/konigsberg.png" />
+<img alt="../_images/konigsberg_bridges.png" src="../_images/konigsberg_bridges.png" />
+<img alt="Кёнигсбергские мосты в виде графа" src="../_images/konigsberg_graph.png" />
+</div>
+<div class="section" id="id5">
+<h3>Проблема четырёх красок<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h3>
+<img alt="../_images/four_colour_map_example.png" src="../_images/four_colour_map_example.png" />
+<p>Проблема четырёх красок &#8212; математическая задача, предложенная Гутри в 1852 году:</p>
+<blockquote>
+<div>Выяснить, можно ли всякую расположенную на сфере карту раскрасить четырьмя красками так, чтобы любые две области, имеющие общий участок границы, были раскрашены в разные цвета.</div></blockquote>
+<p>Иначе говоря, показать что хроматическое число плоского графа не превосходит 4.</p>
+<p><em>О доказательстве</em></p>
+<p>К. Аппель и В. Хакен доказали в 1976 г., что так можно раскрасить любую карту. Это была первая крупная
+математическая теорема, для доказательства которой был применён компьютер. Несмотря на последующие упрощения,
+доказательство практически невозможно проверить, не используя компьютер. Поэтому некоторые математики отнеслись к
+этому доказательству с недоверием, что объяснялось не только использованием компьютера, но и громоздкостью
+описания алгоритма первых доказательств (741 страница), впоследствии были предложены более компактные алгоритмы и
+скорректирован ряд ошибок. Проблема четырех красок является одним из известнейших прецедентов неклассического
+доказательства в современной математике.</p>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>Определения теории графов<a class="headerlink" href="#id6" title="Ссылка на этот заголовок">¶</a></h2>
+<p><strong>Граф</strong> &#8212; конечное множество вершин, природа которых не важна, и конечно множество рёбер, соединяющих между собой какие-либо вершины.</p>
+<p>Графы могут быть ориентированными и неориентированными. Если в рамках задачи по рёбрам можно перемещаться в обоих направлениях, то граф называется <em>неориентированным</em>. Если же по каждому ребру можно пройти только в одну сторону, то граф <em>ориентированный</em>. В таком случае рёбра обычно обозначаются стрелками, а не просто линиями.</p>
+<div class="figure align-center">
+<img alt="Граф" src="../_images/img00.gif" />
+<p class="caption">Пример ориентированного графа</p>
+</div>
+<p>Иногда бывает полезно связать с ребрами графа какие-то числа. Это могут быть длины дорог или плата за проезд, если граф моделирует карту какой-то местности. В таком случае граф называется <em>взвешенным</em>, а сами числа &#8212; <em>весами</em>.</p>
+<div class="figure align-center">
+<img alt="../_images/graph_6_7.png" src="../_images/graph_6_7.png" />
+<p class="caption">Пример: граф с шестью вершинами и семью рёбрами</p>
+</div>
+<p>Граф, в котором каждая пара вершин соединена ребром, называется <strong>полным</strong>. Обозначение: <span class="math">\(K_n\)</span> &#8212; граф, состоящий из <span class="math">\(n\)</span> вершин и ребер, соединяющих всевозможные пары этих вершин. Такой граф можно представить как <span class="math">\(n\)</span>-угольник, в котором проведены все диагонали.</p>
+<p>Ниже приведены полные графы с числом вершин от 1 до 8 и количества их рёбер.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="math">\(K_1\)</span></td>
+<td><span class="math">\(K_2\)</span></td>
+<td><span class="math">\(K_3\)</span></td>
+<td><span class="math">\(K_4\)</span></td>
+</tr>
+<tr class="row-even"><td><img alt="../_images/complete_graph_K1.png" class="first last" src="../_images/complete_graph_K1.png" />
+</td>
+<td><img alt="../_images/complete_graph_K2.png" class="first last" src="../_images/complete_graph_K2.png" />
+</td>
+<td><img alt="../_images/complete_graph_K3.png" class="first last" src="../_images/complete_graph_K3.png" />
+</td>
+<td><img alt="../_images/complete_graph_K4.png" class="first last" src="../_images/complete_graph_K4.png" />
+</td>
+</tr>
+<tr class="row-odd"><td><span class="math">\(K_5\)</span></td>
+<td><span class="math">\(K_6\)</span></td>
+<td><span class="math">\(K_7\)</span></td>
+<td><span class="math">\(K_8\)</span></td>
+</tr>
+<tr class="row-even"><td><img alt="../_images/complete_graph_K5.png" class="first last" src="../_images/complete_graph_K5.png" />
+</td>
+<td><img alt="../_images/complete_graph_K6.png" class="first last" src="../_images/complete_graph_K6.png" />
+</td>
+<td><img alt="../_images/complete_graph_K7.png" class="first last" src="../_images/complete_graph_K7.png" />
+</td>
+<td><img alt="../_images/complete_graph_K8.png" class="first last" src="../_images/complete_graph_K8.png" />
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Степенью</strong> вершины называется число ребер, которым принадлежит вершина (число рёбер с концом в данной вершине).</p>
+<p><strong>Дополнением данного графа</strong> называется граф, состоящий из всех ребер и их концов, которые необходимо добавить к исходному графу, чтобы получить полный граф.</p>
+<p>Граф, который можно представить на плоскости в таком виде, когда его ребра пересекаются только в вершинах, называется <strong>плоским</strong>.</p>
+<p>Многоугольник плоского графа, не содержащий внутри себя никаких вершин или ребер графа, называют его гранью.</p>
+<p>Понятия плоского графа и грани графа применяется при решении задач на &#8220;правильное&#8221; раскрашивание различных карт.</p>
+<p><strong>Путем</strong> от вершины A до вершины X называется последовательность ребер, ведущая от A к X, такая, что каждые два соседних ребра имеют общую вершину, и никакое ребро не встречается более одного раза.</p>
+<p><strong>Циклом</strong> называется путь, в котором совпадают начальная и конечная точка (т.е. можно &#8220;ходить по циклу&#8221; &#8212; &#8220;ходить по кругу&#8221;).</p>
+<img alt="../_images/graph_cycle.png" src="../_images/graph_cycle.png" />
+<p><strong>Простым циклом</strong> называется цикл, не проходящий ни через одну из вершин графа более одного раза.</p>
+<p><strong>Длиной пути</strong>, проложенного на цикле, называется число ребер этого пути.</p>
+<p>Две вершины A и B в графе называются <strong>связными</strong> (<strong>несвязными</strong>), если в нем существует (не существует) путь, ведущий из A в B.</p>
+<p>Граф называется <strong>связным</strong>, если каждые две его вершины связны; если же в графе найдется хотя бы одна пара несвязных вершин, то граф называется несвязным.</p>
+<p>Специальным типом графов является <strong>дерево</strong>. В дереве выделяется особая вершина &#8212; <em>корень</em>, которая соединена рёбрами с другими вершинами &#8212; своими <em>потомками</em>, которые в свою очередь могут иметь своих потомков. Вершина, не имеющая потомков, называется <em>листом</em>. Наглядный пример дерева &#8212; иерархия файлов и папок в файловой системе компьютера или систематика живых организмов</p>
+<img alt="Файловая система" class="align-center" src="../_images/fs_tree.gif" />
+<p>Если не выделять особым образом корень, то дерево &#8212; это просто любой связный граф, не имеющий циклов.</p>
+</div>
+<div class="section" id="id7">
+<h2>Представление графов в памяти<a class="headerlink" href="#id7" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Чтобы решать задачи, связанные с графами, нужно сначала научиться сохранять его в памяти, а ещё лучше &#8212; сохранять оптимально. Существует несколько способов сделать это, и для каждой конкретной задачи оптимальным будет свой способ.</p>
+<div class="section" id="id8">
+<h3>Матрица смежности<a class="headerlink" href="#id8" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Самый простой способ сохранить граф в памяти &#8212; <em>матрица смежности</em>. Нарисуем таблицу, которая чем-то напоминает таблицу умножения: в первой строчке и в первом столбце будут стоять номера (или любые названия) вершин, а на пересечении столбца и строки будем ставить, например, 1 если между этими вершинами есть ребро и 0 если нет. Кроме 1 и 0 можно ставить, например, вес ребра, а для обозначения отсутствия ребра &#8212; просто очень большое число. Какой именно вариант использовать, зависит от каждой конкретной задачи. Также задача определяет, что ставить на диагонали получившейся матрицы.</p>
+<img alt="../_images/175px-6n-graph2.svg.png" class="align-center" src="../_images/175px-6n-graph2.svg.png" />
+<img alt="../_images/53e3bdee8fec62c1002ccb39c461b51e.png" class="align-center" src="../_images/53e3bdee8fec62c1002ccb39c461b51e.png" />
+<p>Матрица смежности элементарно реализуется в большинстве языков программирования, достаточно лишь объявить двумерный массив. Посмотрим, как сделать это на языке Python. В большинстве задач на тему &#8220;графы&#8221; формат входных данных описан так:</p>
+<blockquote>
+<div>В первой строке входного файла заданы числа <span class="math">\(N\)</span> и <span class="math">\(M\)</span> через пробел &#8212; количество вершин и рёбер в графе, соответственно (<span class="math">\(1 \le N \le 100\)</span>, <span class="math">\(0 \le M \le 10 000\)</span>). Следующие <span class="math">\(M\)</span> строк содержат по два числа <span class="math">\(u_i\)</span> и <span class="math">\(v_i\)</span> через пробел (<span class="math">\(1 \le u_i, v_i \le N\)</span>); каждая строка означает, что в графе существует ребро между вершинами <span class="math">\(u_i\)</span> и <span class="math">\(v_i\)</span>. Рёбра нумеруются в том порядке, в котором они даны во входном файле, начиная с единицы.</div></blockquote>
+<p>Напишем функцию, считывающую граф как матрицу смежности:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">load_adjacency_matrix</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Эта функция загружает из входного файла граф и возвращает его матрицу смежности (adjacency matrix)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c"># Сначала считываем количества вершин и рёбер</span>
+    <span class="n">vertices</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">()]</span>
+
+    <span class="c"># Создаём матрицу смежности (двумерный массив) и инициализируем её нулями</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">vertices</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vertices</span><span class="p">)]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">edges</span><span class="p">):</span>
+        <span class="c"># И считываем все рёбра. Вычитаем 1, так как массивы в Python нумеруются с нуля</span>
+        <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">()]</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c"># Если граф неориентированный, то надо добавить ребро в обратную сторону:</span>
+        <span class="c"># A[v][u] = 1</span>
+
+    <span class="c"># Последний шаг --- вернуть построенную матрицу</span>
+    <span class="k">return</span> <span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id9">
+<h3>Список смежности<a class="headerlink" href="#id9" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Этот способ тоже простой, но он значительно оптимальнее матрицы смежности во многих случаях. Для того, чтобы сохранить в памяти граф, заведём для каждой вершины свой список (для удобства все списки можно хранить в одном массиве), и в эти списки занесём номера вершин, в которые ведут рёбра из данной.</p>
+<p>Посмотрим, как это пишется на Python с тем же форматом входных данных:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">load_adjacency_list</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Эта функция загружает из входного файла граф и возвращает его списки смежности</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">vertices</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">()]</span>
+
+    <span class="c"># Создадим N пустых списков</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vertices</span><span class="p">)]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">edges</span><span class="p">):</span>
+        <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">()]</span>
+        <span class="c"># Запоминаем, что из вершины u можно попасть в v:</span>
+        <span class="n">L</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="c"># Если граф неориентированный:</span>
+        <span class="c"># L[v].append(u)</span>
+
+    <span class="c"># Возвращаем результат</span>
+    <span class="k">return</span> <span class="n">L</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id10">
+<h3>Другие способы<a class="headerlink" href="#id10" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Существуют и другие способы хранения графа в памяти, например, <em>матрица инцидентости</em>, которая удобна при использовании методов линейной алгебры в задачах на графах, или списки рёбер, но практическое применение в задачах обычно находят описанные выше два способа.</p>
+</div>
+</div>
+<div class="section" id="id11">
+<h2>Основные задачи теории графов<a class="headerlink" href="#id11" title="Ссылка на этот заголовок">¶</a></h2>
+<div class="section" id="id12">
+<h3>Обходы графа<a class="headerlink" href="#id12" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Часто требуется обойти все вершины графа в определённом порядке, например, для проверки его на связность или упорядочения задач при планировании (топологическая сортировка графа). Существует два стандартных метода обхода графа &#8212; <em>обход в глубину</em> и <em>обход в ширину</em>.</p>
+<div class="section" id="dfs">
+<h4>Обход в глубину (DFS)<a class="headerlink" href="#dfs" title="Ссылка на этот заголовок">¶</a></h4>
+<p>Обход в глубину можно описать так: представьте, что вы в лабиринте. Идите всегда прямо, а на всех развилках выбирайте самый левый путь. Упёршись в тупик, возвращайтесь обратно до последней развилки и выбирайте следующий путь слева. Продолжайте, пока не обойдёте весь лабиринт.</p>
+<p>Обычно алгоритм DFS реализуется с помощью списков смежности и рекурсии. Требуется лишь создать функцию <tt class="docutils literal"><span class="pre">dfs(v)</span></tt>, которая будет просматривать всех соседей вершины <tt class="docutils literal"><span class="pre">v</span></tt> и запускать себя для каждого из них. Единственное, что требуется, кроме этого &#8212; список уже посещённых вершин, иначе функция может войти в бесконечный цикл.</p>
+<p>Напишем функцию <tt class="docutils literal"><span class="pre">dfs</span></tt> на языке Python с использованием списков смежности:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Загрузка графа из файла (пример)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">load_adjacency_list</span><span class="p">()</span>
+
+<span class="c"># Создадим множество посещённых вершин, используя эффективную реализацию множеств в Python</span>
+<span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Эта функция рекурсивно обходит всех соседей вершины v</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c"># Если эта вершина уже посещена, ничего делать не нужно</span>
+    <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="c"># Запоминаем, что это вершина посещалась</span>
+    <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="c"># Здесь можно выполнять какую-либо полезную обработку вершины v, необходимую для решаемой задачи</span>
+
+    <span class="c"># Перебираем всех соседей вершины v --- элементы списка смежности g[v]</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">g</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+        <span class="c"># Запускаем функцию dfs для каждого соседа</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Теперь достаточно запустить обход из стартовой вершины. Например, так: <tt class="docutils literal"><span class="pre">dfs(0)</span></tt>.</p>
+</div>
+<div class="section" id="bfs">
+<h4>Обход в ширину (BFS)<a class="headerlink" href="#bfs" title="Ссылка на этот заголовок">¶</a></h4>
+<p>Обход в ширину можно наглядно представить себе так: в какой-то стартовой точке лабиринта разливается жидкость, и она начинает равномерно заполнять все его помещения, продвигаясь все дальше. При этом в каждый момент времени все точки края разливающейся воды находятся на одном расстоянии от начала.</p>
+<p>Этот обход, как и обход DFS, можно применять для поиска путей в графах. Основное его отличие в том, что поиск не уходит сразу далеко от начала, а продвигается вглубь графа постепенно, неким &#8220;фронтом&#8221;.</p>
+<p>Его реализация немного сложнее, чем DFS. Для этого нам понадобится такая структура данных, как <em>очередь</em>. Очередь, как видно из названия, моделирует обычную очередь в магазине. Обычно это список, в которой можно класть элементы с одной стороны, а забирать &#8212; с другой. Обход в ширину хранит в очереди вершины, которые еще предстоит просмотреть.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Загрузка графа</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">load_adjacency_list</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Эта функция обходит граф &quot;в ширину&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c"># Множество посещённых вершин</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="c"># Очередь посещаемых вершин. Изначально надо посетить первую вершину</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c"># Пока очередь не пуста:</span>
+    <span class="k">while</span> <span class="n">Q</span><span class="p">:</span>
+        <span class="c"># Достаем из очереди следующую вершину</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+            <span class="c"># Если эта вершина уже просматривалась, пропускаем её</span>
+            <span class="k">continue</span>
+
+        <span class="c"># Запоминаем, что эта вершина посещалась</span>
+        <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+        <span class="c"># Здесь можно обработать вершину v</span>
+
+        <span class="c"># Перебираем всех соседей вершины v и добавляем их в очередь</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">g</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+            <span class="n">Q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id13">
+<h3>Поиск кратчайших путей<a class="headerlink" href="#id13" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Очень часто требуется найти кратчайший путь между двумя вершинами во взвешенном графе. Очевидный пример &#8212; прокладка маршрута по карте. Для решения этой задачи существует большое количество алгоритмов, в числе которых алгоритм Флойда и алгоритм Дейкстры. Алгоритм Флойда является самым простым, но очень неоптимальным &#8212; его сложность <span class="math">\(O(n^3)\)</span>. Алгоритм Дейкстры быстрее (<span class="math">\(O(n^2)\)</span> или <span class="math">\(O(n \log n)\)</span>, в зависимости от реализации), но имеет некоторые ограничения.</p>
+<p>Рассмотрим самый простой алгоритм поиска пути &#8212; <em>алгоритм Флойда</em>. Его преимущества состоят в том, что он реализуется очень легко, может работать с рёбрами отрицательного веса и одновременно находит кратчайшие пути между всеми парами вершин. Алгоритм Флойда &#8212; один из немногих алгоритмов, которые лучше работают с матрицей смежности, чем со списками рёбер. Алгоритм последовательно изменяет матрицу смежности, превращая её в матрицу кратчайших путей &#8212; в каждой клетке матрицы остаётся длина (сумма весов) кратчайшего пути между соответствующей парой вершин. Условие работы алгоритма &#8212; если между какой-то парой вершинам нет ребра, в исходной матрице смежности в этой клетке должна стоять &#8220;бесконечность&#8221;, обычно это число, заведомо больше весов всех рёбер в данной задаче.</p>
+<p>Алгоритм устроен так: для каждой вершины графа, пусть её номер будет <span class="math">\(k\)</span>, просматриваются все пары вершин, пусть это <span class="math">\(i\)</span> и <span class="math">\(j\)</span>. Если сумма текущей известной длины пути из <span class="math">\(i\)</span> в <span class="math">\(k\)</span> и из <span class="math">\(k\)</span> в <span class="math">\(j\)</span> меньше, чем из <span class="math">\(i\)</span> в <span class="math">\(j\)</span>, то в клетке, соответствующей пути из <span class="math">\(i\)</span> в <span class="math">\(j\)</span>, запоминаем длину пути через <span class="math">\(k\)</span>, иначе ничего делать не требуется. Таким образом, алгоритм содержит три вложенных цикла, поэтому его сложность &#8212; <span class="math">\(O(n^3)\)</span>.</p>
+<p>Посмотрим, как реализовать этот алгоритм на Python:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Константа &quot;бесконечность&quot;</span>
+<span class="n">INF</span> <span class="o">=</span> <span class="mf">1e6</span>
+
+<span class="c"># Загружаем матрицу смежности. Не забудьте изменить функцию так, чтобы в пустых клетках матрицы стояла &quot;бесконечность&quot;, а не единица</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">load_adjacency_matrix_2</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">Floyd</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Эта функция превращает матрицу смежности A в матрицу кратчайших путей</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c"># Перебираем все вершины. vertices --- количество вершин в графе</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vertices</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vertices</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vertices</span><span class="p">):</span>
+                <span class="c"># Если путь из i в k плюс из k в j, короче, чем известный путь из i в j, запоминаем его</span>
+                <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]:</span>
+                    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Этот алгоритм легко дорабатывается для случая, когда надо получить не только длины кратчайших путей, но и сами пути. Такую модификацию стоит проделать самостоятельно.</p>
+<p>Алгоритм Дейкстры будет рассматриваться на зимней очной сессии.</p>
+</div>
+</div>
+<div class="section" id="id14">
+<h2>Другие задачи<a class="headerlink" href="#id14" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Другими классическими задачами теории графов являются, например, задача <em>топологической сортировки</em> и задача поиска <em>наименьшего остовного дерева</em>. Алгоритмы для решения этих задач также будут рассматриваться на зимней очной сессии.</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, Максим Кольцов, Денис Степулёнок.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

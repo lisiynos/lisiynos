@@ -1,44 +1,52 @@
 <html>
 <head>
-  <meta http-equiv=Content-Type content="text/html; charset=utf-8">
-  <title>Декартово дерево</title>
-  <link rel="stylesheet" type="text/css" href="../style/style.css">
-  <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
-  <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
-  <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
-  <script type="text/javascript" src="../syntax/sh_python.min.js"></script>
-  <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-  </script>
-  <script type="text/javascript"
-          src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  </script>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Декартово дерево</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_python.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
 </head>
 <body onLoad="sh_highlightDocument();">
 <div style="width:80%;">
-  <div style="float:right;">
-    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-            codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version
-=6,0,0,0" width="100" height="50">
-      <param name="movie"
-             value="../audio/a_smsqulh3n.swf">
-      <param name="bgcolor" value="fff">
-      <param
-          name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
-      <param
-          name="autoplay" value="false">
-      <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
-             width="100" height="70" type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
-    </object>
-  </div>
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100" height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70" type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
 </div>
 
-<div id="content" style="width:80%;">
-<div class="lesson">Сессия 6</div>
+<div id="content">
 <h1>Декартово дерево</h1>
+
+<p><strong>Декартово дерево</strong> — это двоичное дерево, в узлах которого хранятся: ссылки на правое и левое
+    поддерево, ссылка на родительский узел (необязательно), ключи <strong>x</strong> и <strong>y</strong>, которые
+    являются двоичным деревом поиска по ключу <strong>x</strong> и двоичной кучей по ключу <strong>y</strong>.
+    А именно, для любого узла дерева <strong>n</strong> ключи <strong>x</strong> узлов правого (левого) поддерева больше
+    (меньше либо равны) ключа <strong>x</strong> узла <strong>n</strong>, ключи y узлов правого и левого детей больше
+    либо равны ключу <strong>y</strong> узла <strong>n</strong>.</p>
+
+<p>Ссылка на родительский узел не обязательна, она желательна только для линейного алгоритма построения дерева. </p>
+
+<p><strong>Декартово дерево </strong>- это структура данных, объединяющая в себе бинарное дерево поиска и бинарную
+    кучу
+    (отсюда и второе её название: treap (tree+heap) и дерамида (дерево+пирамида).</p>
 
 <img src="structures/treap.png" width="1470" height="608">
 
@@ -267,9 +275,9 @@ end.
 <h3>Ссылки</h3>
 
 <ul>
-  <li><a href="http://ru.wikipedia.org/wiki/Декартово_дерево">Декартово дерево в Википедии</a></li>
-  <li><a href="http://habrahabr.ru/blogs/algorithm/101818/">Декартово дерево - статья на Хабрахабре</a></li>
-  <li><a href="http://e-maxx.ru/algo/treap">Реализация декартова дерева на C/C++</a></li>
+    <li><a href="http://ru.wikipedia.org/wiki/Декартово_дерево">Декартово дерево в Википедии</a></li>
+    <li><a href="http://habrahabr.ru/blogs/algorithm/101818/">Декартово дерево - статья на Хабрахабре</a></li>
+    <li><a href="http://e-maxx.ru/algo/treap">Реализация декартова дерева на C/C++</a></li>
 </ul>
 
 </div>

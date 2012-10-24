@@ -8,35 +8,37 @@
     <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+
+
     </script>
-    <script type="text/javascript"
-            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
 </head>
 <body onLoad="sh_highlightDocument();">
 <div style="width:80%;">
     <div style="float:right;">
         <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version
-=6,0,0,0" width="100" height="50">
-            <param name="movie"
-                   value="../audio/a_smsqulh3n.swf">
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100" height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
             <param name="bgcolor" value="fff">
-            <param
-                    name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
-            <param
-                    name="autoplay" value="false">
-            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
-                   width="100" height="70" type="application/x-shockwave-flash"
-                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+            <param name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff" width="100" height="70"
+                   type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"
                    FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
         </object>
     </div>
 </div>
 
-<div id="content" style="width:80%;">
+<div id="content">
 
 <h1>Дерево отрезков</h1>
+
+<ul class="tags">
+    <li><a href="#">Структуры данных</a></li>
+    <li><a href="#">Дерево отрезков</a></li>
+</ul>
 
 <h2>1. Постановка задачи</h2>
 
@@ -97,18 +99,14 @@
 
 <h2>3. Дерево отрезков </h2>
 
-<p>
-    Следующая мысль, которая приходит в голову, это то, что мы можем завести не
-    один вспомогательный уровень, а много. Каждый уровень будет служить для
-    уменьшения вычислений на уровне ниже. Для простоты реализации проще иметь
-    одинаковое число возможных переходов на каждом уровне. Таким образом, мы
-    приходим к дереву, из верхнего узла которого $x$ переходов, из каждого из
-    получившихся $x$ узлов также $x$ переходов, и так далее. На самом нижнем
-    уровне получается $x^{h}$ узлов, где $h$ - высота дерева, что должно быть
-    равно $n$. Отсюда $h = \log_{x}n$.
+<p> Следующая мысль, которая приходит в голову, это то, что мы можем завести не один вспомогательный уровень, а много.
+    Каждый уровень будет служить для уменьшения вычислений на уровне ниже. Для простоты реализации проще иметь
+    одинаковое число возможных переходов на каждом уровне. Таким образом, мы приходим к дереву, из верхнего узла
+    которого $x$ переходов, из каждого из получившихся $x$ узлов также $x$ переходов, и так далее. На самом нижнем
+    уровне получается $x^{h}$ узлов, где $h$ - высота дерева, что должно быть равно $n$. Отсюда $h = \log_{x}n$.
 </p>
 
-<div align="center">
+<div class="picture">
     <img src="segments_tree/2.png"><br>Рисунок 1
 </div>
 

@@ -1,0 +1,1088 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Переход с Pascal на Delphi</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_basic.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100"
+                height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70" type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+<div id="content">
+
+<h1>Отличия Turbo (Borland) Pascal и Delphi</h1>
+
+<ul class="tags">
+    <li><a href="#">Delphi</a></li>
+</ul>
+
+<h2>Компиляция программ на Delphi из командной строки</h2>
+
+<p>В Delphi основной модуль программы имеет расширение <strong>.dpr</strong> (сокращение от <strong>D</strong>elphi
+    <strong>Pr</strong>oject). Создадим в любом текстовом редакторе файл <strong>hw.dpr</strong> и напишем в нём
+    следующий
+    текст программы:</p>
+<pre class="sh_pascal">
+{$APPTYPE CONSOLE}
+
+begin
+  writeln('Hello, world!');
+end.</pre>
+
+<p><strong>{$APPTYPE CONSOLE}</strong> в заголовке файла означает что программа будет консольной (а не оконным
+    приложением Windows).</p>
+
+<p>Чтобы откомпилировать программу, в командной строке наберите: <strong>dcc32 hw.dpr</strong>, компиоятор создаст
+    исполняемый файл <strong>hw.exe</strong> или выдаст сообщения об ошибках если они есть.</p>
+
+<pre class="console">
+<span class="cmd">$dcc32 hw.dpr</span>
+Embarcadero Delphi for Win32 compiler version 22.0
+Copyright (c) 1983,2010 Embarcadero Technologies, Inc.
+hw.dpr(5)
+6 lines, 0.02 seconds, 15516 bytes code, 13108 bytes data.
+
+<span class="cmd">$hw.exe</span>
+Hello, world!
+</pre>
+
+<iframe title="YouTube video player" width="480" height="390" src="http://www.youtube.com/embed/xmMSi9_qNn0?rel=0"
+        ></iframe>
+
+<p>&nbsp;</p>
+
+<h2>Типы данных в Delphi</h2>
+
+<p>При помощи следующей несложной программы можно изучить целочисленные и действительные типы данных в Delphi (сохранять
+    текст надо в кодировке cp866!). </p>
+
+<pre class="sh_pascal">
+{$APPTYPE CONSOLE}
+
+uses Math;
+begin
+  writeln('Тип данных   Размер в байтах   Нижняя граница..Верхняя граница');
+  writeln('Целые типы:');
+  writeln('  Byte: ',SizeOf(Byte),'  ',Low(Byte),'..',High(Byte));
+  writeln('  ShortInt: ',SizeOf(ShortInt),'  ',Low(ShortInt),'..',High(ShortInt));
+  writeln('  Word: ',SizeOf(Word),'  ',Low(Word),'..',High(Word));
+  writeln('  SmallInt: ',SizeOf(SmallInt),'  ',Low(SmallInt),'..',High(SmallInt));
+  writeln('  LongWord: ',SizeOf(LongWord),'  ',Low(LongWord),'..',High(LongWord));
+  writeln('  Cardinal: ',SizeOf(Cardinal),'  ',Low(Cardinal),'..',High(Cardinal));
+  writeln('  Integer: ',SizeOf(Integer),'  ',Low(Integer),'..',High(Integer),'=',MaxInt);
+  writeln('  Longint: ',SizeOf(Longint),'  ',Low(Longint),'..',High(Longint));
+  writeln('  Int64: ',SizeOf(Int64),'  ',Low(Int64),'..',High(Int64));
+  writeln('Comp выводится как вещественный, хотя хранить может только целые числа');
+  writeln('  Comp: ',SizeOf(Comp),'  ',MinComp,'..',MaxComp);
+  writeln('Вещественные типы');
+  writeln('  Single: ',SizeOf(Single),'  ',MinSingle,'..',MaxSingle);
+  writeln('  Double: ',SizeOf(Double),'  ',MinDouble,'..',MaxDouble);
+  writeln('  Extended: ',SizeOf(Extended),'  ',MinExtended,'..',MaxExtended);
+end.</pre>
+
+<p>Вывод программы:</p>
+
+<pre class="console">
+Тип данных   Размер в байтах   Нижняя граница..Верхняя граница
+Целые типы:
+  Byte: 1  0..255
+  ShortInt: 1  -128..127
+  Word: 2  0..65535
+  SmallInt: 2  -32768..32767
+  LongWord: 4  0..4294967295
+  Cardinal: 4  0..4294967295
+  Integer: 4  -2147483648..2147483647=2147483647
+  Longint: 4  -2147483648..2147483647
+  Int64: 8  -9223372036854775808..9223372036854775807
+Comp выводится как вещественный, хотя хранить может только целые числа
+  Comp: 8  -9.22337203685478E+0018.. 9.22337203685478E+0018
+Вещественные типы
+  Single: 4   1.50000000000000E-0045.. 3.40000000000000E+0038
+  Double: 8   5.00000000000000E-0324.. 1.70000000000000E+0308
+  Extended: 10   3.40000000000000E-4932.. 1.10000000000000E+4932</pre>
+
+<h2>Форматированный вывод</h2>
+
+<p> С помощью функции <strong>Format </strong>(из модуля SysUtils) можно форматировать простые типы данных в строке (как
+    функция printf в C). Первый параметр: строка <strong>Formatting</strong> определяет, как
+    массив <strong>Data</strong> (второй
+    параметр) будет отформатирован. <br>
+    <br>
+    Форматируемая cтрока может включать обычные символы (которые передаются неизменными в строку результата), и символы
+    форматирования данных, которые начинаются с <strong>%</strong> и заканчиваются индикатором типа данных: </p>
+<ul>
+    <li><strong>d</strong> = Десятичное (целое число)<br>
+    </li>
+    <li><strong>e</strong> = Научный (экспоненциальный)<br>
+    </li>
+    <li><strong>f</strong> = С фиксированной точкой<br>
+    </li>
+    <li><strong>g</strong> = Основной формат (обрезание незначащих нулей в конце)<br>
+    </li>
+    <li><strong>m</strong> = Деньги<br>
+    </li>
+    <li><strong>n</strong> = Действительное число (с плавающей точкой)<br>
+    </li>
+    <li><strong>p</strong> = Указатель<br>
+    </li>
+    <li><strong>s</strong> = Строка<br>
+    </li>
+    <li><strong>u</strong> = Десятичное число без знака<br>
+    </li>
+    <li><strong>x</strong> = Шестнадцатеричный</li>
+</ul>
+<p>
+    Общий формат форматирования каждой подстроки следующий: <br>
+    <br>
+    <strong>%[Index:][-][Width][.Precision]Type</strong> <br>
+    <br>
+    где квадратные скобки относятся к дополнительным параметрам, и :. - символы - литералы, первые 2 из которых
+    используются, чтобы идентифицировать два из дополнительных параметров. 
+</p>
+
+<pre class="sh_pascal">{$APPTYPE CONSOLE}
+uses SysUtils;
+
+var text : string;
+begin
+  Writeln(Format('%s', ['Hello'])); { Вывод: Hello }
+
+  { Соединение символьного текста и элемента данных }
+  Writeln(Format('String = "%s"', ['Hello'])); { String = "Hello" }
+
+  { Примеры каждого из типов данных }
+  Writeln(Format('Decimal = %d', [-123]));  { Decimal = -123 }
+  Writeln(Format('Exponent = %e', [12345.678])); { Exponent = 1,23456780000000E+004 }
+  Writeln(Format('Fixed = %f', [12345.678])); { Fixed = 12345,68 }
+  Writeln(Format('General = %g', [12345.678])); { General = 12345,678 }
+  Writeln(Format('Number = %n', [12345.678])); { Number = 12 345,68 }
+  Writeln(Format('Money = %m', [12345.678])); { Money = 12 345,68р. }
+  Writeln(Format('Pointer = %p', [addr(text)])); { Pointer = 00417E78 }
+  Writeln(Format('String = %s', ['Hello'])); { String = Hello }
+  Writeln(Format('Unsigned decimal = %u', [123])); { Unsigned decimal = 123 }
+  Writeln(Format('Hexadecimal = %x', [140])); { Hexadecimal = 8C }  
+  DecimalSeparator := '|'; { Показ с новым символом десятичной точки }  
+  ThousandSeparator := '_'; { Показ с новым разделителем тысяч }
+  Writeln(Format('Number = %n', [12345.678])); { Number = 12_345|68 }
+
+  { Используя выравнивание в колонке (ширина колонки) и значения точности }
+  { Символы '<>' используются, чтобы выделить форматирование }
+  Writeln(Format('Padded decimal = <%7d>', [1234])); { Padded decimal = <   1234> }
+  { С отрицательной шириной выравнивание влево }
+  Writeln(Format('Justified decimal = <%-7d>', [1234])); { Justified decimal = <1234   > }
+
+  { Если указать '.' то число будет дополнено '0' до заданной длины }
+  Writeln(Format('0 padded decimal  = <%.6d>', [1234])); { 0 padded decimal  = <001234> }
+
+  { Комбинация ширины и дополнения. Сначала ширина, потом дополнение }
+  Writeln(Format('Width + precision = <%8.6d>', [1234])); { Width + precision = <  001234> }
+
+  { Индекс позволяет менять порядок вывода (например, несколько раз выводить одну строку) }
+  Writeln(Format('Reposition after 3 strings = %s %s %s %1:s %s',['Zero', 'One', 'Two', 'Three']));
+  { Reposition after 3 strings = Zero One Two One Two }
+
+  { Обратите внимание, испытание показало, что * для параметра ширины может привести к ECONVERTERROR. }
+  Writeln(Format('In line = <%10.4d>', [1234]));  { In line = <      1234> }
+  Writeln(Format('Part data driven  = <%*.4d>', [10, 1234])); { Part data driven = <      1234> }
+  Writeln(Format('Data driven = <%*.*d>', [10, 4, 1234]));  { Data driven = <      1234> }
+end.</pre>
+<h2>Отличия Object и Class</h2>
+
+<ul>
+    <li>Вместо ключевого слова Object лучше использовать Class, хотя Object также доступен. Object ведёт себя как Record
+        с
+        методами (копируется целиком, например)
+    </li>
+    <li>Все классы являются порождены от TObject, т.е. являются наследниками TObject (TObject – абстрактный класс). См.
+        далее наследование
+    </li>
+    <li>Free – метод для уничтожения экземпляра класса (очистки памяти). Определён в базовом классе
+        <strong>TObject</strong>, который прежде проверяет, был ли обьект создан (равен ли указатель
+        <strong>nil</strong>) и
+        только потом вызывает метод Destroy. Если обьект не был создан конструктором, то обращение к деструктору,
+        приведет к
+        генерации исключительной ситуации. Для уничтожения обьекта удобнее использовать метод Free, например:
+        MyObject.Free;
+    </li>
+    <li>Зарезервированные имена конструкторов и деструкторов: Constructor Create, Destructor Destroy (как в Паскале)
+    </li>
+    <li>Любая переменная - экземляр класса – это указатель!</li>
+</ul>
+
+
+<pre class="sh_pascal">
+type
+  TClass = class
+    Proc1 : Integer; { Объявление поля }
+  end;
+
+var VClass : TClass;
+begin
+  VClass := TClass.Create({параметры (может не быть)});
+  VClass.Proc1 := 1; { обращение к полю без «^» }
+  VClass.Free; { Очищаем память после всех обращений к полям }
+end.</pre>
+
+<pre class="sh_pascal">
+  { Пример демонстрирует отличия Object и Class }
+  {$APPTYPE CONSOLE}  { Консольное приложение Delphi } 
+
+  uses SysUtils;
+
+  type
+    Number = integer; { Задаём тип для всех чисел в программе }
+    { Один раз определив тип Number будем дальше его использовать во всей программе }
+    { Объявление класса }
+    MyClass = class { Неявно унаследован от (TObject) }
+      x,y : Number;
+      constructor Create( ix : Number ); { Конструктор Create }
+      destructor Free; { Деструктор Free (в Pascal он назывался Destroy) }
+      function MyMethod : Number;
+    end;
+    { Объявление типа данных object }
+    MyObject = object { Расширенный record }
+      x,y : Number;
+      function MyMethod : Number;
+    end;
+
+  constructor MyClass.Create; { Конструктор }
+  begin
+    x := ix;
+    y := 0;
+  end;
+
+  destructor MyClass.Free; { Деструктор }
+  begin
+    writeln('Free');
+  end;
+
+  { Методы объявляются одинаково! }
+  function MyClass.MyMethod : Number;
+  begin
+    Result := x*y;
+  end;
+
+  function MyObject.MyMethod : Number;
+  begin
+    Result := x*y;
+  end;
+
+  { Эмуляция присваивания классов на объектах }
+  procedure SimulateClassesByPointers;
+  var Ap,Bp : ^MyObject; { 2 указателя на объект }
+  begin
+    new(Ap); new(Bp); { Завели в динамической памяти }
+    Bp := Ap; { Теперь Bp указывает на то же, на что и Ap }
+    Ap.x := 20; { Изменили поле в Ap, изменилось поле и в Bp }
+    writeln('A = ',Ap.x,' B = ',Bp.x); { A = 20 B = 20 }
+  end;
+
+  var
+    Ac,Bc : MyClass; { 2 переменные - экземпляры класса }
+    Ao,Bo : MyObject; { 2 объекта }
+  begin
+    Ac := MyClass.Create(1);
+    Bc := Ac;
+    Ac.x := 3;
+    writeln('A = ',Ac.x,' B = ',Bc.x); { A = 3 B = 3 }
+    Bc.x := 9;
+    writeln('A = ',Ac.x,' B = ',Bc.x); { A = 9 B = 9 }
+    Bo := Ao;
+    Ao.x := 3;
+    writeln('A = ',Ao.x,' B = ',Bo.x); { A = 3 B = 0 }
+    Bo.x := 9;
+    writeln('A = ',Ao.x,' B = ',Bo.x); { A = 3 B = 9 }
+    SimulateClassesByPointers;
+    Ac.Free;
+    readln; // Ожидаем нажатия Enter - пауза в конце программы
+  end.
+</pre>
+
+<h2>Использование свойств (property), Public, Private</h2>
+
+<p>Поля <strong><em>property</em></strong><em> – </em>свойства<br/> Описание:<br/> <strong><em>Property</em></strong>
+    <span style="text-decoration: underline;">идентификатор</span> <strong>:</strong> <span
+            style="text-decoration: underline;">тип данных</span> <strong><em>read</em></strong> <cite>имя метода или
+        поля</cite>
+    <strong><em>write</em></strong> <cite>имя метода или поля</cite><br/> Если читаем – <strong><em>read</em></strong>,
+    если
+    пишем <strong><em>write</em></strong></p>
+
+
+<pre class="sh_pascal">
+{$APPTYPE CONSOLE}
+
+uses SysUtils;
+
+type { Класс "Квадрат" }
+  Square = class
+  private { Доступны только внутри класса Square }
+    function GetArea : real;
+    procedure SetArea( V : real );
+  public { Доступны извне класса }
+    { Сторона квадрата }
+    Side : Real;
+    { Площадь квадрата }
+    property Area : real Read GetArea Write SetArea;
+    { property ИМЯ_СВОЙСТА : ТИП }
+    {   Read ФУНКЦИЯ_ИЛИ_ПЕРЕМЕННАЯ_ДЛЯ_ЧТЕНИЯ }
+    {   Write ПРОЦЕДУРА_ИЛИ_ПЕРЕМЕННАЯ_ДЛЯ_ИЗМЕНЕНИЯ }
+    property Side2 : real Read Side Write Side;
+  end;
+
+procedure Square.SetArea( V : real );
+begin
+  Side := sqrt(V);
+end;
+
+function Square.GetArea : real;
+begin
+  Result := Side * Side;
+end;
+
+var A : Square; { A - экземпляр класса "Квадрат" }
+begin
+  A := Square.Create;
+  A.Side := 2;
+  writeln(A.Side:0:1,' ',A.Area:0:1);
+  A.Area := 9;
+  writeln(A.Side:0:1,' ',A.Area:0:1);
+  readln;
+end.
+</pre>
+
+<h2>Пример наследования (правила наследования)</h2>
+
+<p>Правила наследования<br/>
+    <strong><em>Public</em></strong><strong><em>, </em></strong><strong><em>Private</em></strong><strong><em>, </em></strong><strong><em>Protected</em></strong><strong></strong><br/>
+    По-умолчанию <strong><em>Public</em></strong> – открыт доступ для всех.<br/> <strong><em>Private</em></strong> –
+    видит
+    только <em>class</em> и потомки, другие классы, функции (вся остальная программа) не увидят</p>
+
+
+<pre class="sh_pascal">
+  {$APPTYPE CONSOLE}
+
+  uses SysUtils;
+
+  type
+    { Parent - Надкласс (SuperClass) по отношению к Sun }
+    Parent = class
+      X : integer;
+      { Виртуальный деструктор }
+      destructor Free; virtual;
+    end;
+    { Sun - Подкласс (SubClass) по отношению к Parent }
+    Sun = class(Parent)
+      Y : integer;
+      { overload - перезагрузка метода }
+      { Описывает новый метод (с новыми параметрами) => используем overload }
+      constructor Create; overload;
+      constructor Create( X,Y : integer ); overload;
+      { Перекрытие деструктора }
+      destructor Free; override;
+    end;
+    { У Sun будут свойства и X и Y }
+
+  constructor Sun.Create;
+  begin
+    writeln('constructor #1');
+  end;
+
+  constructor Sun.Create( X,Y : integer );
+  begin
+    writeln('constructor #2');
+    { Для различения переменных и полей используется Self }
+    Self.X := X;
+    Self.Y := Y;
+  end;
+
+  destructor Parent.Free;
+  begin
+    writeln('Parent.Free');
+  end;
+
+  destructor Sun.Free;
+  begin
+    writeln('Sun.Free');
+  end;
+
+  var
+    S : Sun;
+    A : array [1..3] of Parent;
+  begin
+    S := Sun.Create; { Создаём экземпляр класса Sun }
+    S.X := 1;  S.Y := 2; { У него есть оба поля, и X и Y }
+    { В одном массиве могут быть экземпляры разных классов но с ОДНИМ общим предком }
+    A[1] := Parent.Create;  A[2] := Parent.Create;  A[3] := Sun.Create;
+  end.</pre>
+
+<h2>Виртуальные методы, перекрытия. Override, Overload</h2>
+
+<p><strong><em>Virtual, Dynamic</em></strong> - означают что методы могут перекрываться.
+    <strong><em>Dynamiс</em></strong> – таблица хранится для класса, а в объекте только ссылка на класс, экономит
+    память.
+    <strong><em>Virtual</em></strong> - экономит время.
+</p>
+
+<pre class="sh_pascal">
+  {$APPTYPE CONSOLE}
+
+  uses SysUtils;
+
+  type
+    Shape = class
+      procedure Draw; virtual; // Только виртуальный метод может быть перекрыт (Override)
+    end;
+    Square = class(Shape)
+      procedure Draw; override; // Перекрытие
+    end;
+    Circle = class(Shape)
+      procedure Draw; override; // Перекрытие
+    end;
+    Text3D = class(Shape)
+      procedure Draw; override; // Перекрытие
+    end;
+
+  procedure Shape.Draw;
+  begin
+    writeln('Shape.Draw');
+  end;
+
+  procedure Square.Draw;
+  begin
+    writeln('Square.Draw');
+  end;
+
+  procedure Circle.Draw;
+  begin
+    writeln('Circle.Draw');
+  end;
+
+  procedure Text3D.Draw;
+  begin
+    writeln('Text3D.Draw');
+  end;
+
+  var
+    A : array [1..3] of Shape; // Массив фигур
+    i : integer; // Переменная цикла
+  begin
+    // Создаём 3 объекта разных типов, но помещаем их в один массив
+    A[1] := Square.Create;   A[2] := Circle.Create;   A[3] := Text3D.Create;
+    // Пробегаем в цикле все элементы массива и вызываем для каждого метод Draw
+    for i := low(A) to high(A) do
+      A[i].Draw;
+      { Будет выведено: Square.Draw  Circle.Draw  Text3D.Draw, т.е.
+        для каждого элемента массива был вызыван свой Draw в соответствии с его типом }
+    Readln; { Пауза в конце программы, ожидание нажания Enter }
+  end.
+</pre>
+
+<pre class="sh_pascal">
+  type
+    A = class
+      procedure Method; virtual; abstract; { Абстрактный метод - при вызове - ошибка! }
+    end;
+    B = class(A) { B - наследник A }
+      procedure Method; override; { Перекрываем абстрактный A.Method }
+    end;
+    C = class(B) { C - наследник В }
+      procedure Method; reintroduce; { Перевведение (противоположно override) }
+        { Из-за reintroduce C.Method не связан с Method в предках! }
+    end;
+
+  procedure B.Method;
+  begin
+    Writeln('B.Method');
+  end;
+
+  procedure C.Method;
+  begin
+    Writeln('C.Method');
+  end;
+
+  var V : A;
+  begin
+    V := B.Create; V.Method; { Нормально выводится: B.Method }
+    V := C.Create; V.Method; { Выводится: B.Method, хотя в C тоже есть Method }
+    V := A.Create; { В Delphi экземпляр класса с абстрактным методом создать можно }
+    { Попытаемся вызвать абстрактный метод! }
+    V.Method; { ОШИБКА: Exception class EAbstractError with message 'Abstract Error' }
+  end.
+</pre>
+
+<h2>Визуальные компоненты и свойства</h2>
+
+<ul>
+    <li><b>Caption</b> (string) - "заголовок" на компоненте, его можно менять в ходе работы программы</li>
+    <li><b>Name</b> (string) - идентификатор компонента (следует правилам написания идентификаторов)</li>
+    <li><b>Visible</b> (Boolean) - видимость компонента (true - видимый, false - невидимый)</li>
+</ul>
+
+<pre class="sh_pascal">
+  procedure TForm1.FormCreate(Sender: TObject);
+  begin
+    { Исключение, у Font свойство Name это не имя компонента, а название шрифта! }
+    Font.Name := 'Times New Roman'; { Вся форма шрифтом Times New Roman }
+    { Свойство Style: Разрешить жирный шрифт Bold }
+    Font.Style := [fsBold]; { пишется в [] - т.к. множество (set) }
+    Font.Style := [fsBold,fsItalic]; { Жирный наклонный шрифт }
+    Font.Style := [fsUnderline]; { Подчёркнутый шрифт }
+    Font.Style := []; { Обычный шрифт }
+  end;
+</pre>
+
+<p>Пример обработки изображений</p>
+
+
+<h2>Связь между размерами компонентов и размерами формы</h2>
+
+<p>Свойство Align – прижимает объект к краям внутри родительского компонента (формы или панели), представим себе, что у
+    нас есть надпись (TLabel) Label1</p>
+
+<pre class="sh_pascal">
+  procedure TForm1.FormCreate(Sender: TObject);
+  begin
+    Label1.Align := alTop; { Метка заполняет верхнюю часть (прижата к верху формы) }
+    Label1.Align := alBottom; { нижнюю часть }
+    Label1.Align := alLeft; { левую часть }
+    Label1.Align := alRight; { правую часть }
+    Label1.Align := alClient; { всё свободное пространство }
+    Label1.Align := alNone; { не прижимать, объект размещается в координатах как вы его и поставили в редакторе }
+  end;
+</pre>
+
+<p>Свойство Anchor (якорь) – привязка по расстоянию до краёв</p>
+
+<pre class="sh_pascal">
+  procedure TForm7.FormCreate(Sender: TObject);
+  begin
+    Label1.Anchors := [akLeft,akTop]; { Сохранять расстояние до края сверху и слева }
+    Label1.Anchors := [akRight,akBottom]; { Сохранять расстояние до правого края и низа }
+    Label1.Anchors := [akLeft,akTop,akRight]; { Растягиваться вместе с формой по ширине }
+    Label1.Anchors := [akLeft,akTop,akBottom]; { Растягиваться вместе с формой по высоте }
+    { Растягиваться вместе с формой по обоим направлениям (всё в True) }
+    { Обычно используется только для одного центрального компонента формы! }
+    Label1.Anchors := [akLeft,akTop,akRight,akBottom];
+  end;
+</pre>
+
+<h2>Изменения и дополнения в стандартных типах данных</h2>
+
+<ul>
+    <li>Целочисленные данные:
+        <ul>
+            <li>Byte – нет изменений</li>
+            <li>Теперь Integer = Longint – 4 байта со знаком (-2147483648..2147483647)</li>
+            <li>Новый тип int64 - 8 байт со знаком (-9223372036854775808..9223372036854775807)</li>
+        </ul>
+    </li>
+    <li>Остальные:
+        <ul>
+            <li>Char – остался, но изменилась кодовая таблица (в DOS была ASCII - cp866, теперь ASCII win1251 до 2007 и
+                Unicode после)
+            </li>
+            <li>Class – указатель, Object – структура</li>
+        </ul>
+    </li>
+</ul>
+
+<p>Массивы: SetLength, Finalize </p>
+
+<p>Динамические массивы в Delphi можно описывать без размера:
+    <strong>Имя_переменной</strong> : array of <strong>тип_данных</strong>;
+</p>
+
+<p>Может быть динамический массив из динамических массивов:
+    <strong>Имя_переменной</strong> : array of array of <strong>тип_данных</strong>;
+</p>
+
+<p>Имя – это указатель.</p>
+
+<p>После объявления массива в var инициализируем (задавая длину):
+
+<p>SetLength(Имя_переменной, размер);</p>
+
+<pre class="sh_pascal">
+var ArByte : array of byte; { ArByte – это указатель }
+begin
+  SetLength(ArByte, 5); { Для данного массива индексы от 0 до 4 }
+  ArByte[0] := 23;
+  { Почему: SetLenght вызывать два раза нельзя, т.е. менять размер массива в процессе работы нельзя?? }
+  SetLength(ArByte, 3); { Изменяем размер массива! }
+  Writeln(ArByte[0]); { Печатает 23 }
+  ArByte := nil; { Избавляемся от массива }
+  Finalize(ArByte); { Или так }
+end.
+</pre>
+
+<pre class="sh_pascal">
+{ Двумерные динамические массивы }
+var Arr2byte: array of array of byte;
+begin
+  SetLength(Arr2byte,2); { Задаём количество строк!!! }
+  SetLength(Arr2byte[0], 5); { 1–ая строка содержит 5 эл. }
+  SetLength(Arr2byte[1], 4); { 2–ая строка содержит 4 эл. }
+  { Освобождаем в обратном порядке: сначала строки, а потом весь массив }
+  Finalize(Arr2byte[0]);
+  Finalize(Arr2byte[1]);
+  Finalize(Arr2byte);
+end.
+</pre>
+
+<h2>Строки в Delphi</h2>
+<pre>String =&gt; ShortString</pre>
+<pre>String[ N ] =&gt; String [ N ]</pre>
+<p> В Delphi <strong>String</strong> – это array of char, т.е. нет ограничений на её длину как в Паскале (в Pascal
+    максимальная длина строки - 255 символов).</p>
+<pre>«0» - ая ячейка ничего не хранит</pre>
+<pre>WideString  - это array of widechar</pre>
+<pre>  Занимает 2 байта (char – 1 байт)</pre>
+<pre>PСhar – при обращении к f- м ОС (API)</pre>
+<pre>Должен быть длиннее Pchar,</pre>
+<pre>В нашем «0» - конец строки</pre>
+Также и  в string – последний символ «0»
+<p><strong>Преобразование</strong></p>
+
+<pre class="sh_pascal">
+{ В Delphi - PChar = ^array of char; }
+{ Char - Unicode с 2009-ой версии Delphi, до этого ANSI }
+
+procedure CopyPChar( var dest : array of char; source : PChar; Count : Integer );
+var i : integer;
+begin
+  for i := 0 to Count-1 do begin
+    dest[i] := source[i];
+    if source[i] = #0 then exit;
+  end;
+end;
+
+var
+  ArrChar : array [0..255] of char;
+  VPChar : PChar;
+  Str : string = 'Hello!';
+begin
+  VPChar := ArrChar; { Теперь VPChar ссылается на ArrChar }
+  ArrChar[0] := 'T';
+  ArrChar[1] := 'E';
+  ArrChar[2] := 'S';
+  ArrChar[3] := 'T';
+  ArrChar[4] := #0;
+  Writeln(VPChar); { Печатает 'TEST' }
+  Writeln(ArrChar); { Печатает 'TEST' }
+
+  VPChar := PChar(Str); { Получаем из string PChar }
+  Writeln('VPChar = ',VPChar); { Печатает Hello! }
+  Str := VPChar; { Обратный перевод из PChar в string - автоматически! }
+  Writeln('Str = ',Str); { Печатает Hello! }
+  { Arrchar := VPChar; }{ Нельзя присвоить! Несовместимые типы Array of Char и PChar }
+  CopyPChar(ArrChar, VPChar, 255); { Можно копировать, 255 – копировать не более 255 символов }
+  Writeln(ArrChar); { Печатает Hello! }
+end.</pre>
+
+<h2>Работа с файлами в Delphi</h2>
+
+<p>Запись в текстовый файл.</p>
+
+<pre class="sh_pascal">
+var
+  T : TextFile; { Вместо Text =&gt; TextFile }
+begin
+  AssignFile(T,'MyFile.txt'); { Вместо Assign =&gt; AssignFile }
+  Rewrite(T); { так же как в Pascal }
+  Writeln(T,'Hello world!'); { так же }
+  CloseFile(T); { Вместо Close =&gt; CloseFile }
+end.  </pre>
+
+<p>Показать все файлы находящиеся в заданном каталоге.</p>
+
+<pre class="sh_pascal">
+procedure ShowDir; { Показать все файлы или каталоги }
+var SR: TSearchRec; { Запись для хранения временных данных при поиске файлов }
+begin
+  { FindFirst задаёт параметры поиска и ищет первую подходящую запись в каталоге }
+  { Параметры FindFirst: }
+  {   1. Строка - Шаблон поиска }
+  {   2. Аттрибуты для поиска: }
+  {     faAnyFile - Файлы и каталоги, faReadOnly - Файлы только для чтения }
+  {     faHidden - Скрытые файлы, faSysFile - Системные файлы }
+  {     faVolumeID - Файлы идентификаторы размера }
+  {     faDirectory - Каталоги, faArchive - Архивные файлы }
+  {   3. Запись для поиска }
+  if FindFirst('C:\Program Files\*.*', faAnyFile, SR) = 0 then
+    repeat
+      if SR.Attr and faDirectory <> 0 then { Если это каталог }
+        Write('Directory: ')
+      else { Иначе это файл }
+        Write('File: ');
+      Writeln(SR.Name);
+    until FindNext(SR) <> 0;
+  FindClose(SR); { После FindFirst, FindNext  вызвать FindClose } 
+end;</pre>
+
+<h2>Процедуры и функции в Delphi</h2>
+
+<p><b>External</b> - после заголовка Procedure пишем external (директива) –
+    которая обозначает, что процедура не описывается в программе, а берется в другой DLL. '
+    Например: procedure MyProcedure; external 'MyDLL.DLL';.
+</p>
+
+<p><b>Forward</b> - при объявлении процедуры, которая будет описана ниже.</p>
+
+<p><strong>Передача параметров в процедуру (cоглашения по вызовам):</strong></p>
+<table width="873" border="1">
+    <tbody>
+    <tr>
+        <td width="208"><p>Директива</p></td>
+        <td width="167"><p>Порядок передачи параметров</p></td>
+        <td width="197"><p>Где очищается стек</p></td>
+        <td width="246"><p>Передача параметров через регистры процессора</p></td>
+    </tr>
+    <tr>
+        <td><p><strong>Register</strong></p></td>
+        <td><p>Слева-направо</p></td>
+        <td><p>В подпрограмме</p></td>
+        <td><p>Да</p></td>
+    </tr>
+    <tr>
+        <td><p><strong>Pascal</strong></p></td>
+        <td><p>Слева-направо</p></td>
+        <td><p>В подпрограмме</p></td>
+        <td><p>Нет</p></td>
+    </tr>
+    <tr>
+        <td><p><strong>Cdecl</strong></p></td>
+        <td><p>Справа-налево</p></td>
+        <td><p>В вызывающей программе</p></td>
+        <td><p>Нет</p></td>
+    </tr>
+    <tr>
+        <td><p><strong>StdCall </strong>(стандартный вызов)</p></td>
+        <td><p>Справа-налево</p></td>
+        <td><p>В подпрограмме</p></td>
+        <td><p>Нет</p></td>
+    </tr>
+    <tr>
+        <td><p><strong>Safecall</strong></p></td>
+        <td><p>Справа-налево</p></td>
+        <td><p>В подпрограмме</p></td>
+        <td><p>Нет</p></td>
+    </tr>
+    </tbody>
+</table>
+<p> Использование соглашения по вызовам <strong>register </strong>наиболее эффективно, так как обычно позволяет избежать
+    создания стекового фрейма при вызове подпрограммы. </p>
+
+<h2>Библиотеки в Delphi</h2>
+
+<h3>Стандартные Unit</h3>
+
+<p>Имя Unit ?НЕ? может не совпадать с именем файла, где он хранится ??? .</p>
+
+<pre class="sh_pascal">
+{ Обычно пишем }
+unit Unit7;
+
+interface { Обьявление экспортируемых функций }
+
+  { Внешние функции }
+  function Sqr( I:Double ):Double;
+
+implementation
+
+  function Sqr( I:Double ):Double;
+  begin
+    Sqr := I*I;
+  end;
+
+initialization { не обязателен }
+  Writeln('Тут пишутся те операторы которые выполняются при');
+  Writeln('запуске программы (когда подключается модуль)');
+
+finalization
+{  может отсутствовать }
+  Writeln('Операторы, которые выполняются всегда при закрытии программы');
+  Writeln('Тут можно написать много строк');
+
+end.</pre>
+
+<h3>Динамические подключаемые библиотеки (DLL)</h3>
+
+<pre class="sh_pascal">
+  { Заголовок библиотеки }
+  library MyLib; { имя библиотеки }
+   { имя должно совпадать с именем файла где хранится - MyLib.dpr }
+
+  { DLL - не входит в проект, это законченная программа }
+  { Программа и DLL могут быть написаны на разных языках }
+
+  uses
+    SysUtils,
+    Classes;
+
+  { Локальные типы данных и функции не видны! }
+  type
+    TMyRec = record
+      F1 : byte;
+      F2 : real;
+      F3 : PChar;
+    end;
+
+  Procedure LibProc1( A:byte ) Export;
+  begin
+    Writeln('Тело 1 процедуры');
+  end;
+
+  Procedure LibProc2( A:TMyRec ) Export; //лучший вариант записи
+  begin
+    Writeln('Тело 2 процедуры');
+  end;
+
+  Procedure LibProc3( A:TMyRec) Export;
+  begin
+    Writeln('Тело 3 процедуры');
+  end;
+
+  { Все процедуры разом из DLL нельзя экспортировать в программу }
+  { Для указания какие процедуры экспортировать служит директива Exports }
+  Exports
+    LibProc1, { Если параметры не указаны, индекс будет 0, внешнее имя LibProc1
+     { внешнее имя чувствительно к регистру }
+    LibProc2 index 2, { Т.е. у LibProc1 будет индекс 0, а у LibProc2 индекс 2.
+      Правило: если вы импортируете по индексу, их надо указывать явно,
+      не надеясь на индексы по умолчанию. }
+    LibProc3 index 3 name 'ExternalName1' {внешнее имя};
+    {  (Имя (внутр имя) в dll) index ЧИСЛО Name ВНЕШНЕЕ_ИМЯ;
+       Вызывать можно через index или через внешнее имя лучше через index }
+
+  {$R *.res}
+
+  begin
+    Writeln('Загрузка библиотеки');
+  end.</pre>
+
+<h3>Статический вызов DLL</h3>
+
+<p>
+    1) I Внешнее имя в библиотекеI , external Iимя библиотеки I
+    2) I Новое имя I , external Iимя библиотеки I index l индекс l
+    3) I Новое имя I , external Iимя библиотеки I , name lвнешнее имяl
+</p>
+
+<h3>Динамический вызов DLL</h3>
+
+<p>
+    Function LoadLibrary ( LibName : Pchar) : word ;
+    Если возвр. «0» - то не нашел библиотеку , если нашел, то возвр. Число с которой ассоциируется библиотека
+    Var
+    Handle : word
+    Handle := LoadLibrary ( ‘ MyLib ‘ ) ;
+    Когда библиотека нужна, её нужно закрыть :
+    Function FreeLibrary ( Handle : word ) ;
+    Связывание
+    Function GetProcAdress ( Handle : Word : Name : Pchar ) : Pointer
+    Можно вместо Name указать индекс «1»
+    Хорошим тоном считается
+    Unit MyLibUnit
+    Type
+    TmyRec = recjrd
+    F1 : byte
+    F2 : real
+    F3 : Pchar
+    End;
+    Interface
+    Procedure UlibProc1 ( A : byte ) external ‘ MyLib ’ index 0
+    Procedure UlibProc2 ( A : TMyRec ) external ‘ MyLib ’ index 2
+    Procedure UlibProc3 ( A : pchar ) external ‘ MyLib ’ index 3
+    Emplementation
+    End.
+</p>
+
+
+<p>
+
+</p>
+
+<p>Подключается на этапе выполнения программы</p>
+
+
+<p>Unit, DLL (Library) Вызов процедуры из DLL
+</p>
+
+
+-----------------------------------
+
+<h2>Многозадачность (потоки и методы их синхронизации в Delphi)</h2>
+
+<p><strong>Процесс</strong> - экземпляр выполняемого приложения (exe-файла) в памяти. При запуске приложения происходит
+    выделение памяти под процесс, в часть которой и загружается исполняемый код программы. </p>
+
+<p><strong>Поток</strong> - объект внутри процесса, отвечающий за выполнение кода и получающий для этого процессорное
+    время (потоки выполняются параллельно).</p>
+
+<p>При запуске приложения автоматически создаётся один (главный) поток для его выполнения. Поэтому если приложение
+    однопоточное, то весь код будет выполняться последовательно (без переключений и параллельного выполнения).</p>
+
+<p>Каждый поток может создать другой поток и т.д. Потоки не могут существовать отдельно от процесса, т.е. каждый поток
+    принадлежит какому-то процессу и этот поток выполняет код только в адресном пространстве этого процесса. </p>
+
+<p>Многопоточность обеспечивает псевдопараллельную работу множества процессов. В некоторых случаях без создания потоков
+    нельзя обойтись, например, при работе с сокетами в блокирующем режиме.</p>
+
+<p><strong>Объявление класса потока</strong></p>
+
+<p>Для реализации потока используется абстрактный класс <strong>TThread</strong>, который надо унаследовать в своём
+    классе и переопределить метод <strong>Execute</strong>.</p>
+<pre class="sh_pascal">
+type 
+  TMyThread = class(TThread)
+  protected
+    procedure Execute; override; { Перегруженный метод предка (класса TThread) }
+  end;
+
+procedure TMyThread.Execute;
+begin
+  { Здесь можно писать код, который будет выполняться в отдельном потоке, }
+  { выполнение которого подвешивало бы программу }
+  { Примечание: метод execute предка вызывать не надо! }
+end;
+</pre>
+
+<p><strong>Создание и запуск потока</strong></p>
+<pre class="sh_pascal">
+Теперь необходимо запустить поток. Как всякий класс tnew необходимо создать:
+var MT : TMyThread;
+begin
+  MT := TMyThread.Create(true); { Значение true значит, что после создания класса поток автоматически запущен не будет }
+  MT.FreeOnTerminate := true; { Освобождать при завершении }
+  { Устанавливаем приоритет потока в одно из возможных значений: }
+  { tpidle Работает, когда система простаивает 
+tplowest Нижайший 
+tplower Низкий 
+tpnormal Нормальный 
+tphigher Высокий 
+tphighest Высочайший 
+tptimecritical Критический
+new.priority := tplowest; }
+{  MT. }
+  MT.Resume; { Запускаем поток }
+end;
+</pre>
+
+
+<p>Чтобы поток отдал процессорное время вставляйте функцию sleep(n), где n - количество миллисекунд, на которое поток
+    приостановит свое выполнение, встретив это функцию. </p>
+
+<p><strong>Обмен данными между потоками и основной программой</strong></p>
+
+<p>Execute, Suspendet, Synhronize </p>
+
+<p> Tthread
+    Методы класса TThread :
+</p>
+
+<p>1) Procedure Execute ; override
+    Появится implementation , где
+    Begin
+    // TODO -вставить что нужно
+    end
+    Что запустить / не запустить поток :
+    Property Suspended. Boolean ;
+    при False – поток ON
+    2) Procedure Synchronize ( VizProc : procedure )
+    - обращаем при выводе на экран
+    Constructor Thread. Create ( Susp : Boolean )
+    Для закрытия потока :
+    Procedure Terminate
+    После вызова лучше дождаться что бы Property Terminated.Boolean </p>
+
+<h2>Работа с принтером</h2>
+
+<ul>
+    <li><b>Font</b> - шрифт которым выводить надписи.</li>
+    <li><b>Pen</b> - настройки рисования линий (например методом LineTo)</li>
+    <li><b>Brush</b> - настройки заливки фигур</li>
+</ul>
+
+<pre class="sh_pascal">
+uses SysUtils, Dialogs, Classes, Graphics,
+  Printers; { Подключаем модуль с принтером, там объявлен класс TPrinter и Printer : TPrinter }
+  { Объект класса TPrinter создается автоматически если в Uses: Uses Printer }
+
+var  printDialog : TPrintDialog; { Диалог для выбора принтера }
+begin
+  printDialog := TPrintDialog.Create(nil);
+  printDialog.Options := [poPrintToFile];
+  if printDialog.Execute then begin
+    { 1 пункт = 1/72 дюйма }
+    Writeln('Ширина листа в пунктах: ',Printer.PageWidth);
+    Writeln('Высота листа в пунктах: ',Printer.PageHeight);
+    Printer.Orientation := poPortrait; { Ориентация листа: Книжная }
+    Printer.Orientation := poLandscape; { Альбомная }
+    Printer.BeginDoc; { Начать рисование документа }
+    { Далее рисуем то что хотим печатать на Canvas:TCanvas }
+    { MoveTo(x,y:integer) – перемещение в точку x,y }
+    Printer.Canvas.MoveTo(10,20);
+    { LineTo – рисование линии из текущей точки заданную в соответствии с Pen }
+    Printer.Canvas.LineTo(100,200); { Рисовать в точку X=100;Y=200) }
+    { Настройка шрифта для вывода текста }
+    with Printer.Canvas.Font do begin {шрифт}
+      Name := 'Times New Roman'; { Имя шрифта (выбор шрифта из стандартных) }
+      Style := [fsBold,fsItalic]; { Наклонный (fsItelic) жирный (fsBold) шрифт }
+        { Style	fsBold–жирный, fsItalic – курсив,
+          fsUnderLine - подчёркнутый, fsSrikeOut – зачеркнутый }
+      Size := 15; { Размер шрифта: Size – размер задается в пунктах }
+      Color := clRed; { Выбираем цвет }
+    end;
+    { Настройка инструмента "Перо" - рисование линий }
+    with Printer.Canvas.Pen do begin
+      Color := clBlue; { Цвет линий для рисования }
+      Mode := pmXOR; { Режим рисования (прозрачность) }
+      Style := psDash; { Тип линии:
+       * psSolid — сплошная линия;
+       * psDash — линия в виде пунктира (состоит из коротких линий);
+       * psDot — линия из точек;
+       и так далее }
+      Width := 2; { Ширина (толщина) линии }
+    end;
+    { Настройка инструмента "Кисть" - закраска }
+    { Задаёт параметры закраски рисуемых фигур }
+    with Printer.Canvas.Brush do begin
+      Color := clGreen; { Зелёная заливка }
+      Style := bsSolid; { Сплошная }
+    end;
+    Printer.NewPage; { создать еще лист и перейти на него }
+    { ..тут можно что-то нарисовать на 2-ой странице.. }
+    Printer.EndDoc; { Отдать документ на печать (пробуем вывести на принтер) }
+  end;
+end.  
+</pre>
+
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+</div>
+</body>
+
+</html>

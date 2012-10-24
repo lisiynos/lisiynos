@@ -1,0 +1,86 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Язык программирования C/C++</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100" height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param name="FlashVars" value="src=9094e666f613f513f50301------------ffffff">
+            <param name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70" type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=9094e666f613f513f50301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+<div id="content">
+
+    <h1>Система управления версиями Mercurail (hg)</h1>
+
+    <p><strong>Mercurial</strong> - распределённая система управления версиями написанная на <a
+            href="../s2/python.html">Python</a>'е. Она проигрывает по производительности <strong>git</strong>,
+        но
+        зато
+        клиенты для mercurial лучше интегрированы в Windows, и легко найти бесплатный хостинг любого объёма (например,
+        сайт
+        <a href="https://bitbucket.org/">bitbucket.org</a> предоставляет любое количество открытых и закрытых
+        репозитариев
+        при условии что количество участников проекта не больше 5).</p>
+
+    <h2><strong>Скачивание и установка:</strong></h2>
+    <ul type="disc">
+        <li>Клиент TortoiseHG для Mercurial для Windows: <a href="http://tortoisehg.bitbucket.org/">http://tortoisehg.bitbucket.org</a>,
+            скачайте и установите последнюю версию.
+        </li>
+        <li>Под Linux: <strong>sudo apt-get install mercurial</strong></li>
+    </ul>
+    <p>&nbsp;</p>
+
+    <p>Главный недостаток ручного тестирования: его нужно выполнять каждый раз когда программа меняется,  даже если
+        изменился кусок кода от другого разработчика, наша часть могла перестать работать. При росте размера проекта
+        количество практически одновременных изменений в различных кусках кода непрерывно возрастает, и количество
+        тестов,
+        которые нужно сделать чтобы убедиться что &ldquo;мы ничего не сломали&rdquo;  тоже возрастает. Начиная с
+        некоторого
+        объема проекта такое ручное тестирование становится слишком трудоёмким,  а следовательно, этим тестированием 
+        пожертвуют в первую очередь и не будут выполнять. Именно по этой причине лучше сразу же делать модульные
+        тесты.</p>
+
+    <h2>Тестирование циклов</h2>
+
+    <p>&nbsp;</p>
+
+    <h2>Системы управления версиями*</h2>
+
+    <p>Управление версиями также тем актуальнее, чем больше и сложнее проект. Для решения олимпиадных задач оно не
+        актуально, так что эта часть общеразвивающая.</p>
+
+    <p><strong>Централизованные:</strong> CVS, SVN - сихронизация (обмен исходными текстами программ) между
+        разработчиками
+        происходит через единый центральный сервер.<br>
+        <strong>Децентрализованные:</strong> GIT, Mercurial, Bazaar - у каждого разработчика свой репозиторий с историей
+        изменений, он может свободно обмениваться накопленными изменениями с любым другим разработчиком.</p>
+
+    <h2>Ссылки</h2>
+    <ul>
+        <li>Руководство по Mercurial на русском языке: <a href="http://mercurial.selenic.com/wiki/RussianTutorial">http://mercurial.selenic.com/wiki/RussianTutorial</a>
+        </li>
+        <li><strong> </strong></li>
+    </ul>
+    <p>&nbsp;</p>
+</div>
+</body>
+
+</html>

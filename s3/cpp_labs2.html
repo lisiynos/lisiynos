@@ -12,9 +12,9 @@
 <div style="width:80%;">
     <div style="float:right;">
         <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version
-=6,0,0,0" width="100" height="50">
-            <param name="movie"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100" height="50">
+        <param name="movie"
                    value="../audio/a_smsqulh3n.swf">
             <param name="bgcolor" value="fff">
             <param
@@ -32,6 +32,10 @@
 <div id="content">
 
 <h1>ООП и перегрузка операторов в С/C++</h1>
+
+<ul class="tags">
+    <li><a href="#">С/C++</a></li>
+</ul>
 
 <h2> Ссылки для скачивания:</h2>
 <ul>
@@ -353,8 +357,8 @@ int main(){
   b[1][0] = 1; b[1][1] = 3;
   // Используем конструктор копирования
   matrix c = b, c1 = b, c2 = b;
-  assert( c[0][0] == 2 ); assert( c[0][1] = 1 );
-  assert( c[1][0] == 1 ); assert( c[1][1] = 3 );
+  assert( c[0][0] == 2 ); assert( c[0][1] == 1 );
+  assert( c[1][0] == 1 ); assert( c[1][1] == 3 );
   // Сложение
   b+=a;
   assert( b[0][0] == 3+2 ); assert( b[0][1] == 5+1 );

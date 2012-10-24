@@ -1,0 +1,112 @@
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+    <title>Полиномиальное хеширование строк</title>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <script type="text/javascript" src="../syntax/sh_main.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
+    <script type="text/javascript" src="../syntax/sh_python.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+
+
+
+
+
+
+
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body onLoad="sh_highlightDocument();">
+<div style="width:80%;">
+    <div style="float:right;">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+                codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+                width="100" height="50">
+            <param name="movie" value="../audio/a_smsqulh3n.swf">
+            <param name="bgcolor" value="fff">
+            <param name="FlashVars" value="src=../audio/8016574696f643130301------------ffffff">
+            <param name="autoplay" value="false">
+            <embed src="../audio/a_smsqulh3n.swf" bgcolor="fff"
+                   width="100" height="70"
+                   type="application/x-shockwave-flash"
+                   pluginspage="http://www.macromedia.com/go/getflashplayer"
+                   FlashVars="src=../audio/8016574696f643130301------------ffffff"></embed>
+        </object>
+    </div>
+</div>
+
+<div id="content">
+    <h1>Полиномиальные хеши на строках</h1>
+
+    <ul class="tags">
+        <li><a href="#">Строки</a></li>
+        <li><a href="#">Хеши</a></li>
+    </ul>
+
+
+    <p></p>
+
+
+    <p>
+        Полиномиальная хэш-функция от строки $S$:
+        $h(S) = S_0 + S_1 b + S_2 b^2 + S_3 b^3 + ... + S_N b^N$
+    </p>
+
+    <p>
+        Чтобы не происходило переполнения надо считать этот хеш по модулю большого простого числа $P$
+        (или, хотя бы числа взаимно простого с $b$).
+        $h(S) = (S_0 + S_1 b + S_2 b^2 + S_3 b^3 + ... + S_N b^N) \mod P$
+    </p>
+
+
+    <p>В качестве $P$ удобно использовать, например, простое число: $10^9+7$</p>
+
+    <p>Как найти подходяшие простые числа? Можно просто запомнить несколько подходящих. Или поискать с помощью
+        программы.</p>
+
+
+    <p>Для поиска простых чисел можно использовать следующий код:</p>
+    <pre class="sh_python">
+# -*- utf-8 -*-
+# Полиномиальное хеширование строк
+
+from math import *
+
+
+def is_prime(a):
+    """ Простое ли число a? """
+    return all(a % i for i in range(2, int(a**0.5 + 0.1) + 1))
+    # all возвращает True только если все элементы множества не 0
+
+# Генерируем все простые числа < 100
+primes = [x for x in range(2, 100) if is_prime(x)]
+print(*primes)
+
+# Простые числа больше миллиарда
+primes = [x for x in range(10 ** 9, 10 ** 9 + 1000) if is_prime(x)]
+print(*primes)
+    </pre>
+
+
+    <p>Пример вычисления хеша на C++</p>
+    <pre class="sh_cpp">
+const int p = 31;
+long long hash = 0, p_pow = 1;
+for (size_t i=0; i<s.length(); ++i)
+{
+	// желательно отнимать 'a' от кода буквы
+	// единицу прибавляем, чтобы у строки вида 'aaaaa' хэш был ненулевой
+	hash += (s[i] - 'a' + 1) * p_pow;
+	p_pow *= p;
+}
+    </pre>
+</div>
+
+</body>
+
+</html>

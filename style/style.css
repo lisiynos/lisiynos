@@ -1,13 +1,11 @@
-@charset
-"utf-8"
-;
+@charset "utf-8";
 
 body {
     font-family: Verdana, sans-serif;
     font-size: 12pt;
     color: #333;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
 }
 
 /* Страница: цвет фона и высота строки */
@@ -27,11 +25,10 @@ a:hover {
 }
 
 #content {
-    width: 1000px;
-    margin-top: 0px;
-    margin-right: auto;
-    margin-bottom: 0px;
-    margin-left: auto;
+    /*   width: 1000px; */
+    margin: 0 auto;
+    width: 90%;
+    margin: 10pt;
 }
 
 #nav {
@@ -167,45 +164,37 @@ td {
 #plan {
     width: 600pt;
     border-collapse: collapse;
-    border: solid windowtext 1.0pt;
+    border: 1.0pt solid windowtext;
 }
 
 #plan tr .number {
     width: 71pt;
-    border-top: solid windowtext 1.0pt;
-    border-left: solid windowtext 1.0pt;
-    border-bottom: solid windowtext 1.0pt;
-    border-right: solid windowtext 1.0pt;
-    padding-top: 0cm;
-    padding-right: 5.4pt;
-    padding-bottom: 0cm;
-    padding-left: 5.4pt;
+    border: 1.0pt solid windowtext;
+    padding: 0 5.4pt;
+}
+
+#plan tr th {
+    border: 1.0pt solid windowtext;
+}
+
+#plan th.theme {
+    text-align: center;
 }
 
 #plan tr td {
     width: 79.35pt;
-    border-top: solid windowtext 1.0pt;
-    border-left: solid windowtext 1.0pt;
-    border-bottom: solid windowtext 1.0pt;
-    border-right: solid windowtext 1.0pt;
-    padding: 0cm 5.4pt 0cm 5.4pt;
-    margin-top: 6.1pt;
-    margin-right: 5.65pt;
-    margin-bottom: 0cm;
-    margin-left: 0cm;
+    border: 1.0pt solid windowtext;
+    padding: 0 5.4pt 0 5.4pt;
+    margin: 6.1pt 5.65pt 0cm 0cm;
     text-align: center;
 }
 
 #plan .number {
-    margin-top: 6.1pt;
-    margin-right: 5.65pt;
-    margin-bottom: 0cm;
-    margin-left: 0cm;
-    margin-bottom: .0001pt;
+    margin: 6.1pt 5.65pt 0 0;
 }
 
 #plan .hours {
-    margin: 6.1pt 5.65pt 0cm 0cm;
+    margin: 6.1pt 5.65pt 0 0;
     text-align: center;
     font-size: 12.0pt;
     width: 85pt;
@@ -217,10 +206,7 @@ td {
 }
 
 #content #plan tr td p {
-    margin-top: 6.1pt;
-    margin-right: 5.65pt;
-    margin-bottom: 0cm;
-    margin-left: 0cm;
+    margin: 6.1pt 5.65pt 0 0;
     text-align: center;
 }
 
@@ -330,4 +316,103 @@ td.number {
     font-weight: 600;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.main {
+    border: 2px solid #CCCCCC;
+    border-collapse: collapse;
+    width: 450px;
+    font-family: Cambria, Cochin, Georgia, serif;
+}
+
+.main td, .main th {
+    border: 1px solid #CCC;
+    padding: 10px;
+}
+
+.main th {
+    font-weight: bold;
+    font-size: 16px;
+    background-color: #DDE9FF;
+}
+
+.main tr:nth-of-type(2n + 2) {
+    background-color: #ECF7FF;
+}
+
+.main tr:nth-of-type(2n + 3) {
+    background-color: #FBFDFF;
+}
+
+.picture {
+    text-align: center;
+}
+
+.tags {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 24px;
+    top: 4px;
+    list-style: none;
+}
+
+.tags li, .tags a {
+    float: left;
+    height: 24px;
+    line-height: 24px;
+    position: relative;
+    font-size: 11px;
+}
+
+.tags a {
+    margin-left: 20px;
+    padding: 0 10px 0 12px;
+    background: #007402;
+    color: #fff;
+    text-decoration: none;
+    -moz-border-radius-bottomright: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    -moz-border-radius-topright: 4px;
+    -webkit-border-top-right-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.tags a:before {
+    content: "";
+    float: left;
+    position: absolute;
+    top: 0;
+    left: -12px;
+    width: 0;
+    height: 0;
+    border-color: transparent #007402 transparent transparent;
+    border-style: solid;
+    border-width: 12px 12px 12px 0;
+}
+
+.tags a:after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 0;
+    float: left;
+    width: 4px;
+    height: 4px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    background: #fff;
+    -moz-box-shadow: -1px -1px 2px #004977;
+    -webkit-box-shadow: -1px -1px 2px #004977;
+    box-shadow: -1px -1px 2px #004977;
+}
+
+.tags a:hover {
+    background: #555;
+}
+
+.tags a:hover:before {
+    border-color: transparent #555 transparent transparent;
 }

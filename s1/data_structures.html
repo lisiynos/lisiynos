@@ -7,6 +7,19 @@
     <script type="text/javascript" src="../syntax/sh_pascal.min.js"></script>
     <script type="text/javascript" src="../syntax/sh_cpp.min.js"></script>
     <link type="text/css" rel="stylesheet" href="../style/sh_nedit.css">
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+
+
+
+
+
+
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
 </head>
 <body onLoad="sh_highlightDocument();">
 <div style="width:80%;">
@@ -26,9 +39,14 @@
     </div>
 </div>
 
-<div id="content" style="width:80%;">
+<div id="content">
 
 <h1>Структуры данных: стеки и очереди</h1>
+
+<ul class="tags">
+    <li><a href="#">Стек</a></li>
+    <li><a href="#">Очередь</a></li>
+</ul>
 
 <h2>Записи и оператор with</h2>
 
@@ -139,7 +157,7 @@ end.</pre>
     очередь) возможно лишь в конец очереди, выборка — только из начала очереди (что принято называть словом dequeue —
     убрать из очереди), при этом выбранный элемент из очереди удаляется. </p>
 
-<p><img src="img/queue.gif" width="517" height="214" alt="Очередь" longdesc="img/queue.gif"></p>
+<p><img src="img/queue.gif" width="517" height="214" alt="Очередь"></p>
 
 <p>&nbsp;</p>
 
