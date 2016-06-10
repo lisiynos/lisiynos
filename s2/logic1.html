@@ -12,6 +12,15 @@
 
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+
+
+
+
+
+
+
+
+
     </script>
     <script type="text/javascript"
             src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
@@ -59,6 +68,168 @@
     $x$, $y$ …, которые являются <em><strong>логическими переменными</strong></em> в логических формулах. Истинные
     значения обозначаются
     буквой <strong>И (True, T)</strong> или 1, а ложные – <strong>Л (False, F)</strong> или 0. </p>
+
+<h3>Унарные функции</h3>
+
+
+<p>$n = 1$ - количество аргументов.
+    $k_n = 2^n = 2$
+    $k_ф = 2$
+</p>
+
+<table>
+
+</table>
+
+<h3>Бинарные функции</h3>
+
+<p>$n = 2$ - количество аргументов.
+    $k_n = 2^2 = 4$
+    $k_ф = 2^4 = 16$
+</p>
+
+
+<table border="1">
+    <thead>
+    <tr>
+        <td>$x$</td>
+        <td>$y$</td>
+        <td>$f_0$</td>
+        <td>$f_1$</td>
+        <td>$f_2$</td>
+        <td>$f_3$</td>
+        <td>$f_4$</td>
+        <td>$f_5$</td>
+        <td>$f_6$</td>
+        <td>$f_7$</td>
+        <td>$f_8$</td>
+        <td>$f_9$</td>
+        <td>$f_{10}$</td>
+        <td>$f_{11}$</td>
+        <td>$f_{12}$</td>
+        <td>$f_{13}$</td>
+        <td>$f_{14}$</td>
+        <td>$f_{15}$</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+    </tr>
+
+    <tr>
+        <td></td>
+        <td></td>
+        <td>const "0"</td>
+        <td>$x \land y$</td>
+        <td></td>
+        <td>пер. $x$</td>
+        <td></td>
+        <td>пер. $y$</td>
+        <td>$x \xor y$</td>
+        <td>$x \lor y$</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>const "1"</td>
+    </tr>
+    </tbody>
+</table>
+
+<p> Номер функции совпадает с двоичной записью функции
+</p>
+
+
+<ul>
+    <li>$f_1$ - коньюнкция. $x \& y$ - $x$ и $y$ - ${x} and {y}$ $x \&\& y$</li>
+    <li>$f_7$ - дизъюнкция. $x | y$ - $x$ или $y$</li>
+    <li>$f_{11}$ и $f_{13}$ - импликация (следование)</li>
+    <li>$f_9$ - равнозначность, эквивалентность, равносильность. ${x} \equiv {y}$</li>
+    <li>$f_6$ - равнозначность, эквивалентность, равносильность. ${x} \equiv {y}$</li>
+</ul>
+
+Таблица инстинности - табличное изображение
 
 <p> Из элементарных высказываний можно составить более сложные с помощью <em><strong>логических связок</strong></em>:
 </p>
@@ -318,11 +489,16 @@
 
 <table border="1" cellspacing="0" cellpadding="0" class="table_center">
     <thead>
-    <th width="43">$x$</td>
-    <th width="48">$y$</td>
-    <th width="84">$x \oplus y$</td>
-    <th width="84">$x \oplus x$</td>
-    <th width="84">$y \oplus y$</td>
+    <th width="43">$x$
+    </td>
+    <th width="48">$y$
+    </td>
+    <th width="84">$x \oplus y$
+    </td>
+    <th width="84">$x \oplus x$
+    </td>
+    <th width="84">$y \oplus y$
+    </td>
     </thead>
     <tr>
         <td>0</td>
@@ -363,9 +539,9 @@
 <p><strong>Решение:</strong> завести переменную нужного типа, инициализировать её нулями, выполнять операцию XOR с
     каждым новым числом (строкой), в результате останется только число (строка), встречающаяся нечётное число раз.</p>
 
-<pre class="sh_pascal">  
+<pre class="sh_pascal">
 {$APPTYPE CONSOLE}
-var 
+var
   N : integer; { Количество чисел во входном файле }
   i : integer; { Счётчик цикла (1..N) }
   X : int64; { Очередное число из входного файла }
@@ -376,7 +552,7 @@ begin
   Read(N); { Читаем количество чисел из входного файла }
   Res := 0; { Обнуляем результат }
   for i:=1 to N do begin
-    Read(X); { Читаем очередное число X из входного файла } 
+    Read(X); { Читаем очередное число X из входного файла }
     Res := Res XOR X; { Выполняем операцию XOR }
   end;
   Writeln(Res); { Записываем результат в выходной файл }
@@ -385,7 +561,8 @@ end.</pre>
 <h2>Вычисление значения логического выражения</h2>
 
 <p>Для вычисления значения логического выражения мы можем просто поставить (replace) переменные как значения,
-потом прогнать все операции с наибольшим приоритетом (логическое НЕ, затем И), затем в операциях с меньшим приоритетом (ИЛИ).</p>
+    потом прогнать все операции с наибольшим приоритетом (логическое НЕ, затем И), затем в операциях с меньшим
+    приоритетом (ИЛИ).</p>
 
 
 <pre class="sh_python">
